@@ -1,0 +1,121 @@
+https://en.cppreference.com/w/c/keyword | C keywords - cppreference.com
+
+https://cplusplus.com/ | cplusplus.com/
+http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines | C++ Core Guidelines
+https://www.vulkan.org/ | Home | Vulkan | Cross platform 3D Graphics
+https://www.vulkan.org/learn#new-to-graphics-programming | Learn | Vulkan | Cross platform 3D Graphics
+https://github.com/waitin2010/awesome-computer-graphics | waitin2010/awesome-computer-graphics: A curated list of awesome computer graphics.
+https://www.opengl.org/ | OpenGL - The Industry Standard for High Performance Graphics
+https://www.libsdl.org/ | Simple DirectMedia Layer - Homepage
+https://en.wikipedia.org/wiki/TensorFlow | TensorFlow - Wikipedia
+https://en.wikipedia.org/wiki/OpenCV | OpenCV - Wikipedia
+https://www.programiz.com/cpp-programming | Learn C++ Programming
+https://www.learncpp.com/ | Learn C++ – Skill up with our free tutorials
+https://www.w3schools.com/cpp/ | C++ Tutorial
+https://isocpp.org/std/status | Current Status : Standard C++
+https://en.cppreference.com/w/cpp/header | C++ Standard Library headers - cppreference.com
+https://en.cppreference.com/w/cpp/keyword | C++ keywords - cppreference.com
+https://www.youtube.com/watch?v=ih20l3pJoeU&list=PLrOv9FMX8xJE8NgepZR1etrsU63fDDGxO&index=22 | (193) Code-It-Yourself! 3D Graphics Engine Part #1 - Triangles & Projection - YouTube
+https://www.youtube.com/playlist?list=PL8327DO66nu9qYVKLDmdLW_84-yE4auCR | (193) Vulkan (c++) Game Engine Tutorials - YouTube
+
+https://www.pygame.org/docs/ref/draw.html | pygame.draw — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/surface.html | pygame.Surface — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/mixer.html | pygame.mixer — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/music.html | pygame.mixer.music — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/image.html#pygame.image.load | pygame.image — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/transform.html | pygame.transform — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/mouse.html | pygame.mouse — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pressed | pygame.mouse — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/event.html | pygame.event — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/key.html#module-pygame.key | pygame.key — pygame v2.5.0 documentation
+
+https://en.wikipedia.org/wiki/Sorting_algorithm | 💤 Sorting algorithm - Wikipedia
+https://en.wikipedia.org/wiki/Insertion_sort | 💤 Insertion sort - Wikipedia
+https://en.wikipedia.org/wiki/Selection_sort | Selection sort - Wikipedia
+https://en.wikipedia.org/wiki/Bubble_sort | Bubble sort - Wikipedia
+https://en.wikipedia.org/wiki/Cocktail_shaker_sort | 💤 Cocktail shaker sort - Wikipedia
+https://afteracademy.com/blog/comparison-of-sorting-algorithms/ | Comparison of Sorting Algorithms
+https://en.wikipedia.org/wiki/Data_structure | Data structure - Wikipedia
+
+https://www.lua.org/pil/ | Programming in Lua
+https://www.lua.org/manual/5.4/manual.html | Lua 5.4 Reference Manual
+
+https://www.rust-lang.org/learn | Learn Rust - Rust Programming Language
+https://doc.rust-lang.org/book/ch00-00-introduction.html | Introduction - The Rust Programming Language
+https://github.com/rust-lang/rust.vim | rust-lang/rust.vim: Vim configuration for Rust.
+
+https://www.freebsd.org/ | The FreeBSD Project
+https://forums.freebsd.org/ | The FreeBSD Forums
+https://www.google.com/search?client=firefox-b-d&q=what+is+an+immutable+desktop | what is an immutable desktop - Google Search
+https://kairos.io/blog/2023/03/22/understanding-immutable-linux-os-benefits-architecture-and-challenges/ | 💤 Understanding Immutable Linux OS: Benefits, Architecture, and Challenges | Kairos - The immutable Linux meta-distribution for edge Kubernetes
+https://fedoraproject.org/silverblue/ | 💤 Fedora Silverblue | The Fedora Project
+https://fedoraproject.org/sericea/ | 💤 Fedora Sericea | The Fedora Project
+https://diolinux.com.br/sistemas-operacionais/timeshift-ponto-restauracao-linux-ubuntu.html | 💤 Como instalar e configurar o Timeshift - Diolinux
+https://en.wikipedia.org/wiki/Btrfs | 💤 Btrfs - Wikipedia
+https://wiki.archlinux.org/title/btrfs | Btrfs - ArchWiki
+
+https://fedoraproject.org/ | Fedora Linux | The Fedora Project
+https://fedoraproject.org/spins/sway/ | Fedora Sway Spin | The Fedora Project
+https://archlinux.org/download/ | Arch Linux - Downloads
+https://en.wikipedia.org/wiki/Void_Linux | Void Linux - Wikipedia
+https://en.wikipedia.org/wiki/NixOS | NixOS - Wikipedia
+
+https://go.dev/# | The Go Programming Language
+https://go.dev/solutions/case-studies | Case Studies - The Go Programming Language
+https://go.dev/solutions/use-cases | Use Cases - The Go Programming Language
+https://go.dev/security/ | Security - The Go Programming Language
+https://go.dev/learn/ | Get Started - The Go Programming Language
+
+https://www.google.com/search?client=firefox-b-d&q=syntactic+tree | 💤 syntactic tree - Google Search
+https://elearning.cpp.edu/learning-objects/syntactic-tree-structures/ | 💤 Syntactic Tree Diagram
+https://en.wikipedia.org/wiki/Parse_tree | 💤 Parse tree - Wikipedia
+
+https://git-scm.com/docs/gittutorial | Git - gittutorial Documentation
+https://nodejs.org/en/docs/guides/nodejs-docker-webapp | Dockerizing a Node.js web app | Node.js
+https://docs.fedoraproject.org/en-US/quick-docs/installing-mysql-mariadb/ | Installing MySQL/MariaDB :: Fedora Docs
+https://docs.fedoraproject.org/en-US/quick-docs/postgresql/ | PostgreSQL :: Fedora Docs
+https://www.postgresql.org/files/documentation/pdf/14/postgresql-14-A4.pdf | PostgreSQL 14.8 Documentation - postgresql-14-A4.pdf
+https://docs.docker.com/engine/reference/builder/#cmd | Dockerfile reference | Docker Documentation
+
+https://docs.python.org/3/tutorial/controlflow.html?highlight=positional?#special-parameters | 4. More Control Flow Tools — Python 3.11.4 documentation
+https://docs.python.org/3/glossary.html | Glossary — Python 3.11.4 documentation
+https://docs.python.org/3/library/enum.html | enum — Support for enumerations — Python 3.11.4 documentation
+https://docs.python.org/3/library/ | The Python Standard Library — Python 3.11.4 documentation
+https://docs.python.org/3/library/json.html | json — JSON encoder and decoder — Python 3.11.4 documentation
+https://docs.python.org/3/library/os.html | os — Miscellaneous operating system interfaces — Python 3.11.4 documentation
+https://docs.python.org/3/library/argparse.html | argparse — Parser for command-line options, arguments and sub-commands — Python 3.11.4 documentation
+https://docs.python.org/3/library/timeit.html | timeit — Measure execution time of small code snippets — Python 3.11.4 documentation
+https://docs.python.org/3/library/pdb.html | pdb — The Python Debugger — Python 3.11.4 documentation
+https://pyautogui.readthedocs.io/en/latest/ | Welcome to PyAutoGUI’s documentation! — PyAutoGUI documentation
+https://pynput.readthedocs.io/en/latest/ | pynput Package Documentation — pynput 1.7.6 documentation
+https://pynput.readthedocs.io/en/latest/mouse.html | Handling the mouse — pynput 1.7.6 documentation
+https://pynput.readthedocs.io/en/latest/keyboard.html | Handling the keyboard — pynput 1.7.6 documentation
+https://docs.python.org/3/library/threading.html | threading — Thread-based parallelism — Python 3.11.4 documentation
+https://docs.python.org/3/library/contextlib.html | contextlib — Utilities for with-statement contexts — Python 3.11.4 documentation
+https://www.geeksforgeeks.org/context-manager-in-python/ | Context Manager in Python - GeeksforGeeks
+https://realpython.com/python-with-statement/ | Context Managers and Python's with Statement – Real Python
+
+https://www.youtube.com/watch?v=H5GETOP7ivs&list=PLh0j6fxciWbIYnyKAW24k_Sr99MeJ-0nk | (136) Motion Canvas is now Open Source! - YouTube
+https://www.youtube.com/@aarthificial/videos | (136) aarthificial - YouTube
+https://motioncanvas.io/ | Motion Canvas - A TypeScript library for creating animated videos using the Canvas API.
+https://motioncanvas.io/docs/flow/ | Animation flow | Motion Canvas
+https://motioncanvas.io/docs/hierarchy/ | Scene hierarchy | Motion Canvas
+https://motioncanvas.io/docs/positioning/ | Positioning | Motion Canvas
+https://motioncanvas.io/docs/layouts/ | Layouts | Motion Canvas
+https://motioncanvas.io/docs/signals/ | Signals | Motion Canvas
+https://motioncanvas.io/docs/code-block/ | CodeBlock | Motion Canvas
+https://motioncanvas.io/docs/bezier-curves/ | Bézier Curves | Motion Canvas
+https://colab.research.google.com/drive/1j-o5xZey967dgzak1_mZ1eVn7ZEAmxv3#scrollTo=m72E6gGLUYkz | Google Colab
+http://localhost:9000/ | project | Motion Canvas
+
+https://www.google.com/search?client=firefox-b-d&q=how+to+debug+a+command+in+bash | how to debug a command in bash - Google Search
+https://nodejs.org/en/docs | 💤 Documentation | Node.js
+https://en.wikipedia.org/wiki/Node.js | 💤 Node.js - Wikipedia
+https://expressjs.com/ | 💤 Express - Node.js web application framework
+https://www.npmjs.com/ | 💤 npm
+https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides | 💤 package.json | npm Docs
+https://www.typescriptlang.org/docs/handbook/2/everyday-types.html | 💤 TypeScript: Documentation - Everyday Types
+https://www.codingninjas.com/codestudio/library/difference-between-npm-and-npx | 💤 Difference between NPM and NPX - Coding Ninjas
+https://en.wikipedia.org/wiki/JSX_(JavaScript) | JSX (JavaScript) - Wikipedia
+https://www.prisma.io/express | 💤 Express & Prisma | Next-Generation ORM for SQL DBs
+https://jestjs.io/pt-BR/ | Jest · 🃏 Delightful JavaScript Testing

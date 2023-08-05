@@ -4,7 +4,6 @@
 # time all commands
 # preferably test all commands in a vm
 # 1 log per function ?
-# get config files from github?
 # kitty fish
 
 DEV_TOOLS="git"
@@ -21,7 +20,7 @@ function main(){
 
 	echo "Welcome to the post install script for Fedora $(rpm -E %fedora)!"
 
-	echo -e "Would you like to enable debugging? y/n: "
+	echo -e "Would you like to enable debugging? yes/no: "
 	read debug_flag
 	if [ debug_flag == "yes" ]; then
 		set -xv
@@ -98,6 +97,26 @@ function install_docker(){
 	sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo 
 	sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 
 	sudo systemctl start docker
+}
+
+function config_files(){
+	git clone https://github.com/paisdegales/dotfiles.git ~
+}
+
+function get_notes(){
+	git clone https://github.com/paisdegales/notes.git ~
+}
+
+function kitty_terminal(){
+	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+}
+
+function fish_shell(){
+	sudo dnf install fish
+}
+
+function get_awesome_wm(){
+	sudo dnf install awesome
 }
 
 main

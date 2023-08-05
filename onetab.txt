@@ -1,3 +1,66 @@
+https://www.w3schools.com/python/python_ref_dictionary.asp | Python Dictionary Methods
+https://www.w3schools.com/python/ref_dictionary_pop.asp | Python Dictionary pop() Method
+https://www.w3schools.com/python/ref_dictionary_get.asp | Python Dictionary get() Method
+https://www.pygame.org/docs/ref/surface.html | pygame.Surface — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/key.html | pygame.key — pygame v2.5.0 documentation
+https://www.pygame.org/docs/ref/event.html | pygame.event — pygame v2.5.0 documentation
+
+https://www.google.com/search?client=firefox-b-d&q=web+development+roadmap | web development roadmap - Google Search
+https://roadmap.sh/ | Developer Roadmaps - roadmap.sh
+https://roadmap.sh/cpp | Learn to become a modern C++ developer
+https://roadmap.sh/flutter | Learn to become a modern Flutter developer
+https://roadmap.sh/android | Android Developer Roadmap: Learn to become an Android developer
+https://roadmap.sh/full-stack | Full Stack Developer Roadmap
+https://roadmap.sh/devops | DevOps Roadmap: Learn to become a DevOps Engineer or SRE
+https://roadmap.sh/backend | Backend Developer Roadmap
+https://roadmap.sh/frontend | Frontend Developer Roadmap
+https://www.google.com/search?client=firefox-b-d&q=mobile+development+roadmap | mobile development roadmap - Google Search
+https://www.geeksforgeeks.org/best-way-to-become-android-developer-a-complete-roadmap/ | Best Way to Become Android Developer – A Complete Roadmap - GeeksforGeeks
+
+https://www.programiz.com/cpp-programming/arrays | C++ Arrays (With Examples)
+https://en.cppreference.com/w/cpp/header | C++ Standard Library headers - cppreference.com
+https://en.cppreference.com/w/cpp/header/string | Standard library header <string> - cppreference.com
+https://en.cppreference.com/w/cpp/header/cstring | Standard library header <cstring> - cppreference.com
+https://en.cppreference.com/w/cpp/header/iostream | Standard library header <iostream> - cppreference.com
+https://en.cppreference.com/w/cpp/header/ostream | Standard library header <ostream> - cppreference.com
+https://hackr.io/blog/cpp-projects | Top 10 C++ Projects Ideas for C++ Beginners in 2023 [Updated]
+https://github.com/fffaraz/awesome-cpp | fffaraz/awesome-cpp: A curated list of awesome C++ (or C) frameworks, libraries, resources, and shiny things. Inspired by awesome-... stuff.
+https://github.com/KhronosGroup/Vulkan-Samples/tree/main | KhronosGroup/Vulkan-Samples: One stop solution for all Vulkan samples
+
+https://www.google.com/search?client=firefox-b-d&q=data+structures+programming | data structures programming - Google Search
+https://en.wikipedia.org/wiki/Search_algorithm | Search algorithm - Wikipedia
+https://en.wikipedia.org/wiki/Sorting_algorithm | Sorting algorithm - Wikipedia
+https://en.wikipedia.org/wiki/Introsort | Introsort - Wikipedia
+https://en.wikipedia.org/wiki/Heapsort | Heapsort - Wikipedia
+https://en.wikipedia.org/wiki/Merge_sort | Merge sort - Wikipedia
+https://en.wikipedia.org/wiki/Quicksort | Quicksort - Wikipedia
+https://en.wikipedia.org/wiki/Shellsort | Shellsort - Wikipedia
+https://en.wikipedia.org/wiki/Cocktail_shaker_sort | Cocktail shaker sort - Wikipedia
+https://en.wikipedia.org/wiki/Selection_sort | Selection sort - Wikipedia
+
+https://www.pygame.org/docs/ref/surface.html#pygame.Surface.blit | pygame.Surface — pygame v2.5.0 documentation
+https://stackoverflow.com/questions/17576009/python-class-property-use-setter-but-evade-getter | Python class @property: use setter but evade getter? - Stack Overflow
+https://docs.python.org/3/library/functions.html#super | Built-in Functions — Python 3.11.4 documentation
+https://docs.python.org/3/tutorial/errors.html | 8. Errors and Exceptions — Python 3.11.4 documentation
+https://docs.python.org/3/library/logging.html | logging — Logging facility for Python — Python 3.11.4 documentation
+
+https://www.programiz.com/cpp-programming/storage-class | C++ Storage Class: Local, Global, Static, Register and Thread Local
+https://en.cppreference.com/w/cpp/header | C++ Standard Library headers - cppreference.com
+https://en.cppreference.com/w/cpp/header/string | Standard library header <string> - cppreference.com
+https://en.cppreference.com/w/cpp/header/cstring | Standard library header <cstring> - cppreference.com
+https://en.cppreference.com/w/cpp/header/iostream | 💤 Standard library header <iostream> - cppreference.com
+https://en.cppreference.com/w/cpp/header/ostream | Standard library header <ostream> - cppreference.com
+https://hackr.io/blog/cpp-projects | Top 10 C++ Projects Ideas for C++ Beginners in 2023 [Updated]
+https://www.youtube.com/watch?v=ih20l3pJoeU&t=1s | (200) Code-It-Yourself! 3D Graphics Engine Part #1 - Triangles & Projection - YouTube
+
+https://doc.rust-lang.org/book/ch01-03-hello-cargo.html | Hello, Cargo! - The Rust Programming Language
+https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html | Variables and Mutability - The Rust Programming Language
+https://doc.rust-lang.org/book/ch03-02-data-types.html | Data Types - The Rust Programming Language
+https://doc.rust-lang.org/book/ch03-03-how-functions-work.html | Functions - The Rust Programming Language
+https://doc.rust-lang.org/book/ch03-04-comments.html | Comments - The Rust Programming Language
+https://doc.rust-lang.org/book/ch03-05-control-flow.html | Control Flow - The Rust Programming Language
+https://en.wikipedia.org/wiki/The_Twelve_Days_of_Christmas_(song) | The Twelve Days of Christmas (song) - Wikipedia
+
 https://en.cppreference.com/w/c/keyword | C keywords - cppreference.com
 
 https://cplusplus.com/ | cplusplus.com/

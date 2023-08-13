@@ -5,22 +5,17 @@ DBeaver Community	io.dbeaver.DBeaverCommunity
 Fedora Platform	org.fedoraproject.Platform
 Freedesktop Platform	org.freedesktop.Platform
 Freedesktop Platform	org.freedesktop.Platform
-i386	org.freedesktop.Platform.Compat.i386
 Mesa	org.freedesktop.Platform.GL.default
 Mesa	org.freedesktop.Platform.GL.default
 Mesa (Extra)	org.freedesktop.Platform.GL.default
-nvidia-535-54-03	org.freedesktop.Platform.GL.nvidia-535-54-03
 nvidia-535-86-05	org.freedesktop.Platform.GL.nvidia-535-86-05
-Mesa	org.freedesktop.Platform.GL32.default
-Mesa (Extra)	org.freedesktop.Platform.GL32.default
-nvidia-535-54-03	org.freedesktop.Platform.GL32.nvidia-535-54-03
 Intel	org.freedesktop.Platform.VAAPI.Intel
 Intel	org.freedesktop.Platform.VAAPI.Intel
-i386	org.freedesktop.Platform.VAAPI.Intel.i386
 openh264	org.freedesktop.Platform.openh264
 openh264	org.freedesktop.Platform.openh264
 Freedesktop SDK	org.freedesktop.Sdk
 GNU Image Manipulation Program	org.gimp.GIMP
+Web	org.gnome.Epiphany
 GNOME Application Platform version 44	org.gnome.Platform
 Adwaita theme	org.kde.KStyle.Adwaita
 KDE Application Platform	org.kde.Platform

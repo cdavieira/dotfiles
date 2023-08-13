@@ -1,24 +1,7 @@
 #!/bin/bash
 
-# check if binaries exist before using them
-# time all commands
-# preferably test all commands in a vm
-# 1 log per function ?
-# kitty fish
-
-DEV_TOOLS="git"
-C_LANGUAGE="make gcc gdb valgrind"
-MY_TOOLS="tmux vim neovim micro"
-USEFUL_PROGRAMS="ffmpeg gparted"
-FLATPAK_PROGRAMS="com.discordapp.Discord com.github.xournalpp.xournalpp com.obsproject.Studio net.lutris.Lutris org.mypaint.MyPaint"
-
 function main(){
-	if [ -z ${FEDORA_VERSION} ]; then
-		echo "Post install script cannot start! Fedora version not identified!"
-		exit
-	fi
-
-	echo "Welcome to the post install script for Fedora $(rpm -E %fedora)!"
+	echo "Welcome to the post install script for Fedora ${FEDORA_VERSION}!"
 
 	echo -e "Would you like to enable debugging? yes/no: "
 	read debug_flag
@@ -26,49 +9,60 @@ function main(){
 		set -xv
 	fi
 
+	# routine
+}
+
+function update_fedora(){
 	# updating all system packages
-	# sudo dnf distro-sync
-}
+	sudo dnf distro-sync
 
-function install_dev_tools(){
-	echo "Installing dev tools: ${DEV_TOOLS}"
-	sudo dnf install ${DEV_TOOLS} -y
-}
-
-function install_c_language(){
-	echo "Installing c language package: ${C_LANGUAGE}"
-	sudo dnf install ${C_LANGUAGE} -y
-}
-
-function install_rpm_repos(){
+	# setting up some useful repositoers
 	echo "Setting rpmfusion free and nonfree repositories"
 	sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 	sudo dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-}
 
-function install_my_tools(){
-	echo "Installing my fav programs: ${MY_TOOLS}"
-	sudo dnf install ${MY_TOOLS} -y
-
-	# override editor env variable
-	echo -e "\nexport EDITOR=micro" >> ~/.bashrc
-}
-
-function install_useful_programs(){
-	echo "Installing useful programs: ${USEFUL_PROGRAMS}"
-	#obs1: ffmpeg is only available in the RPM fusion free/non-free repositories
-	#obs2: ffmpeg is necessary to play some videos in firefox
-
-	sudo dnf install ${USEFUL_PROGRAMS} --allow-erasing -y
-}
-
-function install_flatpak_programs(){
+	# install flatpak if it isn't already installed
 	if [ ! -a "/usr/bin/flatpak" ] ; then
 		sudo dnf install flatpak -y
-		flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo	
+		flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 		flatpak remote-add --if-not-exists fedora oci+https://registry.fedoraproject.org
 	fi
 
+	# remove nano
+	sudo dnf uninstall nano -y
+}
+
+function install_programming_languages(){
+	# C/C++ language
+	local C_LANGUAGE="make gcc gdb valgrind"
+	echo "Installing C language package: ${C_LANGUAGE}"
+	sudo dnf install ${C_LANGUAGE} -y
+
+	# Rust
+	echo "Installing Rust"
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+	# Python
+
+	# Javascript
+	# echo "Installing Rust"
+	# install nvm and latest stable version of npm
+	# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+	# bash -c "nvm install --lts"
+
+	# Lua
+
+	# Go
+}
+
+function install_cli_tools(){
+	local COMMANDLINE_PROGRAMS="git tmux vim neovim micro lynx ffmpeg gparted"
+	echo "Installing cli tools: ${COMMANDLINE_PROGRAMS}"
+	sudo dnf install ${COMMANDLINE_PROGRAMS} -y
+}
+
+function install_flatpak_programs(){
+	local FLATPAK_PROGRAMS="com.discordapp.Discord org.mypaint.MyPaint"
 	echo "Installing flatpak apps: ${FLATPAK_PROGRAMS}"
 	sudo flatpak install ${FLATPAK_PROGRAMS} -y
 }
@@ -84,14 +78,6 @@ function install_nvidia_driver(){
 	sleep 240
 }
 
-function install_nvm(){
-	# install nvm and latest stable version of npm
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-	# spawn new shell and then execute this command
-	# nvm install --lts
-	bash -c "nvm install --lts"
-}
-
 function install_docker(){
 	sudo dnf -y install dnf-plugins-core
 	sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo 
@@ -99,29 +85,53 @@ function install_docker(){
 	sudo systemctl start docker
 }
 
-function config_files(){
+function set_working_environment(){
+	# config files
 	git clone https://github.com/paisdegales/dotfiles.git ~
-}
 
-function get_notes(){
+	# personal notes
 	git clone https://github.com/paisdegales/notes.git ~
-}
 
-function kitty_terminal(){
+	# kitty terminal
 	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-}
 
-function fish_shell(){
+	# fish shell
 	sudo dnf install fish
+
+	# awesome window manager
+	sudo dnf install awesome
 }
 
-function get_awesome_wm(){
-	sudo dnf install awesome
+function routine(){
+	mkdir log
+
+	log_file=log/update_fedora.log
+	time update_fedora &> ${log_file}
+
+	log_file=log/install_cli_tools.log
+	time install_cli_tools &> ${log_file}
+
+	log_file=log/install_programming_languages.log
+	time install_programming_languages &> ${log_file}
+
+	log_file=log/set_working_environment.log
+	time set_working_environment &> ${log_file}
+
+	log_file=log/install_flatpak_programs.log
+	time install_flatpak_programs &> ${log_file}
+
+	# log_file=update_fedora.log
+	# time install_nvidia_driver
+
+	# log_file=update_fedora.log
+	# time install_docker
 }
 
 main
 
-#6.4 bash conditional expressions: options to be used in []
-#3.5 shell expasions
-#3.2.5.1 loops
-#3.2.5.2 ifs
+# 6.4 BASH CONDITIONAL EXPRESSIONS
+# 3.5 SHELL EXPANSION
+# 3.2.5.1 LOOP
+# 3.2.5.2 IF
+
+# Insomnia, DBeaver, GIMP, Wireshark, OBS, Blender, Epiphany, VLC

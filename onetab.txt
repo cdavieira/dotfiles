@@ -1,3 +1,78 @@
+file:///home/carlosvieira/Desktop/Projects/Javascript/mydocument.html | file:///home/carlosvieira/Desktop/Projects/Javascript/mydocument.html
+https://www.w3schools.com/js/js_htmldom_document.asp | JavaScript DOM Document
+https://www.w3schools.com/js/js_htmldom_elements.asp | JavaScript DOM Elements
+https://www.w3schools.com/js/js_promise.asp | JavaScript Promises
+https://www.programiz.com/javascript/try-catch-finally | JavaScript try...catch...finally Statement
+https://www.w3schools.com/html/ | HTML Tutorial
+https://www.w3schools.com/tags/att_meta_http_equiv.asp | HTML meta http-equiv Attribute
+https://www.w3schools.com/tags/tag_meta.asp | HTML meta tag
+https://www.w3schools.com/xml/xml_whatis.asp | XML Introduction
+https://www.w3schools.com/js/js_window.asp | JavaScript Window
+https://nodejs.org/dist/latest-v18.x/docs/api/ | Index | Node.js v18.17.1 Documentation
+https://react.dev/learn | Quick Start – React
+https://react.dev/reference/react | Built-in React Hooks – React
+file:///usr/share/doc/fish/index.html | Introduction — fish-shell 3.6.1 documentation
+file:///usr/share/doc/fish/interactive.html#interactive | Interactive use — fish-shell 3.6.1 documentation
+https://sw.kovidgoyal.net/kitty/ | kitty
+https://awesomewm.org/ | about - awesome window manager
+
+https://www.youtube.com/watch?v=wIzwyyHolRs | (239) From React To HTMX - YouTube
+https://frontendmasters.com/learn/ | Learn to Master Front-End Development | Frontend Masters
+
+https://jameshfisher.com/2017/02/22/ssize_t/ | What is `ssize_t` in C?
+https://en.wikipedia.org/wiki/Inter-process_communication | Inter-process communication - Wikipedia
+file:///usr/share/doc/fish/index.html | Introduction — fish-shell 3.6.1 documentation
+file:///usr/share/doc/fish/interactive.html#interactive | Interactive use — fish-shell 3.6.1 documentation
+file:///usr/share/doc/fish/language.html#language | The fish language — fish-shell 3.6.1 documentation
+https://www.google.com/search?client=firefox-b-d&q=is+there+a+way+to+heapify+in+O%28N%29 | is there a way to heapify in O(N) - Google Search
+https://stackoverflow.com/questions/9755721/how-can-building-a-heap-be-on-time-complexity | algorithm - How can building a heap be O(n) time complexity? - Stack Overflow
+https://www.prepbytes.com/blog/heap/time-complexity-of-building-a-heap/ | Time complexity of building a heap | Heap | PrepBytes Blog
+https://www.atlassian.com/br/git/tutorials/saving-changes/gitignore | arquivo .gitignore – como ignorar arquivos no Git
+
+https://www.programiz.com/javascript | 💤 Learn JavaScript Programming
+https://www.programiz.com/javascript/methods | 💤 JavaScript Methods and this Keyword (with Examples)
+https://www.programiz.com/javascript/constructor-function | 💤 JavaScript Constructor Function (with Examples)
+https://www.programiz.com/javascript/getter-setter | 💤 JavaScript Getter and Setter (with Examples)
+https://www.programiz.com/javascript/prototype | 💤 JavaScript Prototype (with Examples)
+https://www.programiz.com/javascript/array | 💤 JavaScript Arrays (with Examples)
+https://www.programiz.com/javascript/multidimensional-array | 💤 JavaScript Multidimensional Array
+https://www.programiz.com/javascript/string | 💤 JavaScript String (with Examples)
+https://www.programiz.com/javascript/for-in | 💤 JavaScript for...in loop (with Examples)
+https://www.programiz.com/javascript/numbers | 💤 JavaScript Number (with Examples)
+https://www.programiz.com/javascript/symbol | 💤 JavaScript Symbol (with Examples)
+https://www.programiz.com/javascript/try-catch-finally | JavaScript try...catch...finally Statement
+https://www.programiz.com/javascript/setTimeout | Javascript setTimeout()
+
+https://www.programiz.com/cpp-programming/constructors | 💤 C++ Constructors: Types and Copy Constructors
+https://www.programiz.com/cpp-programming/operator-overloading | 💤 C++ Operator Overloading (With Examples)
+https://www.programiz.com/cpp-programming/pointers-function | 💤 C++ Call by Reference: Using pointers
+https://www.programiz.com/cpp-programming/memory-management | 💤 C++ Memory Management: new and delete
+https://www.programiz.com/cpp-programming/inheritance | 💤 C++ Inheritance
+https://www.programiz.com/cpp-programming/public-protected-private-inheritance | C++ Public, Protected and Private Inheritance
+https://www.programiz.com/cpp-programming/function-overriding | C++ Function Overriding
+https://www.programiz.com/cpp-programming/multilevel-multiple-inheritance | C++ Multiple, Multilevel and Hierarchical Inheritance
+https://www.programiz.com/cpp-programming/friend-function-class | C++ Friend Functions and Classes (With Examples)
+https://www.programiz.com/cpp-programming/virtual-functions | C++ Virtual Functions
+https://www.programiz.com/cpp-programming/class-templates | 💤 C++ Class Templates
+https://www.programiz.com/cpp-programming/polymorphism | 💤 C++ Polymorphism
+https://www.programiz.com/cpp-programming/encapsulation | C++ Encapsulation (With Examples)
+https://www.geeksforgeeks.org/can-constructor-private-cpp/ | 💤 Can a constructor be private in C++ ? - GeeksforGeeks
+https://cplusplus.com/reference/string/string/ | 💤 https://cplusplus.com/reference/string/string/
+https://stackoverflow.com/questions/308276/can-i-call-a-constructor-from-another-constructor-do-constructor-chaining-in-c | Can I call a constructor from another constructor (do constructor chaining) in C++? - Stack Overflow
+
+https://www.programiz.com/javascript | Learn JavaScript Programming
+https://www.w3schools.com/js/ | 💤 JavaScript Tutorial
+https://www.w3schools.com/html/ | HTML Tutorial
+https://www.w3schools.com/xml/xml_whatis.asp | XML Introduction
+
+https://en.wikipedia.org/wiki/Sorting_algorithm | Sorting algorithm - Wikipedia
+https://en.wikipedia.org/wiki/Shellsort | 💤 Shellsort - Wikipedia
+https://en.wikipedia.org/wiki/Heapsort | Heapsort - Wikipedia
+https://chat.openai.com/c/edd51bf7-65c7-4283-b0e9-89a7f63ea4ae | 💤 Shell Sort Algorithm Explanation
+https://github.com/paisdegales/backup/tree/master/assignments | 💤 backup/assignments at master · paisdegales/backup
+https://drive.google.com/drive/u/0/folders/0AGD7sxYcfDCqUk9PVA | Folder - Google Drive
+https://en.wikipedia.org/wiki/Data_structure | Data structure - Wikipedia
+
 https://www.w3schools.com/python/python_ref_dictionary.asp | Python Dictionary Methods
 https://www.w3schools.com/python/ref_dictionary_pop.asp | Python Dictionary pop() Method
 https://www.w3schools.com/python/ref_dictionary_get.asp | Python Dictionary get() Method
@@ -96,7 +171,6 @@ https://en.wikipedia.org/wiki/Sorting_algorithm | 💤 Sorting algorithm - Wikip
 https://en.wikipedia.org/wiki/Insertion_sort | 💤 Insertion sort - Wikipedia
 https://en.wikipedia.org/wiki/Selection_sort | Selection sort - Wikipedia
 https://en.wikipedia.org/wiki/Bubble_sort | Bubble sort - Wikipedia
-https://en.wikipedia.org/wiki/Cocktail_shaker_sort | 💤 Cocktail shaker sort - Wikipedia
 https://afteracademy.com/blog/comparison-of-sorting-algorithms/ | Comparison of Sorting Algorithms
 https://en.wikipedia.org/wiki/Data_structure | Data structure - Wikipedia
 
@@ -182,3 +256,4 @@ https://www.codingninjas.com/codestudio/library/difference-between-npm-and-npx |
 https://en.wikipedia.org/wiki/JSX_(JavaScript) | JSX (JavaScript) - Wikipedia
 https://www.prisma.io/express | 💤 Express & Prisma | Next-Generation ORM for SQL DBs
 https://jestjs.io/pt-BR/ | Jest · 🃏 Delightful JavaScript Testing
+

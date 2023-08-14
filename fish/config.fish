@@ -7,4 +7,8 @@ if status is-interactive
 	if test -f "$HOME/.lynx/lynx.cfg"
 		set -x LYNX_CFG "/home/carlosvieira/.lynx/lynx.cfg"
 	end
+
+	if test -f "$HOME/.lynx/lynx.cfg"
+		set -x LYNX_LSS "bright-blue.lss"
+	end
 end

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function main(){
-	echo "Welcome to the post install script for Fedora ${FEDORA_VERSION}!"
+	echo "Welcome to the post install script for Fedora ${FEDORA_VERSION:-'Unknown'}!"
 
 	echo -e "Would you like to enable debugging? yes/no: "
 	read debug_flag
@@ -16,17 +16,18 @@ function update_fedora(){
 	# updating all system packages
 	sudo dnf distro-sync
 
-	# setting up some useful repositoers
-	echo "Setting rpmfusion free and nonfree repositories"
+	# setting up rpm's free repo
 	sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-	sudo dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+	# advanced dnf tools
+	sudo dnf -y install dnf-plugins-core
 
 	# install flatpak if it isn't already installed
 	if [ ! -a "/usr/bin/flatpak" ] ; then
 		sudo dnf install flatpak -y
-		flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-		flatpak remote-add --if-not-exists fedora oci+https://registry.fedoraproject.org
 	fi
+	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	flatpak remote-add --if-not-exists fedora oci+https://registry.fedoraproject.org
 
 	# remove nano
 	sudo dnf uninstall nano -y
@@ -42,17 +43,17 @@ function install_programming_languages(){
 	echo "Installing Rust"
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
+	# Go
+
 	# Python
 
 	# Javascript
-	# echo "Installing Rust"
+	# echo "Javascript"
 	# install nvm and latest stable version of npm
 	# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 	# bash -c "nvm install --lts"
 
 	# Lua
-
-	# Go
 }
 
 function install_cli_tools(){
@@ -79,7 +80,6 @@ function install_nvidia_driver(){
 }
 
 function install_docker(){
-	sudo dnf -y install dnf-plugins-core
 	sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo 
 	sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 
 	sudo systemctl start docker
@@ -100,31 +100,64 @@ function set_working_environment(){
 
 	# awesome window manager
 	sudo dnf install awesome
+
+	# setup vim environment
+	ln -s -r ~/dotfiles/.vimrc -t ~
+	mkdir -p ~/.cache/vim/{backup,swap,undo}
+	mkdir -p ~/.vim/{doc,ftplugin,pack,plugin}
+
+	# setup tmux environment
+	ln -s -r ~/dotfiles/.tmux.conf -t ~
+
+	# setup lynx environment
+	ln -s -r ~/dotfiles/lynx/ -t ~/.lynx
+
+	# setup kitty terminal
+	mv ~/.config/kitty/{kitty,kitty.old}.conf
+	# some environment variables are defined here
+	ln -s -r ~/dotfiles/kitty/kitty.conf -t ~/.config/kitty/
+	
+	# setup awesome
+	mv ~/.config/awesome/{rc,rc.old}.lua
+	# some environment variables are defined here
+	ln -s -r ~/dotfiles/awesome/rc.lua -t ~/.config/awesome/
+	ln -s -r ~/dotfiles/awesome/themes -t ~/.config/awesome/themes
+	
+	# setup fish shell
+	# some environment variables are defined here
+	ln -s -r ~/dotfiles/fish/config.fish -t ~/.config/fish/
+	ln -s -r ~/dotfiles/fish/fish.variables -t ~/.config/fish/
+
+	# set up git
+	# GIT_AUTHOR_NAME
+	# GIT_AUTHOR_EMAIL
+	# GIT_COMMITER_NAME
+	# GIT_COMMITER_EMAIL
 }
 
 function routine(){
 	mkdir log
 
 	log_file=log/update_fedora.log
-	time update_fedora &> ${log_file}
+	time update_fedora > ${log_file}
 
 	log_file=log/install_cli_tools.log
-	time install_cli_tools &> ${log_file}
+	time install_cli_tools > ${log_file}
 
 	log_file=log/install_programming_languages.log
-	time install_programming_languages &> ${log_file}
+	time install_programming_languages > ${log_file}
 
 	log_file=log/set_working_environment.log
-	time set_working_environment &> ${log_file}
+	time set_working_environment > ${log_file}
 
 	log_file=log/install_flatpak_programs.log
-	time install_flatpak_programs &> ${log_file}
+	time install_flatpak_programs > ${log_file}
 
 	# log_file=update_fedora.log
-	# time install_nvidia_driver
+	# time install_nvidia_driver > ${log_file}
 
 	# log_file=update_fedora.log
-	# time install_docker
+	# time install_docker > ${log_file}
 }
 
 main
@@ -134,4 +167,4 @@ main
 # 3.2.5.1 LOOP
 # 3.2.5.2 IF
 
-# Insomnia, DBeaver, GIMP, Wireshark, OBS, Blender, Epiphany, VLC
+# Insomnia, DBeaver, GIMP, Wireshark, OBS, Blender, Epiphany, VLC, Inkscape

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script is not done yet and it hasn't been tested!
+# Use at your own risk
+
 function main(){
 	echo "Welcome to the post install script for Fedora ${FEDORA_VERSION:-'Unknown'}!"
 	echo -e "run\n\tscript --log-timing timing.log --log-out output.log -c './post-install.sh'\nto record the output stream of this script"

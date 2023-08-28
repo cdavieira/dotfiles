@@ -48,13 +48,24 @@ function install_programming_languages(){
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 	# Go
+	# echo "Installing Go"
+	# mkdir ~/.go
+	# wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz -P ~/.go
+	# cd ~/.go
+	# gzip -d go1.21.0.linux-amd64.tar.gz
+	# tar -xf go1.21.0.linux-amd64.tar
+	# mv go go-1.21.0
 
 	# Zig
+	# echo "Installing Zig"
+	# dnf install zig -y
 
 	# Java
+	# echo "Installing Java"
+	# dnf install java-21-openjdk -y
 
 	# Javascript
-	# echo "Javascript"
+	# echo "Installing Javascript"
 	# install nvm and latest stable version of npm
 	# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 	# bash -c "nvm install --lts"
@@ -144,10 +155,10 @@ function set_working_environment(){
 	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 	# fish shell
-	sudo dnf install fish
+	sudo dnf install fish -y
 
 	# awesome window manager and Xephyr, a very useful debugging tool for wm!
-	sudo dnf install awesome Xephyr
+	sudo dnf install awesome Xephyr -y
 
 	# setup vim environment
 	ln -s -r ~/dotfiles/.vimrc -t ~
@@ -163,19 +174,18 @@ function set_working_environment(){
 
 	# setup kitty terminal
 	mv ~/.config/kitty/{kitty,kitty.old}.conf
-	# some environment variables are defined here
 	ln -s -r ~/dotfiles/kitty/kitty.conf -t ~/.config/kitty/
 	
 	# setup awesome
 	mv ~/.config/awesome/{rc,rc.old}.lua
-	# some environment variables are defined here
 	ln -s -r ~/dotfiles/awesome/rc.lua -t ~/.config/awesome/
 	ln -s -r ~/dotfiles/awesome/themes -t ~/.config/awesome/themes
 	
 	# setup fish shell
-	# some environment variables are defined here
 	ln -s -r ~/dotfiles/fish/config.fish -t ~/.config/fish/
 	ln -s -r ~/dotfiles/fish/fish.variables -t ~/.config/fish/
+	echo /usr/local/bin/fish | sudo tee -a /etc/shells
+	chsh -s /usr/local/bin/fish
 
 	# set up git
 	# GIT_AUTHOR_NAME

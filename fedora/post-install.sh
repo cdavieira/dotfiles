@@ -54,7 +54,6 @@ function install_programming_languages(){
 	# cd ~/.go
 	# gzip -d go1.21.0.linux-amd64.tar.gz
 	# tar -xf go1.21.0.linux-amd64.tar
-	# mv go go-1.21.0
 
 	# Zig
 	# echo "Installing Zig"

@@ -6,6 +6,9 @@ if status is-interactive
 
 	if test -f "$HOME/.lynx/lynx.cfg"
 		set -x LYNX_CFG "$HOME/.lynx/lynx.cfg"
-		set -x LYNX_LSS "bright-blue.lss"
+		# not working in arch
+		# set -x LYNX_LSS "bright-blue.lss"
 	end
+
+	set -x EDITOR "vim"
 end

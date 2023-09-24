@@ -52,7 +52,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
-editor = os.getenv("EDITOR")  or "vim"
+editor = "vim" or os.getenv("EDITOR")
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.

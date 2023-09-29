@@ -10,5 +10,9 @@ if status is-interactive
 		# set -x LYNX_LSS "bright-blue.lss"
 	end
 
+	if test -d "$HOME/.local/bin"
+		set -x PATH $PATH $HOME/.local/bin
+	end
+
 	set -x EDITOR "vim"
 end

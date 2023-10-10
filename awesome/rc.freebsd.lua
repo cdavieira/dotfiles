@@ -53,7 +53,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 -- terminal = "xterm"
 terminal = "kitty"
 -- editor = os.getenv("EDITOR") or "nano"
-editor = "vim"
+editor = "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -113,23 +113,6 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
---[[ LEGACY
-function get_battery_percentage()
-	local handle = io.popen("sysctl hw.acpi.battery.life")
-	local text = handle:read("*a")
-	-- from the beginning of the line, replace one or more occurrences of whitespaces with nothing
-	text = string.gsub(text, '^%s+', '')
-	-- from the end of the line, replace one or more occurrences of whitespaces with nothing
-	text = string.gsub(text, '%s+$', '')
-	-- replace one or more occurrences of line feed and carriage return with nothing
-	text = string.gsub(text, '[\n\r]+', ' ')
-	-- obtain only the number found within the text
-	text = string.gsub(text, 'hw.acpi.battery.life: ', '')
-	handle:close()
-	return tonumber(text)/100
-end
-]]
-
 -- creating a function which maps 0-100 to red-green-blue color range 
 function map_int_colorcode(val)
 	if val >= 50 then
@@ -147,73 +130,26 @@ function map_int_colorcode(val)
 	end
 end
 
---[[ LEGACY
-myprogressbar_watch = wibox.widget {
-    awful.widget.watch("sysctl hw.acpi.battery.life",
-						60,
-						function(widget, text)
-							text = string.gsub(text, '^%s+', '')
-							text = string.gsub(text, '%s+$', '')
-							text = string.gsub(text, '[\n\r]+', ' ')
-							text = string.gsub(text, 'hw.acpi.battery.life: ', '')
-
-							value = tonumber(text)
-							percent = value/100
-							gradient_color_value = map_int_colorcode(value)
-
-							widget:set_max_value(1)
-							widget:set_value(percent)
-							widget:set_forced_height(20)
-							widget:set_forced_width(100)
-							widget:set_shape(gears.shape.rounded_bar)
-							widget:set_bar_shape(gears.shape.rounded_bar)
-							widget:set_paddings(1)
-							widget:set_border_width(2)
-
-							widget:set_border_color("#444444")
-							widget:set_color(gradient_color_value)
-							widget:set_background_color("#111111")
-							-- widget:set_bar_border_color("#777777")
-						end,
-						wibox.widget.progressbar()
-    ),
-    awful.widget.watch("sysctl hw.acpi.battery.life",
-						60,
-						function(widget, text)
-							text = string.gsub(text, '^%s+', '')
-							text = string.gsub(text, '%s+$', '')
-							text = string.gsub(text, '[\n\r]+', ' ')
-							text = string.gsub(text, 'hw.acpi.battery.life: ', '')
-							pango_markup = '<span color="#FFF"> '..text..' </span>'
-							widget:set_markup(pango_markup)
-							-- widget:set_text(text)
-							widget:set_align("right")
-						end
-    ),
-    layout = wibox.layout.stack
-}
-]]
-
 myprogressbar_timer = wibox.widget {
     {
-        max_value     		= 1,
-        value         		= 0,
-        forced_height 		= 20,
-        forced_width  		= 100,
-		shape         		= gears.shape.rounded_bar,
-		bar_shape     		= gears.shape.rounded_bar,
-        paddings      		= 1,
-        border_width  		= 2,
-        border_color  		= "#444444",
-        background_color  	= "#111111",
-		id	      	  		= "pgbar",
-        widget        		= wibox.widget.progressbar,
+      max_value     		= 1,
+      value         		= 0,
+      forced_height 		= 20,
+      forced_width  		= 100,
+      shape         		= gears.shape.rounded_bar,
+      bar_shape     		= gears.shape.rounded_bar,
+      paddings      		= 1,
+      border_width  		= 2,
+      border_color  		= "#444444",
+      background_color  = "#111111",
+      id	      	  		= "pgbar",
+      widget        		= wibox.widget.progressbar,
     },
     {
-		text	      = "0",
-		id	      	  = "pgtext",
-		align		  = "right",
-		widget        = wibox.widget.textbox,
+      text	      = "0",
+      id	      	  = "pgtext",
+      align		  = "right",
+      widget        = wibox.widget.textbox,
     },
     layout 	      = wibox.layout.stack,
     set_battery   = function (self, val)

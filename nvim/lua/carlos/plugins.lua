@@ -9,6 +9,8 @@
 		https://github.com/nvim-telescope/telescope-fzf-native.nvim
 	[X] nvim-treesitter
 		https://github.com/nvim-treesitter/nvim-treesitter
+	[X] lspconfig
+		https://github.com/neovim/nvim-lspconfig
 	[ ] ripgrep
 		https://github.com/BurntSushi/ripgrep
 	[ ] fd
@@ -49,7 +51,9 @@ return {
 				"c",
 				"lua",
 				"python",
-				-- "javascript",
+				"javascript",
+				"typescript",
+				"rust"
 				-- "html"
 			},
 			sync_install = false,
@@ -61,6 +65,18 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-	priority = 1000
+		priority = 1000
+	},
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		}
+	},
+	{
+		"neovim/nvim-lspconfig"
 	},
 }

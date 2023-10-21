@@ -455,7 +455,8 @@ clientkeys = gears.table.join(
         {description = "(un)maximize horizontally", group = "client"}),
     awful.key({ }, "Print",
         function()
-            awful.util.spawn_with_shell("sleep 0.5 && scrot -s")
+            awful.util.spawn_with_shell("sleep 0.5 && scrot -s -F 'temp/%Y-%m-%d_%H:%M:%S_$wx$h.png'")
+            -- awful.util.spawn_with_shell("sleep 0.5 && scrot -s")
         end,
         {description = "take a screenshot", group = "client"})
 )

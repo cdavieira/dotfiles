@@ -14,5 +14,5 @@ if status is-interactive
 		set -x PATH $PATH $HOME/.local/bin
 	end
 
-	set -x EDITOR "vim"
+	set -x EDITOR "nvim"
 end

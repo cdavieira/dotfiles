@@ -15,4 +15,7 @@ if status is-interactive
 	end
 
 	set -x EDITOR "nvim"
+
+	set -x TOKEN "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"
+
 end

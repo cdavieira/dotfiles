@@ -35,13 +35,27 @@ start_pages = {
         "https://www.lua.org/manual/5.4/",
         "https://developer.mozilla.org/en-US/docs/Web/javascript",
         "https://docs.python.org/3.12/",
-        "https://duckduckgo.com",
-        "https://chat.openai.com/",
-    ]
+    ],
+    5: {
+        "https://www.typescriptlang.org/docs/handbook/intro.html",
+        "https://react.dev/learn",
+    },
+    6: {
+        "https://developer.mozilla.org/en-US/docs/Web/javascript",
+        "https://en.wikipedia.org/wiki/JSX_(JavaScript)",
+        "https://www.w3schools.com/Js/js_es6.asp",
+        "https://www.w3schools.com/js/js_htmldom.asp",
+        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    },
+    7: {
+        "https://wiki.archlinux.org/title/NVIDIA",
+        "https://wiki.archlinux.org/title/Nouveau",
+        "https://wiki.archlinux.org/title/NVIDIA_Optimus",
+    }
 }
 
 c.url.start_pages = [
     "https://raw.githubusercontent.com/qutebrowser/qutebrowser/main/doc/img/cheatsheet-big.png"
 ]
 
-c.url.start_pages.extend(start_pages[4])
+c.url.start_pages.extend(start_pages[5])

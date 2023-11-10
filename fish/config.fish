@@ -1,5 +1,5 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+	# Commands to run in interactive sessions can go here
 	if test -d "$HOME/.cargo/bin"
 		set -x PATH $PATH $HOME/.cargo/bin
 	end
@@ -15,7 +15,5 @@ if status is-interactive
 	end
 
 	set -x EDITOR "nvim"
-
-	set -x TOKEN "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"
 
 end

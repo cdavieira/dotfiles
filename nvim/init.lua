@@ -16,7 +16,7 @@
 -- 	:lua =vim.lsp
 -- find where lsp log files are:
 -- 	:lua print(vim.lsp.get_log_path())
--- :lua print(vim.inspect(vim.loop))
+-- 	:lua print(vim.inspect(vim.loop))
 
 
 

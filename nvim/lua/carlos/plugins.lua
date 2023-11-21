@@ -13,13 +13,19 @@
 		https://github.com/neovim/nvim-lspconfig
 	[X] neotree
 		https://github.com/nvim-neo-tree/neo-tree.nvim
-	[ ] ripgrep
+	[X] ripgrep
 		https://github.com/BurntSushi/ripgrep
-	[ ] fd
+	[X] fd
 		https://github.com/sharkdp/fd
 	[X] nvim-cmp
 		https://www.lazyvim.org/plugins/coding
 		https://github.com/hrsh7th/nvim-cmp
+	[ ] comment
+		https://github.com/numToStr/Comment.nvim
+	[ ] neodev
+		https://github.com/folke/neodev.nvim
+	[X] which-key
+		https://github.com/folke/which-key.nvim
 --]]
 
 
@@ -162,5 +168,19 @@ return {
 			end
 			require("cmp").setup(opts)
 		end,
+	},
+	{ "folke/neodev.nvim", opts = {} },
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		}
 	}
 }

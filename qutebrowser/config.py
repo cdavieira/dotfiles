@@ -51,6 +51,9 @@ start_pages = {
         "https://wiki.archlinux.org/title/NVIDIA",
         "https://wiki.archlinux.org/title/Nouveau",
         "https://wiki.archlinux.org/title/NVIDIA_Optimus",
+    },
+    8: {
+        "https://www.lua.org/manual/5.4/",
     }
 }
 
@@ -58,4 +61,4 @@ c.url.start_pages = [
     "https://raw.githubusercontent.com/qutebrowser/qutebrowser/main/doc/img/cheatsheet-big.png"
 ]
 
-c.url.start_pages.extend(start_pages[5])
+c.url.start_pages.extend(start_pages[8])

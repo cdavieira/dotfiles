@@ -14,9 +14,10 @@ vim.cmd.colorscheme "catppuccin"
 
 
 -- vim variables
-vim.opt.number = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+-- vim.opt.number = true
+vim.opt.relativenumber = true
 
 
 -- Global mappings.
@@ -35,7 +36,6 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 
 -- copied from https://github.com/neovim/nvim-lspconfig
--- Setup language servers.
 lspconfig.pyright.setup {}
 lspconfig.tsserver.setup {}
 lspconfig.lua_ls.setup {}
@@ -75,18 +75,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end, opts)
 	end,
 })
-
-
--- :h 'runtimepath'
--- :h mapleader
--- :h lua.txt
--- :h lua-loop
--- :h lsp
--- :h lsp-config
--- :h lsp-events
--- :h vim.lsp.start()
--- to view the contents of a table
--- 	:lua =vim.lsp
--- find where lsp log files are:
--- 	:lua print(vim.lsp.get_log_path())
--- 	:lua print(vim.inspect(vim.loop))

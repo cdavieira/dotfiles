@@ -22,10 +22,12 @@
 		https://github.com/hrsh7th/nvim-cmp
 	[ ] comment
 		https://github.com/numToStr/Comment.nvim
-	[ ] neodev
+	[X] neodev
 		https://github.com/folke/neodev.nvim
 	[X] which-key
 		https://github.com/folke/which-key.nvim
+	[X] alpha-nvim
+		https://github.com/goolord/alpha-nvim
 --]]
 
 
@@ -182,5 +184,13 @@ return {
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		}
-	}
+	},
+	{
+		'goolord/alpha-nvim',
+		-- dependencies = { 'nvim-tree/nvim-web-devicons' },
+		config = function ()
+			-- require'alpha'.setup(require'alpha.themes.startify'.config)
+			require'alpha'.setup(require'alpha.themes.dashboard'.config)
+		end
+	},
 }

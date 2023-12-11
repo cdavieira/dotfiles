@@ -16,6 +16,11 @@ if status is-interactive
 
 	set -x EDITOR "nvim"
 
+	if test -d "$HOME/.bun"
+		set --export BUN_INSTALL "$HOME/.bun"
+		set --export PATH $PATH $BUN_INSTALL/bin
+	end
+
 	function multicd
 			echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 	end

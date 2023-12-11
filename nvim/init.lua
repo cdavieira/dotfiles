@@ -1,24 +1,20 @@
 -- changing the leader key to space
 vim.g.mapleader = " "
 
-
 -- loading my modules
 local mylazyness = require("carlos.lazy")
 local telescope = require('telescope.builtin')
 local neotree = require('neo-tree.command')
 local lspconfig = require('lspconfig')
 
-
 -- colorschemes
 vim.cmd.colorscheme "catppuccin"
-
 
 -- vim variables
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 -- vim.opt.number = true
 vim.opt.relativenumber = true
-
 
 -- Global mappings.
 vim.keymap.set('n', '<leader>f', telescope.find_files, {})
@@ -27,13 +23,13 @@ vim.keymap.set('n', '<leader>b', telescope.buffers, {})
 vim.keymap.set('n', '<leader>h', telescope.help_tags, {})
 vim.keymap.set('n', '<leader>m', telescope.man_pages, {})
 vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>')
-vim.keymap.set('n', '<leader>c', '<Cmd>edit /home/carlos/.config/nvim/ <CR>')
+vim.keymap.set('n', '<leader>i', '<Cmd>edit /home/carlos/.config/nvim/init.lua <CR>')
+vim.keymap.set('n', '<leader>p', '<Cmd>edit /home/carlos/.config/nvim/lua/carlos/plugins.lua <CR>')
 -- See `:help vim.diagnostic.*` for more
 vim.keymap.set('n', '<space>g', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
 
 -- copied from https://github.com/neovim/nvim-lspconfig
 lspconfig.pyright.setup {}
@@ -41,8 +37,7 @@ lspconfig.tsserver.setup {}
 lspconfig.lua_ls.setup {}
 lspconfig.clangd.setup {}
 lspconfig.rust_analyzer.setup {
-	-- Server-specific settings. See `:help lspconfig-setup`
-	settings = {
+	settings = { -- Server-specific settings. See `:help lspconfig-setup`
 		['rust-analyzer'] = {},
 	},
 }
@@ -75,3 +70,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end, opts)
 	end,
 })
+
+--[[
+:Alpha
+:AlphaRedraw
+:AlphaRemap
+:Lazy
+:Inspect
+:InspectTree
+:LspInfo
+:LspLog
+:LspRestart
+:LspStart
+:LspStop
+:Man
+:Neotree
+:Ntree
+:Telescope
+:TS
+:Tutor
+:WhichKey
+--]]

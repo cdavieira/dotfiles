@@ -7,6 +7,7 @@
 static const int sloppyfocus               = 1;  /* focus follows mouse */
 static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
 static const unsigned int borderpx         = 1;  /* border pixel of windows */
+static const float rootcolor[]             = COLOR(0x222222ff);
 static const float bordercolor[]           = COLOR(0x444444ff);
 static const float focuscolor[]            = COLOR(0x005577ff);
 static const float urgentcolor[]           = COLOR(0xff0000ff);
@@ -23,8 +24,9 @@ static const Rule rules[] = {
 	/* app_id     title       tags mask     isfloating   monitor */
 	/* examples:
 	{ "Gimp",     NULL,       0,            1,           -1 },
-	*/
 	{ "firefox",  NULL,       1 << 8,       0,           -1 },
+	*/
+	{ "firefox",  NULL,       1 << 0,       0,           -1 },
 };
 
 /* layout(s) */
@@ -36,6 +38,7 @@ static const Layout layouts[] = {
 };
 
 /* monitors */
+/* NOTE: ALWAYS add a fallback rule, even if you are completely sure it won't be used */
 static const MonitorRule monrules[] = {
 	/* name       mfact nmaster scale layout       rotate/reflect                x    y */
 	/* example of a HiDPI laptop monitor:
@@ -118,12 +121,14 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* commands */
 static const char *termcmd[] = { "kitty", NULL };
 static const char *menucmd[] = { "bemenu-run", NULL };
+static const char *waybarcmd[] = { "waybar", NULL };
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
+	{ MODKEY,                    XKB_KEY_b,          spawn,          {.v = waybarcmd} },
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
@@ -158,6 +163,9 @@ static const Key keys[] = {
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
+	/* Ctrl-Alt-Fx is used to switch to another VT, if you don't know what a VT is
+	 * do not remove them.
+	 */
 #define CHVT(n) { WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_XF86Switch_VT_##n, chvt, {.ui = (n)} }
 	CHVT(1), CHVT(2), CHVT(3), CHVT(4), CHVT(5), CHVT(6),
 	CHVT(7), CHVT(8), CHVT(9), CHVT(10), CHVT(11), CHVT(12),

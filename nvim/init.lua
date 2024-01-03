@@ -21,6 +21,10 @@ vim.keymap.set('n', '<leader>f', telescope.find_files, {})
 vim.keymap.set('n', '<leader>s', telescope.live_grep, {})
 vim.keymap.set('n', '<leader>b', telescope.buffers, {})
 vim.keymap.set('n', '<leader>h', telescope.help_tags, {})
+--- Lists manpage entries, opens them in a help window on `<cr>`
+---@param opts table: options to pass to the picker
+---@field sections table: a list of sections to search, use `{ "ALL" }` to search in all sections (default: { "1" })
+---@field man_cmd function: that returns the man command. (Default: `apropos ""` on linux, `apropos " "` on macos)
 vim.keymap.set('n', '<leader>m', telescope.man_pages, {})
 vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>')
 vim.keymap.set('n', '<leader>i', '<Cmd>edit /home/carlos/.config/nvim/init.lua <CR>')

@@ -1,6 +1,6 @@
 " INTERNAL STUFF
 source $VIMRUNTIME/defaults.vim
-version 6.0
+" version 6.0 " this is now ignored
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
@@ -25,15 +25,17 @@ set hlsearch
 set incsearch
 set langnoremap
 set nolangremap
+set nowrap " text does not wrap to fit entirely in the window
 set nrformats=bin,hex
-set relativenumber
-set ruler
+set relativenumber " line numbering relative to the current line
+set ruler " show line and column numbers at the bottom right of the window
 set scrolloff=5
-set shiftwidth=2
-set showcmd
+set shiftwidth=2 " i_ctrl^T and i_ctrl^D will enter 2 spaces
+set showcmd " show partial commands at the bottom right of the window
 set suffixes=.bak,~,.o,.info,.swp,.aux,.bbl,.blg,.brf,.cb,.dvi,.idx,.ilg,.ind,.inx,.jpg,.log,.out,.png,.toc
-set tabstop=2
+set tabstop=2 " tabs become 2 spaces
 set ttimeout
+set timeoutlen=400
 set ttimeoutlen=100
 set undodir=~/.cache/vim/undo//
 set viminfo='20,\"50
@@ -88,16 +90,98 @@ Plug 'preservim/nerdcommenter'
 " git integration
 Plug 'tpope/vim-fugitive'
 
+" display available keybindings in a popup
+Plug 'liuchengxu/vim-which-key'
+
 call plug#end()
 
 
 
 
 """ MAPPINGS
+let g:mapleader = " "
 nmap Q gq
 xmap Q gq
 omap Q gq
-nnoremap <Space>e <Cmd>NERDTreeToggle<CR>
+nnoremap <silent> <Leader> :WhichKey '<Space>'<CR>
+nnoremap <Leader>c <Plug>NERDCommenterInvert
+nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
+nnoremap <Leader>f <Cmd>Files<CR>
+nnoremap <Leader>gg <Cmd>Git<CR>
+nnoremap <Leader>gc <Cmd>Commands<CR>
+nnoremap <Leader>gco <Cmd>Commits<CR>
+nnoremap <Leader>gv <Cmd>Colors<CR>
+nnoremap <Leader>gb <Cmd>Git blame<CR>
+nnoremap <Leader>m <Cmd>Maps<CR>
+nnoremap <Leader>n <Cmd>tabnext<CR>
+nnoremap <Leader>p <Cmd>tabprevious<CR>
+nnoremap <Leader>rb <Cmd>Cbuild<CR>
+nnoremap <Leader>rc <Cmd>Ccheck<CR>
+nnoremap <Leader>rd <Cmd>Cdoc<CR>
+nnoremap <Leader>rl <Cmd>Cclean<CR>
+nnoremap <Leader>s <Cmd>split<CR>
+nnoremap <Leader>t <Cmd>tabnew<CR>
+nnoremap <Leader>v <Cmd>vsplit<CR>
+
+
+
+
+" Cool plugin commands available
+" :BCommits - git diff of all commits found in all buffers
+" :BLines - opens floating window to search for words in all buffers
+" :Buffers - opens floating window to search for words in all buffers
+" :Cbuild - run cargo build
+" :Ccheck - run cargo check
+" :Cclean - run cargo clean
+" :Cdoc - run cargo doc
+" :Colors - pick a color
+" 	default, desert, elflord, evening, habamax, industry, koehler, lunaperche,
+" 	pablo, slate, sorbet, torte, wildcharm, zaibatsu
+" :Commands - show all commands
+" :Commits - looks just like BCommits, but not only for buffers
+" :Changes - see all changes made during this session
+" :DiffOrig - run diff with current file and something else
+" :FZF - call fuzzy finder
+" :Files - call fuzzy finder with file preview
+" :Filetypes - pick a filetype for the current buffer
+" :G - open a brief summary of all git files that aren't being tracked and files that haven't been commited quite just yet
+" 	go to :help :Git and then read the section "Staging/unstaging maps", very
+" 	useful read
+" :G blame - opens git commit history
+" :GitFiles - take a look at all readable git files in current project
+" :HelpTags - search for something within vim help files
+" :History - open file history 
+" :Jumps - open jump list
+" :LP <something> - search for <something> in current file
+" :Lines - opens floating window to search for words in all files
+" :LspCodeAction 
+" :LspCodeLens
+" :LspDocumentDiagnostics
+" :LspDeclaration
+" :LspDefinition
+" :LspDocumentFormat
+" :LspDocumentRangeFormat
+" :LspDocumentSymbol
+" :LspDocumentSymbolSearch
+" :LspHover
+" :LspNextDiagnostic
+" :LspNexterror
+" :LspPeekDeclaration
+" :LspPeekDefinition
+" :LspPeekImplementation
+" :LspTypeDefinition
+" :LspRename
+" :LspStatus
+" :LspInstallServers
+" :LspManageServers
+" :Maps - all mappings done
+" :PlugStatus - check  all vimplug plugins
+" :PlugUpgrade - upgrade vimplug
+" :PlugUpdate - update vimplug
+" :PlugInstall - install all plugins inside vimplug folder
+" :Snippets - open all saved snippets
+" :Startify - open startify
+" :Windows - windows preview
 
 
 
@@ -116,6 +200,9 @@ let g:startify_commands = [
 	"\ {'h startify': 'help startify'},
 	\ ':help',
 	\ ':help startify',
+	\ ":help 'runtimepath'",
+	\ ":help 'path'",
+	\ ":help .vimrc",
 	\ ]
 
 

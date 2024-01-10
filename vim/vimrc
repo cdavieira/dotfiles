@@ -11,6 +11,7 @@ unlet s:cpo_save
 
 
 " VARIABLES
+" run 'mkdir -p ~/.cache/vim/{backup,swap,undo}'
 set background=dark
 set backspace=indent,eol,start
 set backupdir=~/.cache/vim/backup//
@@ -18,7 +19,7 @@ set directory=~/.cache/vim/swap//
 set display=truncate
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,default,latin1
-set helplang=en
+set helplang=en,de
 set history=200
 set hlsearch
 set incsearch
@@ -41,7 +42,9 @@ set wildmenu
 
 
 
-""" VIM PLUG
+""" VIM PLUG (https://github.com/junegunn/vim-plug)
+" to install vim-plug:
+" 'curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 call plug#begin('~/.vim/vim-plug')
 " linter and lsp
 " Plug 'dense-analysis/ale'
@@ -100,16 +103,19 @@ nnoremap <Space>e <Cmd>NERDTreeToggle<CR>
 
 
 " startify variables
-
 let g:startify_bookmarks = [
-	\ {'vimrc': '~/.vimrc'},
-	\ {'fish': '~/dotfiles/fish/config.fish'},
-	\ {'kitty': '~/dotfiles/kitty/kitty.conf'},
+	"\ {'vimrc': '~/.vimrc'},
+	\ '~/.vim/vimrc',
+	\ '~/dotfiles/fish/config.fish',
+	\ '~/dotfiles/kitty/kitty.fish',
+	\ '~/notes/unix/arch-install-notes.md',
+	\ '~/dwl/config.h',
 	\ ]
 
 let g:startify_commands = [
+	"\ {'h startify': 'help startify'},
 	\ ':help',
-	\ {'h startify': 'help startify'},
+	\ ':help startify',
 	\ ]
 
 

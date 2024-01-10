@@ -5,7 +5,7 @@ make bear waybar polkit ly ttf-{anonymouspro,firacode,hack}-nerd \
 ttf-nerd-fonts-symbols{,-mono} kitty firefox neovim gcc gdb valgrind file which \
 ffmpeg pkg-config zip wget usbutils unzip unrar tree lshw os-prober efibootmgr \
 pipewire-{jack,alsa,pulse} sof-firmware nodejs python-pynvim fd ripgrep \
-wl-clipboard clang {lua,typescript}-language-server pyright sway
+wl-clipboard clang {lua,typescript}-language-server pyright ntfs-3g
 
 #nvim /etc/ly/config.ini
 sudo systemctl enable ly

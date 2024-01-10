@@ -17,19 +17,19 @@ vim.opt.shiftwidth = 2
 vim.opt.relativenumber = true
 
 -- Global mappings.
-vim.keymap.set('n', '<leader>f', telescope.find_files, {})
-vim.keymap.set('n', '<leader>s', telescope.live_grep, {})
-vim.keymap.set('n', '<leader>b', telescope.buffers, {})
-vim.keymap.set('n', '<leader>h', telescope.help_tags, {})
-vim.keymap.set('n', '<leader>m', function() telescope.man_pages({sections = {"ALL"}}) end, {})
-vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>')
-vim.keymap.set('n', '<leader>i', '<Cmd>edit /home/carlos/.config/nvim/init.lua <CR>')
-vim.keymap.set('n', '<leader>p', '<Cmd>edit /home/carlos/.config/nvim/lua/carlos/plugins.lua <CR>')
+vim.keymap.set('n', '<leader>f', telescope.find_files, {desc = "Perform filename search in cwd"})
+vim.keymap.set('n', '<leader>s', telescope.live_grep, {desc = 'Perform string search in cwd'})
+vim.keymap.set('n', '<leader>b', telescope.buffers, {desc = 'Perform filename search in neovim\'s buffer list'})
+vim.keymap.set('n', '<leader>h', telescope.help_tags, {desc = 'Search for help within neovim help tags'})
+vim.keymap.set('n', '<leader>m', function() telescope.man_pages({sections = {'ALL'}}) end, {desc = 'Search for a manpage'})
+vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>', {desc = 'Toggle Neotree side panel'})
+vim.keymap.set('n', '<leader>i', '<Cmd>edit /home/carlos/.config/nvim/init.lua <CR>', {desc = 'Edit init.lua'})
+vim.keymap.set('n', '<leader>p', '<Cmd>edit /home/carlos/.config/nvim/lua/carlos/plugins.lua <CR>', {desc = 'Edit Lazy\'s plugins file'})
 -- See `:help vim.diagnostic.*` for more
-vim.keymap.set('n', '<space>g', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<space>g', vim.diagnostic.open_float, {desc = 'Open diagnosis floating panel'})
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {desc = 'Goto previous error'})
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {desc = 'Goto next error'})
+-- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- copied from https://github.com/neovim/nvim-lspconfig
 lspconfig.pyright.setup {}

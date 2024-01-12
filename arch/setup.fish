@@ -5,13 +5,13 @@ make bear waybar polkit ly ttf-{anonymouspro,firacode,hack}-nerd \
 ttf-nerd-fonts-symbols{,-mono} kitty firefox neovim gcc gdb valgrind file which \
 ffmpeg pkg-config zip wget usbutils unzip unrar tree lshw os-prober efibootmgr \
 pipewire-{jack,alsa,pulse} sof-firmware nodejs python-pynvim fd ripgrep \
-wl-clipboard clang {lua,typescript}-language-server pyright ntfs-3g
+wl-clipboard clang {lua,typescript}-language-server pyright ntfs-3g cmake
 
 #nvim /etc/ly/config.ini
 sudo systemctl enable ly
 sudo systemctl --user --now enable wireplumber
 
-git clone https://codeberg.org/dwl/dwl.git ~/apps/dwl
+git clone https://codeberg.org/dwl/dwl.git
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 rm ~/.config/fish/config.fish
@@ -19,5 +19,8 @@ ln -s ~/dotfiles/fish/config.fish -t ~/.config/fish -v
 ln -s ~/dotfiles/tmux/.tmux.conf -t ~ -v
 ln -s ~/dotfiles/nvim/ -t ~/.config -v
 ln -s ~/dotfiles/kitty/ -t ~/.config -v
-ln -s ~/dotfiles/sway/ -t ~/.config -v
-sudo ln -s /usr/share/wayland-sessions/sway.desktop -t /usr/local/share/wayland-sessions/ -v
+ln -s ~/dotfiles/dwl/config.h -t ~/dwl -v
+
+mkdir -p ~/.vim ~/.cache/vim/{backup,swap,undo}
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -s ~/dotfiles/vim/vimrc -t ~/.vim -v

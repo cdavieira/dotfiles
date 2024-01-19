@@ -43,6 +43,14 @@ set wildmenu
 
 
 
+
+" APPEARANCE
+colorscheme evening
+
+
+
+
+
 """ VIM PLUGINS
 runtime ftplugin/man.vim
 
@@ -103,6 +111,24 @@ call plug#end()
 
 
 
+" FUNCTIONS
+let g:myColors = [
+\ 'evening',
+\ 'habamax',
+\ 'koehler',
+\ 'lunaperche',
+\ 'wildcharm',
+\ 'desert',
+\ 'default',
+\ 'sorbet',
+\ 'zaibatsu' ]
+function CycleColorScheme()
+    let idx = index(g:myColors, g:colors_name)
+    return (idx + 1 >= len(g:myColors) ? g:myColors[0] : g:myColors[idx + 1])
+endfunc
+
+
+
 """ MAPPINGS
 let g:mapleader = " "
 let g:maplocalleader = ","
@@ -133,6 +159,7 @@ nnoremap <Leader>rl <Cmd>Cclean<CR>
 nnoremap <Leader>s <Cmd>split<CR>
 nnoremap <Leader>t <Cmd>tabnew<CR>
 nnoremap <Leader>v <Cmd>vsplit<CR>
+nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
 
 
 

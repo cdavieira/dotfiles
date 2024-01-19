@@ -43,10 +43,15 @@ set wildmenu
 
 
 
+""" VIM PLUGINS
+runtime ftplugin/man.vim
+
+
 
 """ VIM PLUG (https://github.com/junegunn/vim-plug)
 " to install vim-plug:
 " 'curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
 call plug#begin('~/.vim/vim-plug')
 " linter and lsp
 " Plug 'dense-analysis/ale'
@@ -73,15 +78,15 @@ Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" lsp
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-
 " autocompletion
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" lsp
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 
 " easy comments
 Plug 'preservim/nerdcommenter'
@@ -100,11 +105,16 @@ call plug#end()
 
 """ MAPPINGS
 let g:mapleader = " "
+let g:maplocalleader = ","
 nmap Q gq
 xmap Q gq
 omap Q gq
+nnoremap <LocalLeader>j o<Esc>k
+nnoremap <LocalLeader>k O<Esc>j
+nnoremap <LocalLeader>m o<Esc>kO<Esc>j
 nnoremap <silent> <Leader> :WhichKey '<Space>'<CR>
-nnoremap <Leader>c <Plug>NERDCommenterInvert
+nnoremap <Leader>b <Cmd>Buffers<CR>
+nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
 nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
 nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>gg <Cmd>Git<CR>
@@ -112,6 +122,7 @@ nnoremap <Leader>gc <Cmd>Commands<CR>
 nnoremap <Leader>gco <Cmd>Commits<CR>
 nnoremap <Leader>gv <Cmd>Colors<CR>
 nnoremap <Leader>gb <Cmd>Git blame<CR>
+nnoremap <Leader>k <Cmd>LspHover<CR>
 nnoremap <Leader>m <Cmd>Maps<CR>
 nnoremap <Leader>n <Cmd>tabnext<CR>
 nnoremap <Leader>p <Cmd>tabprevious<CR>

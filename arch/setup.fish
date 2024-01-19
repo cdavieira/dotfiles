@@ -1,26 +1,60 @@
 #!/usr/bin/fish
 
-sudo pacman -S mesa vulkan-intel {,xorg-x,bemenu-}wayland wlroots wayland-protocols git \
-make bear waybar polkit ly ttf-{anonymouspro,firacode,hack}-nerd \
-ttf-nerd-fonts-symbols{,-mono} kitty firefox neovim gcc gdb valgrind file which \
-ffmpeg pkg-config zip wget usbutils unzip unrar tree lshw os-prober efibootmgr \
-pipewire-{jack,alsa,pulse} sof-firmware nodejs python-pynvim fd ripgrep \
-wl-clipboard clang {lua,typescript}-language-server pyright ntfs-3g cmake
+function graphics -d "Install nvidia and intel drivers"
+	sudo pacman -S mesa vulkan-intel
+end
 
-#nvim /etc/ly/config.ini
-sudo systemctl enable ly
-sudo systemctl --user --now enable wireplumber
+function wayland -d "Install wayland, dwl and display manager"
+	sudo pacman -S wayland xorg-xwayland git make bear polkit pkg-config wlroots wayland-protocols bemenu-wayland waybar ly
+	#nvim /etc/ly/config.ini
+	sudo systemctl enable ly
+end
 
-git clone https://codeberg.org/dwl/dwl.git
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+function fonts -d "Install nerd fonts"
+	sudo pacman -S ttf-{anonymouspro,firacode,hack}-nerd ttf-nerd-fonts-symbols{,-mono}
 
-rm ~/.config/fish/config.fish
-ln -s ~/dotfiles/fish/config.fish -t ~/.config/fish -v
-ln -s ~/dotfiles/tmux/.tmux.conf -t ~ -v
-ln -s ~/dotfiles/nvim/ -t ~/.config -v
-ln -s ~/dotfiles/kitty/ -t ~/.config -v
-ln -s ~/dotfiles/dwl/config.h -t ~/dwl -v
+	git clone https://codeberg.org/dwl/dwl.git
+	ln -s ~/dotfiles/dwl/config.h -t ~/dwl -v
+end
 
-mkdir -p ~/.vim ~/.cache/vim/{backup,swap,undo}
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-ln -s ~/dotfiles/vim/vimrc -t ~/.vim -v
+function vim -d "Install vim and neovim"
+	sudo pacman -S neovim nodejs python-pynvim fd ripgrep wl-clipboard clang {lua,typescript}-language-server pyright cmake
+	ln -s ~/dotfiles/nvim/ -t ~/.config -v
+
+	sudo pacman -S vim
+	mkdir -p ~/.vim ~/.cache/vim/{backup,swap,undo}
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	ln -s ~/dotfiles/vim/vimrc -t ~/.vim -v
+end
+
+function shell -d "Install kitty and setup fish"
+	sudo pacman -S kitty
+
+	rm ~/.config/fish/config.fish
+	ln -s ~/dotfiles/fish/config.fish -t ~/.config/fish -v
+	ln -s ~/dotfiles/kitty/ -t ~/.config -v
+end
+
+function utils -d "Install Misc"
+	sudo pacman -S firefox gcc gdb valgrind file which ffmpeg wget usbutils unzip unrar tree lshw os-prober efibootmgr ntfs-3g tmux
+
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	ln -s ~/dotfiles/tmux/.tmux.conf -t ~ -v
+end
+
+function audio -d "Setup pipewire and audio dependencies"
+	sudo pacman -S pipewire-{jack,alsa,pulse} sof-firmware 
+	sudo systemctl --user --now enable wireplumber
+end
+
+function routine
+	graphics
+	wayland
+	fonts
+	vim
+	shell
+	utils
+	audio
+end
+
+routine

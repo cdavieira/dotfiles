@@ -28,6 +28,8 @@
 		https://github.com/folke/which-key.nvim
 	[X] alpha-nvim
 		https://github.com/goolord/alpha-nvim
+	[X] toggleterm
+		https://github.com/akinsho/toggleterm.nvim
 --]]
 
 
@@ -192,5 +194,9 @@ return {
 			-- require'alpha'.setup(require'alpha.themes.startify'.config)
 			require'alpha'.setup(require'alpha.themes.dashboard'.config)
 		end
+	},
+	{
+		-- amongst your other plugins
+		{'akinsho/toggleterm.nvim', version = "*", config = true}
 	},
 }

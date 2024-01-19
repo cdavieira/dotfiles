@@ -6,6 +6,7 @@ local mylazyness = require("carlos.lazy")
 local telescope = require('telescope.builtin')
 local neotree = require('neo-tree.command')
 local lspconfig = require('lspconfig')
+local toggleterm = require('toggleterm')
 
 -- colorschemes
 vim.cmd.colorscheme "catppuccin"

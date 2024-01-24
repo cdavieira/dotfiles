@@ -156,9 +156,7 @@ nnoremap <Leader>rb <Cmd>Cbuild<CR>
 nnoremap <Leader>rc <Cmd>Ccheck<CR>
 nnoremap <Leader>rd <Cmd>Cdoc<CR>
 nnoremap <Leader>rl <Cmd>Cclean<CR>
-nnoremap <Leader>s <Cmd>split<CR>
 nnoremap <Leader>t <Cmd>tabnew<CR>
-nnoremap <Leader>v <Cmd>vsplit<CR>
 nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
 
 

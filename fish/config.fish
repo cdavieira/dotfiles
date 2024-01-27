@@ -14,8 +14,6 @@ if status is-interactive
 		set -x PATH $PATH $HOME/.local/bin
 	end
 
-	set -x EDITOR "nvim"
-
 	if test -d "$HOME/.bun"
 		set --export BUN_INSTALL "$HOME/.bun"
 		set --export PATH $PATH $BUN_INSTALL/bin
@@ -26,4 +24,11 @@ if status is-interactive
 	end
 	abbr --add dotdot --regex '^\.\.+$' --function multicd
 
+	if type -q 'nvim'
+		set -x EDITOR 'nvim'
+		set -x MANPAGER 'nvim +Man!'
+	else if type -q 'vim'
+		set -x EDITOR 'vim'
+		set -x MANPAGER 'vim +Man!'
+	end
 end

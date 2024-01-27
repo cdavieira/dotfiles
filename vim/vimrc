@@ -34,6 +34,7 @@ set shiftwidth=2 " i_ctrl^T and i_ctrl^D will enter 2 spaces
 set showcmd " show partial commands at the bottom right of the window
 set suffixes=.bak,~,.o,.info,.swp,.aux,.bbl,.blg,.brf,.cb,.dvi,.idx,.ilg,.ind,.inx,.jpg,.log,.out,.png,.toc
 set tabstop=2 " tabs become 2 spaces
+set textwidth=78
 set ttimeout
 set timeoutlen=400
 set ttimeoutlen=100
@@ -53,6 +54,8 @@ colorscheme evening
 
 """ VIM PLUGINS
 runtime ftplugin/man.vim
+let g:ft_man_no_sect_fallback = 1
+set keywordprg=:Man
 
 
 
@@ -149,7 +152,7 @@ nnoremap <Leader>gco <Cmd>Commits<CR>
 nnoremap <Leader>gv <Cmd>Colors<CR>
 nnoremap <Leader>gb <Cmd>Git blame<CR>
 nnoremap <Leader>k <Cmd>LspHover<CR>
-nnoremap <Leader>m <Cmd>Maps<CR>
+nnoremap <Leader>M <Cmd>Maps<CR>
 nnoremap <Leader>n <Cmd>tabnext<CR>
 nnoremap <Leader>p <Cmd>tabprevious<CR>
 nnoremap <Leader>rb <Cmd>Cbuild<CR>

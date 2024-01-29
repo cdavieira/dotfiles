@@ -48,7 +48,8 @@ set wildmenu
 
 
 " APPEARANCE
-colorscheme koehler
+" colorscheme koehler
+colorscheme desert
 
 
 
@@ -126,7 +127,7 @@ let g:myColors = [
 \ 'lunaperche',
 \ 'wildcharm',
 \ 'sorbet',
-\ 'zaibatsu'
+\ 'zaibatsu',
 \ 'koehler',
 \ 'desert',
 \ 'default',

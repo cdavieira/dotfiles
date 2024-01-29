@@ -34,7 +34,7 @@ function shell -d "Install kitty and setup fish"
 end
 
 function utils -d "Install Misc"
-	sudo pacman -S firefox gcc gdb valgrind file which ffmpeg wget usbutils unzip unrar tree lshw os-prober efibootmgr ntfs-3g tmux
+	sudo pacman -S firefox gcc gdb valgrind file which ffmpeg wget usbutils unzip unrar tree lshw os-prober efibootmgr ntfs-3g tmux zathura zathura-pdf-poppler mpv
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	ln -s ~/dotfiles/tmux/.tmux.conf -t ~ -v
 end

@@ -1,6 +1,9 @@
 config.load_autoconfig()
 
+c.auto_save.session = True
 c.downloads.location.directory = "~/temp/"
+#c.colors.webpage.darkmode.enabled = True
+c.editor.command = ["nvim", "{}"]
 
 start_pages = {
     0: [
@@ -14,7 +17,6 @@ start_pages = {
         "https://sw.kovidgoyal.net/kitty/",
         "https://fishshell.com/",
         "https://www.qutebrowser.org/",
-        "https://dwm.suckless.org/",
         "https://github.com/djpohly/dwl",
         "https://awesomewm.org/",
         "https://neovim.io/",
@@ -30,11 +32,9 @@ start_pages = {
         "https://neovim.io/doc/user/lua.html",
     ],
     4: [
-        "https://en.cppreference.com/w/",
         "https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html", 
+        "https://en.cppreference.com/w/",
         "https://www.lua.org/manual/5.4/",
-        "https://developer.mozilla.org/en-US/docs/Web/javascript",
-        "https://docs.python.org/3.12/",
     ],
     5: {
         "https://www.typescriptlang.org/docs/handbook/intro.html",
@@ -53,12 +53,13 @@ start_pages = {
         "https://wiki.archlinux.org/title/NVIDIA_Optimus",
     },
     8: {
-        "https://www.lua.org/manual/5.4/",
+        #
     }
 }
 
 c.url.start_pages = [
-    "https://raw.githubusercontent.com/qutebrowser/qutebrowser/main/doc/img/cheatsheet-big.png"
+    "https://chat.openai.com/"
+    #"https://raw.githubusercontent.com/qutebrowser/qutebrowser/main/doc/img/cheatsheet-big.png"
 ]
 
-c.url.start_pages.extend(start_pages[8])
+c.url.start_pages.extend(start_pages[4])

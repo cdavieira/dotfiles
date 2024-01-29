@@ -10,6 +10,7 @@ unlet s:cpo_save
 
 
 
+
 " VARIABLES
 " run 'mkdir -p ~/.cache/vim/{backup,swap,undo}'
 set background=dark
@@ -45,8 +46,9 @@ set wildmenu
 
 
 
+
 " APPEARANCE
-colorscheme evening
+colorscheme koehler
 
 
 
@@ -59,13 +61,15 @@ set keywordprg=:Man
 
 
 
+
+
 """ VIM PLUG (https://github.com/junegunn/vim-plug)
 " to install vim-plug:
 " 'curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 call plug#begin('~/.vim/vim-plug')
 " linter and lsp
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 " filesystem explorer
 Plug 'preservim/nerdtree'
@@ -83,21 +87,21 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 
 " better start menu
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 
 " fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " autocompletion
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " lsp
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
 
 " easy comments
 Plug 'preservim/nerdcommenter'
@@ -114,17 +118,19 @@ call plug#end()
 
 
 
+
 " FUNCTIONS
 let g:myColors = [
 \ 'evening',
 \ 'habamax',
-\ 'koehler',
 \ 'lunaperche',
 \ 'wildcharm',
+\ 'sorbet',
+\ 'zaibatsu'
+\ 'koehler',
 \ 'desert',
 \ 'default',
-\ 'sorbet',
-\ 'zaibatsu' ]
+\ ]
 function CycleColorScheme()
     let idx = index(g:myColors, g:colors_name)
     return (idx + 1 >= len(g:myColors) ? g:myColors[0] : g:myColors[idx + 1])
@@ -132,35 +138,44 @@ endfunc
 
 
 
+
 """ MAPPINGS
 let g:mapleader = " "
 let g:maplocalleader = ","
+" whichkey
+nnoremap <silent> <Leader> :WhichKey '<Space>'<CR>
+" nerdtree
+nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
+" vim-fugitive
+nnoremap <Leader>gg <Cmd>Git<CR>
+nnoremap <Leader>gb <Cmd>Git blame<CR>
+" fzf
+nnoremap <Leader>b <Cmd>Buffers<CR>
+nnoremap <Leader>f <Cmd>Files<CR>
+nnoremap <Leader>gc <Cmd>Commands<CR>
+nnoremap <Leader>gco <Cmd>Commits<CR>
+nnoremap <Leader>gv <Cmd>Colors<CR>
+nnoremap <Leader>M <Cmd>Maps<CR>
+" vim-lsp
+nnoremap <Leader>k <Cmd>LspHover<CR>
+" rust
+nnoremap <Leader>rb <Cmd>Cbuild<CR>
+nnoremap <Leader>rc <Cmd>Ccheck<CR>
+nnoremap <Leader>rd <Cmd>Cdoc<CR>
+nnoremap <Leader>rl <Cmd>Cclean<CR>
+" mine
 nmap Q gq
 xmap Q gq
 omap Q gq
 nnoremap <LocalLeader>j o<Esc>k
 nnoremap <LocalLeader>k O<Esc>j
 nnoremap <LocalLeader>m o<Esc>kO<Esc>j
-nnoremap <silent> <Leader> :WhichKey '<Space>'<CR>
-nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
-nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
-nnoremap <Leader>f <Cmd>Files<CR>
-nnoremap <Leader>gg <Cmd>Git<CR>
-nnoremap <Leader>gc <Cmd>Commands<CR>
-nnoremap <Leader>gco <Cmd>Commits<CR>
-nnoremap <Leader>gv <Cmd>Colors<CR>
-nnoremap <Leader>gb <Cmd>Git blame<CR>
-nnoremap <Leader>k <Cmd>LspHover<CR>
-nnoremap <Leader>M <Cmd>Maps<CR>
 nnoremap <Leader>n <Cmd>tabnext<CR>
 nnoremap <Leader>p <Cmd>tabprevious<CR>
-nnoremap <Leader>rb <Cmd>Cbuild<CR>
-nnoremap <Leader>rc <Cmd>Ccheck<CR>
-nnoremap <Leader>rd <Cmd>Cdoc<CR>
-nnoremap <Leader>rl <Cmd>Cclean<CR>
 nnoremap <Leader>t <Cmd>tabnew<CR>
 nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
+
 
 
 
@@ -225,6 +240,7 @@ nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
 
 
 
+
 " startify variables
 let g:startify_bookmarks = [
 	"\ {'vimrc': '~/.vimrc'},
@@ -243,6 +259,7 @@ let g:startify_commands = [
 	\ ":help 'path'",
 	\ ":help .vimrc",
 	\ ]
+
 
 
 

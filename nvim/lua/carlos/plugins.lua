@@ -30,6 +30,8 @@
 		https://github.com/goolord/alpha-nvim
 	[X] toggleterm
 		https://github.com/akinsho/toggleterm.nvim
+	[X] typescript + jsx better syntax
+		https://github.com/leafgarland/typescript-vim
 --]]
 
 
@@ -199,4 +201,8 @@ return {
 		-- amongst your other plugins
 		{'akinsho/toggleterm.nvim', version = "*", config = true}
 	},
+	{
+		"leafgarland/typescript-vim",
+	}
+	,
 }

@@ -34,7 +34,7 @@ function shell -d "Install kitty and setup fish"
 end
 
 function utils -d "Install Misc"
-	sudo pacman -S firefox gcc gdb valgrind file which ffmpeg wget usbutils unzip unrar tree lshw os-prober efibootmgr ntfs-3g tmux zathura zathura-pdf-poppler mpv
+	sudo pacman -S qutebrowser gcc gdb valgrind file which ffmpeg wget usbutils unzip unrar tree lshw os-prober efibootmgr ntfs-3g tmux
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	ln -s ~/dotfiles/tmux/.tmux.conf -t ~ -v
 end
@@ -42,6 +42,10 @@ end
 function audio -d "Setup pipewire and audio dependencies"
 	sudo pacman -S pipewire-{jack,alsa,pulse} sof-firmware 
 	sudo systemctl --user --now enable wireplumber
+end
+
+function optional -d "Install optional programs"
+	sudo pacman -S zathura zathura-pdf-poppler mpv vimiv obs-studio mypaint
 end
 
 function routine
@@ -52,6 +56,7 @@ function routine
 	shell
 	utils
 	audio
+	#optional
 end
 
 routine

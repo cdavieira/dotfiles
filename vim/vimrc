@@ -18,7 +18,7 @@ set backspace=indent,eol,start
 set backupdir=~/.cache/vim/backup//
 set directory=~/.cache/vim/swap//
 set display=truncate
-set encoding=utf-8
+set encoding=UTF-8
 set fileencodings=ucs-bom,utf-8,default,latin1
 set helplang=en,de
 set history=200
@@ -154,20 +154,16 @@ nnoremap <Leader>gb <Cmd>Git blame<CR>
 nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>gc <Cmd>Commands<CR>
-nnoremap <Leader>gco <Cmd>Commits<CR>
-nnoremap <Leader>gv <Cmd>Colors<CR>
+nnoremap <Leader>gC <Cmd>Commits<CR>
 nnoremap <Leader>M <Cmd>Maps<CR>
 " vim-lsp
-nnoremap <Leader>k <Cmd>LspHover<CR>
+" nnoremap <Leader>k <Cmd>LspHover<CR>
 " rust
 nnoremap <Leader>rb <Cmd>Cbuild<CR>
 nnoremap <Leader>rc <Cmd>Ccheck<CR>
 nnoremap <Leader>rd <Cmd>Cdoc<CR>
 nnoremap <Leader>rl <Cmd>Cclean<CR>
 " mine
-nmap Q gq
-xmap Q gq
-omap Q gq
 nnoremap <LocalLeader>j o<Esc>k
 nnoremap <LocalLeader>k O<Esc>j
 nnoremap <LocalLeader>m o<Esc>kO<Esc>j
@@ -176,8 +172,10 @@ nnoremap <Leader>n <Cmd>tabnext<CR>
 nnoremap <Leader>p <Cmd>tabprevious<CR>
 nnoremap <Leader>t <Cmd>tabnew<CR>
 nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
-
-
+nnoremap <Up> <NOP>
+nnoremap <Down> <NOP>
+nnoremap <Left> <NOP>
+nnoremap <Right> <NOP>
 
 
 
@@ -261,6 +259,12 @@ let g:startify_commands = [
 	\ ":help .vimrc",
 	\ ]
 
+
+
+
+" INTERESTING
+" https://github.com/mbbill/undotree
+" https://github.com/xolox/vim-notes
 
 
 

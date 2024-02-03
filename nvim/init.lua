@@ -16,6 +16,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 -- vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.wrap = false
 
 -- Global mappings.
 vim.keymap.set('n', '<leader>f', telescope.find_files, {desc = "Perform filename search in cwd"})
@@ -23,6 +24,7 @@ vim.keymap.set('n', '<leader>s', telescope.live_grep, {desc = 'Perform string se
 vim.keymap.set('n', '<leader>b', telescope.buffers, {desc = 'Perform filename search in neovim\'s buffer list'})
 vim.keymap.set('n', '<leader>h', telescope.help_tags, {desc = 'Search for help within neovim help tags'})
 vim.keymap.set('n', '<leader>m', function() telescope.man_pages({sections = {'ALL'}}) end, {desc = 'Search for a manpage'})
+vim.keymap.set('x', '<leader>y', '"+y', {desc = 'Copy to system clipboard'})
 vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>', {desc = 'Toggle Neotree side panel'})
 vim.keymap.set('n', '<leader>i', '<Cmd>edit /home/carlos/.config/nvim/init.lua <CR>', {desc = 'Edit init.lua'})
 vim.keymap.set('n', '<leader>p', '<Cmd>edit /home/carlos/.config/nvim/lua/carlos/plugins.lua <CR>', {desc = 'Edit Lazy\'s plugins file'})

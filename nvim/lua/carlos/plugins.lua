@@ -32,9 +32,15 @@
 		https://github.com/akinsho/toggleterm.nvim
 	[X] typescript + jsx better syntax
 		https://github.com/leafgarland/typescript-vim
+	[ ] formatter
+		https://github.com/mhartington/formatter.nvim
+	[ ] open markdown file in markdown-preview.com
+		https://github.com/iamcco/markdown-preview.nvim
+	[ ] bookmarking files
+		https://github.com/otavioschwanck/arrow.nvim
+	[ ] toggleterm
+		https://github.com/willothy/flatten.nvim
 --]]
-
-
 
 
 --[[
@@ -203,6 +209,5 @@ return {
 	},
 	{
 		"leafgarland/typescript-vim",
-	}
-	,
+	},
 }

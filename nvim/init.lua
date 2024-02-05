@@ -28,6 +28,8 @@ vim.keymap.set('x', '<leader>y', '"+y', {desc = 'Copy to system clipboard'})
 vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>', {desc = 'Toggle Neotree side panel'})
 vim.keymap.set('n', '<leader>i', '<Cmd>edit /home/carlos/.config/nvim/init.lua <CR>', {desc = 'Edit init.lua'})
 vim.keymap.set('n', '<leader>p', '<Cmd>edit /home/carlos/.config/nvim/lua/carlos/plugins.lua <CR>', {desc = 'Edit Lazy\'s plugins file'})
+vim.keymap.set('n', '\\', '<Cmd>:ToggleTerm <CR>', {desc = 'Edit Lazy\'s plugins file'})
+vim.keymap.set('t', '\\', '<Cmd>:ToggleTerm <CR>', {desc = 'Edit Lazy\'s plugins file'})
 -- See `:help vim.diagnostic.*` for more
 vim.keymap.set('n', '<space>g', vim.diagnostic.open_float, {desc = 'Open diagnosis floating panel'})
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {desc = 'Goto previous error'})
@@ -73,6 +75,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end, opts)
 	end,
 })
+
+toggleterm.setup{
+	size = 40,
+	direction = 'float',
+	shade_terminals = false,
+}
 
 --[[
 :Alpha

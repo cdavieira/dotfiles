@@ -123,14 +123,14 @@ call plug#end()
 " FUNCTIONS
 let g:myColors = [
 \ 'evening',
-\ 'habamax',
-\ 'lunaperche',
-\ 'wildcharm',
+"\ 'habamax',
+"\ 'lunaperche',
+"\ 'wildcharm',
 \ 'sorbet',
-\ 'zaibatsu',
-\ 'koehler',
+"\ 'zaibatsu',
+"\ 'koehler',
 \ 'desert',
-\ 'default',
+"\ 'default',
 \ ]
 function CycleColorScheme()
     let idx = index(g:myColors, g:colors_name)
@@ -170,12 +170,18 @@ nnoremap <LocalLeader>m o<Esc>kO<Esc>j
 nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
 nnoremap <Leader>n <Cmd>tabnext<CR>
 nnoremap <Leader>p <Cmd>tabprevious<CR>
-nnoremap <Leader>t <Cmd>tabnew<CR>
+noremap <Leader>t :term ++close ++kill="kill"<cr>
+tnoremap <Leader>t <cr>exit<cr>
 nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
-nnoremap <Up> <NOP>
-nnoremap <Down> <NOP>
-nnoremap <Left> <NOP>
-nnoremap <Right> <NOP>
+"" nnoremap <Leader>t <Cmd>tabnew<CR>
+noremap! <Up> <NOP>
+noremap! <Down> <NOP>
+noremap! <Left> <NOP>
+noremap! <Right> <NOP>
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
 
 

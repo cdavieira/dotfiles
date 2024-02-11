@@ -23,7 +23,7 @@ set fileencodings=ucs-bom,utf-8,default,latin1
 set helplang=en,de
 set history=200
 set hlsearch
-set incsearch
+set incsearch " while typing a search command, show where the pattern matches
 set langnoremap
 set nolangremap
 set nowrap " text does not wrap to fit entirely in the window
@@ -38,7 +38,7 @@ set tabstop=2 " tabs become 2 spaces
 set textwidth=78
 set ttimeout
 set timeoutlen=400
-set ttimeoutlen=100
+set ttimeoutlen=100 " time waited for a key code or mapped key sequence to complete (ms)
 set undodir=~/.cache/vim/undo//
 set viminfo='20,\"50
 set wildmenu
@@ -58,7 +58,7 @@ colorscheme desert
 """ VIM PLUGINS
 runtime ftplugin/man.vim
 let g:ft_man_no_sect_fallback = 1
-set keywordprg=:Man
+set keywordprg=:Man " program to user for the K command
 
 
 
@@ -114,6 +114,10 @@ Plug 'tpope/vim-fugitive'
 " display available keybindings in a popup
 Plug 'liuchengxu/vim-which-key'
 
+" https://github.com/mbbill/undotree
+
+" https://github.com/xolox/vim-notes
+
 call plug#end()
 
 
@@ -140,29 +144,37 @@ endfunc
 
 
 
+
 """ MAPPINGS
 let g:mapleader = " "
 let g:maplocalleader = ","
+
 " whichkey
 nnoremap <silent> <Leader> :WhichKey '<Space>'<CR>
+
 " nerdtree
 nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
+
 " vim-fugitive
 nnoremap <Leader>gg <Cmd>Git<CR>
 nnoremap <Leader>gb <Cmd>Git blame<CR>
+
 " fzf
 nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>gc <Cmd>Commands<CR>
 nnoremap <Leader>gC <Cmd>Commits<CR>
 nnoremap <Leader>M <Cmd>Maps<CR>
+
 " vim-lsp
 " nnoremap <Leader>k <Cmd>LspHover<CR>
+
 " rust
 nnoremap <Leader>rb <Cmd>Cbuild<CR>
 nnoremap <Leader>rc <Cmd>Ccheck<CR>
 nnoremap <Leader>rd <Cmd>Cdoc<CR>
 nnoremap <Leader>rl <Cmd>Cclean<CR>
+
 " mine
 nnoremap <LocalLeader>j o<Esc>k
 nnoremap <LocalLeader>k O<Esc>j
@@ -173,7 +185,6 @@ nnoremap <Leader>p <Cmd>tabprevious<CR>
 noremap <Leader>t :term ++close ++kill="kill"<cr>
 tnoremap <Leader>t <cr>exit<cr>
 nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
-"" nnoremap <Leader>t <Cmd>tabnew<CR>
 noremap! <Up> <NOP>
 noremap! <Down> <NOP>
 noremap! <Left> <NOP>
@@ -183,36 +194,22 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-
-
 " Cool plugin commands available
-" :BCommits - git diff of all commits found in all buffers
-" :BLines - opens floating window to search for words in all buffers
-" :Buffers - opens floating window to search for words in all buffers
+"
+" rust
 " :Cbuild - run cargo build
 " :Ccheck - run cargo check
 " :Cclean - run cargo clean
 " :Cdoc - run cargo doc
-" :Colors - pick a color
-" 	default, desert, elflord, evening, habamax, industry, koehler, lunaperche,
-" 	pablo, slate, sorbet, torte, wildcharm, zaibatsu
-" :Commands - show all commands
-" :Commits - looks just like BCommits, but not only for buffers
-" :Changes - see all changes made during this session
-" :DiffOrig - run diff with current file and something else
-" :FZF - call fuzzy finder
-" :Files - call fuzzy finder with file preview
-" :Filetypes - pick a filetype for the current buffer
+"
+" fugitive 
 " :G - open a brief summary of all git files that aren't being tracked and files that haven't been commited quite just yet
 " 	go to :help :Git and then read the section "Staging/unstaging maps", very
 " 	useful read
 " :G blame - opens git commit history
 " :GitFiles - take a look at all readable git files in current project
-" :HelpTags - search for something within vim help files
-" :History - open file history 
-" :Jumps - open jump list
-" :LP <something> - search for <something> in current file
-" :Lines - opens floating window to search for words in all files
+"
+" asyncomplete/asyncomplete-lsp
 " :LspCodeAction 
 " :LspCodeLens
 " :LspDocumentDiagnostics
@@ -233,15 +230,42 @@ noremap <Right> <NOP>
 " :LspStatus
 " :LspInstallServers
 " :LspManageServers
+"
+" Vim
+" :DiffOrig - run diff with current file and something else
+"
+" Unknown
+" :LP <something> - search for <something> in current file
+"
+" FZF
+" :BCommits - git diff of all commits found in all buffers
+" :BLines - opens floating window to search for words in all buffers
+" :Buffers - opens floating window to search for words in all buffers
+" :Colors - pick a color
+" 	default, desert, elflord, evening, habamax, industry, koehler, lunaperche,
+" 	pablo, slate, sorbet, torte, wildcharm, zaibatsu
+" :Commands - show all commands
+" :Commits - looks just like BCommits, but not only for buffers
+" :Changes - see all changes made during this session
+" :FZF - call fuzzy finder
+" :Files - call fuzzy finder with file preview
+" :Filetypes - pick a filetype for the current buffer
+" :HelpTags - search for something within vim help files
+" :History - open file history 
+" :Jumps - open jump list
+" :Lines - opens floating window to search for words in all files
 " :Maps - all mappings done
+" :Snippets - open all saved snippets
+" :Windows - windows preview
+"
+" VimPlug
 " :PlugStatus - check  all vimplug plugins
 " :PlugUpgrade - upgrade vimplug
 " :PlugUpdate - update vimplug
 " :PlugInstall - install all plugins inside vimplug folder
-" :Snippets - open all saved snippets
+"
+" Startify
 " :Startify - open startify
-" :Windows - windows preview
-
 
 
 
@@ -264,13 +288,6 @@ let g:startify_commands = [
 	\ ":help 'path'",
 	\ ":help .vimrc",
 	\ ]
-
-
-
-
-" INTERESTING
-" https://github.com/mbbill/undotree
-" https://github.com/xolox/vim-notes
 
 
 

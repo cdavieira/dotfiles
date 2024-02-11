@@ -6,20 +6,22 @@ c.editor.command = ["vim", "{}"]
 c.url.searchengines = {
     "DEFAULT": "https://google.com/search?hl=en&q={}",
     #:open dd something-something
-    "dd": "https://duckduckgo.com/?q={}",
+    "d": "https://duckduckgo.com/?q={}",
     #:open yt something-something
-    "yt": "https://www.youtube.com/results?search_query={}",
+    "y": "https://www.youtube.com/results?search_query={}",
     #:open w something-something
     "w": "https://en.wikipedia.org/wiki/{}",
     #:open ig something-something
-    "ig": "https://www.instagram.com/explore/tags/{}",
+    "i": "https://www.instagram.com/explore/tags/{}",
     #:open ge something-something
-    "ge": "https://www.verbformen.com/?w={}",
+    "v": "https://www.verbformen.com/?w={}",
     #:open t something-something
     "t": "https://translate.google.com/?hl=pt-BR&sl=en&tl=de&text={}&op=translate",
 }
 #c.colors.webpage.darkmode.enabled = True
 #c.content.blocking.enabled = False
+#config.bind('A', 'spawn zathura {url}', mode='normal')
+#config.unbind('A', 'normal')
 
 start_pages = {
     0: [

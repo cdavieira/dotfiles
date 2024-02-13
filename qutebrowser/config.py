@@ -2,14 +2,14 @@ config.load_autoconfig()
 
 #c.content.blocking.enabled = False
 #c.url.default_page = "https://start.duckduckgo.com/"
-#c.fonts.default_size = "10pt" # qutebrowser fontsize
-#c.fonts.web.size.default = 16 # webpage fontsize
-#c.colors.webpage.darkmode.enabled = True
 #c.colors.webpage.darkmode.threshold.foreground = 120
 #c.colors.webpage.darkmode.threshold.background = 255
 #c.colors.webpage.darkmode.algorithm = "lightness-hsl"
-c.colors.webpage.preferred_color_scheme = "dark"
+#c.fonts.default_size = "10pt" # qutebrowser fontsize
+c.fonts.web.size.default = 18 # webpage fontsize
+c.colors.webpage.darkmode.enabled = False
 c.auto_save.session = True
+c.colors.webpage.preferred_color_scheme = "dark"
 c.downloads.location.directory = "~/temp/"
 c.editor.command = ["kitty", "--config", "/home/carlos/.config/kitty/kitty.conf", "-c", "\"fish", "nvim", "{}", "\""]
 c.url.searchengines = {
@@ -32,6 +32,9 @@ c.url.searchengines = {
 #config.unbind('A', 'normal')
 
 general = {
+    "gpt": [
+        "https://chat.openai.com/",
+    ],
     "vim": [
         "https://www.vim.org/",
         "https://neovim.io/",
@@ -54,39 +57,43 @@ general = {
     ],
     "dwl": [
         "https://codeberg.org/dwl/dwl",
+        "https://wayland-book.com/",
         "https://wayland.freedesktop.org/docs/html/index.html",
         "https://wayland.app/protocols/",
     ],
 }
 
 code = {
-    "cpp": {
+    "cpp": [
         "https://en.cppreference.com/w/",
         "https://cplusplus.com/",
-    },
+    ],
     "rust": [
         "https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html", 
     ],
-    "lua": {
+    "lua": [
         "https://www.lua.org/manual/5.4/",
-    },
-    "js": {
+    ],
+    "js": [
         "https://developer.mozilla.org/en-US/docs/Web/javascript",
         "https://www.w3schools.com/Js/js_es6.asp",
         "https://www.w3schools.com/js/js_htmldom.asp",
         "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
-    },
-    "ts": {
+    ],
+    "ts": [
         "https://www.typescriptlang.org/docs/handbook/intro.html",
-    },
-    "react": {
+    ],
+    "react": [
         "https://react.dev/learn",
         "https://en.wikipedia.org/wiki/JSX_(JavaScript)",
-    },
+    ],
+    "combo": [
+        "https://doc.rust-lang.org/book/ch03-02-data-types.html",
+        "https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html",
+        "https://www.lua.org/manual/5.4/",
+    ],
 }
 
-c.url.start_pages = [
-    "https://chat.openai.com/"
-]
-
-c.url.start_pages.extend(general["arch"])
+pick = code["combo"]
+c.url.start_pages = [pick[0]]
+c.url.start_pages.extend(pick[1:])

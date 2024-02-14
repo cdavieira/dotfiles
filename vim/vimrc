@@ -37,7 +37,7 @@ set suffixes=.bak,~,.o,.info,.swp,.aux,.bbl,.blg,.brf,.cb,.dvi,.idx,.ilg,.ind,.i
 set tabstop=2 " tabs become 2 spaces
 set textwidth=78
 set ttimeout
-set timeoutlen=400
+set timeoutlen=100
 set ttimeoutlen=100 " time waited for a key code or mapped key sequence to complete (ms)
 set undodir=~/.cache/vim/undo//
 set viminfo='20,\"50
@@ -173,6 +173,7 @@ nnoremap <Leader>M <Cmd>Maps<CR>
 nnoremap <Leader>rb <Cmd>Cbuild<CR>
 nnoremap <Leader>rc <Cmd>Ccheck<CR>
 nnoremap <Leader>rd <Cmd>Cdoc<CR>
+nnoremap <Leader>rf <Cmd>RustFmt<CR>
 nnoremap <Leader>rl <Cmd>Cclean<CR>
 
 " mine
@@ -180,11 +181,10 @@ nnoremap <LocalLeader>j o<Esc>k
 nnoremap <LocalLeader>k O<Esc>j
 nnoremap <LocalLeader>m o<Esc>kO<Esc>j
 nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
-nnoremap <Leader>n <Cmd>tabnext<CR>
-nnoremap <Leader>p <Cmd>tabprevious<CR>
-noremap <Leader>t :term ++close ++kill="kill"<cr>
-tnoremap <Leader>t <cr>exit<cr>
+nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
+noremap \ :term ++close ++kill="kill"<CR>
+tnoremap \ <CR>exit<CR>
 noremap! <Up> <NOP>
 noremap! <Down> <NOP>
 noremap! <Left> <NOP>

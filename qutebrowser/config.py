@@ -6,9 +6,10 @@ config.load_autoconfig()
 #c.colors.webpage.darkmode.threshold.background = 255
 #c.colors.webpage.darkmode.algorithm = "lightness-hsl"
 #c.fonts.default_size = "10pt" # qutebrowser fontsize
-c.fonts.web.size.default = 18 # webpage fontsize
+#c.fonts.web.size.default = 18 # webpage fontsize
+c.zoom.default = 150
 c.colors.webpage.darkmode.enabled = False
-c.auto_save.session = True
+c.auto_save.session = False
 c.colors.webpage.preferred_color_scheme = "dark"
 c.downloads.location.directory = "~/temp/"
 c.editor.command = ["kitty", "--config", "/home/carlos/.config/kitty/kitty.conf", "-c", "\"fish", "nvim", "{}", "\""]

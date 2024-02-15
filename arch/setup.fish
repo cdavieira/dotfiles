@@ -30,6 +30,7 @@ function shell -d "Install kitty and setup fish"
 	sudo pacman -S kitty
 	rm ~/.config/fish/config.fish
 	ln -s ~/dotfiles/fish/config.fish -t ~/.config/fish -v
+	ln -s ~/dotfiles/fish/functions/ -t ~/.config/fish -v
 	ln -s ~/dotfiles/kitty/ -t ~/.config -v
 end
 

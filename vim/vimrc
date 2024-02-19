@@ -58,7 +58,7 @@ colorscheme desert
 """ VIM PLUGINS
 runtime ftplugin/man.vim
 let g:ft_man_no_sect_fallback = 1
-set keywordprg=:Man " program to user for the K command
+set keywordprg=:Man " program to be evoked by K
 
 
 

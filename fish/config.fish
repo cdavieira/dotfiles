@@ -19,16 +19,23 @@ if status is-interactive
 		set --export PATH $PATH $BUN_INSTALL/bin
 	end
 
-	function multicd
-			echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
-	end
-	abbr --add dotdot --regex '^\.\.+$' --function multicd
-
 	if type -q 'nvim'
 		set -x EDITOR 'nvim'
 		set -x MANPAGER 'nvim +Man!'
 	else if type -q 'vim'
 		set -x EDITOR 'vim'
 		set -x MANPAGER 'vim +Man!'
+	end
+
+	alias ls 'ls --group-directories-first --color=auto'
+
+	function multicd
+			echo builtin cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+	end
+	abbr --add dotdot --regex '^\.\.+$' --function multicd
+
+	function cd
+		builtin cd $argv
+		ls
 	end
 end

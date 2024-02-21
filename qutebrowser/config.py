@@ -89,12 +89,11 @@ code = {
         "https://en.wikipedia.org/wiki/JSX_(JavaScript)",
     ],
     "combo": [
-        "https://doc.rust-lang.org/book/ch03-02-data-types.html",
         "https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html",
-        "https://www.lua.org/manual/5.4/",
     ],
 }
 
 pick = code["combo"]
 c.url.start_pages = [pick[0]]
-c.url.start_pages.extend(pick[1:])
+if len(pick) > 1:
+    c.url.start_pages.extend(pick[1:])

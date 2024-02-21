@@ -4,14 +4,14 @@ if status is-interactive
 		set -x PATH $PATH $HOME/.cargo/bin
 	end
 
+	if test -d "$HOME/.local/bin"
+		set -x PATH $PATH $HOME/.local/bin
+	end
+
 	if test -f "$HOME/.lynx/lynx.cfg"
 		set -x LYNX_CFG "$HOME/.lynx/lynx.cfg"
 		# not working in arch
 		# set -x LYNX_LSS "bright-blue.lss"
-	end
-
-	if test -d "$HOME/.local/bin"
-		set -x PATH $PATH $HOME/.local/bin
 	end
 
 	if test -d "$HOME/.bun"
@@ -27,15 +27,12 @@ if status is-interactive
 		set -x MANPAGER 'vim +Man!'
 	end
 
-	alias ls 'ls --group-directories-first --color=auto'
-
 	function multicd
-			echo builtin cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+			echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 	end
-	abbr --add dotdot --regex '^\.\.+$' --function multicd
+	abbr --add dotdot --position command --regex '^\.\.+$' --function multicd
 
-	function cd
-		builtin cd $argv
-		ls
-	end
+	alias ls 'ls --group-directories-first --color=auto'
+else if status is-login
+	# Commands to run in login sessions can go here
 end

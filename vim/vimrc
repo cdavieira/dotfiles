@@ -49,7 +49,8 @@ set wildmenu
 
 " APPEARANCE
 " colorscheme koehler
-colorscheme desert
+" colorscheme desert
+colorscheme evening
 
 
 
@@ -146,6 +147,8 @@ endfunc
 
 
 """ MAPPINGS
+" b, c, e, f, g, r, s, z
+" a, d, h, i, j, k, l, m, n, o, p, q, t, u, v, w, x, y
 let g:mapleader = " "
 let g:maplocalleader = ","
 
@@ -156,15 +159,16 @@ nnoremap <silent> <Leader> :WhichKey '<Space>'<CR>
 nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
 
 " vim-fugitive
-nnoremap <Leader>gg <Cmd>Git<CR>
-nnoremap <Leader>gb <Cmd>Git blame<CR>
+nnoremap <Leader>g <Cmd>Git<CR>
+nnoremap <Leader>G <Cmd>Git blame<CR>
 
 " fzf
 nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>f <Cmd>Files<CR>
-nnoremap <Leader>gc <Cmd>Commands<CR>
-nnoremap <Leader>gC <Cmd>Commits<CR>
-nnoremap <Leader>M <Cmd>Maps<CR>
+nnoremap <Leader>s <Cmd>Rg<CR>
+nnoremap <Leader>o <Cmd>Commits<CR>
+nnoremap <Leader>m <Cmd>Commands<CR>
+" nnoremap <Leader>m <Cmd>Maps<CR>
 
 " vim-lsp
 " nnoremap <Leader>k <Cmd>LspHover<CR>
@@ -177,11 +181,8 @@ nnoremap <Leader>rf <Cmd>RustFmt<CR>
 nnoremap <Leader>rl <Cmd>Cclean<CR>
 
 " mine
-nnoremap <LocalLeader>j o<Esc>k
-nnoremap <LocalLeader>k O<Esc>j
-nnoremap <LocalLeader>m o<Esc>kO<Esc>j
-nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
-nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
+" nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
+" nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
 noremap \ :term ++close ++kill="kill"<CR>
 tnoremap \ <CR>exit<CR>
@@ -238,6 +239,7 @@ noremap <Right> <NOP>
 " :LP <something> - search for <something> in current file
 "
 " FZF
+" :Ag
 " :BCommits - git diff of all commits found in all buffers
 " :BLines - opens floating window to search for words in all buffers
 " :Buffers - opens floating window to search for words in all buffers
@@ -255,6 +257,7 @@ noremap <Right> <NOP>
 " :Jumps - open jump list
 " :Lines - opens floating window to search for words in all files
 " :Maps - all mappings done
+" :Rg
 " :Snippets - open all saved snippets
 " :Windows - windows preview
 "

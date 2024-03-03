@@ -37,8 +37,8 @@ set suffixes=.bak,~,.o,.info,.swp,.aux,.bbl,.blg,.brf,.cb,.dvi,.idx,.ilg,.ind,.i
 set tabstop=2 " tabs become 2 spaces
 set textwidth=78
 set ttimeout
-set timeoutlen=100
-set ttimeoutlen=100 " time waited for a key code or mapped key sequence to complete (ms)
+set timeoutlen=200
+set ttimeoutlen=200 " time waited for a key code or mapped key sequence to complete (ms)
 set undodir=~/.cache/vim/undo//
 set viminfo='20,\"50
 set wildmenu
@@ -147,8 +147,8 @@ endfunc
 
 
 """ MAPPINGS
-" b, c, e, f, g, r, s, z
-" a, d, h, i, j, k, l, m, n, o, p, q, t, u, v, w, x, y
+" in use: b, c, e, f, g, r, s, z
+" available: a, d, h, i, j, k, l, m, n, o, p, q, t, u, v, w, x, y
 let g:mapleader = " "
 let g:maplocalleader = ","
 
@@ -186,6 +186,9 @@ nnoremap <Leader>rl <Cmd>Cclean<CR>
 nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
 noremap \ :term ++close ++kill="kill"<CR>
 tnoremap \ <CR>exit<CR>
+noremap <LocalLeader>k O<Esc>j
+noremap <LocalLeader>j o<Esc>k
+noremap <LocalLeader>l o<Esc>kO<Esc>j
 noremap! <Up> <NOP>
 noremap! <Down> <NOP>
 noremap! <Left> <NOP>

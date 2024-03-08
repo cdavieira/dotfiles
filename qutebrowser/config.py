@@ -68,6 +68,16 @@ general = {
 }
 
 code = {
+    "assembly": [
+        "https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_toc.html",
+        "https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_3.html#SEC25",
+        "https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_4.html",
+        "https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_5.html",
+        "https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_6.html",
+        "https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_7.html#SEC90",
+        "https://stackoverflow.com/questions/2529185/what-are-cfi-directives-in-gnu-assembler-gas-used-for",
+        "https://sourceware.org/binutils/docs/as/index.html#SEC_Contents",
+    ],
     "cpp": [
         "https://en.cppreference.com/w/",
         "https://cplusplus.com/",

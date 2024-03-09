@@ -3,14 +3,12 @@
 	https://www.youtube.com/watch?v=6mxWayq-s9I
 --]]
 
--- :echo stdpath('config') -> /home/carlos/.config/nvim
--- :echo stdpath('data') -> /home/carlos/.local/share/nvim
 
 -- configuring lazy's installation path
 -- all eventually installed plugins will reside in this folder
 -- stdpath('data') defaults to ~/.local/share/nvim
 -- you can check it by running: :echo stdpath('data')
--- so lazy's path will usually be '~/.config/share/nvim/lazy/lazy.nvim/'
+-- so lazy's path will usually be '~/.local/share/nvim/lazy/lazy.nvim/'
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 -- the github repo is fetched if isn't found in the previously configured path

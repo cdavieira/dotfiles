@@ -10,24 +10,18 @@ config.load_autoconfig()
 c.fonts.default_family = ["HackNerdFontMono-Italic", "FiraCodeNerdFontMono-Regular", "SourceCodeVF-Upright"]
 c.zoom.default = 150
 c.colors.webpage.darkmode.enabled = False
-c.auto_save.session = False
+c.auto_save.session = True
 c.colors.webpage.preferred_color_scheme = "dark"
 c.downloads.location.directory = "~/temp/"
-c.editor.command = ["kitty", "--config", "/home/carlos/.config/kitty/kitty.conf", "-c", "\"fish", "nvim", "{}", "\""]
+c.editor.command = ["kitty", "--config", "/home/carlos/.config/kitty/kitty.conf", "-c", "\"fish", "nvim", '{}']
 c.url.searchengines = {
     "DEFAULT": "https://google.com/search?hl=en&q={}",
-    #:open dd something-something
     "d": "https://duckduckgo.com/?q={}",
-    #:open yt something-something
     "y": "https://www.youtube.com/results?search_query={}",
-    #:open w something-something
     "w": "https://en.wikipedia.org/wiki/{}",
-    #:open ge something-something
     "v": "https://www.verbformen.com/?w={}",
-    #:open t something-something
     "t": "https://translate.google.com/?hl=pt-BR&sl=en&tl=de&text={}&op=translate",
-    #:open ig something-something
-    # "i": "https://www.instagram.com/explore/tags/{}",
+    "l": "https://www.linguee.com.br/alemao-portugues/traducao/{}.html",
 }
 
 #config.bind('A', 'spawn zathura {url}', mode='normal')

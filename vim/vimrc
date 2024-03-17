@@ -53,6 +53,8 @@ set wildmenu
 " colorscheme koehler
 " colorscheme desert
 " colorscheme evening
+" colorscheme sorbet
+colorscheme wildcharm
 
 
 
@@ -131,14 +133,14 @@ call plug#end()
 " FUNCTIONS
 let g:myColors = [
 \ 'evening',
-"\ 'habamax',
-"\ 'lunaperche',
-"\ 'wildcharm',
+\ 'habamax',
+\ 'lunaperche',
+\ 'wildcharm',
 \ 'sorbet',
-"\ 'zaibatsu',
-"\ 'koehler',
+\ 'zaibatsu',
+\ 'koehler',
 \ 'desert',
-"\ 'default',
+\ 'default',
 \ ]
 function CycleColorScheme()
     let idx = index(g:myColors, g:colors_name)
@@ -191,7 +193,7 @@ vnoremap <Leader>c <Plug>NERDCommenterToggle
 " nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
 " nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>z :exe ":colorscheme " .. CycleColorScheme()<CR>
-noremap \ :term ++close ++kill="kill"<CR>
+noremap \ :term ++noclose ++kill="kill"<CR>
 tnoremap \ <CR><C-D>
 noremap <LocalLeader>k O<Esc>j
 noremap <LocalLeader>j o<Esc>k

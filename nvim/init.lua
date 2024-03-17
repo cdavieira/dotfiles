@@ -31,6 +31,7 @@ vim.keymap.set('t', '\\', '<Cmd>:ToggleTerm <CR>', {desc = 'Edit Lazy\'s plugins
 vim.keymap.set('n', '<space>g', vim.diagnostic.open_float, {desc = 'Open diagnosis floating panel'})
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {desc = 'Goto previous error'})
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {desc = 'Goto next error'})
+vim.keymap.set('n', '<S-Esc>', ':noh<CR>', {desc = 'Unhighlight previous search highlight'})
 -- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- copied from https://github.com/neovim/nvim-lspconfig

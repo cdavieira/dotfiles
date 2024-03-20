@@ -53,11 +53,12 @@ general = {
         "https://sr.ht/~exec64/imv/",
         "https://github.com/mpv-player/mpv",
     ],
-    "dwl": [
+    "wayland": [
         "https://codeberg.org/dwl/dwl",
-        "https://wayland-book.com/",
         "https://wayland.freedesktop.org/docs/html/index.html",
+        "https://wayland-book.com/",
         "https://wayland.app/protocols/",
+        "https://www.cairographics.org/documentation/",
     ],
 }
 

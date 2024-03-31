@@ -35,6 +35,8 @@ vim.keymap.set('n', '<S-Esc>', ':noh<CR>', {desc = 'Unhighlight previous search 
 -- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- copied from https://github.com/neovim/nvim-lspconfig
+
+-- lspconfig.arduino_language_server.setup{}
 lspconfig.pyright.setup {}
 lspconfig.tsserver.setup {}
 lspconfig.lua_ls.setup {}

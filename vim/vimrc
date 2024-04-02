@@ -198,14 +198,14 @@ tnoremap \ <CR><C-D>
 noremap <LocalLeader>k O<Esc>j
 noremap <LocalLeader>j o<Esc>k
 noremap <LocalLeader>l o<Esc>kO<Esc>j
-noremap! <Up> <NOP>
-noremap! <Down> <NOP>
-noremap! <Left> <NOP>
-noremap! <Right> <NOP>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+"noremap! <Up> <NOP>
+"noremap! <Down> <NOP>
+"noremap! <Left> <NOP>
+"noremap! <Right> <NOP>
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
 
 " Cool plugin commands available
 "

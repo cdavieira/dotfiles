@@ -19,6 +19,7 @@ c.url.searchengines = {
     "d": "https://duckduckgo.com/?q={}",
     "y": "https://www.youtube.com/results?search_query={}",
     "w": "https://en.wikipedia.org/wiki/{}",
+    "wa": "https://wiki.archlinux.org/?search={}",
     "v": "https://www.verbformen.com/?w={}",
     "t": "https://translate.google.com/?hl=pt-BR&sl=en&tl=de&text={}&op=translate",
     "l": "https://www.linguee.com.br/alemao-portugues/traducao/{}.html",

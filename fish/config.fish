@@ -6,6 +6,7 @@ if status is-interactive
 	set -x GMAIL 'cd.vieira14@gmail.com'
 	set -x OUTLOOK 'cd_vieira@hotmail.com'
 	set -x EMAIL $GMAIL
+	set -x GPG_TTY "$(tty)"
 
 	# Dynamic variables
 	if test -d "$HOME/.cargo/bin"
@@ -14,10 +15,6 @@ if status is-interactive
 
 	if test -d "$HOME/.local/bin"
 		set -x PATH $PATH "$HOME/.local/bin"
-	end
-
-	if test -d "$HOME/.lynx"
-		set -x LYNX_CFG "$HOME/.lynx/lynx.cfg"
 	end
 
 	if test -d "$HOME/mail"

@@ -1,9 +1,17 @@
 ### Config
+set my_neomutt = "$HOME/.config/neomutt"
+set my_neomutt_root = '/usr/share/neomutt'
 set real_name = 'Carlos Vieira'
-set me_too = yes
-#set folder = "$MAIL" #default: "$HOME/Mail"
-#set spool_file = "$MAIL" #default
-#set record = "$HOME/sent/" #default
+set me_too
+#set folder_format = 
+#set greeting = 
+#set index_format =
+# builtin coloschemes: 'solarized-dark-256.neomuttrc', 'zenburn.neomuttrc', 'neonwolf-256.neomuttrc' 
+set my_neomutt_colorscheme = 'vombatidae.neomuttrc'
+source "$my_neomutt/secretneomuttrc"
+source "$my_neomutt/vimkeys.rc"
+source "$my_neomutt_root/colorschemes/$my_neomutt_colorscheme"
+
 
 
 ### Gmail config
@@ -13,12 +21,14 @@ set folder = "imaps://$GMAIL@imap.gmail.com:993" ; \
 set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587" ; \
 set imap_user = "$GMAIL" ; \
 set imap_authenticators="oauthbearer:xoauth2" ; \
-set imap_oauth_refresh_command = "" ; \
-set imap_check_subscribed = yes ; \
+set imap_oauth_refresh_command = "python $my_neomutt/oauth2.py --quiet --user=$GMAIL \
+	--client_id=$my_gmail_client_id \
+	--client_secret=$my_gmail_client_secret \
+	--refresh_token=$my_gmail_client_refresh_token" ; \
+set imap_check_subscribed ; \
 set spool_file = "+INBOX" ; \
 set record = "+Sent" ; \
 set trash = "+Trash" ; \
-set postponed = "+Drafts" ; \
 finish
 
 
@@ -29,11 +39,10 @@ finish
 #set smtp_url = "smtps://$OUTLOOK@smtp-mail.outlook.com:587" ; \
 #set imap_user = "$OUTLOOK" ; \
 #set imap_authenticators="oauthbearer:xoauth2" ; \
-#set imap_oauth_refresh_command = "" ; \
-#set imap_check_subscribed = yes ; \
+#set imap_oauth_refresh_command = "python $my_neomutt/mutt_oauth2.py $my_neomutt/$OUTLOOK.tokens" ; \
+#set imap_check_subscribed ; \
 #set spool_file = "+INBOX" ; \
 #finish
-
 
 
 ### Gmail notes
@@ -63,3 +72,9 @@ finish
 # https://github.com/google/gmail-oauth2-tools/blob/master/python/oauth2.py
 # https://console.developers.google.com/apis/credentials
 # https://github.com/neomutt/neomutt/tree/main/contrib/oauth2
+
+### other references
+# https://wiki.archlinux.org/title/mutt
+# https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer
+# https://neomutt.org/guide/advancedusage.html#10-%C2%A0mailbox-shortcuts
+# https://developers.google.com/nest/device-access/reference/errors/authorization

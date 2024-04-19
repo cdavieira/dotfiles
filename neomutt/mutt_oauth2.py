@@ -296,6 +296,11 @@ if args.authorize:
             sys.exit(1)
         print(response['message'])
         del p['scope']
+        # THE TWO FOLLOWING LINES OF CODE WERE ADDED BY ME
+        # (cd_vieira@hotmail.com) IN ORDER TO MAKE
+        # 'devicecode' WORK
+        if 'client_secret' not in list(registration.keys()):
+            registration['client_secret'] = input("'client_secret' not found in registration. Please enter it: ")
         p.update({'grant_type': 'urn:ietf:params:oauth:grant-type:device_code',
                   'client_secret': registration['client_secret'],
                   'device_code': response['device_code']})

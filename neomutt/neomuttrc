@@ -1,26 +1,39 @@
 ### Config
-# https://github.com/LukeSmithxyz/mutt-wizard
 set real_name = 'Carlos Vieira'
 set me_too = yes
-set folder = "$MAIL" #default: "$HOME/Mail"
-set spool_file = "$MAIL" #default
-set record = "$HOME/sent/" #default
+#set folder = "$MAIL" #default: "$HOME/Mail"
+#set spool_file = "$MAIL" #default
+#set record = "$HOME/sent/" #default
 
 
 ### Gmail config
-#ifdef GMAIL	\
-#set from = "$GMAIL" \
-#set folder = "imaps://$GMAIL@imap.gmail.com:993" \
-#set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587" \
-#set spool_file = "+INBOX" \
-#set record = "+Sent" \
-#set trash = "+Trash" \
-#set postponed = "+Drafts" \
-#set imap_user = "$GMAIL" \
-#set imap_send_id = yes \
-#set imap_oauth_refresh_command = "" \
+ifdef GMAIL	\
+set from = "$GMAIL" ; \
+set folder = "imaps://$GMAIL@imap.gmail.com:993" ; \
+set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587" ; \
+set imap_user = "$GMAIL" ; \
+set imap_authenticators="oauthbearer:xoauth2" ; \
+set imap_oauth_refresh_command = "" ; \
+set imap_check_subscribed = yes ; \
+set spool_file = "+INBOX" ; \
+set record = "+Sent" ; \
+set trash = "+Trash" ; \
+set postponed = "+Drafts" ; \
+finish
+
+
+### Outlook config
+#ifdef OUTLOOK \
+#set from = "$OUTLOOK" ; \
+#set folder = "imaps://$OUTLOOK@outlook.office365.com:993" ; \
+#set smtp_url = "smtps://$OUTLOOK@smtp-mail.outlook.com:587" ; \
+#set imap_user = "$OUTLOOK" ; \
+#set imap_authenticators="oauthbearer:xoauth2" ; \
+#set imap_oauth_refresh_command = "" ; \
+#set imap_check_subscribed = yes ; \
+#set spool_file = "+INBOX" ; \
 #finish
-#mailboxes =INBOX =Sent =Trash =Drafts =Junk
+
 
 
 ### Gmail notes
@@ -32,24 +45,21 @@ set record = "$HOME/sent/" #default
 # get information about Gmail IMAP, POP and SMTP servers
 # https://developers.google.com/gmail/imap/imap-smtp#:~:text=Incoming%20connections%20to%20the%20IMAP,port%20587%20(for%20TLS).
 
-
-
-### Outlook config
-#ifdef OUTLOOK	\
-#set folder = "imaps://$OUTLOOK@outlook.office365.com:993" \
-#set smtp_url = "smtps://$OUTLOOK@smtp-mail.outlook.com:587" \
-#set spool_file = "+INBOX" \
-#set from = "$OUTLOOK" \
-#set record = "+Sent" \
-#set trash = "+Trash" \
-#set postponed = "+Drafts" \
-#set imap_user = "$OUTLOOK" \
-#set imap_send_id = yes \
-#finish
-#mailboxes =INBOX
-
-
-
 ### Outlook notes
 # get information about Outlook IMAP, POP and SMTP servers
 # https://support.microsoft.com/en-us/office/pop-imap-and-smtp-settings-for-outlook-com-d088b986-291d-42b8-9564-9c414e2aa040
+
+### about imap/pop/smtp
+# file:///usr/share/doc/neomutt/optionalfeatures.html#url-syntax
+# https://neomutt.org/guide/optionalfeatures#1-2-%C2%A0url-syntax
+
+### about imap
+# file:///usr/share/doc/neomutt/optionalfeatures.html#imap
+# https://neomutt.org/guide/optionalfeatures#4-%C2%A0imap-support
+# file:///usr/share/doc/neomutt/reference.html#imap-check-subscribed
+
+### about oauth2 support
+# file:///usr/share/doc/neomutt/optionalfeatures.html#oauth
+# https://github.com/google/gmail-oauth2-tools/blob/master/python/oauth2.py
+# https://console.developers.google.com/apis/credentials
+# https://github.com/neomutt/neomutt/tree/main/contrib/oauth2

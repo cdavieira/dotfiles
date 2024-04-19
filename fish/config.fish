@@ -16,6 +16,10 @@ if status is-interactive
 		set -x PATH $PATH "$HOME/.local/bin"
 	end
 
+	if test -d "$HOME/.lynx"
+		set -x LYNX_CFG "$HOME/.lynx/lynx.cfg"
+	end
+
 	if test -d "$HOME/mail"
 		set -x MAIL "$HOME/mail"
 	end

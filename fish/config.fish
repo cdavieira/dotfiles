@@ -17,10 +17,6 @@ if status is-interactive
 		set -x PATH $PATH "$HOME/.local/bin"
 	end
 
-	if test -d "$HOME/mail"
-		set -x MAIL "$HOME/mail"
-	end
-
 	set editors 'nvim' 'vim' 'less'
 	for editor in $editors
 		type -q $editor

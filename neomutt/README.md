@@ -256,9 +256,9 @@ estejam disponíveis:
 ## Diretórios
 Quanto aos diretórios, o `neomuttrc` necessita que os seguintes diretórios
 estejam disponíveis:
-1. `~/neomutt/header`
+1. `~/.cache/neomutt/header`
 > cache dos headers das mensagens dos emails
-2. `~/neomutt/body`
+2. `~/.cache/neomutt/body`
 > cache dos boydas das mensagens dos emails
 3. `~/.config/neomutt`
 > symbolic link para `~/dotfiles/neomutt/neomutt`
@@ -282,3 +282,8 @@ Caso seja de interesse, copie o arquivo e o coloque na mesma pasta do
 `neomuttrc`
 > Lembre-se de atualizar o `neomuttrc` com o novo caminho até o arquivo de
 > colorscheme
+
+
+# Possíveis evoluções
+* Substituir o `secret.fish` e o `secretneomuttrc` por um arquivo encrypted
+  que guarde as chaves/tokens de autenticação necessários (usar `gpg`)

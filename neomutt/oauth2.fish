@@ -26,5 +26,5 @@ function outlook
 			--authflow devicecode
 end
 
-gmail
-#outlook
+#gmail
+outlook

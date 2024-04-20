@@ -1,11 +1,81 @@
 ### Config
-set my_neomutt = "$HOME/.config/neomutt"
+set my_neomutt = ~/neomutt
+set my_xdg_neomutt = "$HOME/.config/neomutt"
 set my_neomutt_root = '/usr/share/neomutt'
 set real_name = 'Carlos Vieira'
 set me_too
-#set folder_format = 
-#set greeting = 
-#set index_format =
+set greeting = 'Olá %v,'
+set folder_format = "%2C %t %N %F %2l %-8.8u %-8.8g %8s %d %i"
+set index_format = "%4C %Z %{%b %d} %-15.15L (%<l?%4l&%4c>) %s "
+set use_threads = 'reverse'
+set sort = 'date'
+set sort_aux = 'date'
+set pager_read_delay = 15
+set mail_check_stats
+set header_cache = "$my_neomutt/header"
+set header_cache_backend = 'lmdb'
+set message_cache_dir = "$my_neomutt/body"
+set sidebar_short_path
+set sidebar_visible
+set sidebar_folder_indent
+set sidebar_indent_string="  "
+set sidebar_format = "%B%<F? [%F]>%* %<N?%N/>%S"
+
+
+### Rebinding
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
+bind index,pager B sidebar-toggle-visible
+
+
+### Colorscheme
+# builtin coloschemes: 'solarized-dark-256.neomuttrc', 'zenburn.neomuttrc', 'neonwolf-256.neomuttrc' 
+# https://neomutt.org/guide/configuration#11-2-%C2%A0simple-colors
+# https://neomutt.org/guide/gettingstarted#2-4-4-%C2%A0colors
+set my_neomutt_colorscheme = 'vombatidae.neomuttrc'
+source "$my_neomutt_root/colorschemes/$my_neomutt_colorscheme"
+
+
+### OAuth2.0 Tokens
+source "$my_xdg_neomutt/secretneomuttrc"
+
+
+### Vim keybindings
+source "$my_xdg_neomutt/vimkeys.rc"
+
+
+### Gmail config
+#ifdef GMAIL	\
+#set from = "$GMAIL" ; \
+#set folder = "imaps://$GMAIL@imap.gmail.com:993" ; \
+#set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587" ; \
+#set imap_user = "$GMAIL" ; \
+#set imap_authenticators='oauthbearer:xoauth2' ; \
+#set imap_oauth_refresh_command = "python $my_xdg_neomutt/oauth2.py --quiet --user=$GMAIL \
+#	--client_id=$my_gmail_client_id \
+#	--client_secret=$my_gmail_client_secret \
+#	--refresh_token=$my_gmail_client_refresh_token" ; \
+#set imap_check_subscribed ; \
+#set spool_file = "+INBOX" ; \
+#set record = "+Sent" ; \
+#set trash = "+Trash" ; \
+#set postponed = "+Drafts" ; \
+#finish
+
+
+### Outlook config
+ifdef OUTLOOK \
+set from = "$OUTLOOK" ; \
+set folder = "imaps://$OUTLOOK@outlook.office365.com:993" ; \
+set smtp_url = "smtps://$OUTLOOK@smtp-mail.outlook.com:587" ; \
+set imap_user = "$OUTLOOK" ; \
+set imap_authenticators='oauthbearer:xoauth2' ; \
+set imap_oauth_refresh_command = "python $my_xdg_neomutt/mutt_oauth2.py $my_xdg_neomutt/$OUTLOOK.tokens" ; \
+set imap_check_subscribed ; \
+set spool_file = "+INBOX" ; \
+set postponed = "+Drafts" ; \
+finish
 
 
 ### Useful keybindings
@@ -21,51 +91,6 @@ set me_too
 # q: quit
 
 
-### Colorscheme
-# builtin coloschemes: 'solarized-dark-256.neomuttrc', 'zenburn.neomuttrc', 'neonwolf-256.neomuttrc' 
-set my_neomutt_colorscheme = 'vombatidae.neomuttrc'
-source "$my_neomutt_root/colorschemes/$my_neomutt_colorscheme"
-
-
-### OAuth2.0 Tokens
-source "$my_neomutt/secretneomuttrc"
-
-
-### Vim keybindings
-source "$my_neomutt/vimkeys.rc"
-
-
-### Gmail config
-ifdef GMAIL	\
-set from = "$GMAIL" ; \
-set folder = "imaps://$GMAIL@imap.gmail.com:993" ; \
-set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587" ; \
-set imap_user = "$GMAIL" ; \
-set imap_authenticators='oauthbearer:xoauth2' ; \
-set imap_oauth_refresh_command = "python $my_neomutt/oauth2.py --quiet --user=$GMAIL \
-	--client_id=$my_gmail_client_id \
-	--client_secret=$my_gmail_client_secret \
-	--refresh_token=$my_gmail_client_refresh_token" ; \
-set imap_check_subscribed ; \
-set spool_file = "+INBOX" ; \
-set record = "+Sent" ; \
-set trash = "+Trash" ; \
-finish
-
-
-### Outlook config
-#ifdef OUTLOOK \
-#set from = "$OUTLOOK" ; \
-#set folder = "imaps://$OUTLOOK@outlook.office365.com:993" ; \
-#set smtp_url = "smtps://$OUTLOOK@smtp-mail.outlook.com:587" ; \
-#set imap_user = "$OUTLOOK" ; \
-#set imap_authenticators='oauthbearer:xoauth2' ; \
-#set imap_oauth_refresh_command = "python $my_neomutt/mutt_oauth2.py $my_neomutt/$OUTLOOK.tokens" ; \
-#set imap_check_subscribed ; \
-#set spool_file = "+INBOX" ; \
-#finish
-
-
 ### Gmail notes
 # change from 'imaps' to 'imap' to send emails without encryption
 # change from 'smtps' to 'smtp' to send emails without encryption
@@ -79,22 +104,22 @@ finish
 # get information about Outlook IMAP, POP and SMTP servers
 # https://support.microsoft.com/en-us/office/pop-imap-and-smtp-settings-for-outlook-com-d088b986-291d-42b8-9564-9c414e2aa040
 
-### about imap/pop/smtp
+### About imap/pop/smtp
 # file:///usr/share/doc/neomutt/optionalfeatures.html#url-syntax
 # https://neomutt.org/guide/optionalfeatures#1-2-%C2%A0url-syntax
 
-### about imap
+### About imap
 # file:///usr/share/doc/neomutt/optionalfeatures.html#imap
 # https://neomutt.org/guide/optionalfeatures#4-%C2%A0imap-support
 # file:///usr/share/doc/neomutt/reference.html#imap-check-subscribed
 
-### about oauth2 support
+### About oauth2 support
 # file:///usr/share/doc/neomutt/optionalfeatures.html#oauth
 # https://github.com/google/gmail-oauth2-tools/blob/master/python/oauth2.py
 # https://console.developers.google.com/apis/credentials
 # https://github.com/neomutt/neomutt/tree/main/contrib/oauth2
 
-### other references
+### Other references
 # https://wiki.archlinux.org/title/mutt
 # https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer
 # https://neomutt.org/guide/advancedusage.html#10-%C2%A0mailbox-shortcuts

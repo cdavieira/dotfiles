@@ -43,7 +43,7 @@ Esse arquivo também pode ser encontrado no path `/usr/share/neomutt/` num
 sistema UNIX que tenha o neomutt instalado
 
 Diferentemente do `oauth2.py`, o arquivo `mutt_oauth2.py` necessita de uma
-alteração para que funcione pelo método de autorização escolhido. O patch
+alteração para que funcione pelo método de autorização escolhido (devicecode). O patch
 consiste em adicionar as seguintes linhas de código:
 ```python
         if 'client_secret' not in list(registration.keys()):
@@ -136,8 +136,7 @@ Para criar as chaves pelo Google Cloud, siga as instruções:
 4. Crie um novo 'App Registration'
 > Escolha um nome que tenha a ver com o **neomutt** para identifica-lo mais facilmente
 
-> Escolha a opção `Accounts in any organization directory and personal
-> Microsoft accounts`
+> Escolha a opção `Accounts in any organization directory and personal Microsoft accounts`
 
 > Como `Redirect URI` coloque o mesmo valor da variável
 > `registrations['microsoft']['redirect_uri']` contida no código
@@ -259,7 +258,7 @@ estejam disponíveis:
 1. `~/.cache/neomutt/header`
 > cache dos headers das mensagens dos emails
 2. `~/.cache/neomutt/body`
-> cache dos boydas das mensagens dos emails
+> cache dos bodys das mensagens dos emails
 3. `~/.config/neomutt`
 > symbolic link para `~/dotfiles/neomutt/neomutt`
 
@@ -287,3 +286,5 @@ Caso seja de interesse, copie o arquivo e o coloque na mesma pasta do
 # Possíveis evoluções
 * Substituir o `secret.fish` e o `secretneomuttrc` por um arquivo encrypted
   que guarde as chaves/tokens de autenticação necessários (usar `gpg`)
+* Comentar que também é necessário habilitar a opção de usar clients IMAP e
+  POP nas configurações do Gmail (e possivelmente do Outlook?)

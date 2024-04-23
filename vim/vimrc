@@ -13,6 +13,7 @@ unlet s:cpo_save
 
 " VARIABLES
 " run 'mkdir -p ~/.cache/vim/{backup,swap,undo}'
+
 set background=dark
 set backspace=indent,eol,start
 set backupdir=~/.cache/vim/backup//
@@ -25,8 +26,8 @@ set helplang=en,de
 set history=200
 set hlsearch
 set incsearch " while typing a search command, show where the pattern matches
-set langnoremap
-set nolangremap
+"set langnoremap
+"set nolangremap
 set nowrap " text does not wrap to fit entirely in the window
 set nrformats=bin,hex
 set relativenumber " line numbering relative to the current line
@@ -38,8 +39,6 @@ set suffixes=.bak,~,.o,.info,.swp,.aux,.bbl,.blg,.brf,.cb,.dvi,.idx,.ilg,.ind,.i
 set tabstop=2 " tabs become 2 spaces
 set textwidth=78
 set ttimeout
-set timeoutlen=200
-set ttimeoutlen=200 " time waited for a key code or mapped key sequence to complete (ms)
 set undodir=~/.cache/vim/undo//
 set viminfo='20,\"50
 set wildmenu

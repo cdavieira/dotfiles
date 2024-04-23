@@ -100,14 +100,14 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " autocompletion
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " lsp
 Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+" Plug 'mattn/vim-lsp-settings'
 
 " easy comments
 Plug 'preservim/nerdcommenter'

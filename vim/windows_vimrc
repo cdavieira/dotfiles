@@ -4,46 +4,45 @@ filetype plugin indent on
  
 syntax on
 set background=dark
-# colorschemes: evening, desert, habamax, sorbet, zaibatsu
 colorscheme wildcharm
-
+colorscheme evening
 # set backupdir=~/.cache/vim/backup/
 # set directory=~/.cache/vim/swap/
 # set undodir=~/.cache/vim/undo/
- 
 set encoding=UTF-8
 set fileencodings=utf-8,default
- 
-# reminder: use .editorconfig or autocmd to control 'tabstop', 'shiftwidth', ...
 set nowrap
 set shiftwidth=2
 set tabstop=2
 set textwidth=78
 set backspace=indent,eol,start
- 
-# reminder: set 'relativenumber' and 'numberwidth' together in case 'cp' is on
 set numberwidth=4
 set relativenumber
-
 set incsearch 
 set ruler
 set showcmd
 set viminfo='20,\"50
 set helplang=en,de
 set autoread
-
-# reminder: 'timeout' and 'ttimeout' work together
 set timeout
 set ttimeout
 set ttimeoutlen=100
-
 set wildmenu
 g:wildoptions = "pum"
+g:mapleader = " "
+g:maplocalleader = ","
 
-# if empty(glob('~/.vim/autoload/plug.vim'))
-#   silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-#   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-# endif
+# create symlink in windows: 
+var vimdir = $HOME .. '\vimfiles'
+var autoloaddir = vimdir .. '\autoload'
+var vimplugdir = autoloaddir .. '\plug.vim'
+if empty(glob(vimplugdir))
+	# expand vimplugdir in the command above?
+	silent execute iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |` ni vimplugdir -Force
+	# expand vimdir in the command above?
+	silent execute New-Item -ItemType SymbolicLink -Target $HOME .. \dotfiles\vim\windows_vimrc -Path vimdir\vimrc
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 # call plug#begin('~/.vim/vim-plug')
 # Plug 'preservim/nerdtree' # filesystem explorer
 # Plug 'ryanoasis/vim-devicons' # icons for nerdtree and other plugins
@@ -51,14 +50,12 @@ g:wildoptions = "pum"
 # Plug 'tpope/vim-endwise' # automatically write 'end' for lua
 # Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 # Plug 'junegunn/fzf.vim'
-# Plug 'prabirshrestha/vim-lsp'
-# Plug 'prabirshrestha/asyncomplete.vim'
-# Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 # Plug 'preservim/nerdcommenter' # easy comments
 # call plug#end()
 
-g:mapleader = " "
-g:maplocalleader = ","
 # nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
 # nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
@@ -71,7 +68,7 @@ tnoremap \ <CR><C-D>
 if executable('clang')
 	au User lsp_setup call lsp#register_server({
 		\ 'name': 'clang',
-		\ 'cmd': ['clangd', '--background-index'],
+		\ 'cmd': [ &shell, &shellcmdflag, 'clangd', '--background-index'],
 		\ 'allowlist': ['c'],
 		\ 'blocklist': [],
 		\ 'config': {},
@@ -81,7 +78,7 @@ endif
 if executable('lua-language-server')
 	au User lsp_setup call lsp#register_server({
 		\ 'name': 'lua-language-server',
-		\ 'cmd': ['lua-language-server', '--stdio'],
+		\ 'cmd': [ &shell, &shellcmdflag, 'lua-language-server', '--stdio'],
 		\ 'allowlist': ['lua'],
 		\ 'blocklist': [],
 		\ 'config': {},
@@ -91,7 +88,7 @@ endif
 if executable('pyright')
 	au User lsp_setup call lsp#register_server({
 		\ 'name': 'pyright',
-		\ 'cmd': ['pyright'],
+		\ 'cmd': [ &shell, &shellcmdflag, 'pyright'],
 		\ 'allowlist': ['python'],
 		\ 'blocklist': [],
 		\ 'config': {},
@@ -101,7 +98,7 @@ endif
 if executable('rust-analyzer')
 	au User lsp_setup call lsp#register_server({
 		\ 'name': 'rust-analyzer',
-		\ 'cmd': ['rust-analyzer', '--log-file', './rust.log'],
+		\ 'cmd': [ &shell, &shellcmdflag, 'rust-analyzer', '--log-file', './rust.log'],
 		\ 'allowlist': ['rust'],
 		\ 'blocklist': [],
 		\ 'config': {}})

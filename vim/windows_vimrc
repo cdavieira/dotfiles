@@ -4,11 +4,15 @@ filetype plugin indent on
  
 syntax on
 set background=dark
-colorscheme wildcharm
 colorscheme evening
-# set backupdir=~/.cache/vim/backup/
-# set directory=~/.cache/vim/swap/
-# set undodir=~/.cache/vim/undo/
+var vimdir = $HOME .. '\vimfiles'
+var autoloaddir = vimdir .. '\autoload'
+var vimplugdir = autoloaddir .. '\plug.vim'
+set shell=C:\Program\ Files\PowerShell\7\pwsh.exe
+set shellcmdflag=
+set backupdir=expand("~~/vimfiles/backup")
+set directory=expand("~~/vimfiles/swap")
+set undodir=expand("~~/vimfiles/undo")
 set encoding=UTF-8
 set fileencodings=utf-8,default
 set nowrap
@@ -32,17 +36,14 @@ g:wildoptions = "pum"
 g:mapleader = " "
 g:maplocalleader = ","
 
-# create symlink in windows: 
-var vimdir = $HOME .. '\vimfiles'
-var autoloaddir = vimdir .. '\autoload'
-var vimplugdir = autoloaddir .. '\plug.vim'
-if empty(glob(vimplugdir))
+# if empty(glob(vimplugdir))
 	# expand vimplugdir in the command above?
-	silent execute iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |` ni vimplugdir -Force
+	# silent execute iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |` ni vimplugdir -Force
 	# expand vimdir in the command above?
-	silent execute New-Item -ItemType SymbolicLink -Target $HOME .. \dotfiles\vim\windows_vimrc -Path vimdir\vimrc
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+	# create symlink in windows: 
+	# silent execute New-Item -ItemType SymbolicLink -Target $HOME .. \dotfiles\vim\windows_vimrc -Path vimdir\vimrc
+	# autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+# endif
 # call plug#begin('~/.vim/vim-plug')
 # Plug 'preservim/nerdtree' # filesystem explorer
 # Plug 'ryanoasis/vim-devicons' # icons for nerdtree and other plugins
@@ -50,9 +51,9 @@ endif
 # Plug 'tpope/vim-endwise' # automatically write 'end' for lua
 # Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 # Plug 'junegunn/fzf.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+# Plug 'prabirshrestha/vim-lsp'
+# Plug 'prabirshrestha/asyncomplete.vim'
+# Plug 'prabirshrestha/asyncomplete-lsp.vim'
 # Plug 'preservim/nerdcommenter' # easy comments
 # call plug#end()
 
@@ -63,45 +64,68 @@ nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 # nnoremap <Leader>s <Cmd>Rg<CR>
 noremap \ :term ++kill="kill"<CR>
-tnoremap \ <CR><C-D>
+tnoremap \ <CR>exit<CR>>
+
+var c_lspinfo = {
+	'name': 'clangd',
+	#'cmd': [ &shell, &shellcmdflag, 'clangd', '--background-index'],
+	'cmd': ['clangd', '--background-index'],
+	'allowlist': ['c'],
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
+var lua_lspinfo = {
+	'name': 'lua-language-server',
+	#'cmd': [ &shell, &shellcmdflag, 'lua-language-server', '--stdio'],
+	'allowlist': ['lua'],
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
+var python_lspinfo = {
+	'name': 'pylsp',
+	#'cmd': [ &shell, &shellcmdflag, 'pylsp'],
+	'allowlist': ['python'],
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
+var rust_lsp_info = {
+	'name': 'rust-analyzer',
+	#'cmd': [ &shell, &shellcmdflag, 'rust-analyzer', '--log-file', './rust.log'],
+	'allowlist': ['rust'],
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
+var vim_lsp_info = {
+	'name': 'vim-language-server',
+	#'cmd': [ &shell, &shellcmdflag, 'vim-language-server', '--stdio' ],
+	'allowlist': ['vim'],
+	'initialization_options': {
+		'vimruntime': $VIMRUNTIME,
+		'runtimepath': &rtp
+	},
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
 
 if executable('clangd')
-	au User lsp_setup lsp#register_server({
-		\ 'name': 'clangd',
-		\ 'cmd': [ &shell, &shellcmdflag, 'clangd', '--background-index'],
-		\ 'allowlist': ['c'],
-		\ 'blocklist': [],
-		\ 'config': {},
-		\ 'workspace_config': {}})
+	au User lsp_setup lsp#register_server(c_lspinfo)
 endif
-
 if executable('lua-language-server')
-	au User lsp_setup lsp#register_server({
-		\ 'name': 'lua-language-server',
-		\ 'cmd': [ &shell, &shellcmdflag, 'lua-language-server', '--stdio'],
-		\ 'allowlist': ['lua'],
-		\ 'blocklist': [],
-		\ 'config': {},
-		\ 'workspace_config': {}})
+	au User lsp_setup lsp#register_server(lua_lspinfo)
 endif
-
 if executable('pylsp')
-	au User lsp_setup lsp#register_server({
-		\ 'name': 'pylsp',
-		\ 'cmd': [ &shell, &shellcmdflag, 'pylsp'],
-		\ 'allowlist': ['python'],
-		\ 'blocklist': [],
-		\ 'config': {},
-		\ 'workspace_config': {}})
+	au User lsp_setup lsp#register_server(python_lspinfo)
 endif
-
 if executable('rust-analyzer')
-	au User lsp_setup lsp#register_server({
-		\ 'name': 'rust-analyzer',
-		\ 'cmd': [ &shell, &shellcmdflag, 'rust-analyzer', '--log-file', './rust.log'],
-		\ 'allowlist': ['rust'],
-		\ 'blocklist': [],
-		\ 'config': {}})
+	au User lsp_setup lsp#register_server(rust_lsp_info)
+endif
+if executable('vim-language-server')
+	au User lsp_setup lsp#register_server(vim_lsp_info)
 endif
 
 # def On_lsp_buffer_enabled(): void

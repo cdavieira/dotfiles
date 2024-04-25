@@ -65,9 +65,9 @@ nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 noremap \ :term ++kill="kill"<CR>
 tnoremap \ <CR><C-D>
 
-if executable('clang')
-	au User lsp_setup call lsp#register_server({
-		\ 'name': 'clang',
+if executable('clangd')
+	au User lsp_setup lsp#register_server({
+		\ 'name': 'clangd',
 		\ 'cmd': [ &shell, &shellcmdflag, 'clangd', '--background-index'],
 		\ 'allowlist': ['c'],
 		\ 'blocklist': [],
@@ -76,7 +76,7 @@ if executable('clang')
 endif
 
 if executable('lua-language-server')
-	au User lsp_setup call lsp#register_server({
+	au User lsp_setup lsp#register_server({
 		\ 'name': 'lua-language-server',
 		\ 'cmd': [ &shell, &shellcmdflag, 'lua-language-server', '--stdio'],
 		\ 'allowlist': ['lua'],
@@ -85,10 +85,10 @@ if executable('lua-language-server')
 		\ 'workspace_config': {}})
 endif
 
-if executable('pyright')
-	au User lsp_setup call lsp#register_server({
-		\ 'name': 'pyright',
-		\ 'cmd': [ &shell, &shellcmdflag, 'pyright'],
+if executable('pylsp')
+	au User lsp_setup lsp#register_server({
+		\ 'name': 'pylsp',
+		\ 'cmd': [ &shell, &shellcmdflag, 'pylsp'],
 		\ 'allowlist': ['python'],
 		\ 'blocklist': [],
 		\ 'config': {},
@@ -96,7 +96,7 @@ if executable('pyright')
 endif
 
 if executable('rust-analyzer')
-	au User lsp_setup call lsp#register_server({
+	au User lsp_setup lsp#register_server({
 		\ 'name': 'rust-analyzer',
 		\ 'cmd': [ &shell, &shellcmdflag, 'rust-analyzer', '--log-file', './rust.log'],
 		\ 'allowlist': ['rust'],

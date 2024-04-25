@@ -39,10 +39,10 @@ if executable('lua-language-server')
 				\ 'workspace_config': {} })
 endif
 
-if executable('pyright')
+if executable('pylsp')
 	au User lsp_setup lsp#register_server({
-			\ 'name': 'pyright',
-			\ 'cmd': ['pyright'],
+			\ 'name': 'pylsp',
+			\ 'cmd': ['pylsp'],
 			\ 'allowlist': ['python'],
 			\ 'blocklist': [],
 			\ 'config': {},

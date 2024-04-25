@@ -28,6 +28,7 @@ set wildmenu
 g:wildoptions = "pum"
 g:mapleader = " "
 g:maplocalleader = ","
+#g:lsp_log_file = expand('~/.vim/vim-lsp.log')
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -55,61 +56,76 @@ nnoremap <Leader>s <Cmd>Rg<CR>
 noremap \ :term ++kill="kill"<CR>
 tnoremap \ <CR><C-D>
 
-if executable('clang')
-	au User lsp_setup call lsp#register_server({
-		\ 'name': 'clang',
-		\ 'cmd': ['clangd', '--background-index'],
-		\ 'allowlist': ['c'],
-		\ 'blocklist': [],
-		\ 'config': {},
-		\ 'workspace_config': {}})
-endif
+var c_lspinfo = {
+	'name': 'clangd',
+	'cmd': ['clangd', '--background-index'],
+	'allowlist': ['c'],
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
+var lua_lspinfo = {
+	'name': 'lua-language-server',
+	'cmd': ['lua-language-server', '--stdio'],
+	'allowlist': ['lua'],
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
+var python_lspinfo = {
+	'name': 'pylsp',
+	'cmd': ['pylsp'],
+	'allowlist': ['python'],
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
+var rust_lsp_info = {
+	'name': 'rust-analyzer',
+	'cmd': ['rust-analyzer', '--log-file', './rust.log'],
+	'allowlist': ['rust'],
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
+var vim_lsp_info = {
+	'name': 'vim-language-server',
+	'cmd': ['vim-language-server', '--stdio'],
+	'allowlist': ['vim'],
+	'initialization_options': {
+		'vimruntime': $VIMRUNTIME,
+		'runtimepath': &rtp
+	},
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
+}
 
+if executable('clangd')
+	au User lsp_setup lsp#register_server(c_lspinfo)
+endif
 if executable('lua-language-server')
-	au User lsp_setup call lsp#register_server({
-		\ 'name': 'lua-language-server',
-		\ 'cmd': ['lua-language-server', '--stdio'],
-		\ 'allowlist': ['lua'],
-		\ 'blocklist': [],
-		\ 'config': {},
-		\ 'workspace_config': {}})
+	au User lsp_setup lsp#register_server(lua_lspinfo)
 endif
-
-if executable('pyright')
-	au User lsp_setup call lsp#register_server({
-		\ 'name': 'pyright',
-		\ 'cmd': ['pyright'],
-		\ 'allowlist': ['python'],
-		\ 'blocklist': [],
-		\ 'config': {},
-		\ 'workspace_config': {}})
+if executable('pylsp')
+	au User lsp_setup lsp#register_server(python_lspinfo)
 endif
-
 if executable('rust-analyzer')
-	au User lsp_setup call lsp#register_server({
-		\ 'name': 'rust-analyzer',
-		\ 'cmd': ['rust-analyzer', '--log-file', './rust.log'],
-		\ 'allowlist': ['rust'],
-		\ 'blocklist': [],
-		\ 'config': {}})
+	au User lsp_setup lsp#register_server(rust_lsp_info)
+endif
+if executable('vim-language-server')
+	au User lsp_setup lsp#register_server(vim_lsp_info)
 endif
 
 def On_lsp_buffer_enabled(): void
 	setlocal omnifunc=lsp#complete
-	setlocal signcolumn=yes
 	if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+
 	nmap <buffer> gd <plug>(lsp-definition)
-	nmap <buffer> gs <plug>(lsp-document-symbol-search)
-	nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-	nmap <buffer> gr <plug>(lsp-references)
 	nmap <buffer> gi <plug>(lsp-implementation)
 	nmap <buffer> gt <plug>(lsp-type-definition)
-	nmap <buffer> <leader>rn <plug>(lsp-rename)
-	nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-	nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-	nmap <buffer> K <plug>(lsp-hover)
-	nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-	nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+	nmap <buffer> <leader>r <plug>(lsp-rename)
+	nmap <buffer> <c-k> <plug>(lsp-hover)
 
 	g:lsp_format_sync_timeout = 1000
 	autocmd! BufWritePre *.rs execute('LspDocumentFormatSync')
@@ -117,7 +133,7 @@ enddef
 
 augroup lsp_install
 	au!
-	autocmd User lsp_buffer_enabled On_lsp_buffer_enabled()
+	autocmd User lsp_buffer_enabled call On_lsp_buffer_enabled()
 augroup END
 
 # vim: set ft=vim :

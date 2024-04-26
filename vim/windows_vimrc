@@ -4,7 +4,8 @@ filetype plugin indent on
 syntax on
 set background=dark
 colorscheme evening
-set shell=C:\Program\ Files\PowerShell\7\pwsh.exe
+#set shell=C:\Program\ Files\PowerShell\7\pwsh.exe
+set shell=pwsh
 set shellcmdflag=-Command
 set backupdir=C:\Users\futur\vimfiles\backup
 set directory=C:\Users\futur\vimfiles\swap
@@ -45,9 +46,9 @@ plug#begin('C:\Users\futur\vimfiles\vim-plug')
 # Plug 'tpope/vim-endwise' # automatically write 'end' for lua
 # Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 # Plug 'junegunn/fzf.vim'
-# Plug 'prabirshrestha/vim-lsp'
-# Plug 'prabirshrestha/asyncomplete.vim'
-# Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 # Plug 'preservim/nerdcommenter' # easy comments
 plug#end()
 

@@ -34,7 +34,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-call plug#begin('~/.vim/vim-plug')
+plug#begin('~/.vim/vim-plug')
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-surround'
@@ -45,7 +45,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'preservim/nerdcommenter'
-call plug#end()
+plug#end()
 
 nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>

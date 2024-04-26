@@ -44,7 +44,7 @@ g:maplocalleader = ","
 	# silent execute New-Item -ItemType SymbolicLink -Target $HOME .. \dotfiles\vim\windows_vimrc -Path vimdir\vimrc
 	# autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 # endif
-# call plug#begin('~/.vim/vim-plug')
+# plug#begin('~/.vim/vim-plug')
 # Plug 'preservim/nerdtree' # filesystem explorer
 # Plug 'ryanoasis/vim-devicons' # icons for nerdtree and other plugins
 # Plug 'tpope/vim-surround'
@@ -55,7 +55,7 @@ g:maplocalleader = ","
 # Plug 'prabirshrestha/asyncomplete.vim'
 # Plug 'prabirshrestha/asyncomplete-lsp.vim'
 # Plug 'preservim/nerdcommenter' # easy comments
-# call plug#end()
+# plug#end()
 
 # nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>

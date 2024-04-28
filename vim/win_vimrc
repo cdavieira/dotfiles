@@ -1,15 +1,19 @@
 vim9script
-
+#set rtp-=$VIM/vimfiles
+#set rtp-=$VIM/vimfiles/after
+#set packpath-=$VIM/vimfiles
+#set packpath-=$VIM/vimfiles/after
 filetype plugin indent on
+packadd editorconfig
 syntax on
 set background=dark
 colorscheme evening
-#set shell=C:\Program\ Files\PowerShell\7\pwsh.exe
 set shell=pwsh
 set shellcmdflag=-Command
 set backupdir=C:\Users\futur\vimfiles\backup
 set directory=C:\Users\futur\vimfiles\swap
 set undodir=C:\Users\futur\vimfiles\undo
+set viminfofile=C:\Users\futur\vimfiles\viminfo
 set encoding=UTF-8
 set fileencodings=utf-8,default
 set nowrap
@@ -32,24 +36,82 @@ set wildmenu
 g:wildoptions = "pum"
 g:mapleader = " "
 g:maplocalleader = ","
+g:NERDCreateDefaultMappings = 0
+g:lsp_format_sync_timeout = 1000
+g:lsp_preview_doubletap = 0
+g:lsp_preview_autoclose = 1
+g:lsp_diagnostics_enabled = 1
+#g:lsp_experimental_workspace_folders = 1
+#g:lsp_preview_keep_focus = 1
+#g:lsp_log_file = expand('~/.vim/vim-lsp.log')
+#g:asyncomplete_log_file = expand('~/.vim/asyncomplete.log')
 
 if empty(glob('C:\Users\futur\vimfiles\autoload\plug.vim'))
-	silent execute iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |` ni C:\Users\futur\vimfiles\autoload\plug.vim -Force
+	silent execute iwr -useb 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' |` ni 'C:\Users\futur\vimfiles\autoload\plug.vim' -Force
 	# create symlink in windows
-	silent execute New-Item -ItemType SymbolicLink -Target C:\Users\futur\dotfiles\vim\windows_vimrc -Path vimdir\vimrc
+	silent execute New-Item -ItemType SymbolicLink -Target 'C:\Users\futur\dotfiles\vim\win_vimrc' -Path C:\Users\futur\vimfiles\vimrc
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 plug#begin('C:\Users\futur\vimfiles\vim-plug')
-# Plug 'preservim/nerdtree' # filesystem explorer
-# Plug 'ryanoasis/vim-devicons' # icons for nerdtree and other plugins
+# https://github.com/preservim/nerdtree
+# Plug 'preservim/nerdtree'
+
+# https://github.com/ryanoasis/vim-devicons
+# Plug 'ryanoasis/vim-devicons'
+
+# https://github.com/tpope/vim-surround
 # Plug 'tpope/vim-surround'
-# Plug 'tpope/vim-endwise' # automatically write 'end' for lua
+
+# https://github.com/tpope/vim-endwise
+# Plug 'tpope/vim-endwise'
+
+# https://github.com/junegunn/fzf.vim
 # Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 # Plug 'junegunn/fzf.vim'
+
+# https://github.com/prabirshrestha/vim-lsp
 Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-# Plug 'preservim/nerdcommenter' # easy comments
+
+# https://github.com/prabirshrestha/asyncomplete.vim
+# Plug 'prabirshrestha/asyncomplete.vim'
+
+# https://github.com/prabirshrestha/asyncomplete-lsp.vim
+# Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+# https://github.com/preservim/nerdcommenter
+# Plug 'preservim/nerdcommenter'
+
+# https://github.com/itchyny/lightline.vim
+# Plug 'itchyny/lightline.vim'
+
+# https://github.com/vim-airline/vim-airline
+# Plug 'vim-airline/vim-airline'
+
+# https://github.com/vim-airline/vim-airline-themes#vim-airline-themes--
+# Plug 'vim-airline/vim-airline-themes'
+
+# https://github.com/morhetz/gruvbox?tab=readme-ov-file
+# Plug 'morhetz/gruvbox'
+
+# https://github.com/joshdick/onedark.vim
+# Plug 'joshdick/onedark.vim'
+
+# https://github.com/mbbill/undotree
+# Plug 'mbbill/undotree'
+
+# https://github.com/tpope/vim-fugitive
+# Plug 'tpope/vim-fugitive'
+
+# https://github.com/preservim/tagbar?tab=readme-ov-file
+# Plug 'preservim/tagbar'
+
+# https://github.com/preservim/vim-markdown
+# Plug 'godlygeek/tabular'
+# Plug 'preservim/vim-markdown'
+
+# https://github.com/rhysd/vim-healthcheck
+Plug 'rhysd/vim-healthcheck'
+
 plug#end()
 
 # nnoremap <Leader>b <Cmd>Buffers<CR>
@@ -124,22 +186,24 @@ endif
 
 def On_lsp_buffer_enabled(): void
 	setlocal omnifunc=lsp#complete
-	setlocal signcolumn=yes
 	if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-	nmap <buffer> gd <plug>(lsp-definition)
-	nmap <buffer> gs <plug>(lsp-document-symbol-search)
-	nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-	nmap <buffer> gr <plug>(lsp-references)
-	nmap <buffer> gi <plug>(lsp-implementation)
-	nmap <buffer> gt <plug>(lsp-type-definition)
-	nmap <buffer> <leader>rn <plug>(lsp-rename)
-	nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-	nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-	nmap <buffer> K <plug>(lsp-hover)
-	nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-	nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
-	g:lsp_format_sync_timeout = 1000
+  nnoremap <unique> <buffer> <leader>a <plug>(lsp-declaration)
+	nnoremap <unique> <buffer> <leader>d <plug>(lsp-definition)
+  nnoremap <unique> <buffer> <leader>g <plug>(lsp-implementation)
+	nnoremap <unique> <buffer> <leader>t <plug>(lsp-type-definition)
+  nnoremap <unique> <buffer> <leader>h <plug>(lsp-type-hierarchy)
+
+	# -preview appendable 
+  nnoremap <unique> <buffer> <leader>k <plug>(lsp-hover)
+
+	# nothing
+  nnoremap <unique> <buffer> <leader>m <plug>(lsp-document-symbol)
+  nnoremap <unique> <buffer> <leader>i <plug>(lsp-document-diagnostics)
+  nnoremap <unique> <buffer> <leader>w <plug>(lsp-preview-focus)
+  nnoremap <unique> <buffer> <leader>l <plug>(lsp-preview-close)
+  nnoremap <unique> <buffer> <leader>j <plug>(lsp-rename)
+	
 	autocmd! BufWritePre *.rs execute('LspDocumentFormatSync')
 enddef
 

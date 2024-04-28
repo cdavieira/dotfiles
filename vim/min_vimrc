@@ -9,10 +9,6 @@ syntax on
 set background=dark
 # wildcharm, evening, desert, habamax, sorbet, zaibatsu
 colorscheme wildcharm
-set backupdir=~/.cache/vim/backup/
-set directory=~/.cache/vim/swap/
-set undodir=~/.cache/vim/undo/
-set viminfofile=~/.cache/vim/viminfo
 set encoding=UTF-8
 set fileencodings=utf-8,default
 set nowrap
@@ -23,10 +19,7 @@ set backspace=indent,eol,start
 set numberwidth=2
 set relativenumber
 set incsearch 
-set ruler
-set showcmd
 set viminfo='20,\"50
-set helplang=en,de
 set autoread
 set timeout
 set ttimeout
@@ -40,10 +33,6 @@ g:lsp_format_sync_timeout = 1000
 g:lsp_preview_doubletap = 0
 g:lsp_preview_autoclose = 1
 g:lsp_diagnostics_enabled = 1
-#g:lsp_experimental_workspace_folders = 1
-#g:lsp_preview_keep_focus = 1
-g:lsp_log_file = expand('~/.vim/vim-lsp.log')
-#g:asyncomplete_log_file = expand('~/.vim/asyncomplete.log')
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -53,9 +42,6 @@ g:plug#begin('~/.vim/vim-plug')
 
 # https://github.com/preservim/nerdtree
 Plug 'preservim/nerdtree'
-
-# https://github.com/ryanoasis/vim-devicons
-Plug 'ryanoasis/vim-devicons'
 
 # https://github.com/tpope/vim-surround
 # Plug 'tpope/vim-surround'
@@ -71,41 +57,16 @@ Plug 'junegunn/fzf.vim'
 Plug 'prabirshrestha/vim-lsp'
 
 # https://github.com/prabirshrestha/asyncomplete.vim
-Plug 'prabirshrestha/asyncomplete.vim'
+# Plug 'prabirshrestha/asyncomplete.vim'
 
 # https://github.com/prabirshrestha/asyncomplete-lsp.vim
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+# Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 # https://github.com/preservim/nerdcommenter
-Plug 'preservim/nerdcommenter'
+# Plug 'preservim/nerdcommenter'
 
 # https://github.com/itchyny/lightline.vim
-# Plug 'itchyny/lightline.vim'
-
-# https://github.com/vim-airline/vim-airline
-Plug 'vim-airline/vim-airline'
-
-# https://github.com/vim-airline/vim-airline-themes#vim-airline-themes--
-Plug 'vim-airline/vim-airline-themes'
-
-# https://github.com/morhetz/gruvbox?tab=readme-ov-file
-# Plug 'morhetz/gruvbox'
-
-# https://github.com/joshdick/onedark.vim
-Plug 'joshdick/onedark.vim'
-
-# https://github.com/mbbill/undotree
-# Plug 'mbbill/undotree'
-
-# https://github.com/tpope/vim-fugitive
-# Plug 'tpope/vim-fugitive'
-
-# https://github.com/preservim/tagbar?tab=readme-ov-file
-# Plug 'preservim/tagbar'
-
-# https://github.com/preservim/vim-markdown
-# Plug 'godlygeek/tabular'
-# Plug 'preservim/vim-markdown'
+Plug 'itchyny/lightline.vim'
 
 # https://github.com/rhysd/vim-healthcheck
 Plug 'rhysd/vim-healthcheck'
@@ -172,14 +133,6 @@ var vim_lsp_info = {
 	'workspace_config': {}
 }
 
-var arduino_lsp_info = {
-	'name': 'arduino-language-server',
-	'cmd': ['arduino-language-server'],
-	'allowlist': ['arduino', 'ino'],
-	'blocklist': [],
-	'workspace_config': {}
-}
-
 if executable('clangd')
 	au User lsp_setup lsp#register_server(c_lspinfo)
 endif
@@ -194,9 +147,6 @@ if executable('rust-analyzer')
 endif
 if executable('vim-language-server')
 	au User lsp_setup lsp#register_server(vim_lsp_info)
-endif
-if executable('arduino-language-server')
-	au User lsp_setup lsp#register_server(arduino_lsp_info)
 endif
 
 def On_lsp_buffer_enabled(): void
@@ -220,15 +170,6 @@ def On_lsp_buffer_enabled(): void
   nnoremap <unique> <buffer> <leader>l <plug>(lsp-preview-close)
   nnoremap <unique> <buffer> <leader>j <plug>(lsp-rename)
 	
-	# retired
-  # nnoremap <unique> <buffer> <leader>z <plug>(lsp-code-action)
-  # nnoremap <unique> <buffer> <leader>y <plug>(lsp-references)
-  # nnoremap <unique> <buffer> <leader>x <plug>(lsp-code-lens)
-  # nnoremap <unique> <buffer> <leader>w <plug>(lsp-next-diagnostic)
-  # nnoremap <unique> <buffer> <leader>v <plug>(lsp-next-error)
-  # nnoremap <unique> <buffer> <leader>u <plug>(lsp-next-warning)
-  # nnoremap <unique> <buffer> <leader>n <plug>(lsp-status)
-
 	autocmd! BufWritePre *.rs execute('LspDocumentFormatSync')
 enddef
 
@@ -236,5 +177,5 @@ augroup lsp_install
 	au!
 	autocmd User lsp_buffer_enabled call On_lsp_buffer_enabled()
 augroup END
-#
+
 # vim: set ft=vim :

@@ -37,6 +37,7 @@ if status is-interactive
 
 	# Aliases
 	alias ls 'ls --group-directories-first --color=auto'
+	alias lx 'ls --group-directories-first --sort=time --color=auto'
 
 else if status is-login
 	# Commands to run in login sessions can go here

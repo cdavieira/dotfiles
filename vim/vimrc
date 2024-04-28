@@ -1,7 +1,13 @@
 vim9script
+set rtp-=$VIM/vimfiles
+set rtp-=$VIM/vimfiles/after
+set packpath-=$VIM/vimfiles
+set packpath-=$VIM/vimfiles/after
 filetype plugin indent on
+packadd editorconfig
 syntax on
 set background=dark
+# wildcharm, evening, desert, habamax, sorbet, zaibatsu
 colorscheme wildcharm
 set backupdir=~/.cache/vim/backup/
 set directory=~/.cache/vim/swap/
@@ -13,7 +19,7 @@ set shiftwidth=2
 set tabstop=2
 set textwidth=78
 set backspace=indent,eol,start
-set numberwidth=4
+set numberwidth=2
 set relativenumber
 set incsearch 
 set ruler
@@ -28,6 +34,7 @@ set wildmenu
 g:wildoptions = "pum"
 g:mapleader = " "
 g:maplocalleader = ","
+g:NERDCreateDefaultMappings = 0
 #g:lsp_log_file = expand('~/.vim/vim-lsp.log')
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -35,17 +42,67 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 plug#begin('~/.vim/vim-plug')
+
+# https://github.com/preservim/nerdtree
 Plug 'preservim/nerdtree'
+
+# https://github.com/ryanoasis/vim-devicons
 Plug 'ryanoasis/vim-devicons'
-Plug 'tpope/vim-surround'
+
+# https://github.com/tpope/vim-surround
+# Plug 'tpope/vim-surround'
+
+# https://github.com/tpope/vim-endwise
 Plug 'tpope/vim-endwise'
+
+# https://github.com/junegunn/fzf.vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+# https://github.com/prabirshrestha/vim-lsp
 Plug 'prabirshrestha/vim-lsp'
+
+# https://github.com/prabirshrestha/asyncomplete.vim
 Plug 'prabirshrestha/asyncomplete.vim'
+
+# https://github.com/prabirshrestha/asyncomplete-lsp.vim
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+# https://github.com/preservim/nerdcommenter
 Plug 'preservim/nerdcommenter'
+
+# https://github.com/itchyny/lightline.vim
+# Plug 'itchyny/lightline.vim'
+
+# https://github.com/vim-airline/vim-airline
+Plug 'vim-airline/vim-airline'
+
+# https://github.com/vim-airline/vim-airline-themes#vim-airline-themes--
+Plug 'vim-airline/vim-airline-themes'
+
+# https://github.com/morhetz/gruvbox?tab=readme-ov-file
+# Plug 'morhetz/gruvbox'
+
+# https://github.com/joshdick/onedark.vim
+Plug 'joshdick/onedark.vim'
+
+# https://github.com/mbbill/undotree
+# Plug 'mbbill/undotree'
+
+# https://github.com/tpope/vim-fugitive
+# Plug 'tpope/vim-fugitive'
+
+# https://github.com/preservim/tagbar?tab=readme-ov-file
+# Plug 'preservim/tagbar'
+
+# https://github.com/preservim/vim-markdown
+# Plug 'godlygeek/tabular'
+# Plug 'preservim/vim-markdown'
+
 plug#end()
+
+# autocmd vimenter * ++nested colorscheme gruvbox
+# colorscheme onedark
 
 nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
@@ -143,7 +200,7 @@ def On_lsp_buffer_enabled(): void
   nnoremap <buffer> <leader>o <plug>(lsp-next-warning-nowrap)
   nnoremap <buffer> <leader>p <plug>(lsp-preview-close)
   nnoremap <buffer> <leader>q <plug>(lsp-preview-focus)
-  nnoremap <buffer> <leader>r <plug>(lsp-references)
+  #nnoremap <buffer> <leader>r <plug>(lsp-references)
   nnoremap <buffer> <leader>u <plug>(lsp-rename)
   nnoremap <buffer> <leader>y <plug>(lsp-status)
 
@@ -155,5 +212,5 @@ augroup lsp_install
 	au!
 	autocmd User lsp_buffer_enabled call On_lsp_buffer_enabled()
 augroup END
-
+#
 # vim: set ft=vim :

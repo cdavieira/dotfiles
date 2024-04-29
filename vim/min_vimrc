@@ -154,21 +154,21 @@ def On_lsp_buffer_enabled(): void
 	if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
 	# peek- infixable
-  nnoremap <unique> <buffer> <leader>a <plug>(lsp-declaration)
-	nnoremap <unique> <buffer> <leader>d <plug>(lsp-definition)
-  nnoremap <unique> <buffer> <leader>g <plug>(lsp-implementation)
-	nnoremap <unique> <buffer> <leader>t <plug>(lsp-type-definition)
-  nnoremap <unique> <buffer> <leader>h <plug>(lsp-type-hierarchy)
+  nnoremap <buffer> <leader>a <plug>(lsp-declaration)
+	nnoremap <buffer> <leader>d <plug>(lsp-definition)
+  nnoremap <buffer> <leader>g <plug>(lsp-implementation)
+	nnoremap <buffer> <leader>t <plug>(lsp-type-definition)
+  nnoremap <buffer> <leader>h <plug>(lsp-type-hierarchy)
 
 	# -preview appendable 
-  nnoremap <unique> <buffer> <leader>k <plug>(lsp-hover)
+  nnoremap <buffer> <leader>k <plug>(lsp-hover)
 
 	# nothing
-  nnoremap <unique> <buffer> <leader>m <plug>(lsp-document-symbol)
-  nnoremap <unique> <buffer> <leader>i <plug>(lsp-document-diagnostics)
-  nnoremap <unique> <buffer> <leader>w <plug>(lsp-preview-focus)
-  nnoremap <unique> <buffer> <leader>l <plug>(lsp-preview-close)
-  nnoremap <unique> <buffer> <leader>j <plug>(lsp-rename)
+  nnoremap <buffer> <leader>m <plug>(lsp-document-symbol)
+  nnoremap <buffer> <leader>i <plug>(lsp-document-diagnostics)
+  nnoremap <buffer> <leader>w <plug>(lsp-preview-focus)
+  nnoremap <buffer> <leader>l <plug>(lsp-preview-close)
+  nnoremap <buffer> <leader>j <plug>(lsp-rename)
 	
 	autocmd! BufWritePre *.rs execute('LspDocumentFormatSync')
 enddef

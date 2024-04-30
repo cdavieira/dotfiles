@@ -14,6 +14,7 @@ c.auto_save.session = True
 c.colors.webpage.preferred_color_scheme = "dark"
 c.downloads.location.directory = "~/temp/"
 c.editor.command = ["kitty", "--config", "/home/carlos/.config/kitty/kitty.conf", "-c", "\"fish", "nvim", '{}']
+c.tabs.last_close = "startpage"
 c.url.searchengines = {
     "DEFAULT": "https://google.com/search?hl=en&q={}",
     "d": "https://duckduckgo.com/?q={}",
@@ -25,8 +26,8 @@ c.url.searchengines = {
     "l": "https://www.linguee.com.br/alemao-portugues/traducao/{}.html",
 }
 
-#config.bind('A', 'spawn zathura {url}', mode='normal')
 #config.unbind('A', 'normal')
+#config.bind('A', 'spawn zathura {url}', mode='normal')
 
 general = {
     "gpt": [

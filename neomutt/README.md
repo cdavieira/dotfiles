@@ -208,7 +208,7 @@ ser feito da seguinte forma:
 gpg --gen-key
 ```
 
-Ao gerar a sua chave pública, modifique o arquivo `mutt_oauth.py` e coloque o
+Ao gerar a sua chave pública, modifique o arquivo `oauth2.fish` e coloque o
 identificador da chave criada na opção `--encryption-pipe`
 
 Além disso, é necessário que a variável de ambiente `$GPG_TTY` já esteja

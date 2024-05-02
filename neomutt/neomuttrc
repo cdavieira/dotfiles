@@ -46,36 +46,36 @@ source "$my_config_neomutt/vimkeys.rc"
 
 
 ### Gmail config
-ifdef GMAIL	\
-set from = "$GMAIL" ; \
-set folder = "imaps://$GMAIL@imap.gmail.com:993" ; \
-set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587" ; \
-set imap_user = "$GMAIL" ; \
-set imap_authenticators='oauthbearer:xoauth2' ; \
-set imap_oauth_refresh_command = "python $my_config_neomutt/oauth2.py --quiet --user=$GMAIL \
-	--client_id=$my_gmail_client_id \
-	--client_secret=$my_gmail_client_secret \
-	--refresh_token=$my_gmail_client_refresh_token" ; \
-set imap_check_subscribed ; \
-set spool_file = "+INBOX" ; \
-set record = "+Sent" ; \
-set trash = "+Trash" ; \
-set postponed = "+Drafts" ; \
-finish
+#ifdef GMAIL	\
+#set from = "$GMAIL" ; \
+#set folder = "imaps://$GMAIL@imap.gmail.com:993" ; \
+#set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587" ; \
+#set imap_user = "$GMAIL" ; \
+#set imap_authenticators='oauthbearer:xoauth2' ; \
+#set imap_oauth_refresh_command = "python $my_config_neomutt/oauth2.py --quiet --user=$GMAIL \
+#	--client_id=$my_gmail_client_id \
+#	--client_secret=$my_gmail_client_secret \
+#	--refresh_token=$my_gmail_client_refresh_token" ; \
+#set imap_check_subscribed ; \
+#set spool_file = "+INBOX" ; \
+#set record = "+Sent" ; \
+#set trash = "+Trash" ; \
+#set postponed = "+Drafts" ; \
+#finish
 
 
 ### Outlook config
-#ifdef OUTLOOK \
-#set from = "$OUTLOOK" ; \
-#set folder = "imaps://$OUTLOOK@outlook.office365.com:993" ; \
-#set smtp_url = "smtps://$OUTLOOK@smtp-mail.outlook.com:587" ; \
-#set imap_user = "$OUTLOOK" ; \
-#set imap_authenticators='oauthbearer:xoauth2' ; \
-#set imap_oauth_refresh_command = "python $my_config_neomutt/mutt_oauth2.py $my_config_neomutt/$OUTLOOK.tokens" ; \
-#set imap_check_subscribed ; \
-#set spool_file = "+INBOX" ; \
-#set postponed = "+Drafts" ; \
-#finish
+ifdef OUTLOOK \
+set from = "$OUTLOOK" ; \
+set folder = "imaps://$OUTLOOK@outlook.office365.com:993" ; \
+set smtp_url = "smtps://$OUTLOOK@smtp-mail.outlook.com:587" ; \
+set imap_user = "$OUTLOOK" ; \
+set imap_authenticators='oauthbearer:xoauth2' ; \
+set imap_oauth_refresh_command = "python $my_config_neomutt/mutt_oauth2.py $my_config_neomutt/$OUTLOOK.tokens" ; \
+set imap_check_subscribed ; \
+set spool_file = "+INBOX" ; \
+set postponed = "+Drafts" ; \
+finish
 
 
 ### Useful keybindings

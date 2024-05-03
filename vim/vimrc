@@ -92,7 +92,7 @@ Plug 'vim-airline/vim-airline-themes'
 # Plug 'morhetz/gruvbox'
 
 # https://github.com/joshdick/onedark.vim
-Plug 'joshdick/onedark.vim'
+# Plug 'joshdick/onedark.vim'
 
 # https://github.com/mbbill/undotree
 # Plug 'mbbill/undotree'
@@ -172,14 +172,6 @@ var vim_lsp_info = {
 	'workspace_config': {}
 }
 
-var arduino_lsp_info = {
-	'name': 'arduino-language-server',
-	'cmd': ['arduino-language-server'],
-	'allowlist': ['arduino', 'ino'],
-	'blocklist': [],
-	'workspace_config': {}
-}
-
 if executable('clangd')
 	au User lsp_setup lsp#register_server(c_lspinfo)
 endif
@@ -194,9 +186,6 @@ if executable('rust-analyzer')
 endif
 if executable('vim-language-server')
 	au User lsp_setup lsp#register_server(vim_lsp_info)
-endif
-if executable('arduino-language-server')
-	au User lsp_setup lsp#register_server(arduino_lsp_info)
 endif
 
 def On_lsp_buffer_enabled(): void

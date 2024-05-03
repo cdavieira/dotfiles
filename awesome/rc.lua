@@ -47,7 +47,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
--- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
 -- beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/zenburn/theme.lua")
 beautiful.wallpaper = os.getenv("HOME") .. "/.config/awesome/brunette.png"
 

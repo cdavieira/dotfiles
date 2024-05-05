@@ -29,15 +29,24 @@ if status is-interactive
 		set -x MANPAGER "$editor +Man!"
 	end
 
+	if type -q qutebrowser
+		set -x BROWSER 'qutebrowser'
+	end
+
+	# Aliases
+	alias ls 'ls --group-directories-first --color=auto'
+	alias lx 'ls --group-directories-first --sort=time --color=auto'
+
 	# Functions
 	function multicd
 			echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 	end
 	abbr --add dotdot --position command --regex '^\.\.+$' --function multicd
 
-	# Aliases
-	alias ls 'ls --group-directories-first --color=auto'
-	alias lx 'ls --group-directories-first --sort=time --color=auto'
+	function cd
+		builtin cd $argv
+		ls
+	end
 
 else if status is-login
 	# Commands to run in login sessions can go here

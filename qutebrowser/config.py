@@ -14,6 +14,7 @@ c.auto_save.session = True
 c.colors.webpage.preferred_color_scheme = "dark"
 c.downloads.location.directory = "~/temp/"
 c.editor.command = ["kitty", "--config", "/home/carlos/.config/kitty/kitty.conf", "-c", "\"fish", "nvim", '{}']
+c.session.lazy_restore = True
 c.tabs.last_close = "startpage"
 c.url.searchengines = {
     "DEFAULT": "https://google.com/search?hl=en&q={}",

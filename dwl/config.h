@@ -119,12 +119,19 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define FISHCMD(cmd) { .v = (const char*[]){ "/usr/bin/fish", "-c", cmd, NULL } }
 
 /* commands */
 static const char *termcmd[] = { "kitty", NULL };
 static const char *menucmd[] = { "bemenu-run", NULL };
 static const char *waybarcmd[] = { "waybar", NULL };
 static const char *browsercmd[] = { "qutebrowser", NULL };
+static const char * const screenshotcmd = "slurp | grim -g - - | swappy -f -";
+static const char * const screencapturecmd = "wf-recorder -g \"$(slurp)\" --audio --file=recording-$(date +%Y%m%d-%H%M%S).mp4";
+
+// take a look at all xkb keynames here
+// #include <xkbcommon/xkbcommon-keysyms.h>
+// #include <linux/input-event-codes.h>
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -133,6 +140,8 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_a,          spawn,          {.v = waybarcmd} },
 	{ MODKEY,                    XKB_KEY_b,          spawn,          {.v = browsercmd} },
+	{ MODKEY,                    XKB_KEY_s,          spawn,          SHCMD(screenshotcmd)},
+	{ MODKEY,                    XKB_KEY_r,          spawn,          FISHCMD(screencapturecmd)},
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },

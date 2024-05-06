@@ -39,12 +39,12 @@ if status is-interactive
 
 	# Functions
 	function multicd
-			echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+			echo (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 	end
 	abbr --add dotdot --position command --regex '^\.\.+$' --function multicd
 
-	function cd
-		builtin cd $argv
+	function cdl
+		cd $argv
 		ls
 	end
 

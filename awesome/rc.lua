@@ -49,7 +49,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
 -- beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/zenburn/theme.lua")
-beautiful.wallpaper = os.getenv("HOME") .. "/.config/awesome/background.png"
+beautiful.wallpaper = os.getenv("HOME") .. "/dotfiles/dwl/background.png"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"

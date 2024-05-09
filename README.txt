@@ -1,16 +1,3 @@
-weston is currently not working with weston.ini
-follow the procedures to debug whats going on:
-1. open dwl
-2. comment all sections in weston.ini
-3. run weston inside dwl and redirect the standart output/stderr to a file
-4. uncomment all sections in weston.ini
-5. run weston inside dwl and redirect the standart output/stderr to a second file
-6. run a diff to see whats different in the first and second files
-7. take notes on whats different and try to modify weston.ini so that it works
-just like the default
-8. reboot the system and try to start weston
-9. repeat if everything fails
-
 dwl needs to be configured to work with applications that add more wayland
 features:
 * waybar needs a custom config
@@ -24,3 +11,5 @@ install the right one
 dwl and weston might not work if ly is restarted from another tty by running
 systemctl restart ly (even with sudo) (perhaps eaccess/authorization/polkit
 problems)
+
+criar dotfiles do dwm

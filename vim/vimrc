@@ -10,6 +10,12 @@ syntax on
 set background=dark
 # wildcharm, evening, desert, habamax, sorbet, zaibatsu
 colorscheme wildcharm
+for folder in ['backup', 'swap', 'undo']
+	var folderpath = '~/.cache/vim/' .. folder
+	if empty(glob(folderpath))
+		mkdir(glob(folderpath), 'p')
+	endif
+endfor
 set backupdir=~/.cache/vim/backup/
 set directory=~/.cache/vim/swap/
 set undodir=~/.cache/vim/undo/

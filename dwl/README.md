@@ -8,7 +8,6 @@ it
 
 wl-mirror -r (slurp) (slurp -o -f "%o")
 
-
 ```desktop
 [Desktop Entry]
 Name=dwl
@@ -17,7 +16,6 @@ Exec=dwl -s ~/dotfiles/dwl/startup.fish
 Type=Application
 ```
 > dwl.desktop example
-
 
 mkdir ~/.config/waybar
 ln -s ~/dotfiles/dwl/waybar-config.jsonc ~/.config/waybar/config.jsonc

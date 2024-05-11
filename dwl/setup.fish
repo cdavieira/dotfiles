@@ -23,7 +23,7 @@ if test $status -ne 0
 end
 
 if test -n "$_flag_c"
-	sed -f $dwl_dotfile/configh.sed $dwl_path/config.def.h > $dwl_path/config.h
+	sed -f $dwl_dotfile/config.sed $dwl_path/config.def.h > $dwl_path/config.h
 end
 
 if test -n "$_flag_m"

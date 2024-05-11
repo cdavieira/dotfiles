@@ -47,7 +47,7 @@ static const char *browsercmd[] = { "qutebrowser", NULL };
 	a\
 static const char * const screenshotcmd = "slurp | grim -g - - | swappy -f -";
 	a\
-static const char * const screencapturecmd = "wf-recorder -g \"$(slurp)\" --audio --file=recording-$(date +%Y%m%d-%H%M%S).mp4";
+static const char * const screencapturecmd = "wf-recorder -g \\"$(slurp)\\" --audio --file=recording-$(date +%Y%m%d-%H%M%S).mp4";
 }
 
 # custom keybindings

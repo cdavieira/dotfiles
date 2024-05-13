@@ -52,7 +52,7 @@ g:lsp_preview_autoclose = 1
 g:lsp_diagnostics_enabled = 1
 #g:lsp_experimental_workspace_folders = 1
 #g:lsp_preview_keep_focus = 1
-#g:lsp_log_file = expand('~/.vim/vim-lsp.log')
+g:lsp_log_file = expand('~/.vim/vim-lsp.log')
 #g:asyncomplete_log_file = expand('~/.vim/asyncomplete.log')
 
 if empty(glob('~/.vim/autoload/plug.vim'))

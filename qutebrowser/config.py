@@ -102,7 +102,6 @@ code = {
     "combo": [
         "https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html",
         "https://www.lua.org/manual/5.4/",
-        "https://en.cppreference.com/w/",
     ],
 }
 

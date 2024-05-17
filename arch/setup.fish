@@ -5,7 +5,9 @@ function graphics -d "Install nvidia and intel drivers"
 end
 
 function wayland -d "Install wayland, dwl and a display manager"
-	sudo pacman -S wayland xorg-xwayland git make bear polkit pkg-config wlroots wayland-protocols bemenu-wayland waybar ly
+	sudo pacman -S wayland xorg-xwayland git make bear polkit pkg-config wlroots \
+	wayland-protocols bemenu-wayland waybar ly wl-clipboard wf-recorder slurp \
+	grim swappy fnott swaybg wl-mirror bemenu-wayland
 	git clone https://codeberg.org/dwl/dwl.git
 	ln -s ~/dotfiles/dwl/config.h -t ~/dwl -v
 	#nvim /etc/ly/config.ini

@@ -43,6 +43,10 @@ general = {
         "https://wiki.archlinux.org/",
         "https://wiki.archlinux.org/title/General_recommendations",
         "https://wiki.gentoo.org/wiki/Special:MyLanguage/Handbook:AMD64",
+        "https://wiki.archlinux.org/title/getting_involved",
+    ],
+    "gentoo": [
+        "https://wiki.gentoo.org/wiki/Handbook:AMD64",
     ],
     "de": [
         "https://translate.google.com/?sl=en&tl=de&op=translate",

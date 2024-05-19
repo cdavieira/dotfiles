@@ -50,8 +50,8 @@ g:lsp_format_sync_timeout = 1000
 g:lsp_preview_doubletap = 0
 g:lsp_preview_autoclose = 1
 g:lsp_diagnostics_enabled = 1
+g:lsp_preview_keep_focus = 1
 #g:lsp_experimental_workspace_folders = 1
-#g:lsp_preview_keep_focus = 1
 g:lsp_log_file = expand('~/.vim/vim-lsp.log')
 #g:asyncomplete_log_file = expand('~/.vim/asyncomplete.log')
 
@@ -133,6 +133,7 @@ nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>s <Cmd>Rg<CR>
 noremap \ :term ++kill="kill"<CR>
 tnoremap \ <CR><C-D>
+inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
 
 # these dictionaries can also have the keys:
 # 'root_uri', 'capabilities', 'initialization_options'

@@ -34,6 +34,7 @@ set ruler
 set showcmd
 set viminfo='20,\"50
 set helplang=en,de
+set helplang=de
 set autoread
 set timeout
 set ttimeout

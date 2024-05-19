@@ -29,6 +29,9 @@
 /^static const int repeat_rate/ s/25/40/
 /^static const int repeat_delay/ s/600/400/
 
+# disable trackpad and enable only external mouses
+/^static const uint32_t send_events_mode =/ s/LIBINPUT_CONFIG_SEND_EVENTS_ENABLED/LIBINPUT_CONFIG_SEND_EVENTS_DISABLED_ON_EXTERNAL_MOUSE/
+
 # change modkey from alt to super (windows/unix key)
 /^#define\s*MODKEY/ s/ALT/LOGO/
 

@@ -37,7 +37,7 @@ if status is-interactive
 		set -x PATH $PATH "$HOME/.local/bin"
 	end
 
-	set editors 'nvim' 'vim' 'less'
+	set editors 'vim' 'nvim' 'less'
 	for editor in $editors
 		type -q $editor
 		if test $status -eq 0

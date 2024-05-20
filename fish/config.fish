@@ -59,9 +59,9 @@ if status is-interactive
 
 	# Abbreviations
 	#abbr --position anywhere dotfiles vim $HOME/dotfiles
-	abbr -a do ranger $HOME/dotfiles
-	abbr -a no ranger $HOME/notes
-	abbr -a co ranger $HOME/code
+	abbr -a do nnn $HOME/dotfiles
+	abbr -a no nnn $HOME/notes
+	abbr -a co nnn $HOME/code
 
 	# Functions
 	function multicd

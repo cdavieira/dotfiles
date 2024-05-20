@@ -1,4 +1,5 @@
 vim9script
+var vimconfigdir = '~/.config/vim/'
 set rtp-=$VIM/vimfiles
 set rtp-=$VIM/vimfiles/after
 set packpath-=$VIM/vimfiles
@@ -34,7 +35,6 @@ set ruler
 set showcmd
 set viminfo='20,\"50
 set helplang=en,de
-set helplang=de
 set autoread
 set timeout
 set ttimeout
@@ -53,14 +53,15 @@ g:lsp_preview_autoclose = 1
 g:lsp_diagnostics_enabled = 1
 g:lsp_preview_keep_focus = 1
 #g:lsp_experimental_workspace_folders = 1
-g:lsp_log_file = expand('~/.vim/vim-lsp.log')
-#g:asyncomplete_log_file = expand('~/.vim/asyncomplete.log')
+g:lsp_log_file = expand(vimconfigdir .. 'vim-lsp.log')
+#g:asyncomplete_log_file = expand(vimconfigdir .. 'asyncomplete.log')
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob(vimconfigdir .. 'autoload/plug.vim'))
+  silent execute '!curl -fLo ' .. vimconfigdir .. 'autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-g:plug#begin('~/.vim/vim-plug')
+#g:plug#begin('~/.config/vim/vim-plug')
+g:plug#begin(vimconfigdir .. 'vim-plug')
 
 # https://github.com/preservim/nerdtree
 Plug 'preservim/nerdtree'

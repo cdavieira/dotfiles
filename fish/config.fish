@@ -33,29 +33,35 @@ if status is-interactive
 		set -x PATH $PATH "$HOME/.cargo/bin"
 	end
 
+
 	if test -d "$HOME/.local/bin"
 		set -x PATH $PATH "$HOME/.local/bin"
 	end
 
 	set editors 'vim' 'nvim' 'less'
 	for editor in $editors
-		type -q $editor
-		if test $status -eq 0
+		if type -q $editor
+			set -x EDITOR "$editor"
 			break
 		end
 	end
-	if test $editor = 'nvim'; or $editor = 'vim'
-		set -x EDITOR "$editor"
-		set -x MANPAGER "$editor +Man!"
+
+	if type -q 'nvim'
+		set -x MANPAGER 'nvim +Man!'
 	end
 
-	if type -q qutebrowser
+	if type -q 'qutebrowser'
 		set -x BROWSER 'qutebrowser'
 	end
 
 	# Aliases
 	alias ls 'ls --group-directories-first --color=auto'
-	alias lx 'ls --group-directories-first --sort=time --color=auto'
+
+	# Abbreviations
+	#abbr --position anywhere dotfiles vim $HOME/dotfiles
+	abbr -a do ranger $HOME/dotfiles
+	abbr -a no ranger $HOME/notes
+	abbr -a co ranger $HOME/code
 
 	# Functions
 	function multicd
@@ -63,8 +69,9 @@ if status is-interactive
 	end
 	abbr --add dotdot --position command --regex '^\.\.+$' --function multicd
 
-	function cdl
-		cd $argv
+	functions -c cd oldcd
+	function cd
+		oldcd $argv
 		ls
 	end
 

@@ -33,7 +33,6 @@ if status is-interactive
 		set -x PATH $PATH "$HOME/.cargo/bin"
 	end
 
-
 	if test -d "$HOME/.local/bin"
 		set -x PATH $PATH "$HOME/.local/bin"
 	end
@@ -46,6 +45,10 @@ if status is-interactive
 		end
 	end
 
+	if type -q 'ranger'
+		set -x RANGER_LOAD_DEFAULT_RC FALSE
+	end
+
 	if type -q 'nvim'
 		set -x MANPAGER 'nvim +Man!'
 	end
@@ -56,12 +59,22 @@ if status is-interactive
 
 	# Aliases
 	alias ls 'ls --group-directories-first --color=auto'
+	alias la 'ls --group-directories-first --color=auto -la'
+	if type -q 'tmux'
+		alias tmux "tmux new-session ranger \; new-window -c ~/code -n code \; new-window -c ~/notes -n notes \; new-window -c ~/dotfiles -n dotfiles \;"
+	end
 
 	# Abbreviations
 	#abbr --position anywhere dotfiles vim $HOME/dotfiles
-	abbr -a do nnn $HOME/dotfiles
-	abbr -a no nnn $HOME/notes
-	abbr -a co nnn $HOME/code
+	if type -q 'ranger'
+		abbr -a do ranger $HOME/dotfiles
+		abbr -a no ranger $HOME/notes
+		abbr -a co ranger $HOME/code
+	else
+		abbr -a do cd $HOME/dotfiles
+		abbr -a no cd $HOME/notes
+		abbr -a co cd $HOME/code
+	end
 
 	# Functions
 	function multicd

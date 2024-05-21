@@ -61,7 +61,10 @@ if status is-interactive
 	alias ls 'ls --group-directories-first --color=auto'
 	alias la 'ls --group-directories-first --color=auto -la'
 	if type -q 'tmux'
-		alias tmux "tmux new-session ranger \; new-window -c ~/code -n code \; new-window -c ~/notes -n notes \; new-window -c ~/dotfiles -n dotfiles \;"
+		alias tmux "tmux new-session -c ~/dotfiles -n dotfiles \; \
+			new-window -c ~/notes -n notes \; \
+			new-window -c ~/code -n code \; \
+			new-window -c ~/code/c/projects/gwl_keys -n gwl_keys \; "
 	end
 
 	# Abbreviations

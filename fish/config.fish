@@ -82,6 +82,8 @@ if status is-interactive
 			new-window -c ~/code/c/projects/gwl_keys -n gwl_keys \; "
 	end
 
+	alias view 'vim -R'
+
 	#######################################
 	########### Abbreviations #############
 	#######################################

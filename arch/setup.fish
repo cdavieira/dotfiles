@@ -23,9 +23,9 @@ function vim -d "Install vim and neovim"
 	ln -s ~/dotfiles/nvim/ -t ~/.config -v
 
 	sudo pacman -S vim
-	mkdir -p ~/.vim ~/.cache/vim/{backup,swap,undo}
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	ln -s ~/dotfiles/vim/vimrc -t ~/.vim -v
+	mkdir -p ~/.config/vim ~/.cache/vim/{backup,swap,undo}
+	curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	ln -s ~/dotfiles/vim/vimrc -t ~/.config/vim -v
 end
 
 function shell -d "Install kitty and setup fish"

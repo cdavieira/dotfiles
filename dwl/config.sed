@@ -50,7 +50,9 @@ static const char *browsercmd[] = { "qutebrowser", NULL };
 	a\
 static const char * const screenshotcmd = "slurp | grim -g - - | swappy -f -";
 	a\
-static const char * const screencapturecmd = "wf-recorder -g \\"$(slurp)\\" --audio --file=recording-$(date +%Y%m%d-%H%M%S).mp4";
+static const char * const startscreencapturecmd = "wf-recorder -g \\"$(slurp)\\" --audio --file=recording-$(date +%Y%m%d-%H%M%S).mp4";
+	a\
+static const char * const finishscreencapturecmd = "pgrep wf-recorder | xargs kill";
 }
 
 # custom keybindings
@@ -70,6 +72,8 @@ static const char * const screencapturecmd = "wf-recorder -g \\"$(slurp)\\" --au
 	a\
 	{ MODKEY,                    XKB_KEY_s,          spawn,          SHCMD(screenshotcmd)},
 	a\
-	{ MODKEY,                    XKB_KEY_r,          spawn,          FISHCMD(screencapturecmd)},
+	{ MODKEY,                    XKB_KEY_r,          spawn,          FISHCMD(startscreencapturecmd)},
+	a\
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_r,          spawn,          FISHCMD(finishscreencapturecmd)},
 }
 

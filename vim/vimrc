@@ -7,7 +7,7 @@ vim9script
 #############################################################
 ###################### VARIABLES ############################
 #############################################################
-# easily manage where vim folder should be checked for
+# easily manage where the vim folder should be
 var vimconfigdir = '~/.config/vim/'
 
 # create additional folders used to store '~', ''.un' and '.swp' files
@@ -272,7 +272,7 @@ inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
 # Step 1: create a dictionary based on one of the ones found below to inform
 # how the LSP server should be initialized
 #
-# Step 2: create an autocmd to register the language server and set it up upon
+# Step 2: create an autocmd to register the language server and set it upon
 # opening a file of a certain programming language
 #
 # Step 3: create one or more autocmds to setup mappings and options upon
@@ -283,7 +283,7 @@ inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
 ########################
 # this dictionary also accepts the keys:
 # 'root_uri', 'capabilities', 'initialization_options'
-# you can check this by reading '~/.vim/autoload/lsp.vim#s:ensure_init'
+# you can check this by reading '~/.config/vim/autoload/lsp.vim#s:ensure_init'
 var c_lspinfo = {
 	'name': 'clangd',
 	'cmd': ['clangd', '--background-index'],

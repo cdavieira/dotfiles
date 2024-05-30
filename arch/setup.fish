@@ -40,7 +40,7 @@ function utils -d "Install Misc"
 	sudo pacman -S qutebrowser gcc gdb valgrind file which ffmpeg wget usbutils unzip unrar tree lshw os-prober efibootmgr ntfs-3g tmux
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	mkdir ~/.config/tmux
-	ln -s ~/dotfiles/tmux/.tmux.conf -t ~/.config/tmux/tmux.conf -v
+	ln -s ~/dotfiles/tmux/tmux.conf -t ~/.config/tmux/tmux.conf -v
 end
 
 function audio -d "Setup pipewire and audio dependencies"
@@ -49,7 +49,7 @@ function audio -d "Setup pipewire and audio dependencies"
 end
 
 function optional -d "Install optional programs"
-	sudo pacman -S zathura zathura-pdf-poppler mpv vimiv obs-studio mypaint
+	sudo pacman -S zathura zathura-pdf-poppler mpv vimiv mypaint
 end
 
 function routine
@@ -60,7 +60,7 @@ function routine
 	shell
 	utils
 	audio
-	#optional
+	optional
 end
 
 routine

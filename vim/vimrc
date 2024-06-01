@@ -310,7 +310,8 @@ var python_lspinfo = {
 }
 var rust_lsp_info = {
 	'name': 'rust-analyzer',
-	'cmd': ['rust-analyzer', '--log-file', './rust.log'],
+	#'cmd': ['rust-analyzer', '--log-file', './rust.log'],
+	'cmd': ['rust-analyzer'],
 	'allowlist': ['rust'],
 	'blocklist': [],
 	'config': {},

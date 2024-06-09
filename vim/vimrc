@@ -1,5 +1,17 @@
 vim9script
-
+# :help options.txt
+# :help $HOME
+# edit dotfiles/sometimes/viml/language/3.vim: line23 is wrong
+# edit dotfiles/sometimes/viml/language/3.vim: explain that 'XX&vim' can be used to restore any variable's default (read :help options.txt)
+# add dotfiles/sometimes/viml/language/3.vim: explain that variables like 'v:null' are vim special variables!
+# add dotfiles/sometimes/viml/language/3.vim: var $HOME = 'yolo:burguer'
+# :help variables, search for $VAR
+# echo environ()
+# use $USERPROFILE for windows
+# maybe create two sections for variables: one for variables which demands being modified manually and another one for variables that aren't going to change that much across different operating systems and users
+# https://learnxinyminutes.com/docs/vimscript/
+# maybe add a way of checking if a plugin is installed in order to define a
+# mapping
 
 
 
@@ -7,14 +19,21 @@ vim9script
 #############################################################
 ###################### VARIABLES ############################
 #############################################################
+
+
+
+# OPERATING SYSTEM/USER DEPENDENT VARIABLES
 # easily manage where the vim folder should be
-var vimconfigdir = '~/.config/vim/'
+var vim_config_dir = '~/.config/vim/'
+var vim_cache_dir = '~/.cache/vim/'
+var vimplug_autoload_dir = vim_config_dir .. 'autoload/plug.vim'
+var vimplug_dir = vim_config_dir .. 'vim-plug'
 
 # create additional folders used to store '~', ''.un' and '.swp' files
 for folder in ['backup', 'swap', 'undo']
-	var folderpath = '~/.cache/vim/' .. folder
+	var folderpath = vim_cache_dir .. folder
 	if empty(glob(folderpath))
-		mkdir(glob(folderpath), 'p')
+		mkdir(expand(folderpath), 'p')
 	endif
 endfor
 
@@ -24,22 +43,8 @@ set rtp-=$VIM/vimfiles/after
 set packpath-=$VIM/vimfiles
 set packpath-=$VIM/vimfiles/after
 
-# enable filetype recognition, plugins for filetypes and indent files
-filetype plugin indent on
-
 # load filetype plugin 'man.vim' (shipped with vim)
 runtime ftplugin/man.vim
-
-# load package 'editorconfig' (shipped with vim)
-packadd editorconfig
-
-# turn on syntax highlighting for different filetypes
-syntax on
-
-# 'background' and 'colorscheme' operate together to set vim's visuals
-set background=dark
-# wildcharm, evening, desert, habamax, sorbet, zaibatsu
-colorscheme wildcharm
 
 # folder to store '~' files
 set backupdir=~/.cache/vim/backup/
@@ -53,6 +58,27 @@ set undodir=~/.cache/vim/undo/
 # folder to store 'viminfo' file
 # viminfo saves session information upon quit
 set viminfofile=~/.cache/vim/viminfo
+
+# choose the desired command to use in conjunction with 'K'
+#set keywordprg=:help
+set keywordprg=:Man
+
+
+
+# OPERATING SYSTEM/USER INDEPENDENT VARIABLES
+# enable filetype recognition, plugins for filetypes and indent files
+filetype plugin indent on
+
+# load package 'editorconfig' (shipped with vim)
+packadd editorconfig
+
+# turn on syntax highlighting for different filetypes
+syntax on
+
+# 'background' and 'colorscheme' operate together to set vim's visuals
+set background=dark
+# wildcharm, evening, desert, habamax, sorbet, zaibatsu
+colorscheme wildcharm
 
 # viminfo configuration
 # \" ('"' escaped): max. number of lines saved for each register
@@ -114,10 +140,6 @@ set ttimeoutlen=100
 # completion
 set wildmenu
 
-# choose the desired command to use in conjunction with 'K'
-#set keywordprg=:help
-set keywordprg=:Man
-
 
 
 
@@ -155,10 +177,10 @@ g:lsp_preview_keep_focus = 1
 #g:lsp_experimental_workspace_folders = 1
 
 # create a log file to inspect lsp action
-g:lsp_log_file = expand(vimconfigdir .. 'vim-lsp.log')
+g:lsp_log_file = expand(vim_config_dir .. 'vim-lsp.log')
 
 # create a log file to inspect async action
-#g:asyncomplete_log_file = expand(vimconfigdir .. 'asyncomplete.log')
+#g:asyncomplete_log_file = expand(vim_config_dir .. 'asyncomplete.log')
 
 
 
@@ -169,12 +191,12 @@ g:lsp_log_file = expand(vimconfigdir .. 'vim-lsp.log')
 #############################################################
 # in case vim plug isn't already installed, install it
 # taken from https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
-if empty(glob(vimconfigdir .. 'autoload/plug.vim'))
-  silent execute '!curl -fLo ' .. vimconfigdir .. 'autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob(vimplug_autoload_dir))
+  execute '!curl -fLo ' .. vimplug_autoload_dir .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-g:plug#begin(vimconfigdir .. 'vim-plug')
+g:plug#begin(vimplug_dir)
 
 # https://github.com/preservim/nerdtree
 Plug 'preservim/nerdtree'

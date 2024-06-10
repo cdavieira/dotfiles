@@ -7,7 +7,8 @@ config.load_autoconfig()
 #c.colors.webpage.darkmode.algorithm = "lightness-hsl"
 #c.fonts.default_size = "10pt" # qutebrowser fontsize
 #c.fonts.web.size.default = 18 # webpage fontsize
-c.fonts.default_family = ["HackNerdFontMono-Italic", "FiraCodeNerdFontMono-Regular", "SourceCodeVF-Upright"]
+# font files can be found in '/usr/share/fonts/TTF/'
+c.fonts.default_family = ["SymbolsNerdFontMono-Regular", "HackNerdFontMono-Italic", "FiraCodeNerdFontMono-Regular", "SourceCodeVF-Upright"]
 c.zoom.default = 150
 c.colors.webpage.darkmode.enabled = False
 c.auto_save.session = True

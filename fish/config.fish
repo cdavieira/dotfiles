@@ -84,6 +84,8 @@ if status is-interactive
 
 	alias view 'vim -R'
 
+	alias dmesg 'dmesg -H'
+
 	#######################################
 	########### Abbreviations #############
 	#######################################

@@ -53,11 +53,6 @@ if status is-interactive
 		end
 	end
 
-	# in case ranger is installed, skip loading its default rc
-	if type -q 'ranger'
-		set -x RANGER_LOAD_DEFAULT_RC FALSE
-	end
-
 	# in case neovim is installed, use it as pager
 	if type -q 'nvim'
 		set -x MANPAGER 'nvim +Man!'

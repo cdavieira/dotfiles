@@ -1,18 +1,4 @@
 vim9script
-# :help options.txt
-# :help $HOME
-# edit dotfiles/sometimes/viml/language/3.vim: line23 is wrong
-# edit dotfiles/sometimes/viml/language/3.vim: explain that 'XX&vim' can be used to restore any variable's default (read :help options.txt)
-# add dotfiles/sometimes/viml/language/3.vim: explain that variables like 'v:null' are vim special variables!
-# add dotfiles/sometimes/viml/language/3.vim: var $HOME = 'yolo:burguer'
-# :help variables, search for $VAR
-# echo environ()
-# use $USERPROFILE for windows
-# maybe create two sections for variables: one for variables which demands being modified manually and another one for variables that aren't going to change that much across different operating systems and users
-# https://learnxinyminutes.com/docs/vimscript/
-# maybe add a way of checking if a plugin is installed in order to define a
-# mapping
-
 
 
 
@@ -33,17 +19,19 @@ var vimplug_dir = vim_config_dir .. 'vim-plug'
 for folder in ['backup', 'swap', 'undo']
 	var folderpath = vim_cache_dir .. folder
 	if empty(glob(folderpath))
-		mkdir(expand(folderpath), 'p')
+		mkdir(folderpath, 'p')
 	endif
 endfor
 
 # disable loading plugins from folders intended for windows
+# MAYBE THIS IS NOT OS DEPENDENT
 set rtp-=$VIM/vimfiles
 set rtp-=$VIM/vimfiles/after
 set packpath-=$VIM/vimfiles
 set packpath-=$VIM/vimfiles/after
 
 # load filetype plugin 'man.vim' (shipped with vim)
+# MAYBE THIS IS NOT OS DEPENDENT
 runtime ftplugin/man.vim
 
 # folder to store '~' files
@@ -60,8 +48,11 @@ set undodir=~/.cache/vim/undo/
 set viminfofile=~/.cache/vim/viminfo
 
 # choose the desired command to use in conjunction with 'K'
-#set keywordprg=:help
 set keywordprg=:Man
+
+# user shell
+set shell=pwsh
+set shellcmdflag=-c
 
 
 
@@ -128,12 +119,10 @@ set autoread
 set timeout
 set ttimeout
 
-# because timeout and ttimeout are on, set a timeout value for mappings
-# in ms
+# because timeout and ttimeout are on, set a timeout value for mappings in ms
 # set timeoutlen=3000
 
-# because timeout and ttimeout are on, set a different timeout value for keycodes
-# in ms
+# because timeout and ttimeout are on, set a different timeout value for keycodes in ms
 set ttimeoutlen=100
 
 # enhance commandline completion operation, by enabling 'wildchar' to invoke
@@ -174,13 +163,13 @@ g:lsp_diagnostics_enabled = 1
 
 g:lsp_preview_keep_focus = 1
 
-#g:lsp_experimental_workspace_folders = 1
+# g:lsp_experimental_workspace_folders = 1
 
 # create a log file to inspect lsp action
 g:lsp_log_file = expand(vim_config_dir .. 'vim-lsp.log')
 
 # create a log file to inspect async action
-#g:asyncomplete_log_file = expand(vim_config_dir .. 'asyncomplete.log')
+# g:asyncomplete_log_file = expand(vim_config_dir .. 'asyncomplete.log')
 
 
 

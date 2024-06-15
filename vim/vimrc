@@ -51,7 +51,7 @@ set viminfofile=~/.cache/vim/viminfo
 set keywordprg=:Man
 
 # user shell
-set shell=pwsh
+set shell=/usr/bin/fish
 set shellcmdflag=-c
 
 

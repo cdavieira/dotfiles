@@ -81,6 +81,8 @@ if status is-interactive
 
 	alias dmesg 'dmesg -H'
 
+	alias info 'info --vi-keys'
+
 	#######################################
 	########### Abbreviations #############
 	#######################################

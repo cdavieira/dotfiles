@@ -120,7 +120,7 @@ Para criar as chaves pelo Google Cloud, siga as instruções:
 >> Essa variável tem como valor: `https://oauth2.dance/`
 
 > Após você criar essa credencial, você passará a ter acesso ao **client id**
-> e ao **client client**
+> e ao **client secret**
 6. Agora, na aba lateral, selecione a seção **OAuth consent screen** e crie um
    recurso desse tipo
 > Cadastre o seu email do gmail como usuário de teste (just in case)
@@ -183,9 +183,9 @@ set -x OUTLOOK_CLIENT_SECRET_VALUE <client_secret_value>
 ### Gerando o refresh token para acesso do Gmail
 Para obter o refresh token, que deverá ser colocado também no arquivo
 `secretneomuttrc`:
-1. Abra o arquivo `oauth.fish`, comente a chamada da função `outlook` e
+1. Abra o arquivo `oauth2.fish`, comente a chamada da função `outlook` e
    descomente a chamada da função `gmail`
-2. Rode o script `./oauth.fish`
+2. Rode o script `./oauth2.fish`
 
 O script pedirá que você abra um link no seu navegador, que irá se encarregar
 de disparar a rotina de autorização do Google para o seu client id.
@@ -216,9 +216,9 @@ configurada e presente no SHELL nesse momento. Portanto, crie/set essa
 variável e reinicie o terminal para certificar-se que ela estará presente.
 
 Uma vez que o GPG tenha sido configurado, prossiga para obter o refresh token do outlook:
-1. Abra o arquivo `oauth.fish`, descomente a chamada da função `outlook` e
+1. Abra o arquivo `oauth2.fish`, descomente a chamada da função `outlook` e
    comente a chamada da função `gmail`
-2. Rode o script `./oauth.fish`
+2. Rode o script `./oauth2.fish`
 > Em caso de erro, delete o arquivo `$OUTLOOK.tokens` caso ele tenha sido
 > criado anteriormente
 

@@ -238,6 +238,20 @@ neomutt
 > script/arquivo aqui presente. Portanto, não é necessário anota-lo nem nada
 > do tipo
 
+Após gerar o arquivo $OUTLOOK.tokens, será possível utiliza-lo para refrescar o
+**access token** a ser usado pelo neomutt para acessar o servidor imap do
+outlook. Para isso, é necessário rodar no terminal o código abaixo uma vez:
+```
+python mutt_oauth2.py --authflow authcode {EMAIL_OUTLOOK}.tokens --authorize
+```
+
+Após isso, é necessário definir o comando que será usado pelo neomutt para
+refrescar constantemente o **access token** durante a execução do programa.
+Isso pode ser feito como segue:
+```
+set imap_oauth_refresh_command = "python $my_config_neomutt/mutt_oauth2.py --authflow authcode $my_config_neomutt/$OUTLOOK.tokens" ; \
+```
+
 
 ## Variáveis
 Quanto às variáveis, o `neomuttrc` necessita que as seguintes variáveis de ambiente

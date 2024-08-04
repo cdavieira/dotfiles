@@ -87,6 +87,7 @@ code = {
     "cpp": [
         "https://en.cppreference.com/w/",
         "https://cplusplus.com/",
+        "https://en.cppreference.com/w/c/header",
     ],
     "rust": [
         "https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html", 

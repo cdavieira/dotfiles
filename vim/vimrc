@@ -410,7 +410,7 @@ enddef
 
 augroup lsp_install
 	au!
-	autocmd User lsp_buffer_enabled call On_lsp_buffer_enabled()
+	autocmd User lsp_buffer_enabled On_lsp_buffer_enabled()
 augroup END
 
 # vim: set ft=vim :

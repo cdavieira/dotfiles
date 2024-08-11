@@ -41,6 +41,7 @@ lspconfig.pylsp.setup {}
 lspconfig.tsserver.setup {}
 lspconfig.lua_ls.setup {}
 lspconfig.clangd.setup {}
+lspconfig.metals.setup {}
 lspconfig.rust_analyzer.setup {
 	settings = { -- Server-specific settings. See `:help lspconfig-setup`
 		['rust-analyzer'] = {},

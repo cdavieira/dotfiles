@@ -40,5 +40,5 @@ if test -n "$_flag_d"
 end
 
 if test -n "$_flag_s"
-	sed '/^Exec=dwl/ c\Exec=dwl -s /home/carlos/dotfiles/dwl/startup.fish' dwl.desktop > dwl.desktop
+	sed '/^Exec=dwl/ c\Exec=dwl -s /home/carlos/dotfiles/dwl/startup.fish' $dwl_path/dwl.desktop > $dwl_path/dwl.desktop.new
 end

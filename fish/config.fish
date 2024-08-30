@@ -63,6 +63,10 @@ if status is-interactive
 		set -x BROWSER 'qutebrowser'
 	end
 
+	if test -d "$HOME/.local/share/coursier/bin"
+		set -x PATH "$PATH:/$HOME/.local/share/coursier/bin"
+	end
+
 	#######################################
 	############## Aliases ################
 	#######################################
@@ -88,14 +92,11 @@ if status is-interactive
 	#######################################
 
 	# save some typing
-	if type -q 'ranger'
-		abbr -a do ranger $HOME/dotfiles
-		abbr -a no ranger $HOME/notes
-		abbr -a co ranger $HOME/code
-	else
-		abbr -a do cd $HOME/dotfiles
-		abbr -a no cd $HOME/notes
-		abbr -a co cd $HOME/code
+	for folder in dotfiles notes code
+		if test -d $HOME/$folder
+			set -l shortname $(string sub --start 1 --end 2 $folder) 
+			abbr -a $shortname cd $HOME/$folder
+		end
 	end
 
 	#######################################
@@ -118,7 +119,3 @@ if status is-interactive
 else if status is-login
 	# Commands to run in login sessions can go here
 end
-
-# >>> coursier install directory >>>
-set -gx PATH "$PATH:/home/carlos/.local/share/coursier/bin"
-# <<< coursier install directory <<<

@@ -21,4 +21,6 @@ fi
 
 alias ls="ls --color --group-directories-first --sort=extension"
 
+SHELL=fish fish
+
 # Put your fun stuff here.

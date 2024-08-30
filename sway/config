@@ -217,7 +217,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+		# props to this post: https://stackoverflow.com/questions/28040149/store-the-output-from-multiple-commands-on-a-single-line-in-a-file
 		status_command while echo \"$(date +'%Y-%m-%d %H:%M') | $(cat /sys/class/power_supply/BAT0/capacity)/100 ($(cat /sys/class/power_supply/BAT0/status))\"; do sleep 60; done
 
     colors {

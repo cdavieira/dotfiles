@@ -2,5 +2,5 @@
 
 # <&- closes standard input
 waybar <&- &
-swaybg -i ~/dotfiles/dwl/background.png -m fit <&- &
+swaybg -i ~/repos/dotfiles/dwl/background.png -m fit <&- &
 #cat > ~/dwl.log

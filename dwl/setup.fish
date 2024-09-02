@@ -15,7 +15,7 @@ if test -n "$_flag_h"
 end
 
 set dwl_path "$HOME/repos/dwl"
-set dwl_dotfile "$HOME/dotfiles/dwl"
+set dwl_dotfile "$HOME/repos/dotfiles/dwl"
 cd $dwl_path
 
 if test -n "$_flag_b"

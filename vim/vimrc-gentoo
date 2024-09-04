@@ -49,7 +49,7 @@ endif
 for folder in ['backup', 'swap', 'undo']
 	var folderpath = vim_cache_dir .. folder
 	if empty(glob(folderpath))
-		mkdir(folderpath, 'p')
+		mkdir(expand(folderpath), 'p')
 	endif
 endfor
 

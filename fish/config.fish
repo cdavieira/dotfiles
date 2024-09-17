@@ -63,10 +63,6 @@ if status is-interactive
 		set -x BROWSER 'qutebrowser'
 	end
 
-	if test -d "$HOME/.local/share/coursier/bin"
-		set -x PATH "$PATH:/$HOME/.local/share/coursier/bin"
-	end
-
 	#######################################
 	############## Aliases ################
 	#######################################
@@ -92,12 +88,12 @@ if status is-interactive
 	#######################################
 
 	# save some typing
-	for folder in dotfiles notes code
-		if test -d $HOME/$folder
-			set -l shortname $(string sub --start 1 --end 2 $folder) 
-			abbr -a $shortname cd $HOME/$folder
-		end
-	end
+	# for folder in dotfiles notes code
+	# 	if test -d $HOME/$folder
+	# 		set -l shortname $(string sub --start 1 --end 2 $folder) 
+	# 		abbr -a $shortname cd $HOME/$folder
+	# 	end
+	# end
 
 	#######################################
 	############# Functions ###############

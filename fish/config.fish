@@ -83,6 +83,12 @@ if status is-interactive
 
 	alias info 'info --vi-keys'
 
+	# in case lynx is installed, override its default cfg file with ours
+	if type -q 'lynx'
+		alias lynx 'lynx -cfg=~/repos/dotfiles/lynx/lynx.cfg'
+	end
+
+
 	#######################################
 	########### Abbreviations #############
 	#######################################

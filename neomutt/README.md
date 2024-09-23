@@ -302,3 +302,7 @@ Caso seja de interesse, copie o arquivo e o coloque na mesma pasta do
   que guarde as chaves/tokens de autenticação necessários (usar `gpg`)
 * Comentar que também é necessário habilitar a opção de usar clients IMAP e
   POP nas configurações do Gmail (e possivelmente do Outlook?)
+
+
+## Outros links
+* [How to use more than 1 account with mutt - Github](https://gist.github.com/miguelmota/9456162)

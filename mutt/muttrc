@@ -5,7 +5,7 @@ mailboxes       = +INBOX
 
 # Store message headers locally to speed things up.
 # If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more.
-set header_cache = ~/.cache/mutt
+set header_cache = "~/.cache/mutt"
 
 # Store messages locally to speed things up, like searching message bodies.
 # Can be the same folder as header_cache.
@@ -14,6 +14,9 @@ set message_cachedir = "~/.cache/mutt"
 
 # Specify where to save and/or look for postponed messages.
 # set postponed = +[Gmail]/Drafts
+
+#set imap_authenticators = "gssapi:cram-md5:login"
+#set imap_oauth_refresh_command
 
 # Allow Mutt to open a new IMAP connection automatically.
 unset imap_passive

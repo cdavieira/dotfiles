@@ -8,7 +8,6 @@ config.load_autoconfig()
 #c.fonts.default_size = "10pt" # qutebrowser fontsize
 #c.fonts.web.size.default = 18 # webpage fontsize
 # font files can be found in '/usr/share/fonts/TTF/'
-# !
 c.fonts.default_family = ["Liberation Mono"
                           "SymbolsNerdFontMono-Regular",
                           "HackNerdFontMono-Italic",
@@ -19,7 +18,6 @@ c.colors.webpage.darkmode.enabled = False
 c.auto_save.session = True
 c.colors.webpage.preferred_color_scheme = "dark"
 c.downloads.location.directory = "~/temp/"
-# !
 c.editor.command = ["kitty", "--config", "/home/carlos/.config/kitty/kitty.conf", "-c", "\"bash", "vim", '{}']
 c.session.lazy_restore = True
 c.tabs.last_close = "startpage"

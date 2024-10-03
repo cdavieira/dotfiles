@@ -1,0 +1,11 @@
+set from = "$OUTLOOK"
+set folder = "imaps://$OUTLOOK@outlook.office365.com:993"
+set smtp_url = "smtps://$OUTLOOK@smtp-mail.outlook.com:587"
+set imap_user = "$OUTLOOK"
+set imap_authenticators = 'oauthbearer:xoauth2'
+set imap_oauth_refresh_command = "python $my_neomutt_config/mutt_oauth2.py \
+--authflow authcode \
+$my_neomutt_config/$OUTLOOK.tokens"
+set imap_check_subscribed
+set spool_file = "+INBOX"
+set postponed = "+Drafts"

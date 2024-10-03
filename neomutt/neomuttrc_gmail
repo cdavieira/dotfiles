@@ -1,0 +1,15 @@
+set from = "$GMAIL"
+set folder = "imaps://$GMAIL@imap.gmail.com:993"
+set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587"
+set imap_user = "$GMAIL"
+set imap_authenticators='oauthbearer:xoauth2'
+set imap_oauth_refresh_command = "python $my_neomutt_config/oauth2.py \
+--user=$GMAIL --quiet \
+--client_id=$(pass mutt/gmail_client_id) \
+--client_secret=$(pass mutt/gmail_client_secret) \
+--refresh_token=$(pass mutt/gmail_refresh_token)"
+set imap_check_subscribed
+set spool_file = "+INBOX"
+set record = "+Sent"
+set trash = "+Trash"
+set postponed = "+Drafts"

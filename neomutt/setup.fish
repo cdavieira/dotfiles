@@ -39,7 +39,11 @@ function cp_theme
 end
 
 function setup_gmail
-	python ./oauth2.py --user=$GMAIL --client_id=(pass mutt/gmail_client_id) --client_secret=(pass mutt/gmail_client_secret) --generate_oauth2_token
+	python ./oauth2.py \
+		--user=$GMAIL \
+		--client_id=(pass mutt/gmail_client_id) \
+		--client_secret=(pass mutt/gmail_client_secret) \
+		--generate_oauth2_token
 end
 
 function setup_outlook

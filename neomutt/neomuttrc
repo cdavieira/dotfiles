@@ -1,25 +1,79 @@
-### Config
+# Custom variables
 set my_neomutt_cache = ~/.cache/neomutt
 set my_neomutt_config = "$HOME/.config/neomutt"
 set my_neomutt_root = '/usr/share/neomutt'
+set my_neomutt_colorscheme = 'vombatidae.neomuttrc'
+
+# This variable specifies what "real" or "personal" name should be used when sending messages.
+# If not specified, then the user’s "real name" will be read from /etc/passwd
 set real_name = 'Carlos Vieira'
-set me_too
-set greeting = 'Olá %v,'
+
+# When set, this is the string that will precede every message as a greeting phrase to the recipients
+# set greeting = 'Olá %v,'
+
+# This  variable  allows  you  to customize the file browser display to your personal taste.
+# It’s only used to customize network mailboxes (imap)
 set folder_format = "%2C %t %N %F %2l %-8.8u %-8.8g %8s %d %i"
+
+# This variable allows you to customize the message index display to your personal taste.
 set index_format = "%4C %Z %{%b %d} %-15.15L (%<l?%4l&%4c>) %s "
+
+# The  style of threading used in the index. May be one of "flat" (no
+# threading), "threads" (threaded, with subthreads below root message) or
+# "reverse" (threaded, with subthreads above root message).
 set use_threads = 'reverse'
+
+# controls the sorting between threads
 set sort = 'date'
+
+# controls sorting within a thread
 set sort_aux = 'date'
+
+# Determines the number of seconds that must elapse after first opening a new
+# message in the pager before that message  will be marked as read.
 set pager_read_delay = 15
+
+# When  set,  NeoMutt will periodically calculate message statistics of a
+# mailbox while polling for new mail.  It will check for unread, flagged, and
+# total message counts.
+#
+# Message statistics can also be explicitly calculated by invoking the
+# <check-stats> function.
 set mail_check_stats
+
+#This variable points to the header cache database. If the path points to an
+#existing directory, NeoMutt will create a ded‐ icated header cache database
+#per folder. Otherwise, the path points to a regular file, which will be
+#created as needed and used as a shared global header cache for all folders.
 set header_cache = "$my_neomutt_cache/header"
+
+# tokyocabinet, kyotocabinet, qdbm, rocksdb, gdbm, bdb, tdb, lmdb.
 #set header_cache_backend = 'lmdb'
+
+# Set this to a directory and NeoMutt will cache copies of messages from your
+# IMAP and POP servers here. You are free to re‐ move entries at any time.
+# When setting this variable to a directory, NeoMutt needs to fetch every
+# remote message only once and can  perform  regular expression searches as
+# fast as for local folders.
 set message_cachedir = "$my_neomutt_cache/body"
+
+# By  default the sidebar will show the mailbox’s path, relative to the
+# $folder variable. Setting sidebar_shortpath=yes will shorten the names
+# relative to the previous name.
 set sidebar_short_path
+
+# This specifies whether or not to show sidebar. The sidebar shows a list of
+# all your mailboxes.
 set sidebar_visible
+
+# Set this to indent mailboxes in the sidebar.
 set sidebar_folder_indent
 set sidebar_indent_string="  "
+
+# %B Name of the mailbox 
+# ???
 set sidebar_format = "%B%<F? [%F]>%* %<N?%N/>%S"
+
 
 
 ### Rebinding
@@ -29,51 +83,23 @@ bind index,pager \CO sidebar-open
 bind index,pager B sidebar-toggle-visible
 
 
+
 ### Colorscheme
-# builtin coloschemes: 'solarized-dark-256.neomuttrc', 'zenburn.neomuttrc', 'neonwolf-256.neomuttrc' 
-# https://neomutt.org/guide/configuration#11-2-%C2%A0simple-colors
-# https://neomutt.org/guide/gettingstarted#2-4-4-%C2%A0colors
-set my_neomutt_colorscheme = 'vombatidae.neomuttrc'
 source "$my_neomutt_root/colorschemes/$my_neomutt_colorscheme"
 
-
-### OAuth2.0 Tokens
-# source "$my_neomutt_config/secretneomuttrc"
 
 
 ### Vim keybindings
 source "$my_neomutt_config/vimkeys.rc"
 
 
+
 ### Gmail config
-#ifdef GMAIL	\
-#set from = "$GMAIL" ; \
-#set folder = "imaps://$GMAIL@imap.gmail.com:993" ; \
-#set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587" ; \
-#set imap_user = "$GMAIL" ; \
-#set imap_authenticators='oauthbearer:xoauth2' ; \
-#set imap_oauth_refresh_command = "python $my_neomutt_config/oauth2.py \
-#--user=$GMAIL --quiet \
-#--client_id=$(pass mutt/gmail_client_id) \
-#--client_secret=$(pass mutt/gmail_client_secret) \
-#--refresh_token=$(pass mutt/gmail_refresh_token)" ; \
-#set imap_check_subscribed ; \
-#set spool_file = "+INBOX" ; \
-#set record = "+Sent" ; \
-#set trash = "+Trash" ; \
-#set postponed = "+Drafts" ; \
-#finish
+ifdef GMAIL	source $my_neomutt_config/neomuttrc_gmail
+finish
+
 
 
 ## Outlook config
-ifdef OUTLOOK \
-set from = "$OUTLOOK" ; \
-set folder = "imaps://$OUTLOOK@outlook.office365.com:993" ; \
-set smtp_url = "smtps://$OUTLOOK@smtp-mail.outlook.com:587" ; \
-set imap_user = "$OUTLOOK" ; \
-set imap_authenticators='oauthbearer:xoauth2' ; \
-set imap_oauth_refresh_command = "python $my_neomutt_config/mutt_oauth2.py --authflow authcode $my_neomutt_config/$OUTLOOK.tokens" ; \
-set imap_check_subscribed ; \
-set spool_file = "+INBOX" ; \
-set postponed = "+Drafts" ; \
-finish
+#ifdef OUTLOOK source $my_neomutt_config/neomuttrc_outlook
+#finish

@@ -1,1 +1,0 @@
-/home/carlos/repos/notes/apps/neomutt-notes.md

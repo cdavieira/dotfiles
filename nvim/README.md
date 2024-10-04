@@ -1,0 +1,20 @@
+## Commands
+
+* :Alpha
+* :AlphaRedraw
+* :AlphaRemap
+* :Lazy
+* :Inspect
+* :InspectTree
+* :LspInfo
+* :LspLog
+* :LspRestart
+* :LspStart
+* :LspStop
+* :Man
+* :Neotree
+* :Ntree
+* :Telescope
+* :TS
+* :Tutor
+* :WhichKey

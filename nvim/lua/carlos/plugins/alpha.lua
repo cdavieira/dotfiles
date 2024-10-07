@@ -1,3 +1,5 @@
+-- greeter
+
 -- https://github.com/goolord/alpha-nvim
 
 return {

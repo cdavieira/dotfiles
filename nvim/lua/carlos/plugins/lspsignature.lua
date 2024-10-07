@@ -1,3 +1,5 @@
+-- lsp
+
 -- https://www.lazyvim.org/plugins/coding
 -- https://github.com/hrsh7th/nvim-cmp
 

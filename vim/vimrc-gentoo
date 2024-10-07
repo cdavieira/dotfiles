@@ -73,8 +73,8 @@ syntax on
 
 # 'background' and 'colorscheme' operate together to set vim's visuals
 set background=dark
-# wildcharm, evening, desert, habamax, sorbet, zaibatsu
-colorscheme wildcharm
+# slate, retrobox, wildcharm, evening, desert, habamax, sorbet
+colorscheme retrobox
 
 # viminfo configuration
 # \" ('"' escaped): max. number of lines saved for each register
@@ -239,19 +239,11 @@ Plug 'vim-airline/vim-airline'
 # https://github.com/vim-airline/vim-airline-themes#vim-airline-themes--
 Plug 'vim-airline/vim-airline-themes'
 
-# https://github.com/morhetz/gruvbox?tab=readme-ov-file
-# Plug 'morhetz/gruvbox'
-# autocmd vimenter * ++nested colorscheme gruvbox
-
-# https://github.com/joshdick/onedark.vim
-# Plug 'joshdick/onedark.vim'
-# colorscheme onedark
-
 # https://github.com/mbbill/undotree
 # Plug 'mbbill/undotree'
 
 # https://github.com/tpope/vim-fugitive
-# Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 # https://github.com/preservim/tagbar?tab=readme-ov-file
 # Plug 'preservim/tagbar'
@@ -263,10 +255,67 @@ Plug 'vim-airline/vim-airline-themes'
 # https://github.com/rhysd/vim-healthcheck
 Plug 'rhysd/vim-healthcheck'
 
+# https://github.com/morhetz/gruvbox?tab=readme-ov-file
+# Plug 'morhetz/gruvbox'
+# autocmd vimenter * ++nested colorscheme gruvbox
+
+# https://draculatheme.com/vim
+# https://github.com/dracula/dracula-theme
+# Plug 'dracula/vim', { 'as': 'dracula' }
+# colorscheme dracula
+
+# https://github.com/joshdick/onedark.vim
+# Plug 'joshdick/onedark.vim'
+# colorscheme onedark
+
+# other themes:
+# https://github.com/rafi/awesome-vim-colorschemes
+# https://github.com/sainnhe/sonokai
+
 # " Call plug#end to update &runtimepath and initialize the plugin system.
 # " - It automatically executes `filetype plugin indent on` and `syntax enable`
 g:plug#end()
 
+
+
+
+
+#############################################################
+######################### FUNCTIONS #########################
+#############################################################
+def g:RotateColor(increment: number): void
+	const colors = [
+		'slate',
+		'retrobox',
+		'wildcharm',
+		'evening',
+		'desert',
+		'habamax',
+		'sorbet',
+		# 'dracula',
+	]
+	const size = len(colors)
+	const idx = index(colors, g:colors_name)
+	if idx == -1
+		echo 'ColorRotate error:' g:colors_name 'not found in the colorlist'
+		return
+	endif
+
+	var next_idx = (idx + increment) % size
+	if next_idx < 0
+		next_idx = size + next_idx
+	endif
+
+	const next_colorscheme = next_idx >= size ? colors[0] : colors[next_idx]
+	const colorscheme_relpath = 'colors/' .. next_colorscheme .. '.vim'
+	if empty(globpath(&rtp, colorscheme_relpath))
+		echo 'ColorRotate error:' next_colorscheme 'not found in the runtimepath'
+		return
+	endif
+
+	execute "colorscheme" next_colorscheme
+	echo "ColorRotate: current colorscheme:" next_colorscheme
+enddef
 
 
 
@@ -280,6 +329,8 @@ nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
 nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>s <Cmd>Rg<CR>
+nnoremap <Leader>q <Cmd>call g:RotateColor(-1)<CR>
+nnoremap <Leader>w <Cmd>call g:RotateColor(+1)<CR>
 noremap \ :term ++kill="kill"<CR>
 tnoremap \ <CR><C-D>
 inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
@@ -413,5 +464,8 @@ augroup lsp_install
 	au!
 	autocmd User lsp_buffer_enabled On_lsp_buffer_enabled()
 augroup END
+
+
+
 
 # vim: set ft=vim :

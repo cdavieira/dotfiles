@@ -122,11 +122,11 @@ Plug 'rhysd/vim-healthcheck'
 
 # https://draculatheme.com/vim
 # https://github.com/dracula/dracula-theme
-# Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'dracula/vim', { 'as': 'dracula' }
 # colorscheme dracula
 
 # https://github.com/joshdick/onedark.vim
-# Plug 'joshdick/onedark.vim'
+Plug 'joshdick/onedark.vim'
 # colorscheme onedark
 
 # other themes:

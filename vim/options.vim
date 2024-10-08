@@ -32,7 +32,7 @@ syntax on
 
 # 'background' and 'colorscheme' operate together to set vim's visuals
 set background=dark
-# slate, retrobox, wildcharm, evening, desert, habamax, sorbet
+# onedark, dracula, slate, retrobox, wildcharm, evening, desert, habamax, sorbet
 colorscheme retrobox
 
 # viminfo configuration

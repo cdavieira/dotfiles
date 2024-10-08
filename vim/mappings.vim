@@ -1,7 +1,8 @@
 vim9script
 
 nnoremap <Leader>b <Cmd>Buffers<CR>
-nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
+#nnoremap <Leader>c <Cmd>edit $MYVIMRC<CR>
+nnoremap <Leader>c <Cmd>Files ~/repos/dotfiles/vim<CR>
 nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
 nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>

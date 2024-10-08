@@ -1,6 +1,6 @@
 vim9script
 
-import './path.vim'
+import '../utils/path.vim'
 
 # operating system independent options
 

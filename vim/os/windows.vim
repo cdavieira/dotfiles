@@ -1,6 +1,6 @@
 vim9script
 
-import 'path.vim'
+import '../utils/path.vim'
 
 # run this in an elevated shell:
 # New-Item -ItemType SymbolicLink -Target C:\Users\cd_vi\dotfiles\vim\win_vimrc -Path C:\Users\cd_vi\vimfiles\vimrc

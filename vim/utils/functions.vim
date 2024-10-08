@@ -2,6 +2,7 @@ vim9script
 
 def g:RotateColor(increment: number): void
 	const colors = [
+		'catppuccin-mocha',
 		'slate',
 		'retrobox',
 		'wildcharm',

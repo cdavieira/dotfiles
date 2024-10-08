@@ -1,6 +1,6 @@
 vim9script
 
-import './path.vim'
+import '../utils/path.vim'
 
 # folder to store '~' files
 set backupdir=~/.cache/vim/backup/

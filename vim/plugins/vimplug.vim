@@ -1,6 +1,6 @@
 vim9script
 
-import './path.vim'
+import '../utils/path.vim'
 
 #############################################################
 #################### PLUGIN VARIABLES #######################
@@ -123,11 +123,12 @@ Plug 'rhysd/vim-healthcheck'
 # https://draculatheme.com/vim
 # https://github.com/dracula/dracula-theme
 Plug 'dracula/vim', { 'as': 'dracula' }
-# colorscheme dracula
 
 # https://github.com/joshdick/onedark.vim
 Plug 'joshdick/onedark.vim'
-# colorscheme onedark
+
+# https://github.com/catppuccin/nvim
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 # other themes:
 # https://github.com/rafi/awesome-vim-colorschemes
@@ -136,3 +137,5 @@ Plug 'joshdick/onedark.vim'
 # " Call plug#end to update &runtimepath and initialize the plugin system.
 # " - It automatically executes `filetype plugin indent on` and `syntax enable`
 g:plug#end()
+
+if has('lua') | colorscheme catppuccin | endif

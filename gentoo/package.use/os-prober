@@ -1,0 +1,4 @@
+sys-kernel/installkernel dracut
+# required by sys-boot/os-prober-1.81-r3::gentoo
+# required by sys-boot/os-prober (argument)
+>=sys-boot/grub-2.12-r4 mount

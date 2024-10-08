@@ -1,10 +1,10 @@
 vim9script
 
-source ~/repos/dotfiles/vim/unix.vim
-source ~/repos/dotfiles/vim/options.vim
-source ~/repos/dotfiles/vim/plugins.vim
-source ~/repos/dotfiles/vim/functions.vim
-source ~/repos/dotfiles/vim/mappings.vim
-source ~/repos/dotfiles/vim/lsp.vim
+source ~/repos/dotfiles/vim/os/unix.vim
+source ~/repos/dotfiles/vim/config/options.vim
+source ~/repos/dotfiles/vim/plugins/vimplug.vim
+source ~/repos/dotfiles/vim/utils/functions.vim
+source ~/repos/dotfiles/vim/config/mappings.vim
+source ~/repos/dotfiles/vim/plugins/lsp.vim
 
 # vim: set ft=vim :

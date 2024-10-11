@@ -138,4 +138,4 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 # " - It automatically executes `filetype plugin indent on` and `syntax enable`
 g:plug#end()
 
-if has('lua') | colorscheme catppuccin | endif
+# if has('lua') | colorscheme catppuccin | endif

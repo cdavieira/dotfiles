@@ -33,7 +33,7 @@ syntax on
 # 'background' and 'colorscheme' operate together to set vim's visuals
 set background=dark
 # onedark, dracula, slate, retrobox, wildcharm, evening, desert, habamax, sorbet
-colorscheme retrobox
+colorscheme wildcharm
 
 # viminfo configuration
 # \" ('"' escaped): max. number of lines saved for each register

@@ -3,6 +3,8 @@
 
 text/plain; vim %s
 text/html; lynx %s
-video/*; mpv %s > /dev/null
-image/*; imv %s > /dev/null
+# video/*; mpv %s > /dev/null
+video/*; mpv %s
+# image/*; imv %s > /dev/null
+image/*; imv %s
 application/pdf; zathura %s

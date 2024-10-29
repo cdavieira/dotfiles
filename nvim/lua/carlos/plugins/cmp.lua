@@ -1,6 +1,6 @@
 -- autocompletion
 
--- https://github.com/goolord/alpha-nvim
+-- https://github.com/hrsh7th/nvim-cmp
 
 return {
 	"hrsh7th/nvim-cmp",

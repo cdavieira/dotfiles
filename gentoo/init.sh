@@ -14,7 +14,7 @@ else
 fi
 
 if test "$1" = "sway"; then
-	dbus-launch sway
+	echo "dbus-launch sway"
 elif test "$1" = "dwl"; then
 	dbus-launch dwl -s ~/repos/dwl/startup.sh
 else

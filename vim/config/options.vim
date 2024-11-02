@@ -30,11 +30,6 @@ packadd editorconfig
 # turn on syntax highlighting for different filetypes
 syntax on
 
-# 'background' and 'colorscheme' operate together to set vim's visuals
-set background=dark
-# onedark, dracula, slate, retrobox, wildcharm, evening, desert, habamax, sorbet
-colorscheme wildcharm
-
 # viminfo configuration
 # \" ('"' escaped): max. number of lines saved for each register
 # ': max. number of previously edited files for which the marks are remembered

@@ -6,5 +6,6 @@ source ~/repos/dotfiles/vim/plugins/vimplug.vim
 source ~/repos/dotfiles/vim/utils/functions.vim
 source ~/repos/dotfiles/vim/config/mappings.vim
 source ~/repos/dotfiles/vim/plugins/lsp.vim
+source ~/repos/dotfiles/vim/config/colorschemes.vim
 
 # vim: set ft=vim :

@@ -118,7 +118,6 @@ Plug 'rhysd/vim-healthcheck'
 
 # https://github.com/morhetz/gruvbox?tab=readme-ov-file
 # Plug 'morhetz/gruvbox'
-# autocmd vimenter * ++nested colorscheme gruvbox
 
 # https://draculatheme.com/vim
 # https://github.com/dracula/dracula-theme
@@ -137,5 +136,3 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 # " Call plug#end to update &runtimepath and initialize the plugin system.
 # " - It automatically executes `filetype plugin indent on` and `syntax enable`
 g:plug#end()
-
-# if has('lua') | colorscheme catppuccin | endif

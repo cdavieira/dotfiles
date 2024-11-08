@@ -26,17 +26,14 @@ window#waybar {
 #temperature,
 #backlight,
 #network,
-#pulseaudio,
 #wireplumber,
-#mode,
-#idle_inhibitor
+#mode
 {
     padding: 0 10px;
     color: #ffffff;
 }
 
-#window,
-#workspaces {
+#window {
     margin: 0 4px;
 }
 
@@ -111,20 +108,6 @@ label:focus {
     background-color: #f53c3c;
 }
 
-#pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
-}
-
-#pulseaudio:hover {
-    background-color: #a37800;
-}
-
-#pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
-}
-
 #wireplumber {
     background-color: #fff0f5;
     color: #000000;
@@ -140,13 +123,4 @@ label:focus {
 
 #temperature.critical {
     background-color: #eb4d4b;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
 }

@@ -116,6 +116,8 @@ Plug 'tpope/vim-fugitive'
 # https://github.com/rhysd/vim-healthcheck
 Plug 'rhysd/vim-healthcheck'
 
+Plug 'lervag/vimtex'
+
 # https://github.com/morhetz/gruvbox?tab=readme-ov-file
 # Plug 'morhetz/gruvbox'
 

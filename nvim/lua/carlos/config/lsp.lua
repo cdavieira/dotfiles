@@ -1,7 +1,7 @@
 Lspconfig = require('lspconfig')
 
 Lspconfig.pylsp.setup {}
-Lspconfig.ts_ls.setup {}
+-- Lspconfig.ts_ls.setup {}
 Lspconfig.lua_ls.setup {}
 Lspconfig.clangd.setup {}
 Lspconfig.rust_analyzer.setup {

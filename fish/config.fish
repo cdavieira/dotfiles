@@ -44,6 +44,10 @@ if status is-interactive
 		set -x PATH $PATH "$HOME/.local/bin"
 	end
 
+	if test -d "/usr/local/texlive/$(date +%Y)/bin/x86_64-linux"
+		set -x PATH $PATH "/usr/local/texlive/$(date +%Y)/bin/x86_64-linux"
+	end
+
 	# set EDITOR env var
 	set editors 'vim' 'nvim' 'less'
 	for editor in $editors
@@ -59,9 +63,12 @@ if status is-interactive
 	end
 
 	# in case qutebrowser is installed, use it as def browser
-	if type -q 'qutebrowser'
-		set -x BROWSER 'qutebrowser'
-	end
+	# if type -q 'qutebrowser'
+	#   # https://github.com/qutebrowser/qutebrowser/blob/main/misc/org.qutebrowser.qutebrowser.desktop
+	# 	# /usr/local/applications/org.qutebrowser.qutebrowser.desktop
+	# 	xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
+	# 	set -x BROWSER 'org.qutebrowser.qutebrowser.desktop'
+	# end
 
 	#######################################
 	############## Aliases ################
@@ -112,10 +119,12 @@ if status is-interactive
 	abbr --add dotdot --position command --regex '^\.\.+$' --function multicd
 
 	# copy the old cd command from fish and enhance it with ls
-	functions -c cd oldcd
-	function cd
-		oldcd $argv
-		ls
+	if ! test (string match oldcd (functions))
+		functions -c cd oldcd
+		function cd
+			oldcd $argv
+			ls
+		end
 	end
 
 else if status is-login

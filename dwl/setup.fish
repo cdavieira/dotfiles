@@ -6,7 +6,6 @@ if test -n "$_flag_h"
 	echo 'dwl_setup.fish [-h/--help] [-c/--config] [-m/--makefile] [-d/--debug]'
 	echo ''
 	echo '-h/--help: show this help message and quit'
-	echo '-b/--branch: create a new branch called "mydwl" and switch to it'
 	echo '-c/--config: create new config header file out of config.def.h'
 	echo '-d/--debug: create a complete config header for debugging purposes'
 	echo '-m/--makefile: create new config makefile out of config.def.mk'
@@ -17,11 +16,6 @@ end
 set dwl_path "$HOME/repos/dwl"
 set dwl_dotfile "$HOME/repos/dotfiles/dwl"
 cd $dwl_path
-
-if test -n "$_flag_b"
-	git branch mydwl
-	git switch mydwl
-end
 
 if test -n "$_flag_c"
 	sed -f $dwl_dotfile/config.sed $dwl_path/config.def.h > $dwl_path/config.h
@@ -40,5 +34,8 @@ if test -n "$_flag_d"
 end
 
 if test -n "$_flag_s"
-	sed '/^Exec=dwl/ c\Exec=dwl -s /home/carlos/dotfiles/dwl/startup.fish' $dwl_path/dwl.desktop > $dwl_path/dwl.desktop.new
+	if ! test -e $dwl_path/dwl.desktop.old
+		mv $dwl_path/dwl.desktop $dwl_path/dwl.desktop.old
+	end
+	sed '/^Exec=dwl/ c\Exec=dwl -s /home/carlos/dotfiles/dwl/startup.fish' $dwl_path/dwl.desktop.old > $dwl_path/dwl.desktop
 end

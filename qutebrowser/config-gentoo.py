@@ -40,8 +40,8 @@ c.zoom.default = 150
 
 #c.url.default_page = "https://start.duckduckgo.com/"
 c.url.searchengines = {
-    "DEFAULT": "https://duckduckgo.com/?q={}",
-    "g": "https://google.com/search?hl=en&q={}",
+    "DEFAULT": "https://google.com/search?hl=en&q={}",
+    "d": "https://duckduckgo.com/?q={}",
     "y": "https://www.youtube.com/results?search_query={}",
     "wi": "https://en.wikipedia.org/wiki/{}",
     "w": "https://wiki.archlinux.org/?search={}",

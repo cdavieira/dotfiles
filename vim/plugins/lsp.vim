@@ -23,7 +23,7 @@ vim9script
 var c_lspinfo = {
 	'name': 'clangd',
 	'cmd': ['clangd', '--background-index'],
-	'allowlist': ['c'],
+	'allowlist': ['c', 'cpp'],
 	'blocklist': [],
 	'config': {},
 	'workspace_config': {}

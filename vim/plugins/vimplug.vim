@@ -36,11 +36,27 @@ g:lsp_preview_autoclose = 1
 g:lsp_diagnostics_enabled = 1
 
 # enable signs like W> and E> for diagnostics messages
-g:lsp_diagnostics_signs_enabled = 1
+g:lsp_diagnostics_signs_enabled = 0
 
 # keep cursor focus on the document rather than on the preview-window when it
 # pops up (ex: when hovering)
 g:lsp_preview_keep_focus = 1
+
+# Enables virtual text to be shown next to diagnostic errors.
+g:lsp_diagnostics_virtual_text_enabled = 1
+
+# Determines the align of the diagnostics virtual text
+g:lsp_diagnostics_virtual_text_align = "above"
+
+# Determines whether or not to wrap the diagnostics virtual text.
+g:lsp_diagnostics_virtual_text_wrap = "wrap"
+
+# A |List| containing one element of type |Funcref|.
+# g:lsp_get_supported_capabilities = [function('lsp#default_get_supported_capabilities')]
+# Note: You can obtain the default supported capabilities of vim-lsp by
+# calling `lsp#default_get_supported_capabilities` from within your function.
+
+# g:lsp_snippet_expand = []
 
 # [experimental] enables workspace capabilities when the lsp supports it by
 # calling the function 'root_uri'.
@@ -49,7 +65,7 @@ g:lsp_preview_keep_focus = 1
 # g:lsp_experimental_workspace_folders = 1
 
 # create a log file to inspect lsp action
-g:lsp_log_file = expand(path.vim_config_dir .. 'vim-lsp.log')
+# g:lsp_log_file = expand(path.vim_config_dir .. 'vim-lsp.log')
 
 # create a log file to inspect async action
 # g:asyncomplete_log_file = expand(vim_config_dir .. 'asyncomplete.log')

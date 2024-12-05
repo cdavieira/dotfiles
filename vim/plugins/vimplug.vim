@@ -38,18 +38,22 @@ g:lsp_diagnostics_enabled = 1
 # enable signs like W> and E> for diagnostics messages
 g:lsp_diagnostics_signs_enabled = 0
 
+# enables a floating window of diagnostic error for the current line to
+# status. Requires lsp_diagnostics_enabled = 1.
+g:lsp_diagnostics_float_cursor = 1
+
 # keep cursor focus on the document rather than on the preview-window when it
 # pops up (ex: when hovering)
-g:lsp_preview_keep_focus = 1
+g:lsp_preview_keep_focus = 0
 
 # Enables virtual text to be shown next to diagnostic errors.
-g:lsp_diagnostics_virtual_text_enabled = 1
+g:lsp_diagnostics_virtual_text_enabled = 0
 
 # Determines the align of the diagnostics virtual text
-g:lsp_diagnostics_virtual_text_align = "above"
+# g:lsp_diagnostics_virtual_text_align = "above"
 
 # Determines whether or not to wrap the diagnostics virtual text.
-g:lsp_diagnostics_virtual_text_wrap = "wrap"
+# g:lsp_diagnostics_virtual_text_wrap = "wrap"
 
 # A |List| containing one element of type |Funcref|.
 # g:lsp_get_supported_capabilities = [function('lsp#default_get_supported_capabilities')]

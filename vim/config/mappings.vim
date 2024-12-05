@@ -5,7 +5,7 @@ nnoremap <Leader>c <Cmd>call g:RotateColor(+1)<CR>
 nnoremap <Leader>v <Cmd>call g:RotateColor(-1)<CR>
 nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
 nnoremap <Leader>f <Cmd>Files<CR>
-nnoremap <Leader>p <Cmd>NERDTreeToggle ~/repos/dotfiles/vim<CR>
+nnoremap <Leader>p <Cmd>edit ~/repos/dotfiles/vim<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>s <Cmd>Rg<CR>
 nnoremap <Leader>w <Cmd>tabnew<CR>

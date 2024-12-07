@@ -1,11 +1,18 @@
 vim9script
 
-source ~/repos/dotfiles/vim/os/unix.vim
-source ~/repos/dotfiles/vim/config/options.vim
-source ~/repos/dotfiles/vim/plugins/vimplug.vim
-source ~/repos/dotfiles/vim/utils/functions.vim
-source ~/repos/dotfiles/vim/config/mappings.vim
-source ~/repos/dotfiles/vim/plugins/lsp.vim
-source ~/repos/dotfiles/vim/config/colorschemes.vim
+import '~/repos/dotfiles/vim/config/path.vim'
+
+import path.CUSTOM_OPTIONS
+options.Setup()
+
+import path.PLUGIN_VIMPLUG
+
+import path.CUSTOM_MAPPINGS
+mappings.Setup()
+
+import path.PLUGIN_VIMLSP
+
+import path.CUSTOM_COLORSCHEMES
+colorschemes.SetDefault()
 
 # vim: set ft=vim :

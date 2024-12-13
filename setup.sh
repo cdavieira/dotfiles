@@ -1,36 +1,130 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# basic folder structure at $HOME
-mkdir ~/temp ~/persistent ~/repos ~/
-mkdir ~/.config/{,vim,fish,kitty,tmux,waybar,qutebrowser}
-mkdir ~/.cache/vim/{,backup,swap,undo}
+prefix=$HOME
+reposdir=$prefix/repos
+xdgconfigdir=$prefix/.config
 
-# cloning git repos
-git clone https://codeberg.org/dwl/dwl.git ~/repos
-git clone https://github.com/cdavieira/notes.git ~/repos
-git clone https://github.com/cdavieira/code.git ~/repos
+create_folders(){
+	# creating home folders
+	cd $prefix
+	mkdir tmp save repos books german vids
 
-# creating symlinks
-ln -s ~/repos/dotfiles/mailcap/mailcap ~/.mailcap
-ln -s ~/repos/dotfiles/nvim/ ~/.config
-ln -sf ~/repos/dotfiles/fish/config.fish ~/.config/fish
-ln -sf ~/repos/dotfiles/tmux/tmux.conf ~/.config/tmux
-ln -sf ~/repos/dotfiles/vim/vimrc ~/.config/vim
-ln -sf ~/repos/dotfiles/waybar/config.jsonc ~/.config/waybar
-ln -sf ~/repos/dotfiles/waybar/style.css ~/.config/waybar
-## arch/gentoo specific
-ln -sf ~/repos/dotfiles/kitty/kitty.conf ~/.config/kitty
-ln -sf ~/repos/dotfiles/qutebrowser/config.py ~/.config/qutebrowser
-ln -s ~/repos/dotfiles/gentoo/init.sh ~
+	# creating $prefix/.config folders
+	mkdir .config/{,vim,fish,kitty,tmux,waybar,qutebrowser}
 
-# building custom dynamic libraries
-make -C '~/repos/code/c/projects/types/wldraw/'
-make -C '~/repos/code/c/projects/types/rational'
-make -C '~/repos/code/c/projects/types/stringUtils'
-make -C '~/repos/code/c/projects/types/sort'
-make -C '~/repos/code/c/projects/types/containers'
-make -C '~/repos/code/c/projects/types/wldraw/' 'local'
-make -C '~/repos/code/c/projects/types/rational' 'local'
-make -C '~/repos/code/c/projects/types/stringUtils' 'local'
-make -C '~/repos/code/c/projects/types/sort' 'local'
-make -C '~/repos/code/c/projects/types/containers' 'local'
+	# creating $prefix/.cache folders
+	mkdir .cache/vim/{,backup,swap,undo}
+}
+
+clone_repos(){
+	git clone https://codeberg.org/dwl/dwl.git ${reposdir}
+	git clone https://github.com/cdavieira/dotfiles.git ${reposdir}
+	git clone https://github.com/cdavieira/notes.git ${reposdir}
+	git clone https://github.com/cdavieira/code.git ${reposdir}
+}
+
+# $1 current OS
+make_links(){
+	ln -sf ${reposdir}/dotfiles/fish/config.fish ${xdgconfigdir}/fish
+	ln -sf ${reposdir}/dotfiles/vim/vimrc ${xdgconfigdir}/vim
+	ln -s ${reposdir}/dotfiles/nvim/ ${xdgconfigdir}
+	ln -sf ${reposdir}/dotfiles/tmux/tmux.conf ${xdgconfigdir}/tmux
+	ln -s ${reposdir}/dotfiles/mailcap/mailcap ~/.mailcap
+	ln -sf ${reposdir}/dotfiles/waybar/config.jsonc ${xdgconfigdir}/waybar
+	ln -sf ${reposdir}/dotfiles/waybar/style.css ${xdgconfigdir}/waybar
+	case $1 in
+		'archlinux')
+			ln -sf ${reposdir}/dotfiles/kitty/kitty.conf ${xdgconfigdir}/kitty
+			ln -sf ${reposdir}/dotfiles/qutebrowser/config.py ${xdgconfigdir}/qutebrowser
+			;;
+		'gentoo')
+			ln -sf ${reposdir}/dotfiles/kitty/kitty-gentoo.conf ${xdgconfigdir}/kitty
+			ln -sf ${reposdir}/dotfiles/qutebrowser/config-gentoo.py ${xdgconfigdir}/qutebrowser
+			ln -s ${reposdir}/dotfiles/gentoo/init.sh ~
+			;;
+		*) ;;
+	esac
+}
+
+make_dyn_libs(){
+	local rootdir="${reposdir}/code/c/projects/types"
+	if ! test -d "$rootdir"; then
+		echo "Skip: missing 'code' repo when building dynamic libraries"
+		return
+	fi
+
+	for dirname in 'wldraw' 'rational' 'stringUtils' 'sort' 'containers'; do
+		make -C ${rootdir}/${dirname}
+	done
+	for dirname in 'wldraw' 'rational' 'stringUtils' 'sort' 'containers'; do
+		make -C ${rootdir}/${dirname} 'local'
+	done
+}
+
+#################################
+#################################
+#################################
+
+echo "Welcome to my setup script!"
+echo "This setup script is meant to be used right after the installation of either: ArchLinux, Gentoo or another OS of my likings"
+echo "Inform which distribution you are on right now:"
+
+select linuxdistro in archlinux gentoo; do
+	break
+done
+
+echo "Distribution selected: ${linuxdistro}. Is that right? [y/N]"
+read confirmation
+if ! test "${confirmation}" = "y"; then
+	echo "Exiting from setup script..."
+	exit
+fi
+
+echo "Would you like to create folders in $prefix? [y/N]"
+read yes_create_folders
+if ! test "${yes_create_folders}" = "y"; then
+	yes_create_folders="n"
+fi
+
+echo "Would you like to clone repos to $prefix/repos? [y/N]"
+read yes_clone_repos
+if ! test "${yes_clone_repos}" = "y"; then
+	yes_clone_repos="n"
+fi
+
+echo "Would you like to create links to $prefix/.config? [y/N]"
+read yes_make_links
+if ! test "${yes_make_links}" = "y"; then
+	yes_make_links="n"
+fi
+
+echo "Would you like to create all custom dynamic libraries? [y/N]"
+read yes_make_dyn_libs
+if ! test "${yes_make_dyn_libs}" = "y"; then
+	yes_make_dyn_libs="n"
+fi
+
+##############################
+##############################
+##############################
+
+if test ${yes_create_folders} = "y"; then
+	echo "Creating folders..."
+	#create_folders
+	echo "Ok"
+fi
+if test ${yes_clone_repos} = "y"; then
+	echo "Cloning repos..."
+	#clone_repos
+	echo "Ok"
+fi
+if test ${yes_make_links} = "y"; then
+	echo "Creating symlinks for ${linuxdistro}..."
+	#make_links ${linuxdistro} 
+	echo "Ok"
+fi
+if test ${yes_make_dyn_libs} = "y"; then
+	echo "Creating dynamic libs..."
+	#make_dyn_libs
+	echo "Ok"
+fi

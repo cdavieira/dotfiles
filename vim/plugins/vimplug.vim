@@ -18,7 +18,6 @@ g:maplocalleader = ","
 g:ft_man_open_mode = 'tab'
 
 
-
 # SetPluginVariables()
 # disallow NERDTree extension from creating unwanted mappings
 g:NERDCreateDefaultMappings = 0

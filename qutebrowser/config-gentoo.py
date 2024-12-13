@@ -16,7 +16,7 @@ c.colors.webpage.darkmode.enabled = False
 c.content.autoplay = False
 c.content.images = True
 
-c.downloads.location.directory = "~/temp/"
+c.downloads.location.directory = "~/tmp/"
 
 c.editor.command = ["kitty", "--config", "/home/carlos/.config/kitty/kitty.conf", "-c", "\"bash", "vim", '{}']
 

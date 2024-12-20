@@ -1,0 +1,3 @@
+# required by x11-base/xwayland-24.1.2::gentoo
+# required by xwayland (argument)
+>=media-libs/libepoxy-1.5.10-r3 X

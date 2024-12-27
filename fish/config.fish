@@ -49,7 +49,7 @@ if status is-interactive
 	end
 
 	# set EDITOR env var
-	set editors 'vim' 'nvim' 'less'
+	set editors 'nvim' 'vim' 'less'
 	for editor in $editors
 		if type -q $editor
 			set -x EDITOR "$editor"
@@ -85,14 +85,14 @@ if status is-interactive
 	# end
 
 	alias view 'vim -R'
-
 	alias dmesg 'dmesg -H'
-
 	alias info 'info --vi-keys'
 
 	# in case lynx is installed, override its default cfg file with ours
 	if type -q 'lynx'
-		alias lynx 'lynx -cfg=~/repos/dotfiles/lynx/lynx.cfg'
+		if test -e ~/repos/dotfiles/lynx/lynx.cfg
+			alias lynx 'lynx -cfg=~/repos/dotfiles/lynx/lynx.cfg'
+		end
 	end
 
 
@@ -102,11 +102,17 @@ if status is-interactive
 
 	# save some typing
 	# for folder in dotfiles notes code
-	# 	if test -d $HOME/$folder
+	# 	if test -d $HOME/repos/$folder
 	# 		set -l shortname $(string sub --start 1 --end 2 $folder) 
 	# 		abbr -a $shortname cd $HOME/$folder
 	# 	end
 	# end
+
+	if type -q nvim
+		alias vim nvim
+	end
+	abbr dc cd
+	abbr sl ls
 
 	#######################################
 	############# Functions ###############

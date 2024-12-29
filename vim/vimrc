@@ -1,18 +1,146 @@
 vim9script
 
-import '~/repos/dotfiles/vim/config/path.vim'
 
-import path.CUSTOM_OPTIONS
-options.Setup()
+# vim related
+# the path to the directory where vim expects to find your 'vimrc' file
+var vim_config_dir: string
+# the path to the directory where vim will store '~', '.un' and '.swp' files
+var vim_cache_dir: string
 
-import path.PLUGIN_VIMPLUG
+# plugin manager related
+# the path to the file 'vimplug.vim'
+var vimplug_autoload_file: string
+# the path to the directory where vimplug will download plugins
+var vimplug_dir: string
 
-import path.CUSTOM_MAPPINGS
-mappings.Setup()
+# mine
+# the path to the root directory where my custom '.vim' files can be found
+var my_vim_files: string
+# the path to my 'colorschemes.vim' file
+var my_colorschemes: string
+# the path to my 'options.vim' file
+var my_options: string
+# the path to my 'vimlsp.vim' file
+var my_vimlsp: string
+# the path to my 'vimplug.vim' file
+var my_vimplug: string
 
-import path.PLUGIN_VIMLSP
 
-import path.CUSTOM_COLORSCHEMES
+# Doing OS-specific stuff
+if has('win64')
+	# Windows
+	# run this in an elevated shell:
+	# New-Item -ItemType SymbolicLink -Target C:\Users\cd_vi\dotfiles\vim\win_vimrc -Path C:\Users\cd_vi\vimfiles\vimrc
+
+	vim_config_dir = $HOME .. '\vimfiles\'
+	vim_cache_dir  = vim_config_dir .. 'cache\'
+	vimplug_autoload_file = vim_config_dir .. 'autoload\plug.vim'
+	vimplug_dir          = vim_config_dir .. 'vim-plug'
+	my_vim_files = $HOME .. '\dotfiles\vim'
+	my_colorschemes = my_vim_files .. '\config\colorschemes.vim'
+	my_options      = my_vim_files .. '\config\options.vim'
+	my_vimlsp       = my_vim_files .. '\plugins\vimlsp.vim'
+	my_vimplug      = my_vim_files .. '\plugins\vimplug.vim'
+
+	# folder to store '~' files
+	set backupdir=$HOME\vimfiles\cache\backup
+
+	# folder to store '.swp' files
+	set directory=$HOME\vimfiles\cache\swap
+
+	# folder to store '.un' files
+	set undodir=$HOME\vimfiles\cache\undo
+
+	# folder to store 'viminfo' (save session information upon quitting)
+	set viminfofile=$HOME\vimfiles\viminfo
+
+	# choose the desired command to use in conjunction with 'K'
+	set keywordprg=:help
+
+	# user shell
+	set shell=pwsh
+	set shellcmdflag=-Command
+
+	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
+	if empty(glob(vimplug_autoload_file))
+		silent echo system('iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_file .. ' -Force')
+		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	endif
+else
+	# Linux
+
+	vim_config_dir = '~/.config/vim/'
+	vim_cache_dir  = '~/.cache/vim/'
+	vimplug_autoload_file = vim_config_dir .. 'autoload/plug.vim'
+	vimplug_dir          = vim_config_dir .. 'vim-plug'
+	my_vim_files    = '~/repos/dotfiles/vim'
+	my_colorschemes = my_vim_files .. '/config/colorschemes.vim'
+	my_options      = my_vim_files .. '/config/options.vim'
+	my_vimlsp       = my_vim_files .. '/plugins/vimlsp.vim'
+	my_vimplug      = my_vim_files .. '/plugins/vimplug.vim'
+
+	# folder to store '~' files
+	set backupdir=~/.cache/vim/backup/
+
+	# folder to store '.swp' files
+	set directory=~/.cache/vim/swap/
+
+	# folder to store '.un' files
+	set undodir=~/.cache/vim/undo/
+
+	# folder to store 'viminfo' (save session information upon quitting)
+	set viminfofile=~/.cache/vim/viminfo
+
+	# choose the desired command to use in conjunction with 'K'
+	set keywordprg=:Man
+
+	# user shell
+	set shell=/bin/bash
+	set shellcmdflag=-c
+
+	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
+	if empty(glob(vimplug_autoload_file))
+		execute '!curl -fLo ' .. vimplug_autoload_file .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	endif
+endif
+
+# Loading vim options
+import my_options
+options.SetOSAgnosticOptions(vim_cache_dir)
+
+# Loading the best plugin manager ever
+import my_vimplug
+vimplug.SetNERDVariables()
+vimplug.SetVimLSPVariables()
+vimplug.SetAsyncVariables()
+vimplug.LoadVimPlug(vimplug_dir)
+
+# Loading colorschemes
+# This step must be done after loading the plugin manager, as some colorschemes
+# might have been installed/configured with it
+import my_colorschemes
 colorschemes.SetDefault()
+
+# Loading the best language server ever
+# No configuration is actually required
+import my_vimlsp
+
+# Creating custom mappings
+# Instead of creating these mappings in a separate file, i decided to create
+# them here. Assuming all other modules would have been already imported at
+# this point, creating mappings here seems logical, as these can then call any
+# function from any vim module. Indeed very convenient!
+nnoremap <Leader>b <Cmd>Buffers<CR>
+#nnoremap <Leader>c <Cmd>vim9 g:RotateColor(+1)<CR>
+nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(+1)<CR>
+nnoremap <Leader>v <ScriptCmd>colorschemes.Rotate(-1)<CR>
+nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
+nnoremap <Leader>f <Cmd>Files<CR>
+nnoremap <Leader>p <Cmd>edit ~/repos/dotfiles/vim<CR>
+nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
+nnoremap <Leader>s <Cmd>Rg<CR>
+tnoremap <C-D> <C-W><C-C>
+#inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
 
 # vim: set ft=vim :

@@ -95,6 +95,10 @@ if status is-interactive
 		end
 	end
 
+	# if type -q nvim
+	# 	alias vim nvim
+	# end
+
 
 	#######################################
 	########### Abbreviations #############
@@ -108,9 +112,6 @@ if status is-interactive
 	# 	end
 	# end
 
-	if type -q nvim
-		alias vim nvim
-	end
 	abbr dc cd
 	abbr sl ls
 

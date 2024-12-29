@@ -1,28 +1,11 @@
 vim9script
 
-# these variables are assigned either by 'UnixSpecifics' or 'WindowsSpecifics'.
-# once set, these will be used by 'SetOSAgnosticOptions'.
-var vim_config_dir: string
-var vim_cache_dir: string
-var vimplug_autoload_dir: string
-export var vimplug_dir: string
+type Dirpath = string
 
-
-export def Setup(): void
-	if has('win64')
-		LoadWindowsSpecifics()
-	else
-		LoadUnixSpecifics()
-	endif
-	SetOSAgnosticOptions()
-enddef
-
-
-
-def SetOSAgnosticOptions(): void
+export def SetOSAgnosticOptions(cache: Dirpath): void
 	# create additional folders used to store '~', ''.un' and '.swp' files
 	for folder in ['backup', 'swap', 'undo']
-		var folderpath = vim_cache_dir .. folder
+		var folderpath = cache .. folder
 		if empty(glob(folderpath))
 			mkdir(folderpath, 'p')
 		endif
@@ -103,77 +86,4 @@ def SetOSAgnosticOptions(): void
 	# enhance commandline completion operation, by enabling 'wildchar' to invoke
 	# completion
 	set wildmenu
-enddef
-
-
-
-def LoadUnixSpecifics(): void
-	vim_config_dir = '~/.config/vim/'
-	vim_cache_dir = '~/.cache/vim/'
-	vimplug_autoload_dir = vim_config_dir .. 'autoload/plug.vim'
-	vimplug_dir = vim_config_dir .. 'vim-plug'
-
-	# folder to store '~' files
-	set backupdir=~/.cache/vim/backup/
-
-	# folder to store '.swp' files
-	set directory=~/.cache/vim/swap/
-
-	# folder to store '.un' files
-	set undodir=~/.cache/vim/undo/
-
-	# folder to store 'viminfo' (save session information upon quitting)
-	set viminfofile=~/.cache/vim/viminfo
-
-	# choose the desired command to use in conjunction with 'K'
-	set keywordprg=:Man
-
-	# user shell
-	# set shell=/usr/bin/fish
-	set shell=/bin/bash
-	set shellcmdflag=-c
-
-	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
-	if empty(glob(vimplug_autoload_dir))
-		execute '!curl -fLo ' .. vimplug_autoload_dir .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-	endif
-enddef
-
-
-
-def LoadWindowsSpecifics(): void
-	# run this in an elevated shell:
-	# New-Item -ItemType SymbolicLink -Target C:\Users\cd_vi\dotfiles\vim\win_vimrc -Path C:\Users\cd_vi\vimfiles\vimrc
-	# read ':help gui_w32.txt' for more information about using vim in windows
-
-	vim_config_dir = $USERPROFILE .. '\vimfiles\'
-	vim_cache_dir = vim_config_dir .. 'cache\'
-	vimplug_autoload_dir = vim_config_dir .. 'autoload\plug.vim'
-	vimplug_dir = vim_config_dir .. 'vim-plug'
-
-	# folder to store '~' files
-	set backupdir=$USERPROFILE\vimfiles\cache\backup
-
-	# folder to store '.swp' files
-	set directory=$USERPROFILE\vimfiles\cache\swap
-
-	# folder to store '.un' files
-	set undodir=$USERPROFILE\vimfiles\cache\undo
-
-	# folder to store 'viminfo' (save session information upon quitting)
-	set viminfofile=$USERPROFILE\vimfiles\viminfo
-
-	# choose the desired command to use in conjunction with 'K'
-	set keywordprg=:help
-
-	# user shell
-	set shell=pwsh
-	set shellcmdflag=-Command
-
-	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
-	if empty(glob(vimplug_autoload_dir))
-		silent echo system('iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_dir .. ' -Force')
-		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-	endif
 enddef

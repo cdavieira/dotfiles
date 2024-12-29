@@ -5,9 +5,10 @@ export def SetDefault(): void
 	set background=dark
 
 	# Plugins
-	colorscheme dracula
+	# colorscheme dracula
+	colorscheme onedark
+
 	# if has('lua') | colorscheme catppuccin | endif
-	# colorscheme onedark
 	# autocmd vimenter * ++nested colorscheme gruvbox
 
 	# Builtin
@@ -53,7 +54,7 @@ export def Rotate(increment: number): void
 			next_idx = size + next_idx
 		endif
 
-		next_colorscheme = next_idx >= size ? colors[0] : colors[next_idx]
+		next_colorscheme = colors[next_idx]
 		next_colorscheme_relpath = 'colors/' .. next_colorscheme .. '.vim'
 		tries += 1
 	endwhile

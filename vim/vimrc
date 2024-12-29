@@ -113,7 +113,6 @@ options.SetOSAgnosticOptions(vim_cache_dir)
 import my_vimplug
 vimplug.SetNERDVariables()
 vimplug.SetVimLSPVariables()
-vimplug.SetAsyncVariables()
 vimplug.LoadVimPlug(vimplug_dir)
 
 # Loading colorschemes
@@ -131,6 +130,8 @@ import my_vimlsp
 # them here. Assuming all other modules would have been already imported at
 # this point, creating mappings here seems logical, as these can then call any
 # function from any vim module. Indeed very convenient!
+tnoremap <C-D> <C-W><C-C>
+#inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
 nnoremap <Leader>b <Cmd>Buffers<CR>
 #nnoremap <Leader>c <Cmd>vim9 g:RotateColor(+1)<CR>
 nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(+1)<CR>
@@ -140,7 +141,19 @@ nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>p <Cmd>edit ~/repos/dotfiles/vim<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>s <Cmd>Rg<CR>
-tnoremap <C-D> <C-W><C-C>
-#inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
+# Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+# Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+# Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+# Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+xmap        s   <Plug>(vsnip-select-text)
+xmap        S   <Plug>(vsnip-cut-text)
+
 
 # vim: set ft=vim :

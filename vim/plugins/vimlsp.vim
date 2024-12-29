@@ -18,8 +18,8 @@ vim9script
 ######## STEP 1 ########
 ########################
 # this dictionary also accepts the keys:
-# 'root_uri', 'capabilities', 'initialization_options'
-# you can check this by reading '~/.config/vim/autoload/lsp.vim#s:ensure_init'
+# 'root_uri' (a string), 'capabilities', 'initialization_options'
+# you can check this by reading '~/.config/vim/vim-plug/vim-lsp/autoload/lsp.vim'
 var c_lspinfo = {
 	'name': 'clangd',
 	'cmd': ['clangd', '--background-index'],
@@ -64,6 +64,18 @@ var vim_lsp_info = {
 	'config': {},
 	'workspace_config': {}
 }
+var ts_lsp_info = {
+	'name': 'typescript-language-server',
+	'cmd': 'typescript-language-server --stdio',
+	'root_uri': (server_info) => lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json')),
+	'whitelist': ['typescript', 'typescript.tsx', 'typescriptreact']
+}
+var js_lsp_info = {
+	'name': 'javascript support using typescript-language-server',
+	'cmd': (server_info) => [&shell, &shellcmdflag, 'typescript-language-server --stdio'],
+	'root_uri': (server_info) => lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json')),
+	'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact']
+}
 
 ########################
 ######## STEP 2 ########
@@ -82,6 +94,10 @@ if executable('rust-analyzer')
 endif
 if executable('vim-language-server')
 	au User lsp_setup lsp#register_server(vim_lsp_info)
+endif
+if executable('tsserver')
+	au User lsp_setup lsp#register_server(ts_lsp_info)
+	au User lsp_setup lsp#register_server(js_lsp_info)
 endif
 
 ########################

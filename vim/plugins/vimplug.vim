@@ -23,6 +23,7 @@ export def SetNERDVariables()
 enddef
 
 export def SetVimLSPVariables()
+	### vimlsp
 	# abort `:LspDocumentFormatSync` or `:LspDocumentRangeFormatSync` after 1000ms
 	# g:lsp_format_sync_timeout = 1000
 
@@ -85,74 +86,33 @@ export def SetVimLSPVariables()
 
 	# create a log file to inspect lsp action
 	# g:lsp_log_file = expand(path.vim_config_dir .. 'vim-lsp.log')
-enddef
 
-export def SetAsyncVariables()
+
+	### Asyncomplete
 	# create a log file to inspect async action
 	# g:asyncomplete_log_file = expand(path.vim_config_dir .. 'asyncomplete.log')
+enddef
+
+def SetALEVariables()
+	g:ale_fixers = {
+		'*': ['remove_trailing_lines', 'trim_whitespace'],
+		'javascript': ['eslint'],
+	}
 enddef
 
 export def LoadVimPlug(vimplug_dir: Dirpath)
 	g:plug#begin(vimplug_dir)
 
-	# https://github.com/preservim/nerdtree
-	legacy Plug 'preservim/nerdtree'
+	# If one day i start feeling too lazy with configuring vim myself,
+	# i will just use the following plugin:
+	# https://github.com/wolandark/wim
 
-	# https://github.com/ryanoasis/vim-devicons
-	legacy Plug 'ryanoasis/vim-devicons'
 
-	# https://github.com/tpope/vim-surround
-	# Plug 'tpope/vim-surround'
 
-	# https://github.com/tpope/vim-endwise
-	legacy Plug 'tpope/vim-endwise'
-
-	# https://github.com/junegunn/fzf.vim
-	# 'do' is used for plugins that require extra steps after installation/update
-	# fzf (yes, the cmdline binary) get's installed first and then its vim plugin
-	legacy Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-	legacy Plug 'junegunn/fzf.vim'
-
-	# https://github.com/prabirshrestha/vim-lsp
-	legacy Plug 'prabirshrestha/vim-lsp'
-
-	# https://github.com/prabirshrestha/asyncomplete.vim
-	legacy Plug 'prabirshrestha/asyncomplete.vim'
-
-	# https://github.com/prabirshrestha/asyncomplete-lsp.vim
-	legacy Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
-	# https://github.com/preservim/nerdcommenter
-	legacy Plug 'preservim/nerdcommenter'
-
-	# https://github.com/itchyny/lightline.vim
-	# legacy Plug 'itchyny/lightline.vim'
-
-	# https://github.com/vim-airline/vim-airline
-	legacy Plug 'vim-airline/vim-airline'
-
-	# https://github.com/vim-airline/vim-airline-themes#vim-airline-themes--
-	legacy Plug 'vim-airline/vim-airline-themes'
-
-	# https://github.com/mbbill/undotree
-	# legacy Plug 'mbbill/undotree'
-
-	# https://github.com/tpope/vim-fugitive
-	legacy Plug 'tpope/vim-fugitive'
-
-	# https://github.com/preservim/tagbar?tab=readme-ov-file
-	# legacy Plug 'preservim/tagbar'
-
-	# https://github.com/preservim/vim-markdown
-	# legacy Plug 'godlygeek/tabular'
-	# legacy Plug 'preservim/vim-markdown'
-
-	# https://github.com/rhysd/vim-healthcheck
-	legacy Plug 'rhysd/vim-healthcheck'
-
-	legacy Plug 'lervag/vimtex'
-
-	# https://github.com/morhetz/gruvbox?tab=readme-ov-file
+	###############
+	#### THEMES ###
+	###############
+	# https://github.com/morhetz/gruvbox
 	# legacy Plug 'morhetz/gruvbox'
 
 	# https://draculatheme.com/vim
@@ -168,6 +128,222 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 	# other themes:
 	# https://github.com/rafi/awesome-vim-colorschemes
 	# https://github.com/sainnhe/sonokai
+
+
+
+	###############################
+	##### FILESYSTEM EXPLORER #####
+	###############################
+	# https://github.com/preservim/nerdtree
+	legacy Plug 'preservim/nerdtree'
+
+	### unicode icons for the explorer
+	# https://github.com/ryanoasis/vim-devicons
+	legacy Plug 'ryanoasis/vim-devicons'
+
+
+
+	###############################
+	##### FILE/SYMBOL SEARCH ######
+	###############################
+	# https://github.com/junegunn/fzf.vim
+	# 'do' is used for plugins that require extra steps after installation/update
+	# fzf (yes, the cmdline binary) get's installed first and then its vim plugin
+	legacy Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	legacy Plug 'junegunn/fzf.vim'
+
+
+
+	######################
+	####### LSP ##########
+	######################
+	### The best lsp ever
+	# https://github.com/prabirshrestha/vim-lsp
+	legacy Plug 'prabirshrestha/vim-lsp'
+
+	# https://github.com/mattn/vim-lsp-settings
+	# legacy Plug 'mattn/vim-lsp-settings'
+
+	### Autocompletion
+	# https://github.com/prabirshrestha/asyncomplete.vim
+	legacy Plug 'prabirshrestha/asyncomplete.vim'
+	# https://github.com/prabirshrestha/asyncomplete-lsp.vim
+	legacy Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+	### Snippers
+	# vim-vsnip integrates with 'vimlsp'
+	# https://github.com/hrsh7th/vim-vsnip
+	legacy Plug 'hrsh7th/vim-vsnip'
+	# https://github.com/hrsh7th/vim-vsnip-integ
+	legacy Plug 'hrsh7th/vim-vsnip-integ'
+	# https://github.com/rafamadriz/friendly-snippets
+	legacy Plug 'rafamadriz/friendly-snippets'
+
+	# ultisnips integrates with 'asyncomplete'
+	# if has('python3')
+	# 		# https://github.com/SirVer/ultisnips
+	# 		Plug 'SirVer/ultisnips'
+	# 		# https://github.com/honza/vim-snippets
+	# 		Plug 'honza/vim-snippets'
+	# 		# https://github.com/prabirshrestha/asyncomplete-ultisnips.vim
+	# 		Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+	# endif
+
+	### Autoimport
+	# See vimlsp
+
+
+
+	#######################
+	####### LINTING #######
+	#######################
+	# WARNING: ALE does not work as a source to asyncomplete by default, only
+	# with the 'asyncomplete-ale' plugin bridge.
+	# ALE brings linting to vim by bridging external linters to the editor.
+	# ALE can work as a language server client (similar to vim-lsp) and also
+	# display warnings/errors coming from language servers but it does not
+	# provide sources to asyncomplete (by default).
+	# With that in mind, ALE and vimlsp work separately and might even clash
+	# when displaying error messages. This can be surpassed by disabling the
+	# ALE's capabilities associated with language servers and letting only
+	# 'vimlsp' receive information coming from language servers.
+
+	# https://github.com/dense-analysis/ale
+	# g:ale_disable_lsp = 1
+	# legacy Plug 'dense-analysis/ale'
+	# https://github.com/rhysd/vim-lsp-ale
+	# legacy Plug 'rhysd/vim-lsp-ale'
+	# https://github.com/andreypopp/asyncomplete-ale.vim
+	# legacy Plug 'andreypopp/asyncomplete-ale.vim'
+
+
+
+	#########################
+	####### FORMATTER #######
+	#########################
+	# See ALE
+
+
+
+	########################
+	#### COMMENT TOGGLE ####
+	########################
+	# https://github.com/preservim/nerdcommenter
+	# legacy Plug 'preservim/nerdcommenter'
+
+
+
+	##########################
+	#### AUTOMATIC TYPING ####
+	##########################
+	# https://github.com/tpope/vim-surround
+	# Plug 'tpope/vim-surround'
+
+	# https://github.com/tpope/vim-endwise
+	legacy Plug 'tpope/vim-endwise'
+
+
+
+	###########################
+	##### GIT INTEGRATION #####
+	###########################
+	# https://github.com/tpope/vim-fugitive
+	# legacy Plug 'tpope/vim-fugitive'
+
+	# https://github.com/junegunn/gv.vim
+	# legacy Plug 'junegunn/gv.vim'
+
+
+
+	#################
+	##### LP/ML #####
+	#################
+	### Rust
+	# https://github.com/rust-lang/rust.vim
+	# legacy Plug 'rust-lang/rust.vim'
+
+	### Markdown
+	# https://github.com/preservim/vim-markdown
+	# legacy Plug 'godlygeek/tabular'
+	# legacy Plug 'preservim/vim-markdown'
+	
+	# https://github.com/mzlogin/vim-markdown-toc
+	legacy Plug 'mzlogin/vim-markdown-toc'
+
+	### HTML
+	# https://github.com/alvan/vim-closetag
+	legacy Plug 'alvan/vim-closetag'
+	
+	### CSS
+	# https://github.com/ap/vim-css-color
+	legacy Plug 'ap/vim-css-color'
+
+	### Latex
+	# https://github.com/lervag/vimtex
+	# legacy Plug 'lervag/vimtex'
+
+
+
+	########################
+	###### STATUS BAR ######
+	########################
+	# https://github.com/itchyny/lightline.vim
+	# legacy Plug 'itchyny/lightline.vim'
+
+	# https://github.com/vim-airline/vim-airline
+	legacy Plug 'vim-airline/vim-airline'
+
+	# https://github.com/vim-airline/vim-airline-themes#vim-airline-themes--
+	legacy Plug 'vim-airline/vim-airline-themes'
+
+
+
+	################
+	##### MISC #####
+	################
+	# https://github.com/mhinz/vim-startify.git
+	# legacy Plug 'mhinz/vim-startify'
+
+	# https://github.com/preservim/tagbar
+	# legacy Plug 'preservim/tagbar'
+
+	# https://github.com/mbbill/undotree
+	# legacy Plug 'mbbill/undotree'
+
+	# https://github.com/rhysd/vim-healthcheck
+	# legacy Plug 'rhysd/vim-healthcheck'
+	
+	# https://github.com/wolandark/vim-live-server
+	# legacy Plug 'wolandark/vim-live-server'
+	
+	# The ollama installation script considers a system which uses systemd as
+	# the init system and that has a GPU. In my case, i don't use systemd and
+	# neither use a GPU (i have one, but i don't have its driver installed)
+	# https://github.com/ollama/ollama
+	# https://github.com/gergap/vim-ollama
+	# legacy Plug 'https://github.com/gergap/vim-ollama'
+	
+
+
+	##################################
+	#### PLUGINS I WOULDN'T USE,  ####
+	#### BUT WHICH ARE KINDA COOL ####
+	##################################
+	# Autocompletion alternative to asyncomplete:
+	# Arguably more robust then asyncomplete
+	# Written in python
+	# https://github.com/Shougo/deoplete.nvim
+	
+	# Replacement for deoplete (it won't be developed anymore)
+	# Written in typescript
+	# https://github.com/Shougo/ddc.vim
+	
+	# LSP alternative to vimlsp
+	# Also provides automatic language server download
+	# Written in typescript
+	# https://github.com/neoclide/coc.nvim
+
+
 
 	# " Call plug#end to update &runtimepath and initialize the plugin system.
 	# " - It automatically executes `filetype plugin indent on` and `syntax enable`

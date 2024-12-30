@@ -17,12 +17,12 @@ g:maplocalleader = ","
 g:ft_man_open_mode = 'tab'
 
 
-export def SetNERDVariables()
+export def SetupNerdtree()
 	# disallow NERDTree extension from creating unwanted mappings
 	g:NERDCreateDefaultMappings = 0
 enddef
 
-export def SetVimLSPVariables()
+export def SetupVimlsp()
 	### vimlsp
 	# abort `:LspDocumentFormatSync` or `:LspDocumentRangeFormatSync` after 1000ms
 	# g:lsp_format_sync_timeout = 1000
@@ -93,14 +93,24 @@ export def SetVimLSPVariables()
 	# g:asyncomplete_log_file = expand(path.vim_config_dir .. 'asyncomplete.log')
 enddef
 
-def SetALEVariables()
+export def SetupAle()
+	g:ale_disable_lsp = 1
 	g:ale_fixers = {
 		'*': ['remove_trailing_lines', 'trim_whitespace'],
 		'javascript': ['eslint'],
 	}
 enddef
 
-export def LoadVimPlug(vimplug_dir: Dirpath)
+export def SetupOllama()
+	g:ollama_enabled = 0
+	g:ollama_chat_model = 'llama3.2:latest'
+	g:ollama_model = 'codellama:latest'
+	g:ollama_fim_prefix = '<|fim_prefix|>'
+	g:ollama_fim_middle = '<|fim_middle|>'
+	g:ollama_fim_suffix = '<|fim_suffix|>'
+enddef
+
+export def SetupVimPlug(vimplug_dir: Dirpath)
 	g:plug#begin(vimplug_dir)
 
 	# If one day i start feeling too lazy with configuring vim myself,
@@ -161,6 +171,7 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 	# https://github.com/prabirshrestha/vim-lsp
 	legacy Plug 'prabirshrestha/vim-lsp'
 
+	### Automatic language server download/configuration for vimlsp
 	# https://github.com/mattn/vim-lsp-settings
 	# legacy Plug 'mattn/vim-lsp-settings'
 
@@ -204,12 +215,10 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 	# display warnings/errors coming from language servers but it does not
 	# provide sources to asyncomplete (by default).
 	# With that in mind, ALE and vimlsp work separately and might even clash
-	# when displaying error messages. This can be surpassed by disabling the
-	# ALE's capabilities associated with language servers and letting only
-	# 'vimlsp' receive information coming from language servers.
-
+	# when displaying error messages. This can be surpassed by disabling ALE's
+	# capabilities associated with language servers and letting only 'vimlsp'
+	# receive information coming from language servers.
 	# https://github.com/dense-analysis/ale
-	# g:ale_disable_lsp = 1
 	# legacy Plug 'dense-analysis/ale'
 	# https://github.com/rhysd/vim-lsp-ale
 	# legacy Plug 'rhysd/vim-lsp-ale'
@@ -221,6 +230,7 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 	#########################
 	####### FORMATTER #######
 	#########################
+	# See vimlsp
 	# See ALE
 
 
@@ -237,7 +247,7 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 	#### AUTOMATIC TYPING ####
 	##########################
 	# https://github.com/tpope/vim-surround
-	# Plug 'tpope/vim-surround'
+	legacy Plug 'tpope/vim-surround'
 
 	# https://github.com/tpope/vim-endwise
 	legacy Plug 'tpope/vim-endwise'
@@ -248,7 +258,7 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 	##### GIT INTEGRATION #####
 	###########################
 	# https://github.com/tpope/vim-fugitive
-	# legacy Plug 'tpope/vim-fugitive'
+	legacy Plug 'tpope/vim-fugitive'
 
 	# https://github.com/junegunn/gv.vim
 	# legacy Plug 'junegunn/gv.vim'
@@ -256,7 +266,7 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 
 
 	#################
-	##### LP/ML #####
+	##### PL/ML #####
 	#################
 	### Rust
 	# https://github.com/rust-lang/rust.vim
@@ -264,8 +274,8 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 
 	### Markdown
 	# https://github.com/preservim/vim-markdown
-	# legacy Plug 'godlygeek/tabular'
-	# legacy Plug 'preservim/vim-markdown'
+	legacy Plug 'godlygeek/tabular'
+	legacy Plug 'preservim/vim-markdown'
 	
 	# https://github.com/mzlogin/vim-markdown-toc
 	legacy Plug 'mzlogin/vim-markdown-toc'
@@ -298,6 +308,21 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 
 
 
+	##############
+	##### AI #####
+	##############
+	# The ollama installation script considers a system which uses systemd as
+	# the init system and that has a GPU. In my case, i don't use systemd and
+	# neither use a GPU (i have one, but i don't have its driver installed)
+	# https://github.com/ollama/ollama
+	# https://github.com/gergap/vim-ollama
+	legacy Plug 'gergap/vim-ollama'
+
+	# https://github.com/github/copilot.vim
+	# legacy Plug 'github/copilot.vim'
+
+
+
 	################
 	##### MISC #####
 	################
@@ -316,12 +341,8 @@ export def LoadVimPlug(vimplug_dir: Dirpath)
 	# https://github.com/wolandark/vim-live-server
 	# legacy Plug 'wolandark/vim-live-server'
 	
-	# The ollama installation script considers a system which uses systemd as
-	# the init system and that has a GPU. In my case, i don't use systemd and
-	# neither use a GPU (i have one, but i don't have its driver installed)
-	# https://github.com/ollama/ollama
-	# https://github.com/gergap/vim-ollama
-	# legacy Plug 'https://github.com/gergap/vim-ollama'
+	# https://github.com/tpope/vim-dadbod
+	# legacy Plug 'tpope/vim-dadbod'
 	
 
 

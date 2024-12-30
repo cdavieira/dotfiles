@@ -1,58 +1,47 @@
 vim9script
 
-
-# vim related
-# the path to the directory where vim expects to find your 'vimrc' file
-var vim_config_dir: string
-# the path to the directory where vim will store '~', '.un' and '.swp' files
-var vim_cache_dir: string
-
-# plugin manager related
-# the path to the file 'vimplug.vim'
-var vimplug_autoload_file: string
-# the path to the directory where vimplug will download plugins
-var vimplug_dir: string
-
-# mine
-# the path to the root directory where my custom '.vim' files can be found
-var my_vim_files: string
-# the path to my 'colorschemes.vim' file
-var my_colorschemes: string
-# the path to my 'options.vim' file
-var my_options: string
-# the path to my 'vimlsp.vim' file
-var my_vimlsp: string
-# the path to my 'vimplug.vim' file
-var my_vimplug: string
-
+# $MYVIM_CONFIG_DIR
+#   the path to the directory where vim expects to find your 'vimrc' file
+# $MYVIM_CACHE_DIR
+#   the path to the directory where vim will store '~', '.un' and '.swp' files
+# $MYVIM_VIMPLUG_DIR
+#   the path to the directory where vimplug will download plugins
+# MYVIM_FILES
+#   the path to the root directory where my custom '.vim' files can be found
 
 # Doing OS-specific stuff
 if has('win64')
 	# Windows
 	# run this in an elevated shell:
-	# New-Item -ItemType SymbolicLink -Target C:\Users\cd_vi\dotfiles\vim\win_vimrc -Path C:\Users\cd_vi\vimfiles\vimrc
+	# New-Item -ItemType SymbolicLink -Target C:\Users\cd_vi\Downloads\dotfiles\vim\vimrc -Path C:\Users\cd_vi\vimfiles\vimrc
+	setenv('MYVIM_CONFIG_DIR', $HOME .. '\vimfiles')
+	setenv('MYVIM_FILES', $HOME .. '\Downloads\dotfiles\vim')
 
-	vim_config_dir = $HOME .. '\vimfiles\'
-	vim_cache_dir  = vim_config_dir .. 'cache\'
-	vimplug_autoload_file = vim_config_dir .. 'autoload\plug.vim'
-	vimplug_dir          = vim_config_dir .. 'vim-plug'
-	my_vim_files = $HOME .. '\dotfiles\vim'
-	my_colorschemes = my_vim_files .. '\config\colorschemes.vim'
-	my_options      = my_vim_files .. '\config\options.vim'
-	my_vimlsp       = my_vim_files .. '\plugins\vimlsp.vim'
-	my_vimplug      = my_vim_files .. '\plugins\vimplug.vim'
+	setenv('MYVIM_CACHE_DIR', getenv('MYVIM_CONFIG_DIR') .. '\cache')
+	setenv('MYVIM_BACKUP_DIR', getenv('MYVIM_CACHE_DIR') .. '\backup')
+	setenv('MYVIM_SWAP_DIR', getenv('MYVIM_CACHE_DIR') .. '\swap')
+	setenv('MYVIM_UNDO_DIR', getenv('MYVIM_CACHE_DIR') .. '\undo')
+	setenv('MYVIM_VIMINFO', getenv('MYVIM_CACHE_DIR') .. '\viminfo')
+
+	setenv('MYVIM_VIMPLUG_AUTOLOAD_FILE', getenv('MYVIM_CONFIG_DIR') .. '\autoload\plug.vim')
+	setenv('MYVIM_VIMPLUG_DIR', getenv('MYVIM_CONFIG_DIR') .. '\vim-plug')
+
+	setenv('MYVIM_COLORSCHEMES', getenv('MYVIM_FILES') .. '\config\colorschemes.vim')
+	setenv('MYVIM_OPTIONS', getenv('MYVIM_FILES') .. '\config\options.vim')
+	setenv('MYVIM_VIMLSP', getenv('MYVIM_FILES') .. '\plugins\vimlsp.vim')
+	setenv('MYVIM_VIMPLUG', getenv('MYVIM_FILES') .. '\plugins\vimplug.vim')
 
 	# folder to store '~' files
-	set backupdir=$HOME\vimfiles\cache\backup
+	set backupdir=$MYVIM_BACKUP_DIR
 
 	# folder to store '.swp' files
-	set directory=$HOME\vimfiles\cache\swap
+	set directory=$MYVIM_SWAP_DIR
 
 	# folder to store '.un' files
-	set undodir=$HOME\vimfiles\cache\undo
+	set undodir=$MYVIM_UNDO_DIR
 
 	# folder to store 'viminfo' (save session information upon quitting)
-	set viminfofile=$HOME\vimfiles\viminfo
+	set viminfofile=$MYVIM_VIMINFO
 
 	# choose the desired command to use in conjunction with 'K'
 	set keywordprg=:help
@@ -62,34 +51,40 @@ if has('win64')
 	set shellcmdflag=-Command
 
 	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
-	if empty(glob(vimplug_autoload_file))
-		silent echo system('iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_file .. ' -Force')
+	if empty(glob($MYVIM_VIMPLUG_AUTOLOAD_FILE))
+		silent echo system('iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. $MYVIM_VIMPLUG_AUTOLOAD_FILE .. ' -Force')
 		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 	endif
 else
 	# Linux
+	setenv('MYVIM_CONFIG_DIR', $HOME .. '/.config/vim')
+	setenv('MYVIM_CACHE_DIR', $HOME .. '/.cache/vim')
+	setenv('MYVIM_FILES', $HOME .. '/repos/dotfiles/vim')
 
-	vim_config_dir = '~/.config/vim/'
-	vim_cache_dir  = '~/.cache/vim/'
-	vimplug_autoload_file = vim_config_dir .. 'autoload/plug.vim'
-	vimplug_dir          = vim_config_dir .. 'vim-plug'
-	my_vim_files    = '~/repos/dotfiles/vim'
-	my_colorschemes = my_vim_files .. '/config/colorschemes.vim'
-	my_options      = my_vim_files .. '/config/options.vim'
-	my_vimlsp       = my_vim_files .. '/plugins/vimlsp.vim'
-	my_vimplug      = my_vim_files .. '/plugins/vimplug.vim'
+	setenv('MYVIM_BACKUP_DIR', getenv('MYVIM_CACHE_DIR') .. '/backup')
+	setenv('MYVIM_SWAP_DIR', getenv('MYVIM_CACHE_DIR') .. '/swap')
+	setenv('MYVIM_UNDO_DIR', getenv('MYVIM_CACHE_DIR') .. '/undo')
+	setenv('MYVIM_VIMINFO', getenv('MYVIM_CACHE_DIR') .. '/viminfo')
+
+	setenv('MYVIM_VIMPLUG_AUTOLOAD_FILE', getenv('MYVIM_CONFIG_DIR') .. '/autoload/plug.vim')
+	setenv('MYVIM_VIMPLUG_DIR', getenv('MYVIM_CONFIG_DIR') .. '/vim-plug')
+
+	setenv('MYVIM_COLORSCHEMES', getenv('MYVIM_FILES') .. '/config/colorschemes.vim')
+	setenv('MYVIM_OPTIONS', getenv('MYVIM_FILES') .. '/config/options.vim')
+	setenv('MYVIM_VIMLSP', getenv('MYVIM_FILES') .. '/plugins/vimlsp.vim')
+	setenv('MYVIM_VIMPLUG', getenv('MYVIM_FILES') .. '/plugins/vimplug.vim')
 
 	# folder to store '~' files
-	set backupdir=~/.cache/vim/backup/
+	set backupdir=$MYVIM_BACKUP_DIR
 
 	# folder to store '.swp' files
-	set directory=~/.cache/vim/swap/
+	set directory=$MYVIM_SWAP_DIR
 
 	# folder to store '.un' files
-	set undodir=~/.cache/vim/undo/
+	set undodir=$MYVIM_UNDO_DIR
 
 	# folder to store 'viminfo' (save session information upon quitting)
-	set viminfofile=~/.cache/vim/viminfo
+	set viminfofile=$MYVIM_VIMINFO
 
 	# choose the desired command to use in conjunction with 'K'
 	set keywordprg=:Man
@@ -99,31 +94,33 @@ else
 	set shellcmdflag=-c
 
 	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
-	if empty(glob(vimplug_autoload_file))
-		execute '!curl -fLo ' .. vimplug_autoload_file .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	if empty(glob($MYVIM_VIMPLUG_AUTOLOAD_FILE))
+		execute '!curl -fLo ' .. $MYVIM_VIMPLUG_AUTOLOAD_FILE .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 	endif
 endif
 
 # Loading vim options
-import my_options
-options.SetOSAgnosticOptions(vim_cache_dir)
+import $MYVIM_OPTIONS
+options.SetOSAgnosticOptions($MYVIM_CACHE_DIR)
 
 # Loading the best plugin manager ever
-import my_vimplug
-vimplug.SetNERDVariables()
-vimplug.SetVimLSPVariables()
-vimplug.LoadVimPlug(vimplug_dir)
+import $MYVIM_VIMPLUG
+vimplug.SetupNerdtree()
+vimplug.SetupVimlsp()
+vimplug.SetupOllama()
+#vimplug.SetupAle()
+vimplug.SetupVimPlug($MYVIM_VIMPLUG_DIR)
 
 # Loading colorschemes
 # This step must be done after loading the plugin manager, as some colorschemes
 # might have been installed/configured with it
-import my_colorschemes
+import $MYVIM_COLORSCHEMES
 colorschemes.SetDefault()
 
 # Loading the best language server ever
 # No configuration is actually required
-import my_vimlsp
+import $MYVIM_VIMLSP
 
 # Creating custom mappings
 # Instead of creating these mappings in a separate file, i decided to create
@@ -152,8 +149,8 @@ smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 # Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
-xmap        s   <Plug>(vsnip-select-text)
-xmap        S   <Plug>(vsnip-cut-text)
+#xmap        s   <Plug>(vsnip-select-text)
+#xmap        S   <Plug>(vsnip-cut-text)
 
 
 # vim: set ft=vim :

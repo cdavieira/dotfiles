@@ -45,7 +45,7 @@ export def Rotate(increment: number): void
 	while tries < size && empty(globpath(&rtp, next_colorscheme_relpath))
 		cur_idx = index(colors, next_colorscheme)
 		if cur_idx == -1
-			redraw | echo 'ColorRotate error:' g:colors_name 'not found in the colorlist'
+			redraw | echo 'ColorRotate error:' next_colorscheme 'not found in the colorlist'
 			return
 		endif
 

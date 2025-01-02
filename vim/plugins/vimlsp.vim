@@ -66,7 +66,7 @@ var vim_lsp_info = {
 }
 var ts_lsp_info = {
 	'name': 'typescript-language-server',
-	'cmd': 'typescript-language-server --stdio',
+	'cmd': (server_info) => [&shell, &shellcmdflag, 'typescript-language-server --stdio'],
 	'root_uri': (server_info) => lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json')),
 	'whitelist': ['typescript', 'typescript.tsx', 'typescriptreact']
 }

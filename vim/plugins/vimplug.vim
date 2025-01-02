@@ -240,6 +240,9 @@ export def SetupVimPlug(vimplug_dir: Dirpath)
 	########################
 	# https://github.com/preservim/nerdcommenter
 	# legacy Plug 'preservim/nerdcommenter'
+	
+	# https://github.com/tpope/vim-commentary
+	legacy Plug 'tpope/vim-commentary'
 
 
 
@@ -251,18 +254,44 @@ export def SetupVimPlug(vimplug_dir: Dirpath)
 
 	# https://github.com/tpope/vim-endwise
 	legacy Plug 'tpope/vim-endwise'
+	
+	# https://github.com/jiangmiao/auto-pairs
+	legacy Plug 'jiangmiao/auto-pairs'
 
 
 
-	###########################
-	##### GIT INTEGRATION #####
-	###########################
+	############################
+	##### TOOL INTEGRATION #####
+	############################
+	### Git
 	# https://github.com/tpope/vim-fugitive
 	legacy Plug 'tpope/vim-fugitive'
 
+	# https://github.com/airblade/vim-gitgutter
+	# legacy Plug 'airblade/vim-gitgutter'
+
 	# https://github.com/junegunn/gv.vim
 	# legacy Plug 'junegunn/gv.vim'
+	
+	### Databases
+	# https://github.com/tpope/vim-dadbod
+	# legacy Plug 'tpope/vim-dadbod'
+	
+	### Ctags
+	# https://github.com/preservim/tagbar
+	legacy Plug 'preservim/tagbar'
 
+	# https://github.com/ludovicchabant/vim-gutentags
+	# legacy Plug 'ludovicchabant/vim-gutentags'
+
+	# https://github.com/craigemery/vim-autotag
+	# legacy Plug 'craigemery/vim-autotag'
+
+	# https://github.com/soramugi/auto-ctags.vim
+	# legacy Plug 'soramugi/auto-ctags.vim'
+
+	# https://github.com/szw/vim-tags
+	# legacy Plug 'szw/vim-tags'
 
 
 	#################
@@ -291,7 +320,16 @@ export def SetupVimPlug(vimplug_dir: Dirpath)
 	### Latex
 	# https://github.com/lervag/vimtex
 	# legacy Plug 'lervag/vimtex'
+	
+	### Javascript
+	# https://github.com/pangloss/vim-javascript
+	legacy Plug 'pangloss/vim-javascript'
+	
+	# https://github.com/HerringtonDarkholme/yats.vim
+	legacy Plug 'HerringtonDarkholme/yats.vim'
 
+	# https://github.com/mxw/vim-jsx
+	legacy Plug 'mxw/vim-jsx'
 
 
 	########################
@@ -303,7 +341,7 @@ export def SetupVimPlug(vimplug_dir: Dirpath)
 	# https://github.com/vim-airline/vim-airline
 	legacy Plug 'vim-airline/vim-airline'
 
-	# https://github.com/vim-airline/vim-airline-themes#vim-airline-themes--
+	# https://github.com/vim-airline/vim-airline-themes
 	legacy Plug 'vim-airline/vim-airline-themes'
 
 
@@ -327,10 +365,13 @@ export def SetupVimPlug(vimplug_dir: Dirpath)
 	##### MISC #####
 	################
 	# https://github.com/mhinz/vim-startify.git
-	# legacy Plug 'mhinz/vim-startify'
+	legacy Plug 'mhinz/vim-startify'
 
-	# https://github.com/preservim/tagbar
-	# legacy Plug 'preservim/tagbar'
+	# https://github.com/romainl/vim-cool
+	legacy Plug 'romainl/vim-cool'
+
+	# https://github.com/terryma/vim-smooth-scroll
+	# legacy Plug 'terryma/vim-smooth-scroll'
 
 	# https://github.com/mbbill/undotree
 	# legacy Plug 'mbbill/undotree'
@@ -341,29 +382,14 @@ export def SetupVimPlug(vimplug_dir: Dirpath)
 	# https://github.com/wolandark/vim-live-server
 	# legacy Plug 'wolandark/vim-live-server'
 	
-	# https://github.com/tpope/vim-dadbod
-	# legacy Plug 'tpope/vim-dadbod'
-	
+	# https://github.com/voldikss/vim-floaterm
+	# legacy Plug 'voldikss/vim-floaterm'
 
-
-	##################################
-	#### PLUGINS I WOULDN'T USE,  ####
-	#### BUT WHICH ARE KINDA COOL ####
-	##################################
-	# Autocompletion alternative to asyncomplete:
-	# Arguably more robust then asyncomplete
-	# Written in python
-	# https://github.com/Shougo/deoplete.nvim
+	# https://github.com/easymotion/vim-easymotion
+	# legacy Plug 'easymotion/vim-easymotion'
 	
-	# Replacement for deoplete (it won't be developed anymore)
-	# Written in typescript
-	# https://github.com/Shougo/ddc.vim
-	
-	# LSP alternative to vimlsp
-	# Also provides automatic language server download
-	# Written in typescript
-	# https://github.com/neoclide/coc.nvim
-
+	# https://github.com/kana/vim-textobj-user
+	# legacy Plug 'kana/vim-textobj-user'
 
 
 	# " Call plug#end to update &runtimepath and initialize the plugin system.

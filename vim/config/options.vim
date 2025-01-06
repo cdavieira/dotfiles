@@ -11,15 +11,6 @@ export def SetOSAgnosticOptions(cache: Dirpath): void
 		endif
 	endfor
 
-	# disable loading plugins from folders intended for windows
-	set rtp-=$VIM/vimfiles
-	set rtp-=$VIM/vimfiles/after
-	set packpath-=$VIM/vimfiles
-	set packpath-=$VIM/vimfiles/after
-
-	# load filetype plugin 'man.vim' (shipped with vim)
-	runtime ftplugin/man.vim
-
 	# enable filetype recognition, plugins for filetypes and indent files
 	filetype plugin indent on
 
@@ -83,7 +74,21 @@ export def SetOSAgnosticOptions(cache: Dirpath): void
 	# because timeout and ttimeout are on, set a different timeout value for keycodes in ms
 	set ttimeoutlen=100
 
-	# enhance commandline completion operation, by enabling 'wildchar' to invoke
+	# enhance commandline completion, by enabling 'wildchar' to invoke
 	# completion
 	set wildmenu
+
+	# changes the way cmdline-completion is done
+	# Display the completion matches using the popup menu in the same style as the
+	# |ins-completion-menu|
+	g:wildoptions = "pum"
+
+	# use <Space> as the map leader
+	g:mapleader = " "
+
+	# use ',' as the local leader
+	g:maplocalleader = ","
+
+	# open manpages in a new tab
+	g:ft_man_open_mode = 'tab'
 enddef

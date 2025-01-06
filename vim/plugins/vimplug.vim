@@ -2,114 +2,6 @@ vim9script
 
 type Dirpath = string
 
-# changes the way cmdline-completion is done
-# Display the completion matches using the popup menu in the same style as the
-# |ins-completion-menu|
-g:wildoptions = "pum"
-
-# use <Space> as the map leader
-g:mapleader = " "
-
-# use ',' as the local leader
-g:maplocalleader = ","
-
-# open manpages in a new tab
-g:ft_man_open_mode = 'tab'
-
-
-export def SetupNerdtree()
-	# disallow NERDTree extension from creating unwanted mappings
-	g:NERDCreateDefaultMappings = 0
-enddef
-
-export def SetupVimlsp()
-	### vimlsp
-	# abort `:LspDocumentFormatSync` or `:LspDocumentRangeFormatSync` after 1000ms
-	# g:lsp_format_sync_timeout = 1000
-
-	# disable calling a custom function when over some text while the preview is still open
-	# g:lsp_preview_doubletap = 0
-
-	# automatically close floating previews upon cursor movement
-	# g:lsp_preview_autoclose = 0
-
-	# enable support for diagnostics like warnings and error messages
-	g:lsp_diagnostics_enabled = 1
-
-	# enable signs like W> and E> for diagnostics messages
-	g:lsp_diagnostics_signs_enabled = 0
-
-	# enables showing the error message in the command mode bar
-	# NOTE: i heavily depend on this
-	g:lsp_diagnostics_echo_cursor = 1
-
-	# set how much time (in ms) the error message should stay up in the commandbar
-	g:lsp_diagnostics_echo_delay = 500
-
-	# enables a floating window of diagnostic error for the current line to
-	# status. Requires lsp_diagnostics_enabled = 1.
-	# NOTE: This is the useful floating error message that i heavily depend on
-	# g:lsp_diagnostics_float_cursor = 1
-
-	# set how much time (in ms) the floating error message should take before
-	# opening the floating window
-	# g:lsp_diagnostics_float_delay = 200
-
-	# keep cursor focus on the document rather than on the preview-window when it
-	# pops up (ex: when hovering)
-	# NOTE: the preview-window can be closed using the default mapping for that: <c-w><c-z>
-	# g:lsp_preview_keep_focus = 1
-
-	# Enables virtual text to be shown next to diagnostic errors.
-	g:lsp_diagnostics_virtual_text_enabled = 0
-
-	# whether virtual text should be on during insertion mode
-	g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
-
-	# Determines the align of the diagnostics virtual text
-	# g:lsp_diagnostics_virtual_text_align = "above"
-
-	# Determines whether or not to wrap the diagnostics virtual text.
-	# g:lsp_diagnostics_virtual_text_wrap = "truncate"
-
-	# A |List| containing one element of type |Funcref|.
-	# g:lsp_get_supported_capabilities = [function('lsp#default_get_supported_capabilities')]
-	# Note: You can obtain the default supported capabilities of vim-lsp by
-	# calling `lsp#default_get_supported_capabilities` from within your function.
-
-	# g:lsp_snippet_expand = []
-
-	# [experimental] enables workspace capabilities when the lsp supports it by
-	# calling the function 'root_uri'.
-	# read ':h vim-lsp-workspace-folders' for details
-	# g:lsp_experimental_workspace_folders = 1
-
-	# create a log file to inspect lsp action
-	# g:lsp_log_file = expand(path.vim_config_dir .. 'vim-lsp.log')
-
-
-	### Asyncomplete
-	# create a log file to inspect async action
-	# g:asyncomplete_log_file = expand(path.vim_config_dir .. 'asyncomplete.log')
-enddef
-
-export def SetupAle()
-	g:ale_disable_lsp = 1
-	g:ale_fixers = {
-		'*': ['remove_trailing_lines', 'trim_whitespace'],
-		'javascript': ['eslint'],
-	}
-enddef
-
-export def SetupOllama()
-	g:ollama_enabled = 0
-	g:ollama_chat_model = 'llama3.2:latest'
-	g:ollama_model = 'codellama:latest'
-	g:ollama_fim_prefix = '<|fim_prefix|>'
-	g:ollama_fim_middle = '<|fim_middle|>'
-	g:ollama_fim_suffix = '<|fim_suffix|>'
-enddef
-
 export def SetupVimPlug(vimplug_dir: Dirpath)
 	g:plug#begin(vimplug_dir)
 
@@ -189,16 +81,7 @@ export def SetupVimPlug(vimplug_dir: Dirpath)
 	legacy Plug 'hrsh7th/vim-vsnip-integ'
 	# https://github.com/rafamadriz/friendly-snippets
 	legacy Plug 'rafamadriz/friendly-snippets'
-
-	# ultisnips integrates with 'asyncomplete'
-	# if has('python3')
-	# 		# https://github.com/SirVer/ultisnips
-	# 		Plug 'SirVer/ultisnips'
-	# 		# https://github.com/honza/vim-snippets
-	# 		Plug 'honza/vim-snippets'
-	# 		# https://github.com/prabirshrestha/asyncomplete-ultisnips.vim
-	# 		Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-	# endif
+	# ultisnips is also pretty good: https://github.com/SirVer/ultisnips
 
 	### Autoimport
 	# See vimlsp
@@ -330,6 +213,7 @@ export def SetupVimPlug(vimplug_dir: Dirpath)
 
 	# https://github.com/mxw/vim-jsx
 	legacy Plug 'mxw/vim-jsx'
+
 
 
 	########################

@@ -1,5 +1,70 @@
 vim9script
 
+# abort `:LspDocumentFormatSync` or `:LspDocumentRangeFormatSync` after 1000ms
+# g:lsp_format_sync_timeout = 1000
+
+# disable calling a custom function when over some text while the preview is still open
+# g:lsp_preview_doubletap = 0
+
+# automatically close floating previews upon cursor movement
+# g:lsp_preview_autoclose = 0
+
+# enable support for diagnostics like warnings and error messages
+g:lsp_diagnostics_enabled = 1
+
+# enable signs like W> and E> for diagnostics messages
+g:lsp_diagnostics_signs_enabled = 0
+
+# enables showing the error message in the command mode bar
+# NOTE: i heavily depend on this
+g:lsp_diagnostics_echo_cursor = 1
+
+# set how much time (in ms) the error message should stay up in the commandbar
+g:lsp_diagnostics_echo_delay = 500
+
+# enables a floating window of diagnostic error for the current line to
+# status. Requires lsp_diagnostics_enabled = 1.
+# NOTE: This is the useful floating error message that i heavily depend on
+# g:lsp_diagnostics_float_cursor = 1
+
+# set how much time (in ms) the floating error message should take before
+# opening the floating window
+# g:lsp_diagnostics_float_delay = 200
+
+# keep cursor focus on the document rather than on the preview-window when it
+# pops up (ex: when hovering)
+# NOTE: the preview-window can be closed using the default mapping for that: <c-w><c-z>
+# g:lsp_preview_keep_focus = 1
+
+# Enables virtual text to be shown next to diagnostic errors.
+g:lsp_diagnostics_virtual_text_enabled = 0
+
+# whether virtual text should be on during insertion mode
+g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
+
+# Determines the align of the diagnostics virtual text
+# g:lsp_diagnostics_virtual_text_align = "above"
+
+# Determines whether or not to wrap the diagnostics virtual text.
+# g:lsp_diagnostics_virtual_text_wrap = "truncate"
+
+# A |List| containing one element of type |Funcref|.
+# g:lsp_get_supported_capabilities = [function('lsp#default_get_supported_capabilities')]
+# Note: You can obtain the default supported capabilities of vim-lsp by
+# calling `lsp#default_get_supported_capabilities` from within your function.
+
+# g:lsp_snippet_expand = []
+
+# [experimental] enables workspace capabilities when the lsp supports it by
+# calling the function 'root_uri'.
+# read ':h vim-lsp-workspace-folders' for details
+# g:lsp_experimental_workspace_folders = 1
+
+# create a log file to inspect lsp action
+# g:lsp_log_file = expand(path.vim_config_dir .. 'vim-lsp.log')
+
+
+
 #############################################################
 ######################## LSP CONFIG #########################
 #############################################################
@@ -54,7 +119,7 @@ var rust_lsp_info = {
 }
 var vim_lsp_info = {
 	'name': 'vim-language-server',
-	'cmd': ['vim-language-server', '--stdio'],
+	'cmd': (server_info) => ['vim-language-server', '--stdio'],
 	'allowlist': ['vim'],
 	'initialization_options': {
 		'vimruntime': $VIMRUNTIME,
@@ -75,6 +140,21 @@ var js_lsp_info = {
 	'cmd': (server_info) => [&shell, &shellcmdflag, 'typescript-language-server --stdio'],
 	'root_uri': (server_info) => lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json')),
 	'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact']
+}
+var html_lsp_info = {
+	'name': 'html-languageserver',
+	'cmd': (server_info) => [&shell, &shellcmdflag, 'html-languageserver --stdio'],
+	'whitelist': ['html'],
+}
+var css_lsp_info = {
+	'name': 'css-languageserver',
+	'cmd': (server_info) => [&shell, &shellcmdflag, 'css-languageserver --stdio'],
+	'whitelist': ['css', 'less', 'sass'],
+}
+var tex_lsp_info = {
+	'name': 'texlab',
+	'cmd': (server_info) => [expand('texlab')],
+	'whitelist': ['tex']
 }
 
 ########################
@@ -98,6 +178,15 @@ endif
 if executable('tsserver')
 	au User lsp_setup lsp#register_server(ts_lsp_info)
 	au User lsp_setup lsp#register_server(js_lsp_info)
+endif
+if executable('html-languageserver')
+	au User lsp_setup lsp#register_server(html_lsp_info)
+endif
+if executable('css-languageserver')
+	au User lsp_setup lsp#register_server(css_lsp_info)
+endif
+if executable('texlab')
+	au User lsp_setup lsp#register_server(tex_lsp_info)
 endif
 
 ########################

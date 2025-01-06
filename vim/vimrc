@@ -9,27 +9,34 @@ vim9script
 # MYVIM_FILES
 #   the path to the root directory where my custom '.vim' files can be found
 
+def GetPathVimConfig(configname: string): string
+	if has('win64')
+		return getenv('MYVIM_FILES') .. '\config\' .. configname .. '.vim'
+	endif
+	return getenv('MYVIM_FILES') .. '/config/' .. configname .. '.vim'
+enddef
+
+def GetPathPluginConfig(pluginname: string): string
+	if has('win64')
+		return getenv('MYVIM_FILES') .. '\plugins\' .. pluginname .. '.vim'
+	endif
+	return getenv('MYVIM_FILES') .. '/plugins/' .. pluginname .. '.vim'
+enddef
+
 # Doing OS-specific stuff
 if has('win64')
 	# Windows
 	# run this in an elevated shell:
 	# New-Item -ItemType SymbolicLink -Target C:\Users\cd_vi\Downloads\dotfiles\vim\vimrc -Path C:\Users\cd_vi\vimfiles\vimrc
 	setenv('MYVIM_CONFIG_DIR', $HOME .. '\vimfiles')
-	setenv('MYVIM_FILES', $HOME .. '\Downloads\dotfiles\vim')
-
 	setenv('MYVIM_CACHE_DIR', getenv('MYVIM_CONFIG_DIR') .. '\cache')
+	setenv('MYVIM_FILES', $HOME .. '\Downloads\dotfiles\vim')
+	setenv('MYVIM_VIMPLUG_DIR', getenv('MYVIM_CONFIG_DIR') .. '\vim-plug')
 	setenv('MYVIM_BACKUP_DIR', getenv('MYVIM_CACHE_DIR') .. '\backup')
 	setenv('MYVIM_SWAP_DIR', getenv('MYVIM_CACHE_DIR') .. '\swap')
 	setenv('MYVIM_UNDO_DIR', getenv('MYVIM_CACHE_DIR') .. '\undo')
 	setenv('MYVIM_VIMINFO', getenv('MYVIM_CACHE_DIR') .. '\viminfo')
-
-	setenv('MYVIM_VIMPLUG_AUTOLOAD_FILE', getenv('MYVIM_CONFIG_DIR') .. '\autoload\plug.vim')
-	setenv('MYVIM_VIMPLUG_DIR', getenv('MYVIM_CONFIG_DIR') .. '\vim-plug')
-
-	setenv('MYVIM_COLORSCHEMES', getenv('MYVIM_FILES') .. '\config\colorschemes.vim')
-	setenv('MYVIM_OPTIONS', getenv('MYVIM_FILES') .. '\config\options.vim')
-	setenv('MYVIM_VIMLSP', getenv('MYVIM_FILES') .. '\plugins\vimlsp.vim')
-	setenv('MYVIM_VIMPLUG', getenv('MYVIM_FILES') .. '\plugins\vimplug.vim')
+	var vimplug_autoload_file = getenv('MYVIM_CONFIG_DIR') .. '\autoload\plug.vim'
 
 	# folder to store '~' files
 	set backupdir=$MYVIM_BACKUP_DIR
@@ -51,8 +58,8 @@ if has('win64')
 	set shellcmdflag=-Command
 
 	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
-	if empty(glob($MYVIM_VIMPLUG_AUTOLOAD_FILE))
-		silent echo system('iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. $MYVIM_VIMPLUG_AUTOLOAD_FILE .. ' -Force')
+	if empty(glob(vimplug_autoload_file))
+		silent echo system('iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_file .. ' -Force')
 		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 	endif
 else
@@ -60,19 +67,12 @@ else
 	setenv('MYVIM_CONFIG_DIR', $HOME .. '/.config/vim')
 	setenv('MYVIM_CACHE_DIR', $HOME .. '/.cache/vim')
 	setenv('MYVIM_FILES', $HOME .. '/repos/dotfiles/vim')
-
+	setenv('MYVIM_VIMPLUG_DIR', getenv('MYVIM_CONFIG_DIR') .. '/vim-plug')
 	setenv('MYVIM_BACKUP_DIR', getenv('MYVIM_CACHE_DIR') .. '/backup')
 	setenv('MYVIM_SWAP_DIR', getenv('MYVIM_CACHE_DIR') .. '/swap')
 	setenv('MYVIM_UNDO_DIR', getenv('MYVIM_CACHE_DIR') .. '/undo')
 	setenv('MYVIM_VIMINFO', getenv('MYVIM_CACHE_DIR') .. '/viminfo')
-
-	setenv('MYVIM_VIMPLUG_AUTOLOAD_FILE', getenv('MYVIM_CONFIG_DIR') .. '/autoload/plug.vim')
-	setenv('MYVIM_VIMPLUG_DIR', getenv('MYVIM_CONFIG_DIR') .. '/vim-plug')
-
-	setenv('MYVIM_COLORSCHEMES', getenv('MYVIM_FILES') .. '/config/colorschemes.vim')
-	setenv('MYVIM_OPTIONS', getenv('MYVIM_FILES') .. '/config/options.vim')
-	setenv('MYVIM_VIMLSP', getenv('MYVIM_FILES') .. '/plugins/vimlsp.vim')
-	setenv('MYVIM_VIMPLUG', getenv('MYVIM_FILES') .. '/plugins/vimplug.vim')
+	var vimplug_autoload_file = getenv('MYVIM_CONFIG_DIR') .. '/autoload/plug.vim'
 
 	# folder to store '~' files
 	set backupdir=$MYVIM_BACKUP_DIR
@@ -93,34 +93,41 @@ else
 	set shell=/bin/bash
 	set shellcmdflag=-c
 
+	# disable loading plugins from folders intended for windows
+	set rtp-=$VIM/vimfiles
+	set rtp-=$VIM/vimfiles/after
+	set packpath-=$VIM/vimfiles
+	set packpath-=$VIM/vimfiles/after
+
+	# load filetype plugin 'man.vim' (shipped with vim)
+	runtime ftplugin/man.vim
+
 	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
-	if empty(glob($MYVIM_VIMPLUG_AUTOLOAD_FILE))
-		execute '!curl -fLo ' .. $MYVIM_VIMPLUG_AUTOLOAD_FILE .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	if empty(glob(vimplug_autoload_file))
+		execute '!curl -fLo ' .. vimplug_autoload_file .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 	endif
 endif
 
-# Loading vim options
-import $MYVIM_OPTIONS
+import GetPathVimConfig('options')
 options.SetOSAgnosticOptions($MYVIM_CACHE_DIR)
 
-# Loading the best plugin manager ever
-import $MYVIM_VIMPLUG
-vimplug.SetupNerdtree()
-vimplug.SetupVimlsp()
-vimplug.SetupOllama()
-#vimplug.SetupAle()
+import GetPathPluginConfig('vimplug')
 vimplug.SetupVimPlug($MYVIM_VIMPLUG_DIR)
+var plugins = [
+	'asyncomplete',
+	'nerdtree',
+	'ollama',
+	'vimlsp',
+]
+for plugin in plugins
+	import GetPathPluginConfig(plugin)
+endfor
 
-# Loading colorschemes
 # This step must be done after loading the plugin manager, as some colorschemes
 # might have been installed/configured with it
-import $MYVIM_COLORSCHEMES
+import GetPathVimConfig('colorschemes')
 colorschemes.SetDefault()
-
-# Loading the best language server ever
-# No configuration is actually required
-import $MYVIM_VIMLSP
 
 # Creating custom mappings
 # Instead of creating these mappings in a separate file, i decided to create
@@ -128,9 +135,7 @@ import $MYVIM_VIMLSP
 # this point, creating mappings here seems logical, as these can then call any
 # function from any vim module. Indeed very convenient!
 tnoremap <C-D> <C-W><C-C>
-#inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
 nnoremap <Leader>b <Cmd>Buffers<CR>
-#nnoremap <Leader>c <Cmd>vim9 g:RotateColor(+1)<CR>
 nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(+1)<CR>
 nnoremap <Leader>v <ScriptCmd>colorschemes.Rotate(-1)<CR>
 nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
@@ -138,17 +143,16 @@ nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>p <Cmd>edit ~/repos/dotfiles/vim<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>s <Cmd>Rg<CR>
-# Expand
+nnoremap <Leader>o <Cmd>Ollama toggle<CR>
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-# Expand or jump
 imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-# Jump forward or backward
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-# Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+#inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
+#nnoremap <Leader>c <Cmd>vim9 g:RotateColor(+1)<CR>
 #xmap        s   <Plug>(vsnip-select-text)
 #xmap        S   <Plug>(vsnip-cut-text)
 

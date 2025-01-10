@@ -2,7 +2,7 @@ vim9script
 
 type Dirpath = string
 
-export def SetupVimPlug(vimplug_dir: Dirpath)
+export def Setup(vimplug_dir: Dirpath)
 	g:plug#begin(vimplug_dir)
 
 	# If one day i start feeling too lazy with configuring vim myself,

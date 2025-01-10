@@ -1,150 +1,114 @@
 vim9script
 
-# $MYVIM_CONFIG_DIR
-#   the path to the directory where vim expects to find your 'vimrc' file
-# $MYVIM_CACHE_DIR
-#   the path to the directory where vim will store '~', '.un' and '.swp' files
-# $MYVIM_VIMPLUG_DIR
-#   the path to the directory where vimplug will download plugins
-# MYVIM_FILES
-#   the path to the root directory where my custom '.vim' files can be found
 
-def WriteToStdout(...words: list<any>): void
-	# to test a vimscript file: "vim -es -c 'source script.vim' -c 'q'"
-	writefile(words, '/dev/stdout', 'a')
-enddef
+# To create a symbolic link to this vimrc:
+# (Windows) - New-Item -ItemType SymbolicLink -Target $HOME\path\to\thisvimrc -Path $HOME\vimfiles\vimrc
+# (linux) - ln -s ~/path/to/this/vimrc ~/.config/vim
 
+# Overview of some environment variables i set in this vimrc:
+# $MYVIM_CONFIG_DIR  - the path to the directory where vim expects to find your 'vimrc' file
+# $MYVIM_CACHE_DIR   - the path to the directory where vim will store '~', '.un' and '.swp' files
+# MYVIM_FILES        - the path to the root directory where my custom '.vim' files can be found
+# $MYVIM_VIMPLUG_DIR - the path to the directory where vimplug will download plugins
+
+
+
+# Helper functions
+const sep = has('win64') ? '\' : '/'
 def GetFilepath(...dirs: list<string>): string
-	var sep = has('win64') ? '\' : '/'
 	var rel_path = join(dirs, sep)
 	return rel_path
 enddef
-
 def GetDirpath(...dirs: list<string>): string
-	var sep = has('win64') ? '\' : '/'
 	var rel_path = join(dirs, sep) .. sep
 	return rel_path
 enddef
-
 def GetPathVimConfig(configname: string): string
 	return GetFilepath(getenv('MYVIM_FILES'), 'config', configname .. '.vim')
 enddef
-
 def GetPathPluginConfig(pluginname: string): string
 	return GetFilepath(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
 enddef
+def WriteToStdout(...words: list<any>): void
+	writefile(words, '/dev/stdout', 'a')
+enddef
 
-# Doing OS-specific stuff
+
+
+
+# Environment variables
 if has('win64')
-	# Windows
-	# run this in an elevated shell:
-	# New-Item -ItemType SymbolicLink -Target C:\Users\cd_vi\Downloads\dotfiles\vim\vimrc -Path C:\Users\cd_vi\vimfiles\vimrc
-	setenv('MYVIM_CONFIG_DIR', $HOME .. '\vimfiles')
-	setenv('MYVIM_CACHE_DIR', getenv('MYVIM_CONFIG_DIR') .. '\cache')
-	setenv('MYVIM_FILES', $HOME .. '\Downloads\dotfiles\vim')
-	setenv('MYVIM_VIMPLUG_DIR', getenv('MYVIM_CONFIG_DIR') .. '\vim-plug')
-	setenv('MYVIM_BACKUP_DIR', getenv('MYVIM_CACHE_DIR') .. '\backup')
-	setenv('MYVIM_SWAP_DIR', getenv('MYVIM_CACHE_DIR') .. '\swap')
-	setenv('MYVIM_UNDO_DIR', getenv('MYVIM_CACHE_DIR') .. '\undo')
-	setenv('MYVIM_VIMINFO', getenv('MYVIM_CACHE_DIR') .. '\viminfo')
-	var vimplug_autoload_file = getenv('MYVIM_CONFIG_DIR') .. '\autoload\plug.vim'
+	setenv('MYVIM_CONFIG_DIR', GetDirpath($HOME, 'vimfiles'))
+	setenv('MYVIM_CACHE_DIR', GetDirpath(getenv('MYVIM_CONFIG_DIR'), 'cache'))
+	setenv('MYVIM_FILES', GetDirpath($HOME, 'Downloads', 'dotfiles', 'vim'))
+else
+	setenv('MYVIM_CONFIG_DIR', GetDirpath($HOME, '.config', 'vim'))
+	setenv('MYVIM_CACHE_DIR', GetDirpath($HOME, '.cache', 'vim'))
+	setenv('MYVIM_FILES', GetDirpath($HOME, 'repos', 'dotfiles', 'vim'))
+endif
+setenv('MYVIM_BACKUP_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'backup'))
+setenv('MYVIM_SWAP_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'swap'))
+setenv('MYVIM_UNDO_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'undo'))
+setenv('MYVIM_VIMINFO', GetFilepath(getenv('MYVIM_CACHE_DIR'), 'viminfo'))
+setenv('MYVIM_VIMPLUG_DIR', GetDirpath(getenv('MYVIM_CONFIG_DIR'), 'vim-plug'))
 
-	# folder to store '~' files
-	set backupdir=$MYVIM_BACKUP_DIR
 
-	# folder to store '.swp' files
-	set directory=$MYVIM_SWAP_DIR
 
-	# folder to store '.un' files
-	set undodir=$MYVIM_UNDO_DIR
 
-	# folder to store 'viminfo' (save session information upon quitting)
-	set viminfofile=$MYVIM_VIMINFO
-
-	# choose the desired command to use in conjunction with 'K'
+# OS-Specific
+var vimplug_install_cmd: string
+var vimplug_autoload_file = GetFilepath(getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim')
+if has('win64')
 	set keywordprg=:help
-
-	# user shell
 	set shell=pwsh
 	set shellcmdflag=-Command
-
-	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
-	if empty(glob(vimplug_autoload_file))
-		silent echo system('iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_file .. ' -Force')
-		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-	endif
+	vimplug_install_cmd = '!powershell -Command ' .. '\"iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_file .. ' -Force \"'
 else
-	# Linux
-	setenv('MYVIM_CONFIG_DIR', $HOME .. '/.config/vim')
-	setenv('MYVIM_CACHE_DIR', $HOME .. '/.cache/vim')
-	setenv('MYVIM_FILES', $HOME .. '/repos/dotfiles/vim')
-	setenv('MYVIM_VIMPLUG_DIR', getenv('MYVIM_CONFIG_DIR') .. '/vim-plug')
-	setenv('MYVIM_BACKUP_DIR', getenv('MYVIM_CACHE_DIR') .. '/backup')
-	setenv('MYVIM_SWAP_DIR', getenv('MYVIM_CACHE_DIR') .. '/swap')
-	setenv('MYVIM_UNDO_DIR', getenv('MYVIM_CACHE_DIR') .. '/undo')
-	setenv('MYVIM_VIMINFO', getenv('MYVIM_CACHE_DIR') .. '/viminfo')
-	var vimplug_autoload_file = getenv('MYVIM_CONFIG_DIR') .. '/autoload/plug.vim'
-
-	# folder to store '~' files
-	set backupdir=$MYVIM_BACKUP_DIR
-
-	# folder to store '.swp' files
-	set directory=$MYVIM_SWAP_DIR
-
-	# folder to store '.un' files
-	set undodir=$MYVIM_UNDO_DIR
-
-	# folder to store 'viminfo' (save session information upon quitting)
-	set viminfofile=$MYVIM_VIMINFO
-
-	# choose the desired command to use in conjunction with 'K'
 	set keywordprg=:Man
-
-	# user shell
 	set shell=/bin/bash
 	set shellcmdflag=-c
-
-	# disable loading plugins from folders intended for windows
 	set rtp-=$VIM/vimfiles
 	set rtp-=$VIM/vimfiles/after
 	set packpath-=$VIM/vimfiles
 	set packpath-=$VIM/vimfiles/after
-
-	# load filetype plugin 'man.vim' (shipped with vim)
 	runtime ftplugin/man.vim
-
-	# in case vim plug isn't already installed, install it (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
-	if empty(glob(vimplug_autoload_file))
-		execute '!curl -fLo ' .. vimplug_autoload_file .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-	endif
+	vimplug_install_cmd = '!curl -fLo ' .. vimplug_autoload_file .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
-
-import GetPathVimConfig('options')
-options.SetOSAgnosticOptions(GetDirpath($MYVIM_CACHE_DIR))
-
-import GetPathPluginConfig('vimplug')
-vimplug.SetupVimPlug($MYVIM_VIMPLUG_DIR)
-var plugins = [
-	'asyncomplete',
-	'nerdtree',
-	'ollama',
-	'vimlsp',
-]
-for plugin in plugins
-	import GetPathPluginConfig(plugin)
+if empty(glob(vimplug_autoload_file))
+	execute vimplug_install_cmd 
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+for folder in [$MYVIM_BACKUP_DIR, $MYVIM_SWAP_DIR, $MYVIM_UNDO_DIR]
+	if empty(glob(folder))
+		mkdir(folder, 'p')
+	endif
 endfor
+# folder to store '~' files
+set backupdir=$MYVIM_BACKUP_DIR
+# folder to store '.swp' files
+set directory=$MYVIM_SWAP_DIR
+# folder to store '.un' files
+set undodir=$MYVIM_UNDO_DIR
+# folder to store 'viminfo' (save session information upon quitting)
+set viminfofile=$MYVIM_VIMINFO
 
-# This step must be done after loading the plugin manager, as some colorschemes
-# might have been installed/configured with it
+
+
+
+# Myconfig
+import GetPathVimConfig('options')
+import GetPathPluginConfig('vimplug')
+vimplug.Setup($MYVIM_VIMPLUG_DIR)
+import GetPathPluginConfig('asyncomplete')
+import GetPathPluginConfig('nerdtree')
+import GetPathPluginConfig('ollama')
+import GetPathPluginConfig('vimlsp')
 import GetPathVimConfig('colorschemes')
-colorschemes.SetDefault()
 
-# Creating custom mappings
-# Instead of creating these mappings in a separate file, i decided to create
-# them here. Assuming all other modules would have been already imported at
-# this point, creating mappings here seems logical, as these can then call any
-# function from any vim module. Indeed very convenient!
+
+
+
+# Mappings
 tnoremap <C-D> <C-W><C-C>
 nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(+1)<CR>
@@ -162,10 +126,7 @@ imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-#inoremap <expr> <C-q> pumvisible() ? asyncomplete#cancel_popup() : "\<C-q>"
-#nnoremap <Leader>c <Cmd>vim9 g:RotateColor(+1)<CR>
-#xmap        s   <Plug>(vsnip-select-text)
-#xmap        S   <Plug>(vsnip-cut-text)
+
 
 
 # vim: set ft=vim :

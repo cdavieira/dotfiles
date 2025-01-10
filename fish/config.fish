@@ -119,9 +119,18 @@ if status is-interactive
 	############# Functions ###############
 	#######################################
 
+	# test vimscript files in the terminal
+	if ! test (string match viml (functions))
+		function viml
+			for vimfile in (string match '*.vim' $argv)
+				vim -es -c "source $vimfile" -c 'q'
+			end
+		end
+	end
+
 	# use '......' idiom to move to any directory level up
 	function multicd
-			echo (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+		echo (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 	end
 	abbr --add dotdot --position command --regex '^\.\.+$' --function multicd
 

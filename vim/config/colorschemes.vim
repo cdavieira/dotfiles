@@ -1,27 +1,17 @@
 vim9script
 
-export def SetDefault(): void
-	# 'background' and 'colorscheme' operate together to set vim's visuals
-	set background=dark
+# 'background' and 'colorscheme' operate together to set vim's visuals
+set background=dark
+# colorscheme dracula
+colorscheme onedark
+# colorscheme wildcharm
+# colorscheme slate
+# colorscheme retrobox
+# colorscheme evening
+# colorscheme desert
+# colorscheme habamax
+# colorscheme sorbet
 
-	# Plugins
-	# colorscheme dracula
-	colorscheme onedark
-
-	# if has('lua') | colorscheme catppuccin | endif
-	# autocmd vimenter * ++nested colorscheme gruvbox
-
-	# Builtin
-	# colorscheme wildcharm
-	# colorscheme slate
-	# colorscheme retrobox
-	# colorscheme evening
-	# colorscheme desert
-	# colorscheme habamax
-	# colorscheme sorbet
-enddef
-
-#export def g:Rotate(increment: number): void
 export def Rotate(increment: number): void
 	const colors = [
 		'catppuccin-mocha',

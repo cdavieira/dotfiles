@@ -9,18 +9,29 @@ vim9script
 # MYVIM_FILES
 #   the path to the root directory where my custom '.vim' files can be found
 
+def WriteToStdout(...words: list<any>): void
+	# to test a vimscript file: "vim -es -c 'source script.vim' -c 'q'"
+	writefile(words, '/dev/stdout', 'a')
+enddef
+
+def GetFilepath(...dirs: list<string>): string
+	var sep = has('win64') ? '\' : '/'
+	var rel_path = join(dirs, sep)
+	return rel_path
+enddef
+
+def GetDirpath(...dirs: list<string>): string
+	var sep = has('win64') ? '\' : '/'
+	var rel_path = join(dirs, sep) .. sep
+	return rel_path
+enddef
+
 def GetPathVimConfig(configname: string): string
-	if has('win64')
-		return getenv('MYVIM_FILES') .. '\config\' .. configname .. '.vim'
-	endif
-	return getenv('MYVIM_FILES') .. '/config/' .. configname .. '.vim'
+	return GetFilepath(getenv('MYVIM_FILES'), 'config', configname .. '.vim')
 enddef
 
 def GetPathPluginConfig(pluginname: string): string
-	if has('win64')
-		return getenv('MYVIM_FILES') .. '\plugins\' .. pluginname .. '.vim'
-	endif
-	return getenv('MYVIM_FILES') .. '/plugins/' .. pluginname .. '.vim'
+	return GetFilepath(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
 enddef
 
 # Doing OS-specific stuff
@@ -110,7 +121,7 @@ else
 endif
 
 import GetPathVimConfig('options')
-options.SetOSAgnosticOptions($MYVIM_CACHE_DIR)
+options.SetOSAgnosticOptions(GetDirpath($MYVIM_CACHE_DIR))
 
 import GetPathPluginConfig('vimplug')
 vimplug.SetupVimPlug($MYVIM_VIMPLUG_DIR)

@@ -1,68 +1,89 @@
 // -*- mode: jsonc -*-
 {
-    "layer": "bottom",
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    "spacing": 4,
-		"mode": "dock",
-    "modules-left": [
-    ],
-    "modules-center": [
-    ],
-    "modules-right": [
-        "cpu",
-        "memory",
-        "temperature",
-        "backlight",
-        "battery",
-        "clock"
-    ],
-    "clock": {
-        "timezone": "America/Sao_Paulo",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "format": "{}% "
-    },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
-    "backlight": {
-        "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
-    "battery": {
-        "states": {
-            "good": 80,
-            "warning": 40,
-            "critical": 20
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    }
-    //"network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        //"format-wifi": "{essid} ({signalStrength}%) ",
-        //"format-ethernet": "{ipaddr}/{cidr} ",
-        //"tooltip-format": "{ifname} via {gwaddr} ",
-        //"format-linked": "{ifname} (No IP) ",
-        //"format-disconnected": "Disconnected ⚠",
-        //"format-alt": "{ifname}: {ipaddr}/{cidr}"
-    //}
+	"layer": "bottom",
+	"position": "top", // Waybar position (top|bottom|left|right)
+	"height": 30, // Waybar height (to be removed for auto height)
+	"spacing": 4,
+	"mode": "dock",
+	"modules-left": [
+		"dwl/tags"
+	],
+	"modules-center": [
+		"dwl/window"
+	],
+	"modules-right": [
+		"network",
+		"bluetooth",
+		"backlight",
+		"temperature",
+		"cpu",
+		"memory",
+		"battery",
+		"clock"
+	],
+	"dwl/window": {
+		"format": "{layout}",
+		"max-length": 50,
+		"rewrite": {
+			"(.*) - qutebrowser": "🌎 $1",
+			"(.*) - fish": "> [$1]"
+		}
+	},
+	"dwl/tags": {
+		"num-tags": 9
+	},
+	"clock": {
+		"timezone": "America/Sao_Paulo",
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"format-alt": "{:%Y-%m-%d}"
+	},
+	"cpu": {
+		"format": "{usage}% ",
+		"tooltip": false
+	},
+	"memory": {
+		"interval": 60,
+		"format": "{}% "
+	},
+	"temperature": {
+		"interval": 30,
+		"critical-threshold": 80,
+		"format": "{temperatureC}°C {icon}",
+		"format-icons": ["", "", ""]
+	},
+	"backlight": {
+		"interval": 60,
+		"format": "{percent}% {icon}",
+		"format-icons": ["", "", "", "", "", "", "", "", ""]
+	},
+	"battery": {
+		"interval": 60,
+		"states": {
+			"good": 80,
+			"warning": 40,
+			"critical": 20
+		},
+		"format": "{capacity}% {icon}",
+		"format-full": "{capacity}% {icon}",
+		// "format-good": "", // An empty format will hide the module
+		"format-charging": "{capacity}% ",
+		"format-plugged": "{capacity}% ",
+		"format-alt": "{time} {icon}",
+		"format-icons": ["", "", "", "", ""]
+	},
+	"bluetooth": {
+		"format": " {status}",
+		"format-connected": " {device_alias}",
+		"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+		"format-icons": ["", "", "", "", ""]
+	},
+	"network": {
+		"interval": 60,
+		"format-wifi": "{essid} ({signalStrength}%) ",
+		"format-ethernet": "{ipaddr}/{cidr} ",
+		"tooltip-format": "{ifname} via {gwaddr} ",
+		"format-linked": "{ifname} (No IP) ",
+		"format-disconnected": "Disconnected ⚠",
+		"format-alt": "{ifname}: {ipaddr}/{cidr}"
+	}
 }

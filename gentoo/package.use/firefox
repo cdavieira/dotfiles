@@ -1,1 +1,5 @@
-www-client/firefox wifi
+www-client/firefox wifi openh264 system-png
+
+# required by www-client/firefox-128.5.0::gentoo[system-png]
+# required by www-client/firefox (argument)
+>=media-libs/libpng-1.6.44 apng

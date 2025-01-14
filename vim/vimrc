@@ -8,7 +8,7 @@ vim9script
 # Overview of some environment variables i set in this vimrc:
 # $MYVIM_CONFIG_DIR  - the path to the directory where vim expects to find your 'vimrc' file
 # $MYVIM_CACHE_DIR   - the path to the directory where vim will store '~', '.un' and '.swp' files
-# MYVIM_FILES        - the path to the root directory where my custom '.vim' files can be found
+# $MYVIM_FILES        - the path to the root directory where my custom '.vim' files can be found
 # $MYVIM_VIMPLUG_DIR - the path to the directory where vimplug will download plugins
 
 
@@ -75,7 +75,9 @@ else
 	vimplug_install_cmd = '!curl -fLo ' .. vimplug_autoload_file .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 if empty(glob(vimplug_autoload_file))
-	execute vimplug_install_cmd 
+	silent execute vimplug_install_cmd 
+	# OBS1: git must be installed in order for the following autocomd to work!
+	# OBS2: if this command fails the first time, try it a second one
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 for folder in [$MYVIM_BACKUP_DIR, $MYVIM_SWAP_DIR, $MYVIM_UNDO_DIR]
@@ -115,7 +117,7 @@ nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(+1)<CR>
 nnoremap <Leader>v <ScriptCmd>colorschemes.Rotate(-1)<CR>
 nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
 nnoremap <Leader>f <Cmd>Files<CR>
-nnoremap <Leader>p <Cmd>edit ~/repos/dotfiles/vim<CR>
+nnoremap <Leader>p <Cmd>edit $MYVIM_FILES<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>s <Cmd>Rg<CR>
 nnoremap <Leader>o <Cmd>Ollama toggle<CR>

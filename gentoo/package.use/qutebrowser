@@ -4,13 +4,15 @@ www-client/qutebrowser pdf
 dev-qt/qtdeclarative svg
 media-libs/tiff jpeg
 media-libs/libvpx postproc
-dev-python/PyQt6 bluetooth quick svg
+# move dev-python/PyQt6 dev-python/pyqt6
+dev-python/pyqt6 bluetooth quick svg
 net-wireless/bluez cups
 
 # required by dev-python/PyQt6-WebEngine-6.7.0::gentoo[widgets]
 # required by www-client/qutebrowser-3.2.1::gentoo[python_single_target_python3_12]
 # required by qutebrowser (argument)
->=dev-python/PyQt6-6.7.1-r1 qml webchannel
+# move dev-python/PyQt6 dev-python/pyqt6
+>=dev-python/pyqt6-6.7.1-r1 qml webchannel
 # required by www-client/qutebrowser-3.2.1::gentoo[-python_single_target_python3_10,-python_single_target_python3_11,python_single_target_python3_12]
 # required by qutebrowser (argument)
 >=dev-qt/qtbase-6.7.2-r4 icu

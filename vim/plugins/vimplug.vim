@@ -2,14 +2,53 @@ vim9script
 
 type Dirpath = string
 
-export def Setup(vimplug_dir: Dirpath)
+export def MinimalSetup(vimplug_dir: Dirpath)
+	g:plug#begin(vimplug_dir)
+
+	# File explorer
+	legacy Plug 'preservim/nerdtree'
+
+	# Fuzzy finder
+	legacy Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	legacy Plug 'junegunn/fzf.vim'
+
+	# LSP
+	legacy Plug 'prabirshrestha/vim-lsp'
+
+	g:plug#end()
+enddef
+
+export def NormalSetup(vimplug_dir: Dirpath)
+	g:plug#begin(vimplug_dir)
+
+	# File explorer
+	legacy Plug 'preservim/nerdtree'
+
+	# Fuzzy finder
+	legacy Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	legacy Plug 'junegunn/fzf.vim'
+
+	# LSP
+	legacy Plug 'prabirshrestha/vim-lsp'
+
+	# LSP: Autocompletion
+	legacy Plug 'prabirshrestha/asyncomplete.vim'
+	legacy Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+	# Snippers
+	legacy Plug 'hrsh7th/vim-vsnip'
+	legacy Plug 'hrsh7th/vim-vsnip-integ'
+	legacy Plug 'rafamadriz/friendly-snippets'
+
+	g:plug#end()
+enddef
+
+export def FullSetup(vimplug_dir: Dirpath)
 	g:plug#begin(vimplug_dir)
 
 	# If one day i start feeling too lazy with configuring vim myself,
 	# i will just use the following plugin:
 	# https://github.com/wolandark/wim
-
-
 
 	###############
 	#### THEMES ###
@@ -175,6 +214,11 @@ export def Setup(vimplug_dir: Dirpath)
 
 	# https://github.com/szw/vim-tags
 	# legacy Plug 'szw/vim-tags'
+	
+	### Jupyter
+	# https://github.com/ubaldot/vim-replica
+	# legacy Plug 'ubaldot/vim-replica'
+
 
 
 	#################
@@ -240,8 +284,14 @@ export def Setup(vimplug_dir: Dirpath)
 	# https://github.com/gergap/vim-ollama
 	legacy Plug 'gergap/vim-ollama'
 
+	# https://github.com/CoderCookE/vim-chatgpt
+	# legacy Plug 'CoderCookE/vim-chatgpt'
+
 	# https://github.com/github/copilot.vim
 	# legacy Plug 'github/copilot.vim'
+
+	# https://github.com/skywind3000/vim-gpt-commit
+	# legacy Plug 'skywind3000/vim-gpt-commit'
 
 
 
@@ -275,6 +325,32 @@ export def Setup(vimplug_dir: Dirpath)
 	# https://github.com/kana/vim-textobj-user
 	# legacy Plug 'kana/vim-textobj-user'
 
+	# https://github.com/vimwiki/vimwiki
+	# legacy Plug 'vimwiki/vimwiki'
+
+	# https://github.com/qadzek/link.vim.git
+	# legacy Plug 'qadzek/link.vim.git'
+
+	# https://github.com/gyim/vim-boxdraw
+	# legacy Plug 'gyim/vim-boxdraw'
+
+	# https://github.com/luochen1990/rainbow
+	# legacy Plug 'luochen1990/rainbow'
+	
+	# https://github.com/junegunn/vim-easy-align
+	# legacy Plug 'junegunn/vim-easy-align'
+
+	# https://github.com/inkarkat/vim-mark
+	# legacy Plug 'inkarkat/vim-mark'
+
+	# https://github.com/kshenoy/vim-signature
+	# legacy Plug 'kshenoy/vim-signature'
+
+	# https://github.com/vim-scripts/LargeFile
+	# legacy Plug 'vim-scripts/LargeFile'
+
+	# https://github.com/lambdalisue/vim-suda
+	# legacy Plug 'lambdalisue/vim-suda'
 
 	# " Call plug#end to update &runtimepath and initialize the plugin system.
 	# " - It automatically executes `filetype plugin indent on` and `syntax enable`

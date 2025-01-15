@@ -23,10 +23,10 @@ def GetDirpath(...dirs: list<string>): string
 	var rel_path = join(dirs, sep) .. sep
 	return rel_path
 enddef
-def GetPathVimConfig(configname: string): string
-	return GetFilepath(getenv('MYVIM_FILES'), 'config', configname .. '.vim')
+def GetFileHelperConfig(configname: string): string
+	return GetFilepath(getenv('MYVIM_FILES'), configname .. '.vim')
 enddef
-def GetPathPluginConfig(pluginname: string): string
+def GetFilePluginConfig(pluginname: string): string
 	return GetFilepath(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
 enddef
 def WriteToStdout(...words: list<any>): void
@@ -51,7 +51,8 @@ setenv('MYVIM_SWAP_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'swap'))
 setenv('MYVIM_UNDO_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'undo'))
 setenv('MYVIM_VIMINFO', GetFilepath(getenv('MYVIM_CACHE_DIR'), 'viminfo'))
 setenv('MYVIM_VIMPLUG_DIR', GetDirpath(getenv('MYVIM_CONFIG_DIR'), 'vim-plug'))
-
+# override the system MANPAGER, since vim might have trouble using it if it has to (ex: if MANPAGER='nvim')
+setenv('MANPAGER', 'vim +MANPAGER --not-a-term -')
 
 
 
@@ -85,36 +86,30 @@ for folder in [$MYVIM_BACKUP_DIR, $MYVIM_SWAP_DIR, $MYVIM_UNDO_DIR]
 		mkdir(folder, 'p')
 	endif
 endfor
-# folder to store '~' files
-set backupdir=$MYVIM_BACKUP_DIR
-# folder to store '.swp' files
-set directory=$MYVIM_SWAP_DIR
-# folder to store '.un' files
-set undodir=$MYVIM_UNDO_DIR
-# folder to store 'viminfo' (save session information upon quitting)
-set viminfofile=$MYVIM_VIMINFO
 
 
 
 
 # Myconfig
-import GetPathVimConfig('options')
-import GetPathPluginConfig('vimplug')
-vimplug.Setup($MYVIM_VIMPLUG_DIR)
-import GetPathPluginConfig('asyncomplete')
-import GetPathPluginConfig('nerdtree')
-import GetPathPluginConfig('ollama')
-import GetPathPluginConfig('vimlsp')
-import GetPathVimConfig('colorschemes')
-
+import GetFileHelperConfig('options')
+import GetFileHelperConfig('colorschemes')
+import GetFilePluginConfig('vimplug')
+import GetFilePluginConfig('asyncomplete')
+import GetFilePluginConfig('nerdtree')
+import GetFilePluginConfig('ollama')
+import GetFilePluginConfig('vimlsp')
+#vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
+#vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
+vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
+colorschemes.SetCS('dracula', 'sorbet', 'evening', 'wildcharm')
 
 
 
 # Mappings
 tnoremap <C-D> <C-W><C-C>
 nnoremap <Leader>b <Cmd>Buffers<CR>
-nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(+1)<CR>
-nnoremap <Leader>v <ScriptCmd>colorschemes.Rotate(-1)<CR>
+nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(-1)<CR>
+nnoremap <Leader>v <ScriptCmd>colorschemes.Rotate(+1)<CR>
 nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
 nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>p <Cmd>edit $MYVIM_FILES<CR>
@@ -124,10 +119,10 @@ nnoremap <Leader>o <Cmd>Ollama toggle<CR>
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+inoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+snoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+inoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+snoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
 
 

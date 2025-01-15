@@ -23,3 +23,4 @@
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
 * [fd](https://github.com/sharkdp/fd)
 * [fugitive](https://github.com/tpope/vim-fugitive)
+* [ChatGPT](https://github.com/jackMort/ChatGPT.nvim)

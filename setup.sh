@@ -10,7 +10,7 @@ create_folders(){
 	mkdir tmp save repos books german vids
 
 	# creating $prefix/.config folders
-	mkdir .config/{,vim,fish,kitty,tmux,waybar,qutebrowser}
+	mkdir .config/{,vim,fish,kitty,tmux,waybar,qutebrowser,dunst}
 
 	# creating $prefix/.cache folders
 	mkdir .cache/vim/{,backup,swap,undo}
@@ -32,6 +32,7 @@ make_links(){
 	ln -s ${reposdir}/dotfiles/mailcap/mailcap ~/.mailcap
 	ln -sf ${reposdir}/dotfiles/waybar/config.jsonc ${xdgconfigdir}/waybar
 	ln -sf ${reposdir}/dotfiles/waybar/style.css ${xdgconfigdir}/waybar
+	ln -sf ${reposdir}/dotfiles/dunst/dunstrc ${xdgconfigdir}/dunst
 	case $1 in
 		'archlinux')
 			ln -sf ${reposdir}/dotfiles/kitty/kitty.conf ${xdgconfigdir}/kitty

@@ -17,6 +17,7 @@ fi
 if test "$1" = "sway"; then
 	echo "dbus-launch sway"
 elif test "$1" = "dwl"; then
+	#dbus-launch dwl -s ~/repos/dwl/startup.sh <&-
 	dbus-launch dwl -s ~/repos/dwl/startup.sh
 else
 	echo "Unknown window manager!"

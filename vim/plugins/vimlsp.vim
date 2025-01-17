@@ -61,7 +61,7 @@ g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
 # g:lsp_experimental_workspace_folders = 1
 
 # create a log file to inspect lsp action
-# g:lsp_log_file = expand(path.vim_config_dir .. 'vim-lsp.log')
+# g:lsp_log_file = expand($MYVIM_CONFIG_DIR .. 'vim-lsp.log')
 
 
 
@@ -197,30 +197,30 @@ def On_lsp_buffer_enabled(): void
 	if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
 	# peek- infixable
-  nnoremap <buffer> <leader>a <plug>(lsp-declaration)
+	nnoremap <buffer> <leader>a <plug>(lsp-declaration)
 	nnoremap <buffer> <leader>d <plug>(lsp-definition)
-  nnoremap <buffer> <leader>g <plug>(lsp-implementation)
+	nnoremap <buffer> <leader>g <plug>(lsp-implementation)
 	nnoremap <buffer> <leader>t <plug>(lsp-type-definition)
-  nnoremap <buffer> <leader>h <plug>(lsp-type-hierarchy)
+	nnoremap <buffer> <leader>h <plug>(lsp-type-hierarchy)
 
 	# -preview appendable
-  nnoremap <buffer> <leader>k <plug>(lsp-hover)
+	nnoremap <buffer> <leader>k <plug>(lsp-hover)
 
 	# nothing
-  nnoremap <buffer> <leader>m <plug>(lsp-document-symbol)
-  nnoremap <buffer> <leader>i <plug>(lsp-document-diagnostics)
-  nnoremap <buffer> <leader>w <plug>(lsp-preview-focus)
-  nnoremap <buffer> <leader>l <plug>(lsp-preview-close)
-  nnoremap <buffer> <leader>j <plug>(lsp-rename)
+	nnoremap <buffer> <leader>m <plug>(lsp-document-symbol)
+	nnoremap <buffer> <leader>i <plug>(lsp-document-diagnostics)
+	nnoremap <buffer> <leader>w <plug>(lsp-preview-focus)
+	nnoremap <buffer> <leader>l <plug>(lsp-preview-close)
+	nnoremap <buffer> <leader>j <plug>(lsp-rename)
 
 	# retired
-  # nnoremap <buffer> <leader>z <plug>(lsp-code-action)
-  # nnoremap <buffer> <leader>y <plug>(lsp-references)
-  # nnoremap <buffer> <leader>x <plug>(lsp-code-lens)
-  # nnoremap <buffer> <leader>w <plug>(lsp-next-diagnostic)
-  # nnoremap <buffer> <leader>v <plug>(lsp-next-error)
-  # nnoremap <buffer> <leader>u <plug>(lsp-next-warning)
-  # nnoremap <buffer> <leader>n <plug>(lsp-status)
+	# nnoremap <buffer> <leader>z <plug>(lsp-code-action)
+	# nnoremap <buffer> <leader>y <plug>(lsp-references)
+	# nnoremap <buffer> <leader>x <plug>(lsp-code-lens)
+	# nnoremap <buffer> <leader>w <plug>(lsp-next-diagnostic)
+	# nnoremap <buffer> <leader>v <plug>(lsp-next-error)
+	# nnoremap <buffer> <leader>u <plug>(lsp-next-warning)
+	# nnoremap <buffer> <leader>n <plug>(lsp-status)
 
 	autocmd! BufWritePre *.rs execute('LspDocumentFormatSync')
 enddef

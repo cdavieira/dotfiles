@@ -105,6 +105,7 @@ colorschemes.SetCS('dracula', 'sorbet', 'evening', 'wildcharm')
 
 
 
+
 # Mappings
 tnoremap <C-D> <C-W><C-C>
 nnoremap <Leader>b <Cmd>Buffers<CR>
@@ -116,9 +117,9 @@ nnoremap <Leader>p <Cmd>edit $MYVIM_FILES<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>s <Cmd>Rg<CR>
 nnoremap <Leader>o <Cmd>Ollama toggle<CR>
-imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+imap <expr> <C-j>       vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+imap <expr> <C-l>       vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>       vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 inoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 snoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 inoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'

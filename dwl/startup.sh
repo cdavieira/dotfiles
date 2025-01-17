@@ -1,7 +1,7 @@
 #!/bin/sh
 
-gentoo-pipewire-launcher &
 # <&- closes standard input
+gentoo-pipewire-launcher <&- &
 waybar <&- &
 swaybg -i ~/repos/dotfiles/dwl/background.png -m fit <&- &
-dunst &
+dunst <&- &

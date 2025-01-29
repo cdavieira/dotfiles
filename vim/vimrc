@@ -101,7 +101,7 @@ import GetFilePluginConfig('vimlsp')
 #vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
 #vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
 vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
-colorschemes.SetCS('dracula', 'sorbet', 'evening', 'wildcharm')
+colorschemes.SetCS('onedark', 'dracula', 'sorbet', 'evening', 'wildcharm')
 
 
 

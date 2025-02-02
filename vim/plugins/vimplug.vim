@@ -219,6 +219,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/ubaldot/vim-replica
 	# legacy Plug 'ubaldot/vim-replica'
 
+	### GPG
+	# https://github.com/jamessan/vim-gnupg
+	# legacy Plug 'jamessan/vim-gnupg'
 
 
 	#################
@@ -333,6 +336,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/gyim/vim-boxdraw
 	# legacy Plug 'gyim/vim-boxdraw'
+	
+	# https://github.com/jessepav/vim-boxdraw
+	# legacy Plug 'jessepav/vim-boxdraw'
 
 	# https://github.com/luochen1990/rainbow
 	# legacy Plug 'luochen1990/rainbow'

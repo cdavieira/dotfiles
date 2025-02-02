@@ -19,8 +19,8 @@ create_folders(){
 clone_repos(){
 	git clone https://codeberg.org/dwl/dwl.git ${reposdir}
 	git clone https://github.com/cdavieira/dotfiles.git ${reposdir}
-	git clone https://github.com/cdavieira/notes.git ${reposdir}
-	git clone https://github.com/cdavieira/code.git ${reposdir}
+	#git clone https://github.com/cdavieira/notes.git ${reposdir}
+	#git clone https://github.com/cdavieira/code.git ${reposdir}
 }
 
 # $1 current OS
@@ -33,14 +33,13 @@ make_links(){
 	ln -sf ${reposdir}/dotfiles/waybar/config.jsonc ${xdgconfigdir}/waybar
 	ln -sf ${reposdir}/dotfiles/waybar/style.css ${xdgconfigdir}/waybar
 	ln -sf ${reposdir}/dotfiles/dunst/dunstrc ${xdgconfigdir}/dunst
+	ln -sf ${reposdir}/dotfiles/qutebrowser/config.py ${xdgconfigdir}/qutebrowser
 	case $1 in
 		'archlinux')
 			ln -sf ${reposdir}/dotfiles/kitty/kitty.conf ${xdgconfigdir}/kitty
-			ln -sf ${reposdir}/dotfiles/qutebrowser/config.py ${xdgconfigdir}/qutebrowser
 			;;
 		'gentoo')
 			ln -sf ${reposdir}/dotfiles/kitty/kitty-gentoo.conf ${xdgconfigdir}/kitty
-			ln -sf ${reposdir}/dotfiles/qutebrowser/config-gentoo.py ${xdgconfigdir}/qutebrowser
 			ln -s ${reposdir}/dotfiles/gentoo/init.sh ~
 			;;
 		*) ;;
@@ -87,13 +86,13 @@ if ! test "${yes_create_folders}" = "y"; then
 	yes_create_folders="n"
 fi
 
-echo "Would you like to clone repos to $prefix/repos? [y/N]"
+echo "Would you like to clone repos to ${reposdir}? [y/N]"
 read yes_clone_repos
 if ! test "${yes_clone_repos}" = "y"; then
 	yes_clone_repos="n"
 fi
 
-echo "Would you like to create links to $prefix/.config? [y/N]"
+echo "Would you like to create links to ${xdgconfigdir}? [y/N]"
 read yes_make_links
 if ! test "${yes_make_links}" = "y"; then
 	yes_make_links="n"

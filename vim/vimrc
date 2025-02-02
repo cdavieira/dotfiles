@@ -2,13 +2,13 @@ vim9script
 
 
 # To create a symbolic link to this vimrc:
-# (Windows) - New-Item -ItemType SymbolicLink -Target $HOME\path\to\thisvimrc -Path $HOME\vimfiles\vimrc
-# (linux) - ln -s ~/path/to/this/vimrc ~/.config/vim
+# (Windows) : New-Item -ItemType SymbolicLink -Target $HOME\path\to\thisvimrc -Path $HOME\vimfiles\vimrc
+# (linux)   : ln -s ~/path/to/this/vimrc ~/.config/vim
 
 # Overview of some environment variables i set in this vimrc:
 # $MYVIM_CONFIG_DIR  - the path to the directory where vim expects to find your 'vimrc' file
 # $MYVIM_CACHE_DIR   - the path to the directory where vim will store '~', '.un' and '.swp' files
-# $MYVIM_FILES        - the path to the root directory where my custom '.vim' files can be found
+# $MYVIM_FILES       - the path to the root directory where my custom '.vim' files can be found
 # $MYVIM_VIMPLUG_DIR - the path to the directory where vimplug will download plugins
 
 
@@ -56,6 +56,7 @@ setenv('MANPAGER', 'vim +MANPAGER --not-a-term -')
 
 
 
+
 # OS-Specific
 var vimplug_install_cmd: string
 var vimplug_autoload_file = GetFilepath(getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim')
@@ -77,8 +78,7 @@ else
 endif
 if empty(glob(vimplug_autoload_file))
 	silent execute vimplug_install_cmd 
-	# OBS1: git must be installed in order for the following autocomd to work!
-	# OBS2: if this command fails the first time, try it a second one
+	# OBS1: git must be installed in order for the following autocommand to work!
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 for folder in [$MYVIM_BACKUP_DIR, $MYVIM_SWAP_DIR, $MYVIM_UNDO_DIR]

@@ -1,6 +1,5 @@
 -- Links for reference
 -- https://github.com/folke/lazy.nvim
--- https://www.youtube.com/watch?v=6mxWayq-s9I
 
 -- configuring lazy's installation path.
 -- all plugins installed/managed by lazy will reside in this folder.

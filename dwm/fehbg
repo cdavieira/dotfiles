@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-scale '/home/carlos/dotfiles/dwl/background.png' 
+feh --no-fehbg --bg-scale '/home/carlos/dotfiles/wallpapers/background.png' 

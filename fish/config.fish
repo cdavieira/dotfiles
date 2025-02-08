@@ -48,6 +48,10 @@ if status is-interactive
 		set -x PATH $PATH "/usr/local/texlive/$(date +%Y)/bin/x86_64-linux"
 	end
 
+	if test -d "$HOME/.yarn/bin"
+		set -x PATH $PATH "$HOME/.yarn/bin"
+	end
+
 	# set EDITOR env var
 	set editors 'nvim' 'vim' 'less'
 	for editor in $editors

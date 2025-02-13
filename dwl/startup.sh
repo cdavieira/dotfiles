@@ -37,8 +37,8 @@ fi
 
 if command_exists swayidle && command_exists swaylock && command_exists wlopm; then
   swayidle -w \
-    timeout 300 'swaylock -f -c 000000' \
-    timeout 600 'wlopm --off eDP-1' \
+    timeout 600 'swaylock -f -c 000000' \
+    timeout 1200 'wlopm --off eDP-1' \
     resume 'wlopm --on eDP-1'
 else
   echo "dwl-startup.sh: fail when starting screensaving service (swayidle/swaylock/wlopm not found)"

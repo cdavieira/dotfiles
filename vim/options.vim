@@ -55,6 +55,7 @@ set fileencodings=utf-8,default
 set nowrap
 
 # .editorconfig fallbacks
+# NOTE: you can always insert actual <Tab> characters in insert mode with 'Ctrl-V+<Tab>'
 # The number of spaces that an actual <Tab> in the file visually represents.
 set tabstop=8
 # The actual number of spaces that a <Tab> inserts in insert mode. Whenever

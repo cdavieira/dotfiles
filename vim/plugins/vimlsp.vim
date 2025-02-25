@@ -85,6 +85,9 @@ g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
 # this dictionary also accepts the keys:
 # 'root_uri' (a string), 'capabilities', 'initialization_options'
 # you can check this by reading '~/.config/vim/vim-plug/vim-lsp/autoload/lsp.vim'
+
+# https://clang.llvm.org/
+# https://clangd.llvm.org/
 var c_lspinfo = {
 	'name': 'clangd',
 	'cmd': ['clangd', '--background-index'],
@@ -93,6 +96,8 @@ var c_lspinfo = {
 	'config': {},
 	'workspace_config': {}
 }
+
+# https://github.com/LuaLS/lua-language-server
 var lua_lspinfo = {
 	'name': 'lua-language-server',
 	'cmd': ['lua-language-server', '--stdio'],
@@ -101,6 +106,8 @@ var lua_lspinfo = {
 	'config': {},
 	'workspace_config': {}
 }
+
+# https://github.com/python-lsp/python-lsp-server
 var python_lspinfo = {
 	'name': 'pylsp',
 	'cmd': ['pylsp'],
@@ -109,6 +116,9 @@ var python_lspinfo = {
 	'config': {},
 	'workspace_config': {}
 }
+
+# https://rust-analyzer.github.io/
+# https://github.com/rust-lang/rust-analyzer
 var rust_lsp_info = {
 	'name': 'rust-analyzer',
 	'cmd': ['rust-analyzer'],
@@ -117,6 +127,8 @@ var rust_lsp_info = {
 	'config': {},
 	'workspace_config': {}
 }
+
+# https://github.com/iamcco/vim-language-server
 var vim_lsp_info = {
 	'name': 'vim-language-server',
 	'cmd': (server_info) => ['vim-language-server', '--stdio'],
@@ -129,33 +141,67 @@ var vim_lsp_info = {
 	'config': {},
 	'workspace_config': {}
 }
+
+# https://github.com/typescript-language-server/typescript-language-server
 var ts_lsp_info = {
 	'name': 'typescript-language-server',
 	'cmd': (server_info) => [&shell, &shellcmdflag, 'typescript-language-server --stdio'],
 	'root_uri': (server_info) => lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json')),
 	'whitelist': ['typescript', 'typescript.tsx', 'typescriptreact']
 }
+
+# https://github.com/typescript-language-server/typescript-language-server
 var js_lsp_info = {
 	'name': 'javascript support using typescript-language-server',
 	'cmd': (server_info) => [&shell, &shellcmdflag, 'typescript-language-server --stdio'],
 	'root_uri': (server_info) => lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json')),
 	'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact']
 }
+
+# https://github.com/microsoft/vscode-html-languageservice
 var html_lsp_info = {
 	'name': 'html-languageserver',
 	'cmd': (server_info) => [&shell, &shellcmdflag, 'html-languageserver --stdio'],
 	'whitelist': ['html'],
 }
+
+# https://github.com/microsoft/vscode-css-languageservice
 var css_lsp_info = {
 	'name': 'css-languageserver',
 	'cmd': (server_info) => [&shell, &shellcmdflag, 'css-languageserver --stdio'],
 	'whitelist': ['css', 'less', 'sass'],
 }
-var tex_lsp_info = {
-	'name': 'texlab',
-	'cmd': (server_info) => [expand('texlab')],
-	'whitelist': ['tex']
+
+# https://github.com/latex-lsp/texlab
+# var tex_lsp_info = {
+# 	'name': 'texlab',
+# 	'cmd': (server_info) => [expand('texlab')],
+# 	'whitelist': ['tex']
+# }
+
+# https://github.com/juanfranblanco/vscode-solidity
+var solidity_lsp_info = {
+	'name': 'vscode-solidity',
+	'cmd': (server_info) => [&shell, &shellcmdflag, 'vscode-solidity-server --stdio'],
+	'allowlist': ['solidity', 'sol'],
+	'blocklist': [],
+	'config': {},
+	'workspace_config': {}
 }
+
+# https://github.com/bash-lsp/bash-language-server
+# var bash_lsp_info = {
+# 	'name': 'bash-language-server',
+# 	'cmd': (server_info) => [&shell, &shellcmdflag, 'bash-language-server start'],
+# 	'whitelist': ['sh']
+# }
+
+# https://github.com/rcjsuen/dockerfile-language-server
+# var docker_lsp_info = {
+# 	'name': 'docker-langserver',
+# 	'cmd': (server_info) => [&shell, &shellcmdflag, 'docker-langserver --stdio'],
+# 	'whitelist': ['dockerfile'],
+# }
 
 ########################
 ######## STEP 2 ########
@@ -185,9 +231,18 @@ endif
 if executable('css-languageserver')
 	au User lsp_setup lsp#register_server(css_lsp_info)
 endif
-if executable('texlab')
-	au User lsp_setup lsp#register_server(tex_lsp_info)
+# if executable('texlab')
+# 	au User lsp_setup lsp#register_server(tex_lsp_info)
+# endif
+if executable('vscode-solidity-server')
+	au User lsp_setup lsp#register_server(solidity_lsp_info)
 endif
+# if executable('bash-language-server')
+# 	au User lsp_setup lsp#register_server(bash_lsp_info)
+# endif
+# if executable('docker-langserver')
+# 	au User lsp_setup lsp#register_server(docker_lsp_info)
+# endif
 
 ########################
 ######## STEP 3 ########

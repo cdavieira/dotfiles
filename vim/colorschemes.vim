@@ -75,15 +75,3 @@ export def Rotate(increment: number): void
 	# :help echo
 	redraw | echo "ColorRotate: current colorscheme:" next_colorscheme
 enddef
-
-# 'background' and 'colorscheme' operate together to set vim's visuals
-# set background=dark
-# colorscheme dracula
-# colorscheme onedark
-# colorscheme wildcharm
-# colorscheme slate
-# colorscheme retrobox
-# colorscheme evening
-# colorscheme desert
-# colorscheme habamax
-# colorscheme sorbet

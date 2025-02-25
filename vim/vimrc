@@ -35,7 +35,6 @@ enddef
 
 
 
-
 # Environment variables
 if has('win64')
 	setenv('MYVIM_CONFIG_DIR', GetDirpath($HOME, 'vimfiles'))

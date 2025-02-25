@@ -4,6 +4,7 @@ Lspconfig.pylsp.setup {}
 -- Lspconfig.ts_ls.setup {}
 Lspconfig.lua_ls.setup {}
 Lspconfig.clangd.setup {}
+Lspconfig.ts_ls.setup {}
 Lspconfig.rust_analyzer.setup {
 	settings = { -- Server-specific settings. See `:help lspconfig-setup`
 		['rust-analyzer'] = {},
@@ -36,4 +37,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			vim.lsp.buf.format { async = true }
 		end, opts)
 	end,
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+	pattern = '*.cpp',
+	command = 'set commentstring=//%s',
 })

@@ -1,0 +1,6 @@
+# required by media-gfx/blender-4.2.1::gentoo
+# required by blender (argument)
+>=media-libs/freetype-2.13.3 brotli
+# required by media-gfx/blender-4.2.1::gentoo[ffmpeg]
+# required by blender (argument)
+>=media-video/ffmpeg-6.1.2 theora vorbis xvid mp3 vpx

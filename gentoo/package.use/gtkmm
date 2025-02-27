@@ -1,0 +1,24 @@
+# gtkmm e cairomm são dependencias requeridas pelo waybar e não necessitam da
+# useflag X. No cenário mais básico, essas dependencies não necessitam que o
+# gtk nem o cairo sejam compilados com suporte ao X.
+
+# No entanto, para instalar o thunar ou nemo (por exemplo), atualmente é
+# necessário habilitar a useflag X para o gtkmm e cairomm, caso contrário eles
+# puxam versões do gtk e cairo que não trazem suporte ao X, enquanto que o
+# thunar e o nemo puxam versões do gtk e cairo que necessitam do X.
+
+dev-cpp/gtkmm X
+dev-cpp/cairomm X
+
+# required by dev-cpp/gtkmm-3.24.9::gentoo
+# required by gui-apps/waybar-0.11.0-r1::gentoo
+# required by @selected
+# required by @world (argument)
+>=x11-libs/gtk+-3.24.42-r1 X
+
+# required by x11-libs/gtk+-3.24.42-r1::gentoo
+# required by dev-cpp/gtkmm-3.24.9::gentoo
+# required by gui-apps/waybar-0.11.0-r1::gentoo
+# required by @selected
+# required by @world (argument)
+>=x11-libs/cairo-1.18.2-r1 X

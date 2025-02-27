@@ -1,6 +1,9 @@
--- autocompletion
+-- autocomp/home/carlosletion
 
 -- https://github.com/hrsh7th/nvim-cmp
+-- the type for each member of  this dictionary can be found at: $HOME/.local/share/nvim/lazy/nvim-cmp/lua/cmp/types  
+
+-- also, read ':help nvim-cmp'
 
 return {
 	"hrsh7th/nvim-cmp",
@@ -17,13 +20,15 @@ return {
 		local cmp = require("cmp")
 		local defaults = require("cmp.config.default")()
 		return {
-			completion = {
-				completeopt = "menu,menuone,noinsert",
-			},
+		  -- Required, specify a snippet engine
 			snippet = {
 				expand = function(args)
-					require("luasnip").lsp_expand(args.body)
+					-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+					vim.snippet.expand(args.body) -- For native neovim snippets (Neovim 0.10+)
 				end,
+			},
+			completion = {
+				completeopt = "menu,menuone,noinsert",
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -42,23 +47,17 @@ return {
 					fallback()
 				end,
 			}),
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
-				{ name = "path" },
-			}, {
-				{ name = "buffer" },
-			}),
-			--[[ formatting = {
-				format = function(_, item)
-					local icons = require("lazyvim.config").icons.kinds
-					if icons[item.kind] then
-						item.kind = icons[item.kind] .. item.kind
-					end
-					return item
-				end,
-			},
-			--]]
+			sources = cmp.config.sources(
+				{
+					{ name = "nvim_lsp" },
+					{ name = "path" },
+					{ name = "snippets" }, --nvim-snippets (which uses community prebuiltin snippets through snippets-friendly)
+					-- { name = "luasnip" },
+				},
+				{
+					{ name = "buffer" },
+				}
+			),
 			experimental = {
 				ghost_text = {
 					hl_group = "CmpGhostText",

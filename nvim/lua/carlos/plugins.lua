@@ -11,4 +11,6 @@ return {
 	require("carlos.plugins.whichkey"),
 	require("carlos.plugins.alpha"),
 	require("carlos.plugins.toggleterm"),
+	require("carlos.plugins.nvim-snippets")[1],
+	require("carlos.plugins.nvim-snippets")[2],
 }

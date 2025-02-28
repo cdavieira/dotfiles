@@ -18,7 +18,7 @@ create_folders(){
 
 clone_repos(){
 	git clone https://codeberg.org/dwl/dwl.git ${reposdir}
-	git clone https://github.com/cdavieira/dotfiles.git ${reposdir}
+	git clone https://github.com/cdavieira/dotfiles.git ${reposdir}/dwl
 	#git clone https://github.com/cdavieira/notes.git ${reposdir}
 	#git clone https://github.com/cdavieira/code.git ${reposdir}
 }
@@ -30,13 +30,13 @@ make_links(){
 	ln -s ${reposdir}/dotfiles/nvim/ ${xdgconfigdir}
 	ln -sf ${reposdir}/dotfiles/tmux/tmux.conf ${xdgconfigdir}/tmux
 	ln -s ${reposdir}/dotfiles/mailcap/mailcap ~/.mailcap
-	ln -sf ${reposdir}/dotfiles/waybar/config.jsonc ${xdgconfigdir}/waybar
-	ln -sf ${reposdir}/dotfiles/waybar/style.css ${xdgconfigdir}/waybar
+	ln -sf ${reposdir}/dotfiles/dwl/config.jsonc ${xdgconfigdir}/waybar
+	ln -sf ${reposdir}/dotfiles/dwl/style.css ${xdgconfigdir}/waybar
 	ln -sf ${reposdir}/dotfiles/dunst/dunstrc ${xdgconfigdir}/dunst
 	ln -sf ${reposdir}/dotfiles/qutebrowser/config.py ${xdgconfigdir}/qutebrowser
 	case $1 in
 		'archlinux')
-			ln -sf ${reposdir}/dotfiles/kitty/kitty.conf ${xdgconfigdir}/kitty
+			ln -sf ${reposdir}/dotfiles/kitty/kitty-arch.conf ${xdgconfigdir}/kitty
 			;;
 		'gentoo')
 			ln -sf ${reposdir}/dotfiles/kitty/kitty-gentoo.conf ${xdgconfigdir}/kitty
@@ -59,6 +59,17 @@ make_dyn_libs(){
 	for dirname in 'wldraw' 'rational' 'stringUtils' 'sort' 'containers'; do
 		make -C ${rootdir}/${dirname} 'local'
 	done
+}
+
+# TODO
+install_packages(){
+	case $1 in
+		'archlinux')
+			;;
+		'gentoo')
+			;;
+		*) ;;
+	esac
 }
 
 #################################
@@ -104,27 +115,38 @@ if ! test "${yes_make_dyn_libs}" = "y"; then
 	yes_make_dyn_libs="n"
 fi
 
+echo "Would you like to install packages? [y/N]"
+read yes_install_pkgs
+if ! test "${yes_install_pkgs}" = "y"; then
+	yes_install_pkgs="n"
+fi
+
 ##############################
 ##############################
 ##############################
 
 if test ${yes_create_folders} = "y"; then
 	echo "Creating folders..."
-	#create_folders
+	create_folders
 	echo "Ok"
 fi
 if test ${yes_clone_repos} = "y"; then
 	echo "Cloning repos..."
-	#clone_repos
+	clone_repos
 	echo "Ok"
 fi
 if test ${yes_make_links} = "y"; then
 	echo "Creating symlinks for ${linuxdistro}..."
-	#make_links ${linuxdistro} 
+	make_links ${linuxdistro} 
 	echo "Ok"
 fi
 if test ${yes_make_dyn_libs} = "y"; then
 	echo "Creating dynamic libs..."
-	#make_dyn_libs
+	make_dyn_libs
+	echo "Ok"
+fi
+if test ${yes_install_pkgs} = "y"; then
+	echo "Installing packages..."
+	install_packages
 	echo "Ok"
 fi

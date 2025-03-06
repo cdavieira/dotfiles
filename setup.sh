@@ -13,7 +13,7 @@ create_folders(){
 	mkdir .config/{,vim,fish,kitty,tmux,waybar,qutebrowser,dunst}
 
 	# creating $prefix/.cache folders
-	mkdir .cache/vim/{,backup,swap,undo}
+	mkdir -p .cache/vim/{,backup,swap,undo}
 }
 
 clone_repos(){
@@ -30,8 +30,8 @@ make_links(){
 	ln -s ${reposdir}/dotfiles/nvim/ ${xdgconfigdir}
 	ln -sf ${reposdir}/dotfiles/tmux/tmux.conf ${xdgconfigdir}/tmux
 	ln -s ${reposdir}/dotfiles/mailcap/mailcap ~/.mailcap
-	ln -sf ${reposdir}/dotfiles/dwl/config.jsonc ${xdgconfigdir}/waybar
-	ln -sf ${reposdir}/dotfiles/dwl/style.css ${xdgconfigdir}/waybar
+	ln -sf ${reposdir}/dotfiles/dwl/waybar-config.jsonc ${xdgconfigdir}/waybar
+	ln -sf ${reposdir}/dotfiles/dwl/waybar-style.css ${xdgconfigdir}/waybar
 	ln -sf ${reposdir}/dotfiles/dunst/dunstrc ${xdgconfigdir}/dunst
 	ln -sf ${reposdir}/dotfiles/qutebrowser/config.py ${xdgconfigdir}/qutebrowser
 	case $1 in

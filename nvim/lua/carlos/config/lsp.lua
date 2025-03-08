@@ -40,6 +40,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.api.nvim_create_autocmd('BufEnter', {
-	pattern = '*.cpp',
+	pattern = {'*.cpp', '*.hpp'},
 	command = 'set commentstring=//%s',
 })

@@ -35,6 +35,7 @@ else
   echo "dwl-startup.sh: fail when starting notify-daemon (dunst not found)"
 fi
 
+# TODO: maybe use xdg-screensaver instead of swayidle/wlopm/swaylock?
 if command_exists swayidle && command_exists swaylock && command_exists wlopm; then
   swayidle -w \
     timeout 600 'swaylock -f -c 000000' \

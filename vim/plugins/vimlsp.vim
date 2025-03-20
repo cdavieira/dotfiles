@@ -221,7 +221,7 @@ endif
 if executable('vim-language-server')
 	au User lsp_setup lsp#register_server(vim_lsp_info)
 endif
-if executable('tsserver')
+if executable('typescript-language-server')
 	au User lsp_setup lsp#register_server(ts_lsp_info)
 	au User lsp_setup lsp#register_server(js_lsp_info)
 endif

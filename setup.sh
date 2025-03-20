@@ -17,8 +17,8 @@ create_folders(){
 }
 
 clone_repos(){
-	git clone https://codeberg.org/dwl/dwl.git ${reposdir}
-	git clone https://github.com/cdavieira/dotfiles.git ${reposdir}/dwl
+	git clone https://codeberg.org/dwl/dwl.git ${reposdir}/dwl
+	git clone https://github.com/cdavieira/dotfiles.git ${reposdir}
 	#git clone https://github.com/cdavieira/notes.git ${reposdir}
 	#git clone https://github.com/cdavieira/code.git ${reposdir}
 }
@@ -62,6 +62,18 @@ make_dyn_libs(){
 }
 
 # TODO
+
+install_packages_gentoo(){
+  # this one is trickier because of USE_FLAGS
+  # 1: check if /etc/portage/package.use/ has all files expected (found under dotfiles/gentoo/package.use/)
+  # 2: if not, then warn the user about that and ask if he would like to continue or not
+  # 3: OR: run 'sudo cp dotfiles/gentoo/package.use/* /etc/portage/package.use/' and continue
+}
+
+install_packages_arch(){
+
+}
+
 install_packages(){
 	case $1 in
 		'archlinux')

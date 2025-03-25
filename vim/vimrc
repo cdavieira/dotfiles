@@ -126,4 +126,10 @@ snoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '
 
 
 
+autocmd BufEnter *.c {
+  set commentstring=//\ %s
+}
+
+
+
 # vim: set ft=vim :

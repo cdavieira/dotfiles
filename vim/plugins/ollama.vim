@@ -6,8 +6,12 @@ g:ollama_chat_model = 'llama3.2:latest'
 
 g:ollama_model = 'codellama:latest'
 
-g:ollama_fim_prefix = '<|fim_prefix|>'
+g:ollama_debug = 1
 
-g:ollama_fim_middle = '<|fim_middle|>'
+g:ollama_logfile = expand('~/vimollama.log')
 
-g:ollama_fim_suffix = '<|fim_suffix|>'
+# g:ollama_fim_prefix = '<|fim_prefix|>'
+
+# g:ollama_fim_middle = '<|fim_middle|>'
+
+# g:ollama_fim_suffix = '<|fim_suffix|>'

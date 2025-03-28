@@ -11,6 +11,7 @@ create_folders(){
 
 	# creating $prefix/.config folders
 	mkdir .config/{,vim,fish,kitty,tmux,waybar,qutebrowser,dunst}
+	mkdir .config/vim/snippets
 
 	# creating $prefix/.cache folders
 	mkdir .cache/vim/{,backup,swap,undo}
@@ -85,8 +86,8 @@ install_packages_arch(){
   WAYLAND_APPS="kitty waybar xdg-desktop-portal-gtk xdg-desktop-portal-wlr wl-clipboard wf-recorder slurp grim swappy dunst fnott swaybg wl-mirror"
   TERMINAL_APPS="fish python-pynvim neovim vim nodejs ffmpeg fd ripgrep zathura zathura-pdf-poppler mpv imv vimiv syncthing"
   OPT_TERMINAL_APPS="glow mutt neomutt"
-  GRAPHICAL_APPS="qutebrowser qemu-desktop mypaint"
-  OPT_GRAPHICAL_APPS="firefox discord xournalpp darktable gimp blender"
+  GRAPHICAL_APPS="qutebrowser mypaint"
+  OPT_GRAPHICAL_APPS="firefox discord xournalpp darktable gimp blender qemu-desktop libreoffice"
   FONTS="otf-firamono-nerd ttf-anonymouspro-nerd ttf-cascadia-code-nerd ttf-firacode-nerd ttf-hack-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono adobe-source-code-pro-fonts noto-fonts-emoji otf-font-awesome"
   MISC="gnome lua-language-server typescript-language-server python-lsp-server"
   # display manager missing

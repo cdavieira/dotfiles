@@ -121,6 +121,7 @@ set ttimeoutlen=100
 
 # enhance commandline completion, by enabling 'wildchar' to invoke
 # completion
+# read: ':h set ins-completion-menu'
 set wildmenu
 
 # read ":help 'verbose'" for more on this. This might be useful to debug the internals of vim.
@@ -140,3 +141,21 @@ g:maplocalleader = ","
 
 # open manpages in a new tab
 g:ft_man_open_mode = 'tab'
+
+
+
+### Programming languages
+
+## C
+# read:
+# ':h C-indenting'
+# ':h cinoptions'
+# ':h cinoptions-values'
+# ':h cindent'
+# ':h smartindent'
+# inserts 4 times the value for 'shiftwidth' when indenting
+set cinoptions=4s
+
+# read:
+# ':h o'
+# ':h formatoptions'

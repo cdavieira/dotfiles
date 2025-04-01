@@ -11,6 +11,7 @@ create_folders(){
 
 	# creating $prefix/.config folders
 	mkdir .config/{,vim,fish,kitty,tmux,waybar,qutebrowser,dunst}
+	mkdir .config/vim/snippets
 
 	# creating $prefix/.cache folders
 	mkdir -p .cache/vim/{,backup,swap,undo}
@@ -71,7 +72,29 @@ install_packages_gentoo(){
 }
 
 install_packages_arch(){
+  # system
+  SYSTEM_TOOLS="sudo git gcc cmake clang make pkg-config bear gdb valgrind \
+  file which zip which wget usbutils unzip unrar tree lshw os-prober \
+  efibootmgr ntfs-3g iwd"
+  PROPRIETARY_DRIVERS="nvidia-open"
+  OPENSOURCE_DRIVERS="mesa vulkan-intel"
+  AUDIO="wireplumber pipewire-jack pipewire-alsa pipewire-pulse sof-firmware"
+  PRINTER="cups cups-pdf"
 
+  # user
+  WAYLAND_CORE="wayland wayland-docs wayland-protocols wayland-utils xorg-xwayland qt6-wayland polkit wlroots"
+  WAYLAND_APPS="kitty waybar xdg-desktop-portal-gtk xdg-desktop-portal-wlr wl-clipboard wf-recorder slurp grim swappy dunst fnott swaybg wl-mirror"
+  TERMINAL_APPS="fish python-pynvim neovim vim nodejs ffmpeg fd ripgrep zathura zathura-pdf-poppler mpv imv vimiv syncthing"
+  OPT_TERMINAL_APPS="glow mutt neomutt"
+  GRAPHICAL_APPS="qutebrowser mypaint"
+  OPT_GRAPHICAL_APPS="firefox discord xournalpp darktable gimp blender qemu-desktop libreoffice freecad glade inkscape"
+  FONTS="otf-firamono-nerd ttf-anonymouspro-nerd ttf-cascadia-code-nerd ttf-firacode-nerd ttf-hack-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono adobe-source-code-pro-fonts noto-fonts-emoji otf-font-awesome"
+  MISC="gnome lua-language-server typescript-language-server python-lsp-server"
+  # display manager missing
+
+
+  SYSTEM_SERVICES="gdm cups cups-pdf"
+  USER_SERVICES="wireplumber"
 }
 
 install_packages(){

@@ -263,10 +263,10 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	### Solidity
 	# https://github.com/tomlion/vim-solidity
-	legacy Plug 'tomlion/vim-solidity'
+	# legacy Plug 'tomlion/vim-solidity'
 
 	# https://github.com/juanfranblanco/vscode-solidity
-	legacy Plug 'juanfranblanco/vscode-solidity'
+	# legacy Plug 'juanfranblanco/vscode-solidity'
 
 
 

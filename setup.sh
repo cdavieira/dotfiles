@@ -87,7 +87,7 @@ install_packages_arch(){
   TERMINAL_APPS="fish python-pynvim neovim vim nodejs ffmpeg fd ripgrep zathura zathura-pdf-poppler mpv imv vimiv syncthing"
   OPT_TERMINAL_APPS="glow mutt neomutt"
   GRAPHICAL_APPS="qutebrowser mypaint"
-  OPT_GRAPHICAL_APPS="firefox discord xournalpp darktable gimp blender qemu-desktop libreoffice"
+  OPT_GRAPHICAL_APPS="firefox discord xournalpp darktable gimp blender qemu-desktop libreoffice freecad glade inkscape"
   FONTS="otf-firamono-nerd ttf-anonymouspro-nerd ttf-cascadia-code-nerd ttf-firacode-nerd ttf-hack-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono adobe-source-code-pro-fonts noto-fonts-emoji otf-font-awesome"
   MISC="gnome lua-language-server typescript-language-server python-lsp-server"
   # display manager missing

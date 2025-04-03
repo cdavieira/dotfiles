@@ -1,0 +1,4 @@
+[Unit]
+Description=Battery Notification Service
+[Service]
+ExecStart=/path/to/battery_full_notification.sh

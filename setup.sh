@@ -18,10 +18,12 @@ create_folders(){
 }
 
 clone_repos(){
-	git clone https://codeberg.org/dwl/dwl.git ${reposdir}/dwl
-	git clone https://github.com/cdavieira/dotfiles.git ${reposdir}
-	#git clone https://github.com/cdavieira/notes.git ${reposdir}
-	#git clone https://github.com/cdavieira/code.git ${reposdir}
+	cd ${reposdir}
+	git clone https://codeberg.org/dwl/dwl.git
+	git clone https://github.com/cdavieira/dotfiles.git
+	git clone https://gitlab.com/cameronnemo/brillo
+	#git clone https://github.com/cdavieira/notes.git
+	#git clone https://github.com/cdavieira/code.git
 }
 
 remove_duplicates(){
@@ -67,7 +69,18 @@ make_dyn_libs(){
 }
 
 # TODO
+build_dwl(){
 
+}
+
+build_brillo(){
+	sudo usermod -aG video carlos
+	cd ${reposdir}/brillo
+	make
+	sudo make install
+}
+
+# TODO
 install_packages_gentoo(){
   # this one is trickier because of USE_FLAGS
   # 1: check if /etc/portage/package.use/ has all files expected (found under dotfiles/gentoo/package.use/)
@@ -86,7 +99,7 @@ install_packages_gentoo(){
 # intel-ucode, iwd, efibootmgr, dhcpcd) will mostly likely (or should) be
 # already installed before this script gets to be executed
 install_packages_arch(){
-  SYSTEM_UTILITIES="sudo git file which zip unzip unrar wget curl gpg pass"
+  SYSTEM_UTILITIES="sudo git file which zip unzip unrar wget curl gpg pass go-md2man"
   SYSTEM_BUILD="gcc cmake clang make pkg-config gdb valgrind bear nodejs flex bison graphviz"
   SYSTEM_MOUNT="ntfs-3g"
   SYSTEM_EFI="os-prober efibootmgr"
@@ -166,6 +179,8 @@ install_packages(){
 			;;
 		*) ;;
 	esac
+	build_dwl
+	build_brillo
 }
 
 #################################

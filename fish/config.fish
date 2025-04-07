@@ -118,6 +118,7 @@ if status is-interactive
 
 	abbr dc cd
 	abbr sl ls
+	abbr maek make
 
 	#######################################
 	############# Functions ###############

@@ -1,0 +1,7 @@
+[Unit]
+Description=Battery Notification Timer
+[Timer]
+OnStartupSec=10s # Run after 10 seconds after user logins in
+OnUnitActiveSec=8min # Run every 8 minutes
+[Install]
+WantedBy=timers.target

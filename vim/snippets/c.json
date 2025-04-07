@@ -1,0 +1,20 @@
+{
+  "Class": {
+    "prefix": ["mmmain"],
+    "body": [
+      "/**",
+      " * @author ${VIM:\\$USER}",
+      " */",
+      "#include <stdio.h>",
+      "#include <stdlib.h>",
+      "#include <string.h>",
+      "#include <unistd.h>",
+      "",
+      "int main(int argc, char* argv[]){",
+      "\t",
+      "\treturn EXIT_SUCCESS;",
+      "}"
+    ],
+    "description": "main definition plus includes"
+  }
+}

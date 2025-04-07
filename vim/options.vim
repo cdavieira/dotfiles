@@ -128,6 +128,15 @@ set wildmenu
 # set verbose=12
 # set verbosefile=~/.config/vim/verbose
 
+# Each item has a pattern that is matched against the 'term' option, a colon
+# and the protocol name to be used.
+set keyprotocol=kitty:kitty,foot:kitty,ghostty:kitty,wezterm:kitty
+
+# the following makes kitty complain about vim using xterm’s
+# 'modifyOtherKeys', therefore it was removed
+# read: https://sw.kovidgoyal.net/kitty/keyboard-protocol/
+# set keyprotocol+=xterm:mok2
+
 # changes the way cmdline-completion is done
 # Display the completion matches using the popup menu in the same style as the
 # |ins-completion-menu|

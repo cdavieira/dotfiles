@@ -18,10 +18,16 @@ create_folders(){
 }
 
 clone_repos(){
-	git clone https://codeberg.org/dwl/dwl.git ${reposdir}/dwl
-	git clone https://github.com/cdavieira/dotfiles.git ${reposdir}
-	#git clone https://github.com/cdavieira/notes.git ${reposdir}
-	#git clone https://github.com/cdavieira/code.git ${reposdir}
+	cd ${reposdir}
+	git clone https://codeberg.org/dwl/dwl.git
+	git clone https://github.com/cdavieira/dotfiles.git
+	git clone https://gitlab.com/cameronnemo/brillo
+	#git clone https://github.com/cdavieira/notes.git
+	#git clone https://github.com/cdavieira/code.git
+}
+
+remove_duplicates(){
+	echo $@ | tr ' ' '\n' | sort | uniq
 }
 
 # $1 current OS
@@ -63,48 +69,118 @@ make_dyn_libs(){
 }
 
 # TODO
+build_dwl(){
 
+}
+
+build_brillo(){
+	sudo usermod -aG video carlos
+	cd ${reposdir}/brillo
+	make
+	sudo make install
+}
+
+# TODO
 install_packages_gentoo(){
   # this one is trickier because of USE_FLAGS
   # 1: check if /etc/portage/package.use/ has all files expected (found under dotfiles/gentoo/package.use/)
   # 2: if not, then warn the user about that and ask if he would like to continue or not
-  # 3: OR: run 'sudo cp dotfiles/gentoo/package.use/* /etc/portage/package.use/' and continue
+  # OR: run 'sudo cp dotfiles/gentoo/package.use/* /etc/portage/package.use/' and continue
+
+  # obs: this will function likely break once in a while in the future (more
+  # than for ArchLinux, which should be relatively much more stable)
+
+  sudo cp ${reposdir}/dotfiles/gentoo/package.use/* /etc/portage/package.use/
+  
+  # get the list of installed packages from 'emerge' and put them here
 }
 
+# some packages (such as linux, mandb, man-pages, base, base-devel,
+# intel-ucode, iwd, efibootmgr, dhcpcd) will mostly likely (or should) be
+# already installed before this script gets to be executed
 install_packages_arch(){
-  # system
-  SYSTEM_TOOLS="sudo git gcc cmake clang make pkg-config bear gdb valgrind \
-  file which zip which wget usbutils unzip unrar tree lshw os-prober \
-  efibootmgr ntfs-3g iwd"
-  PROPRIETARY_DRIVERS="nvidia-open"
-  OPENSOURCE_DRIVERS="mesa vulkan-intel"
-  AUDIO="wireplumber pipewire-jack pipewire-alsa pipewire-pulse sof-firmware"
-  PRINTER="cups cups-pdf"
+  SYSTEM_UTILITIES="sudo git file which zip unzip unrar wget curl gpg pass go-md2man"
+  SYSTEM_BUILD="gcc cmake clang make pkg-config gdb valgrind bear nodejs flex bison graphviz"
+  SYSTEM_MOUNT="ntfs-3g"
+  SYSTEM_EFI="os-prober efibootmgr"
+  SYSTEM_WIRELESS="iwd dhcpcd"
+  SYSTEM_QUERY="usbutils tree lshw vulkaninfo"
+  SYSTEM_PRINTER="cups cups-pdf"
+  SYSTEM_ARCH_SPECIFIC="pacman-contrib"
 
-  # user
-  WAYLAND_CORE="wayland wayland-docs wayland-protocols wayland-utils xorg-xwayland qt6-wayland polkit wlroots"
-  WAYLAND_APPS="kitty waybar xdg-desktop-portal-gtk xdg-desktop-portal-wlr wl-clipboard wf-recorder slurp grim swappy dunst fnott swaybg wl-mirror"
-  TERMINAL_APPS="fish python-pynvim neovim vim nodejs ffmpeg fd ripgrep zathura zathura-pdf-poppler mpv imv vimiv syncthing"
-  OPT_TERMINAL_APPS="glow mutt neomutt"
-  GRAPHICAL_APPS="qutebrowser mypaint"
-  OPT_GRAPHICAL_APPS="firefox discord xournalpp darktable gimp blender qemu-desktop libreoffice freecad glade inkscape"
-  FONTS="otf-firamono-nerd ttf-anonymouspro-nerd ttf-cascadia-code-nerd ttf-firacode-nerd ttf-hack-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono adobe-source-code-pro-fonts noto-fonts-emoji otf-font-awesome"
-  MISC="gnome lua-language-server typescript-language-server python-lsp-server"
-  # display manager missing
+  DRIVER_VIDEO_INTEL="mesa vulkan-intel vulkan-tools"
+  DRIVER_VIDEO_NVIDIA_OPENSOURCE="mesa vulkan-nouveau vulkan-tools"
+  DRIVER_VIDEO_NVIDIA_PROPRIETARY="nvidia-open"
+  DRIVER_AUDIO="sof-firmware wireplumber pipewire-jack pipewire-alsa pipewire-pulse"
 
+  DISPLAY_SERVER="wayland wayland-docs wayland-protocols wayland-utils xorg-xwayland qt6-wayland"
+  WINDOW_MANAGER="wlroots polkit"
+  # DISPLAY_MANAGER="greetd"
+  USER_FONTS="otf-firamono-nerd ttf-anonymouspro-nerd ttf-cascadia-code-nerd ttf-firacode-nerd ttf-hack-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono adobe-source-code-pro-fonts noto-fonts-emoji otf-font-awesome"
 
-  SYSTEM_SERVICES="gdm cups cups-pdf"
-  USER_SERVICES="wireplumber"
+  APP_CLIPBOARD="wl-clipboard"
+  APP_TERMINAL="kitty"
+  APP_BROWSER="qutebrowser"
+  APP_BAR="waybar"
+  APP_BLUETOOTH="bluez bluez-tools bluez-utils"
+  APP_NOTIFICATION="dunst"
+  APP_BACKGROUND="swaybg"
+  APP_SCREENRECORDER="wf-recorder"
+  APP_SCREENSHOT="slurp grim swappy"
+  APP_SCREENSHARE="wl-mirror"
+  APP_PORTALS="xdg-desktop-portal-gtk xdg-desktop-portal-wlr"
+  APP_VIEWER_PDF="zathura zathura-pdf-poppler"
+  APP_VIEWER_VIDEO="mpv"
+  APP_VIEWER_IMAGE="imv vimiv"
+  APP_FILESHARE="syncthing"
+  APP_SHELL="fish"
+  APP_PAINT="mypaint"
+  APP_EDITOR="vim python-pynvim neovim"
+  APP_TERMINAL="bat fd ripgrep"
+  APP_MEDIA="ffmpeg"
+  APP_MISC="discord"
+  # APP_POWERMANAGEMENT="swayidle swaylock wlopm"
+  # APP_LS="lua-language-server typescript-language-server python-lsp-server"
+  # APP_DESKTOP="gnome gnome-extra"
+  # APP_EMAIL="thunderbird"
+  # APP_EDITOR_PDF="xournalpp"
+  # APP_EDITOR_IMAGE="darktable gimp inkscape"
+  # APP_EDITOR_3D="blender freecad"
+  # APP_EDITOR_DOC="libreoffice"
+  # APP_HYPERVISOR="qemu-desktop"
+  # APP_FILEEXPLORER="dolphin"
+  # APP_OPT_BROWSER="firefox"
+  # APP_OPT_NOTIFICATION="fnott"
+  # APP_OPT_MISC="glow glade mutt neomutt"
+
+  # if using GNOME as the desktop environment, add 'gdm' to 'SERVICES_SYSTEM'
+  SERVICES_SYSTEM="cups cups-pdf iwd bluetooth"
+  SERVICES_USER="wireplumber"
+
+  PKGS_SYSTEM=$(remove_duplicates $SYSTEM_UTILITIES $SYSTEM_BUILD $SYSTEM_MOUNT $SYSTEM_EFI $SYSTEM_WIRELESS $SYSTEM_QUERY $SYSTEM_PRINTER)
+  PKGS_DRIVER=$(remove_duplicates $DRIVER_VIDEO_INTEL $DRIVER_VIDEO_NVIDIA_OPENSOURCE $DRIVER_AUDIO $DISPLAY_SERVER $WINDOW_MANAGER)
+  PKGS_APPS=$(remove_duplicates $APP_CLIPBOARD $APP_TERMINAL $APP_BROWSER $APP_BAR $APP_NOTIFICATION $APP_BACKGROUND $APP_SCREENRECORDER \
+  $APP_SCREENSHOT $APP_SCREENSHARE $APP_PORTALS $APP_VIEWER_PDF $APP_VIEWER_VIDEO $APP_VIEWER_IMAGE $APP_FILESHARE \
+  $APP_SHELL $APP_PAINT $APP_EDITOR $APP_TERMINAL $APP_MEDIA $APP_MISC $APP_BLUETOOTH $USER_FONTS)
+  PKGS_ALL=$(remove_duplicates $PKGS_SYSTEM $PKGS_DRIVER $PKGS_APPS)
+
+  sudo pacman -S $PKGS_ALL
+  sudo systemctl enable $SERVICES_SYSTEM
+  sudo systemctl --user enable $SERVICES_USER
 }
 
 install_packages(){
 	case $1 in
 		'archlinux')
+			install_packages_arch
 			;;
 		'gentoo')
+			install_packages_gentoo
 			;;
 		*) ;;
 	esac
+	build_dwl
+	build_brillo
 }
 
 #################################

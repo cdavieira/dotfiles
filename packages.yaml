@@ -1,0 +1,654 @@
+# Packages that can be installed by the package manager of each listed
+# distribution
+packages:
+  system:
+    - name: core
+      arch:
+        - sudo
+        - man-db
+        - man-pages
+        - file
+        - dmidecode
+        - parted
+        - which
+        - usbutils
+        - lshw
+        - zip
+        - ntfs-3g
+        - strace
+        - polkit
+        - fuse2
+      gentoo:
+        - app-admin/sudo
+        - sys-apps/man-pages
+        - sys-apps/file
+        - sys-apps/dmidecode
+        - sys-block/parted
+        - sys-apps/which
+        - sys-apps/usbutils
+        - sys-aps/lshw
+        - app-arch/zip
+        - sys-fs/ntfs3g
+        - dev-debug/strace
+        - sys-fs/fuse
+
+    - name: systools
+      arch:
+        - pass
+        - gpg
+        - git
+        - tree
+        - bat
+        - ripgrep
+        - fd
+        - go-md2man
+      gentoo:
+        - app-admin/pass
+        - app-crypt/gnupg
+        - dev-vcs/git
+        - app-text/tree
+        - sys-apps/bat
+        - sys-apps/ripgrep
+        - sys-apps/fd
+        - dev-go/go-md2man
+        - sys-auth/polkit
+
+    - name: buildtools
+      arch:
+        - doxygen
+        - gcc
+        - clang
+        - cmake
+        - gdb
+        - valgrind
+        - flex
+        - bison
+        - make
+        - pkg-config
+        - bear
+        - ctags
+        - graphviz
+      gentoo:
+        - app-text/doxygen
+        - dev-lang/rust
+        - dev-debug/gdb
+        - dev-debug/valgrind
+        - dev-util/bear
+        - dev-util/ctags
+        - media-gfx/graphviz
+
+    - name: nettools
+      arch:
+        - net-tools
+        - tcpdump
+        - curl
+        - wget
+        - nmap
+      gentoo:
+        - sys-apps/net-tools
+        - net-analyzer/tcpdump
+        - net-misc/curl
+        - net-misc/wget
+        - net-analyzer/nmap
+
+    - name: devtools
+      arch:
+        - yarn
+      gentoo:
+        - sys-apps/yarn
+        - gui-libs/gtk
+        - dev-util/gtk-doc
+        - media-libs/fcft
+        - media-libs/freeglut
+        - media-libs/glfw
+        - x11-libs/libxcb
+        - x11-libs/pixman
+        - x11-libs/xcb-util-wm
+
+    - name: bluetooth
+      arch:
+        - bluez
+        - bluez-tools
+        - bluez-utils
+      gentoo:
+        - net-wireless/bluez
+        - net-wireless/bluez-tools
+
+    - name: printer
+      arch:
+        - cups
+        - cups-pdf
+      gentoo:
+        - net-print/cups
+
+    - name: intel
+      arch:
+        - mesa
+        - vulkan-intel
+        - vulkan-tools
+        - vulkaninfo
+      gentoo:
+        - media-libs/mesa
+        - dev-util/vulkan-tools
+        - media-libs/libva-intel-driver
+        - dev-libs/intel-compute-runtime
+
+    - name: osnvidia
+      arch:
+        - mesa
+        - vulkan-tools
+        - vulkan-nouveau
+      gentoo:
+
+    - name: amd
+      arch:
+      gentoo:
+
+    - name: audio
+      arch:
+        - wireplumber
+        - pipewire-jack
+        - pipewire-alsa
+        - pipewire-pulse
+      gentoo:
+        - media-video/pipewire
+        - media-video/wireplumber
+
+    - name: media
+      arch:
+      gentoo:
+        - media-libs/libv4l
+
+    - name: wayland
+      arch:
+        - wayland
+        - wayland-docs
+        - wayland-protocols
+        - wayland-utils
+        - xorg-xwayland
+      gentoo:
+        - x11-base/xwayland
+        - x11-misc/xdg-utils
+
+    - name: flatpak
+      arch: flatpak
+      gentoo: sys-apps/flatpak
+
+    - name: os
+      arch:
+        - pacman-contrib 
+      gentoo:
+        - app-eselect/eselect-repository
+        - app-misc/resolve-march-native
+        - app-portage/gentoolkit
+        - app-portage/pfl
+
+
+
+  user:
+    - name: fonts
+      arch:
+        - otf-firamono-nerd
+        - ttf-anonymouspro-nerd
+        - ttf-cascadia-code-nerd
+        - ttf-firacode-nerd
+        - ttf-hack-nerd
+        - ttf-nerd-fonts-symbols
+        - ttf-nerd-fonts-symbols-mono
+        - adobe-source-code-pro-fonts
+        - noto-fonts-emoji
+        - otf-font-awesome
+      gentoo:
+
+    - name: dwl
+      arch:
+        - wlroots
+        - xdg-desktop-portal-wlr
+        - xdg-desktop-portal-gtk
+        - polkit
+        - dbus
+      gentoo:
+        - gui-libs/wlroots
+        - gui-libs/xdg-desktop-portal-wlr
+        - sys-apps/xdg-desktop-portal-gtk
+        - sys-auth/polkit
+        - sys-apps/dbus
+
+    - name: sway
+      arch: sway
+      gentoo: gui-wm/sway
+
+    - name: displaymanager
+      arch: greetd
+      gentoo: gui-libs/greetd
+
+    - name: texteditor
+      arch:
+        - vim
+        - python-pynvim
+        - neovim
+        - fd
+        - ripgrep
+      gentoo:
+        - app-editors/vim
+        - app-editors/neovim
+        - sys-apps/fd
+        - sys-apps/ripgrep
+
+    - name: terminal
+      arch: kitty
+      gentoo: x11-terms/kitty
+
+    - name: shell
+      arch: fish
+      gentoo: app-shells/fish
+
+    - name: clipboard
+      arch: wl-clipboard
+      gentoo: gui-apps/wl-clipboard
+
+    - name: browser
+      arch:
+        - qt6-wayland
+        - qutebrowser
+        - lynx
+      gentoo:
+        - www-client/qutebrowser
+        - www-client/lynx
+
+    - name: optbrowser
+      arch: firefox
+      gentoo: www-client/firefox
+
+    - name: applauncher
+      arch: wmenu
+      gentoo: gui-apps/wmenu
+
+    - name: bar
+      arch: waybar
+      gentoo: gui-apps/waybar
+
+    # fnott currently masked in gentoo for amd64
+    - name: notification
+      arch:
+        - dunst
+        - fnott
+      gentoo:
+        - x11-misc/dunst
+
+    - name: background
+      arch: swaybg
+      gentoo: gui-apps/swaybg
+
+    # wl-recorder currently masked in gentoo for amd64
+    - name: screenrecorder
+      arch: wf-recorder
+      gentoo:
+
+    - name: screenshot
+      arch:
+        - slurp
+        - grim
+        - swappy
+      gentoo:
+        - gui-apps/slurp
+        - gui-apps/grim
+        - gui-apps/swappy
+
+    # wl-mirror currently masked in gentoo for amd64
+    - name: screenshare
+      arch:
+        - wl-mirror
+      gentoo:
+
+    - name: pdfviewer
+      arch:
+        - zathura
+        - zathura-pdf-poppler
+      gentoo:
+        - app-text/zathura
+        - app-text/zathura-pdf-poppler
+
+    - name: mediaviewer
+      arch:
+        - mpv
+        - ffmpeg
+      gentoo:
+        - media-video/mpv
+        - media-video/ffmpeg
+
+    - name: imageviewer
+      arch:
+        - imv
+        - vimiv
+      gentoo: media-gfx/imv
+
+    - name: fileshare
+      arch: syncthing
+      gentoo: net-p2p/syncthing
+
+    - name: paint
+      arch: mypaint
+      gentoo: media-gfx/mypaint
+
+    - name: talk
+      arch:
+        - discord
+      gentoo:
+        - net-im/discord
+
+    - name: powermanagement
+      arch:
+        - swayidle
+        - swaylock
+        - wlopm
+      gentoo:
+        - gui-apps/swayidle
+        - gui-apps/swaylock
+    
+    - name: docker
+      arch:
+        - docker
+      gentoo:
+        - app-containers/docker
+        - app-containers/docker-cli
+
+    - name: fileexplorer
+      arch: dolphin
+      gentoo: xfce-base/thunar
+
+    - name: emulation
+      arch: qemu-desktop
+      gentoo: app-emulation/qemu
+
+    - name: remotemachine
+      arch:
+      gentoo: gui-apps/wayvnc
+
+    - name: email
+      arch:
+        - thunderbird
+        - mutt
+        - neomutt
+      gentoo:
+        - mail-client/thunderbird
+        - mail-client/neomutt
+
+    - name: 3deditor
+      arch:
+        - blender
+        - freecad
+      gentoo:
+        - media-gfx/blender
+
+    - name: pdfeditor
+      arch: xournalpp
+      gentoo: app-text/xournalpp
+
+    - name: imageeditor
+      arch:
+        - darktable
+        - gimp
+        - inkscape
+      gentoo:
+        - media-gfx/darktable
+        - media-gfx/inkscape
+        - media-gfx/gimp
+
+    - name: mediaeditor
+      arch: kdenlive
+      gentoo: kde-apps/kdenlive
+
+    - name: docxeditor
+      arch: libreoffice
+      gentoo: app-office/libreoffice
+
+    - name: misc
+      arch:
+        - glade
+        - glow
+      gentoo:
+        - dev-libs/protobuf
+        - media-libs/fcft
+        - net-libs/grpc
+
+
+
+
+# packages which can be installed by means other than the distribution package
+# manager
+altpackages:
+  git:
+    - name: dwl
+      url: https://codeberg.org/dwl/dwl
+
+    - name: raylib
+      url: https://github.com/raysan5/raylib
+
+    - name: wlopm
+      url: https://git.sr.ht/~leon_plickat/wlopm
+
+    - name: wlvncc
+      url: https://github.com/any1/wlvncc.git
+
+    - name: nvm
+      url: https://github.com/nvm-sh/nvm.git
+
+    - name: brillo
+      url: https://github.com/CameronNemo/brillo
+
+  curl:
+    - name: lua-language-server
+      url: https://github.com/LuaLS/lua-language-server/archive/refs/tags/3.14.0.zip
+
+    - name: ventoy
+      url: https://sourceforge.net/projects/ventoy/files/v1.1.05
+
+  yarn:
+    - name: typescript-language-server
+      url: typescript-language-server
+
+  pip:
+    - name: python-lsp-server
+      url: python-lsp-server
+
+  flatpak:
+    - name:
+      url:
+
+
+
+
+services:
+  arch:
+    - name: wireplumber
+      type: user
+
+    - name: cups
+      type: system
+
+    - name: iwd
+      type: system
+
+    - name: bluetooth
+      type: system
+
+    - name: docker
+      type: system
+
+  gentoo:
+    - name: seatd
+      type: default
+
+    - name: netmount
+      type: default
+
+    - name: bluetooth
+      type: default
+
+    - name: dbus
+      type: default
+
+    - name: docker
+      type: default
+
+    - name: sysklogd
+      type: default
+
+    - name: iwd
+      type: default
+
+    - name: dhcpcd
+      type: default
+
+    - name: chronyd
+      type: default
+
+
+
+
+
+all:
+  arch:
+    install:
+      packages:
+      altpackages:
+        - dwl
+        - brillo
+        - lua-language-server
+      services:
+    ignore:
+      packages:
+        - dhcpcd
+        - e2fsprogs
+        - efibootmgr
+        - grub
+        - intel-ucode
+        - iwd
+        - linux
+        - linux-firmware
+        - man-db
+        - man-pages
+        - os-prober
+        - sof-firmware
+        - tmux 
+        - vim 
+      altpackages:
+      services:
+
+  gentoo:
+    install:
+      packages:
+        system:
+          - core
+          - systools
+          - buildtools
+          - devtools
+          - nettools
+          - bluetooth
+          - printer
+          - intel
+          - audio
+          - media
+          - wayland
+          - flatpak
+        user:
+          - dwl
+          - texteditor
+          - terminal
+          - shell
+          - clipboard
+          - browser
+          - applauncher
+          - bar
+          - notification
+          - background
+          - screenrecorder
+          - screenshot
+          - screenshare
+          - pdfviewer
+          - mediaviewer
+          - imageviewer
+          - fileshare
+          - paint
+          - talk
+          - powermanagement
+          - docker
+          - 3deditor
+          - misc
+      altpackages:
+        - dwl
+        - brillo
+        - lua-language-server
+        - wlopm
+      services:
+        - seatd
+        - netmount
+        - bluetooth
+        - dbus
+        - docker
+    ignore:
+      packages:
+        # these come from the installation
+        - sys-firmware/intel-microcode
+        - sys-kernel/linux-firmware
+        - sys-kernel/gentoo-kernel-bin
+        - sys-firmware/sof-firmware
+        - net-misc/dhcpcd
+        - app-admin/sysklogd
+        - net-misc/chrony
+        - sys-fs/e2fsprogs
+        - sys-fs/dosfstools
+        - sys-fs/btrfs-progs
+        - sys-block/io-scheduler-udev-rules
+        - net-wireless/iwd
+        - sys-boot/efibootmgr
+        - sys-boot/os-prober
+        - sys-boot/grub
+        # these come from the profile amd23 profile (2025/apr)
+        - sys-apps/baselayout-2
+        - app-alternatives/awk
+        - app-alternatives/bzip2
+        - app-alternatives/gzip
+        - app-alternatives/sh
+        - app-alternatives/tar
+        - app-admin/eselect
+        - app-arch/bzip2
+        - app-arch/gzip
+        - app-arch/tar
+        - app-arch/xz-utils
+        - app-shells/bash:0
+        - dev-build/make
+        - net-misc/iputils
+        - net-misc/rsync
+        - net-misc/wget
+        - sec-keys/openpgp-keys-gentoo-release
+        - sys-apps/coreutils
+        - sys-apps/diffutils
+        - sys-apps/file
+        - sys-apps/findutils
+        - sys-apps/gawk
+        - sys-apps/grep
+        - sys-apps/kbd
+        - sys-apps/kmod
+        - sys-apps/less
+        - sys-process/procps
+        - sys-process/psmisc
+        - sys-apps/sed
+        - sys-apps/shadow
+        - sys-apps/which
+        - sys-devel/binutils
+        - sys-devel/gcc
+        - sys-devel/gnuconfig
+        - sys-devel/patch-2.7
+        - virtual/dev-manager
+        - virtual/editor
+        - virtual/libc
+        - virtual/man
+        - virtual/os-headers
+        - virtual/package-manager
+        - virtual/pager
+        - virtual/service-manager
+        - virtual/ssh
+      altpackages:
+      services:

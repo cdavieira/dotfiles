@@ -102,6 +102,10 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/prabirshrestha/vim-lsp
 	legacy Plug 'prabirshrestha/vim-lsp'
 
+	# lsp written in vim9! very cool
+	# https://github.com/yegappan/lsp
+	# legacy Plug 'yegappan/lsp'
+
 	### Automatic language server download/configuration for vimlsp
 	# https://github.com/mattn/vim-lsp-settings
 	# legacy Plug 'mattn/vim-lsp-settings'
@@ -116,24 +120,39 @@ export def FullSetup(vimplug_dir: Dirpath)
 	#######################
 	# ALE brings linting to vim by bridging external linters to the editor.
 	#
-	# ALE can work as a language server client (similar to vim-lsp) and also
-	# display warnings/errors coming from language servers (and from
-	# linters as well)
+	# With that, ALE is able to display warnings/error messages (W/E) in
+	# the file (through virtual text, syntax highlighting) and in the sign
+	# column 
 	#
-	# With that in mind, ALE and vimlsp work separately and might even clash
-	# when displaying error messages. This can be surpassed by disabling ALE's
-	# capabilities associated with language servers and letting only 'vimlsp'
-	# receive information coming from language servers.
+	# ALE is not restricted to linters. It can also gather information
+	# coming from other sources, such as: language servers and other vim
+	# plugins.
 	#
-	# ALE also works together with gitgutter to display warnings/error
-	# (W/E) signs in the sign column
+	# Additionally, ALE can work as a language server client (similar to
+	# vim-lsp) and provide all/most functionalities expected for one, such
+	# as go-to-definition
+	#
+	# Summing up, ALE can:
+	# * receive and display W/E coming from various sources
+	# * act as a language server client
+	# * fix errors using a formatter or a custom vim function
+	# * provide autocompletion as you type
 	#
 	# I personally use ale only for its linting and fixing capabilities,
-	# letting 'vimlsp' bring the LSP functionality into vim.
+	# letting 'vimlsp' bring the LSP functionality into vim and
+	# 'asyncomplete' bring autocompletion.
+	#
+	# OBS1: ALE and vimlsp work separately and might even clash when
+	# displaying error messages. This can be surpassed by disabling ALE's
+	# capabilities associated with language servers and letting only
+	# 'vimlsp' receive information coming from language servers.
 
 	# https://github.com/dense-analysis/ale
 	legacy Plug 'dense-analysis/ale'
 
+	# this makes 'vimlsp' behave as a source to 'ale', which effectively
+	# means that all information coming to vimlsp is then forwarded to ale
+	# instead.
 	# https://github.com/rhysd/vim-lsp-ale
 	# legacy Plug 'rhysd/vim-lsp-ale'
 
@@ -154,7 +173,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# 3. tag files
 	# 4. even vim functions that return arbitrary suggestions!
 	#
-	# plugins like 'vimlsp' (lsp capability), 'ale' (lsp capability),
+	# plugins like 'vimlsp' (lsp capability), 'ale' (with its lsp capability),
 	# 'vsnip' (snipper) and others require some tweaks to integrate with
 	# asyncomplete. These tweaks come in the form of plugin bridges, which
 	# do all the work of integrating both plugins for you.
@@ -166,9 +185,11 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/prabirshrestha/asyncomplete-lsp.vim
 	legacy Plug 'prabirshrestha/asyncomplete-lsp.vim'
 	
-	# 'ale' and 'asyncomplete' integration
-	# OBS: i personally don't use ale as an LSP, therefore i don't need
-	# this plugin. But, maybe its worth giving it a shot someday!
+	# 'ale' and 'asyncomplete' integration.
+	# this makes 'asyncomplete' send its information to 'ale', so that
+	# 'ale' displays it.
+	# OBS: i personally don't use ale as an LSP, therefore there's no need
+	# for this plugin.
 	# https://github.com/andreypopp/asyncomplete-ale.vim
 	# legacy Plug 'andreypopp/asyncomplete-ale.vim'
 
@@ -183,7 +204,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# 'filesystem' and 'asyncomplete' integration
 	# https://github.com/prabirshrestha/asyncomplete-file.vim
-	legacy Plug 'prabirshrestha/asyncomplete-file.vim'
+	# legacy Plug 'prabirshrestha/asyncomplete-file.vim'
 
 	# 'ultisnips' and 'asyncomplete' integration
 	# OBS: 'ultisnips' is an alternative to 'vsnip' (the one i use)
@@ -281,7 +302,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	
 	### Ctags
 	# https://github.com/preservim/tagbar
-	legacy Plug 'preservim/tagbar'
+	# legacy Plug 'preservim/tagbar'
 
 	# https://github.com/ludovicchabant/vim-gutentags
 	# legacy Plug 'ludovicchabant/vim-gutentags'

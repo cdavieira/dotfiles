@@ -16,7 +16,6 @@ g:lsp_diagnostics_enabled = 1
 g:lsp_diagnostics_signs_enabled = 0
 
 # enables showing the error message in the command mode bar
-# NOTE: i heavily depend on this
 g:lsp_diagnostics_echo_cursor = 1
 
 # set how much time (in ms) the error message should stay up in the commandbar
@@ -24,7 +23,6 @@ g:lsp_diagnostics_echo_delay = 500
 
 # enables a floating window of diagnostic error for the current line to
 # status. Requires lsp_diagnostics_enabled = 1.
-# NOTE: This is the useful floating error message that i heavily depend on
 # g:lsp_diagnostics_float_cursor = 1
 
 # set how much time (in ms) the floating error message should take before
@@ -180,14 +178,14 @@ var css_lsp_info = {
 # }
 
 # https://github.com/juanfranblanco/vscode-solidity
-var solidity_lsp_info = {
-	'name': 'vscode-solidity',
-	'cmd': (server_info) => [&shell, &shellcmdflag, 'vscode-solidity-server --stdio'],
-	'allowlist': ['solidity', 'sol'],
-	'blocklist': [],
-	'config': {},
-	'workspace_config': {}
-}
+# var solidity_lsp_info = {
+# 	'name': 'vscode-solidity',
+# 	'cmd': (server_info) => [&shell, &shellcmdflag, 'vscode-solidity-server --stdio'],
+# 	'allowlist': ['solidity', 'sol'],
+# 	'blocklist': [],
+# 	'config': {},
+# 	'workspace_config': {}
+# }
 
 # https://github.com/bash-lsp/bash-language-server
 # var bash_lsp_info = {
@@ -234,9 +232,9 @@ endif
 # if executable('texlab')
 # 	au User lsp_setup lsp#register_server(tex_lsp_info)
 # endif
-if executable('vscode-solidity-server')
-	au User lsp_setup lsp#register_server(solidity_lsp_info)
-endif
+# if executable('vscode-solidity-server')
+# 	au User lsp_setup lsp#register_server(solidity_lsp_info)
+# endif
 # if executable('bash-language-server')
 # 	au User lsp_setup lsp#register_server(bash_lsp_info)
 # endif

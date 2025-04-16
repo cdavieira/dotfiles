@@ -462,48 +462,24 @@ altpackages:
 
 services:
   arch:
-    - name: wireplumber
-      type: user
-
-    - name: cups
-      type: system
-
-    - name: iwd
-      type: system
-
-    - name: bluetooth
-      type: system
-
-    - name: docker
-      type: system
-
+    user:
+      - wireplumber
+    system:
+      - cups
+      - iwd
+      - bluetooth
+      - docker
   gentoo:
-    - name: seatd
-      type: default
-
-    - name: netmount
-      type: default
-
-    - name: bluetooth
-      type: default
-
-    - name: dbus
-      type: default
-
-    - name: docker
-      type: default
-
-    - name: sysklogd
-      type: default
-
-    - name: iwd
-      type: default
-
-    - name: dhcpcd
-      type: default
-
-    - name: chronyd
-      type: default
+    default:
+      - seatd
+      - netmount
+      - bluetooth
+      - dbus
+      - docker
+      - sysklogd
+      - iwd
+      - dhcpcd
+      - chronyd
 
 
 
@@ -513,11 +489,50 @@ all:
   arch:
     install:
       packages:
+        system:
+          - core
+          - systools
+          - buildtools
+          - devtools
+          - nettools
+          - bluetooth
+          - printer
+          - intel
+          - audio
+          - media
+          - wayland
+          - flatpak
+        user:
+          - dwl
+          - texteditor
+          - terminal
+          - shell
+          - clipboard
+          - browser
+          - applauncher
+          - bar
+          - notification
+          - background
+          - screenrecorder
+          - screenshot
+          - screenshare
+          - pdfviewer
+          - mediaviewer
+          - imageviewer
+          - fileshare
+          - paint
+          - talk
+          - powermanagement
+          - docker
+          - 3deditor
+          - misc
       altpackages:
         - dwl
         - brillo
         - lua-language-server
       services:
+        system:
+        user:
     ignore:
       packages:
         - dhcpcd
@@ -536,6 +551,8 @@ all:
         - vim 
       altpackages:
       services:
+        system:
+        user:
 
   gentoo:
     install:

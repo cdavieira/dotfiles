@@ -52,6 +52,8 @@ export def FullSetup(vimplug_dir: Dirpath)
 	
 	# Cool plugins so that i can take a look after:
 	# https://github.com/prabirshrestha/dotfiles/blob/main/.vimrc
+	# https://github.com/vim/vim/wiki/Vim9-Plugins
+	
 
 	###############
 	#### THEMES ###
@@ -482,9 +484,6 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/qadzek/link.vim.git
 	# legacy Plug 'qadzek/link.vim.git'
-
-	# https://github.com/gyim/vim-boxdraw
-	# legacy Plug 'gyim/vim-boxdraw'
 	
 	# https://github.com/jessepav/vim-boxdraw
 	# legacy Plug 'jessepav/vim-boxdraw'
@@ -506,6 +505,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/lambdalisue/vim-suda
 	# legacy Plug 'lambdalisue/vim-suda'
+	
+	# another plugin manager, but written in vim9
+	# https://github.com/bennyyip/plugpac.vim
 
 	# " Call plug#end to update &runtimepath and initialize the plugin system.
 	# " - It automatically executes `filetype plugin indent on` and `syntax enable`

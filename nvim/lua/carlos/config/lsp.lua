@@ -1,5 +1,6 @@
-Lspconfig = require('lspconfig')
+require('java').setup()
 
+Lspconfig = require('lspconfig')
 Lspconfig.pylsp.setup {}
 -- Lspconfig.ts_ls.setup {}
 Lspconfig.lua_ls.setup {}
@@ -10,6 +11,7 @@ Lspconfig.rust_analyzer.setup {
 		['rust-analyzer'] = {},
 	},
 }
+Lspconfig.jdtls.setup({})
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer

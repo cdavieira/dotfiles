@@ -64,7 +64,7 @@ set tabstop=8
 set softtabstop=2
 # The number of spaces to use for each step of (auto)indent. Used for 'cindent',
 # >>, <<, etc.
-set shiftwidth=2
+set shiftwidth=8
 # Do not replace tabs with spaces
 set noexpandtab
 
@@ -136,6 +136,9 @@ set keyprotocol=kitty:kitty,foot:kitty,ghostty:kitty,wezterm:kitty
 # 'modifyOtherKeys', therefore it was removed
 # read: https://sw.kovidgoyal.net/kitty/keyboard-protocol/
 # set keyprotocol+=xterm:mok2
+
+# remove beeps
+set visualbell t_vb=
 
 # changes the way cmdline-completion is done
 # Display the completion matches using the popup menu in the same style as the

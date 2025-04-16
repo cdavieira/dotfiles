@@ -13,4 +13,5 @@ return {
 	require("carlos.plugins.toggleterm"),
 	require("carlos.plugins.nvim-snippets")[1],
 	require("carlos.plugins.nvim-snippets")[2],
+	-- require("carlos.plugins.nvim-java"),
 }

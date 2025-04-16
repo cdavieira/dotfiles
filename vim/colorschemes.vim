@@ -36,21 +36,22 @@ def IsAvailable(name: string): bool
 enddef
 
 def SetColor(name: string): bool
-  if !IsAvailable(name)
-	return false
-  endif
-  execute "colorscheme" name
-  return true
+	if !IsAvailable(name)
+		return false
+	endif
+	execute "colorscheme" name
+	return true
 enddef
 
 export def SetCS(...names: list<string>): void
-  # 'background' and 'colorscheme' operate together to set vim's visuals
-  set background=dark
-  for mycolor in names
-    if SetColor(mycolor)
-      break
-    endif
-  endfor
+# 'background' and 'colorscheme' operate together to set vim's visuals
+	set termguicolors
+	set background=dark
+	for mycolor in names
+		if SetColor(mycolor)
+			break
+		endif
+	endfor
 enddef
 
 export def Rotate(increment: number): void

@@ -29,6 +29,7 @@ g:ale_linters = {
       'c': ['clangtidy', 'cppcheck'],
       'rust': ['analyzer', 'cargo', 'clippy'],
       'javascript': ['eslint'],
+      'typescriptreact': ['eslint'],
       'lua': ['luacheck'],
       'python': ['flake8', 'mypy', 'pylint', 'pyright'],
       'json': ['jsonlint'],
@@ -41,6 +42,7 @@ g:ale_fixers = {
 	'c': ['clang-format'],
 	'rust': ['rustfmt'],
 	'javascript': ['eslint'],
+	'typescriptreact': ['eslint'],
 	'json': ['prettier'],
 	'yaml': ['prettier'],
 }

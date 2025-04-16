@@ -1,0 +1,28 @@
+11,12c11,12
+< WLR_INCS = `$(PKG_CONFIG) --cflags wlroots-0.19`
+< WLR_LIBS = `$(PKG_CONFIG) --libs wlroots-0.19`
+---
+> # WLR_INCS = `$(PKG_CONFIG) --cflags wlroots-0.19`
+> # WLR_LIBS = `$(PKG_CONFIG) --libs wlroots-0.19`
+17,18c17,18
+< #WLR_INCS = -I/usr/include/pixman-1 -I/usr/include/elogind -I/usr/include/libdrm \
+< #	-I$(PWD)/wlroots/include
+---
+> WLR_INCS = -I/usr/include/pixman-1 -I/usr/include/elogind -I/usr/include/libdrm \
+> 	-I$(PWD)/wlroots/include
+20c20
+< #WLR_LIBS = -Wl,-rpath,$(PWD)/wlroots/build -L$(PWD)/wlroots/build -lwlroots-0.19
+---
+> WLR_LIBS = -Wl,-rpath,$(PWD)/wlroots/build -L$(PWD)/wlroots/build -lwlroots-0.19
+27,28c27,28
+< XWAYLAND =
+< XLIBS =
+---
+> # XWAYLAND =
+> # XLIBS =
+30,31c30,31
+< #XWAYLAND = -DXWAYLAND
+< #XLIBS = xcb xcb-icccm
+---
+> XWAYLAND = -DXWAYLAND
+> XLIBS = xcb xcb-icccm

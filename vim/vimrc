@@ -66,7 +66,8 @@ if has('win64')
 	vimplug_install_cmd = '!powershell -Command ' .. '\"iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_file .. ' -Force \"'
 else
 	set keywordprg=:Man
-	set shell=/bin/bash
+	# set shell=/bin/bash
+	set shell=/usr/bin/fish
 	set shellcmdflag=-c
 	set rtp-=$VIM/vimfiles
 	set rtp-=$VIM/vimfiles/after
@@ -109,6 +110,7 @@ colorschemes.SetCS('onedark', 'dracula', 'sorbet', 'evening', 'wildcharm')
 
 
 # Mappings
+# <M-*> = alt + *
 tnoremap <C-D> <C-W><C-C>
 nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(-1)<CR>
@@ -118,7 +120,10 @@ nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>p <Cmd>edit $MYVIM_FILES<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <Leader>s <Cmd>Rg<CR>
-nnoremap <Leader>o <Cmd>Ollama toggle<CR>
+nnoremap <M-t> <Cmd>term ++noclose<CR>
+tnoremap <M-t> <Cmd>quit!<CR>
+tnoremap <M-q> <Cmd>quit!<CR>
+# nnoremap <Leader>o <Cmd>Ollama toggle<CR>
 imap <expr> <C-j>       vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 imap <expr> <C-l>       vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>       vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'

@@ -26,17 +26,15 @@
 ---
 > #define MODKEY WLR_MODIFIER_LOGO
 119a122
-> //#define FISHCMD(cmd) { .v = (const char*[]){ "/usr/bin/fish", "-c", cmd, NULL } }
+> #define FISHCMD(cmd) { .v = (const char*[]){ "/usr/bin/fish", "-c", cmd, NULL } }
 122c125
 < static const char *termcmd[] = { "foot", NULL };
 ---
 > static const char *termcmd[] = { "kitty", NULL };
-124c127,136
+124c127,134
 < 
 ---
-> static const char *waybarcmd[] = { "waybar", NULL };
 > static const char *browsercmd[] = { "qutebrowser", NULL };
-> static const char *mailclientcmd[] = { "thunderbird", NULL };
 > static const char * const screenshotcmd = "slurp | grim -g - - | swappy -f -";
 > static const char * const startscreencapturecmd = "wf-recorder -g \"$(slurp)\" --audio --file=recording-$(date +%Y%m%d-%H%M%S).mp4";
 > static const char * const finishscreencapturecmd = "pgrep wf-recorder | xargs kill";
@@ -44,10 +42,10 @@
 > //xkb keynames can be found in:
 > //#include <xkbcommon/xkbcommon-keysyms.h>
 > //#include <linux/input-event-codes.h>
-127a140,145
-> 	{ MODKEY,                    XKB_KEY_a,          spawn,          {.v = waybarcmd} },
+127a138,141
 > 	{ MODKEY,                    XKB_KEY_b,          spawn,          {.v = browsercmd} },
-> 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_B,          spawn,          {.v = mailclientcmd} },
 > 	{ MODKEY,                    XKB_KEY_s,          spawn,          SHCMD(screenshotcmd)},
-> 	{ MODKEY,                    XKB_KEY_r,          spawn,          SHCMD(startscreencapturecmd)},
-> 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_r,          spawn,          SHCMD(finishscreencapturecmd)},
+> 	{ MODKEY,                    XKB_KEY_r,          spawn,          FISHCMD(startscreencapturecmd)},
+> 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_R,          spawn,          FISHCMD(finishscreencapturecmd)},
+129a144
+> 	// { MODKEY,                    XKB_KEY_b,          togglebar,      {0} },

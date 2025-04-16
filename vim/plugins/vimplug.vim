@@ -49,6 +49,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# If one day i get tired of configuring vim myself,
 	# i will just use the following plugin:
 	# https://github.com/wolandark/wim
+	
+	# Cool plugins so that i can take a look after:
+	# https://github.com/prabirshrestha/dotfiles/blob/main/.vimrc
 
 	###############
 	#### THEMES ###
@@ -186,10 +189,10 @@ export def FullSetup(vimplug_dir: Dirpath)
 	legacy Plug 'prabirshrestha/asyncomplete-lsp.vim'
 	
 	# 'ale' and 'asyncomplete' integration.
-	# this makes 'asyncomplete' send its information to 'ale', so that
-	# 'ale' displays it.
-	# OBS: i personally don't use ale as an LSP, therefore there's no need
-	# for this plugin.
+	# this makes 'ale' send information coming from language servers to
+	# 'asyncomplete'
+	# OBS: i personally don't use ale with its LSP capability, therefore
+	# there's no need for this plugin.
 	# https://github.com/andreypopp/asyncomplete-ale.vim
 	# legacy Plug 'andreypopp/asyncomplete-ale.vim'
 
@@ -207,7 +210,6 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# legacy Plug 'prabirshrestha/asyncomplete-file.vim'
 
 	# 'ultisnips' and 'asyncomplete' integration
-	# OBS: 'ultisnips' is an alternative to 'vsnip' (the one i use)
 	# https://github.com/prabirshrestha/asyncomplete-ultisnips.vim
 	# legacy Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 
@@ -256,6 +258,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	
 	# https://github.com/tpope/vim-commentary
 	legacy Plug 'tpope/vim-commentary'
+
 
 
 
@@ -442,6 +445,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/chrisbra/csv.vim
 	legacy Plug 'chrisbra/csv.vim'
+
+	# https://github.com/prabirshrestha/quickpick.vim
+	# legacy Plug 'prabirshrestha/quickpick.vim'
 
 	# https://github.com/fredkschott/covim
 	# legacy Plug 'fredkschott/covim'

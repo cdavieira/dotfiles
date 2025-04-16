@@ -1,41 +1,76 @@
 #!/usr/bin/fish
 
-argparse 'h/help' 'b/branch' 'c/config' 'm/makefile' 'd/debug' 's/startup' -- $argv
+argparse 'h/help' -- $argv
 
 if test -n "$_flag_h"
-	echo 'dwl_setup.fish [-h/--help] [-c/--config] [-m/--makefile] [-d/--debug]'
+	echo 'dwl_setup.fish [-h/--help]'
 	echo ''
 	echo '-h/--help: show this help message and quit'
-	echo '-c/--config: create new config header file out of config.def.h'
-	echo '-d/--debug: create a complete config header for debugging purposes'
-	echo '-m/--makefile: create new config makefile out of config.def.mk'
-	echo '-s/--startup: add "~/dotfiles/dwl/startup.fish" as the startup command for dwl'
 	exit
 end
 
 set dwl_path "$HOME/repos/dwl"
 set dwl_dotfile "$HOME/repos/dotfiles/dwl"
-cd $dwl_path
 
-if test -n "$_flag_c"
-	sed -f $dwl_dotfile/config.sed $dwl_path/config.def.h > $dwl_path/config.h
+function wlroots_available
+	cd $dwl_path
+	ls | grep wlroots
+	return 
 end
 
-if test -n "$_flag_m"
-	if not test -f 'config.def.mk'
-		cp config.mk config.def.mk
+function wlroots_download
+	cd $dwl_path
+	git clone https://gitlab.freedesktop.org/wlroots/wlroots.git
+end
+
+function wlroots_build
+	cd $dwl_path/wlroots
+	meson setup build && ninja -C build
+end
+
+function apply_pre_patches
+	# sed could be used alternatively
+	patch -b $dwl_path/config.mk $dwl_dotfile/patch/diff-configmk.patch
+end
+
+function dwl_rebuild
+	cd $dwl_path
+	make
+end
+
+function apply_post_patches
+	# sed could be used alternatively
+	patch -b $dwl_path/config.h    $dwl_dotfile/patch/diff-config.patch
+	patch -b $dwl_path/dwl.desktop $dwl_dotfile/patch/diff-desktop.patch
+end
+
+function dwl_install
+	cd $dwl_path
+	sudo make install
+end
+
+function dwl_reinstall
+	cd $dwl_path
+	make
+	sudo make install
+end
+
+function dwl_debug
+	sed -f $dwl_dotfile/sed/dwl.sed $dwl_path/dwl.c 
+end
+
+function run_once
+	if ! wlroots_available
+		wlroots_download
 	end
-	sed -e '/^\#XWAYLAND/ s/\#//' -e '/^\#XLIBS/ s/\#//' $dwl_path/config.def.mk > $dwl_path/config.mk
+	wlroots_build
+	apply_pre_patches
+	dwl_rebuild
+	apply_post_patches
+	dwl_rebuild
+	ln -s $dwl_dotfile/startup.sh $dwl_path
+	dwl_install
 end
 
-if test -n "$_flag_d"
-	sed -e '/#include "config.h"/,$ d' $dwl_path/dwl.c > $dwl_path/configclangd.h
-	cat $dwl_path/config.def.h >> $dwl_path/configclangd.h
-end
-
-if test -n "$_flag_s"
-	if ! test -e $dwl_path/dwl.desktop.old
-		mv $dwl_path/dwl.desktop $dwl_path/dwl.desktop.old
-	end
-	sed '/^Exec=dwl/ c\Exec=dwl -s /home/carlos/dotfiles/dwl/startup.fish' $dwl_path/dwl.desktop.old > $dwl_path/dwl.desktop
-end
+# run_once
+# dwl_reinstall

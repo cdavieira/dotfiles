@@ -348,6 +348,11 @@ export def FullSetup(vimplug_dir: Dirpath)
 	#################
 	##### PL/ML #####
 	#################
+
+	### Pack of programming languages and more
+	# https://github.com/sheerun/vim-polyglot
+	# legacy Plug 'sheerun/vim-polyglot'
+
 	### Rust
 	# https://github.com/rust-lang/rust.vim
 	# legacy Plug 'rust-lang/rust.vim'
@@ -381,7 +386,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	
 	### Javascript
 	# https://github.com/pangloss/vim-javascript
-	# legacy Plug 'pangloss/vim-javascript'
+	legacy Plug 'pangloss/vim-javascript'
 	
 	# https://github.com/HerringtonDarkholme/yats.vim
 	legacy Plug 'HerringtonDarkholme/yats.vim'

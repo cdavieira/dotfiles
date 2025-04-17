@@ -41,6 +41,7 @@ packages:
         - bat
         - ripgrep
         - fd
+        - openssh
         - go-md2man
       gentoo:
         - app-admin/pass
@@ -51,6 +52,7 @@ packages:
         - sys-apps/ripgrep
         - sys-apps/fd
         - dev-go/go-md2man
+        - net-misc/openssh
         - sys-auth/polkit
 
     - name: buildtools
@@ -460,6 +462,15 @@ altpackages:
 
 
 
+# TODO: services and packages follow different philosophies...
+# should we do the following instead:
+# wireplumber:
+#  arch:
+#   - name: ...
+#     type: ...
+#  gentoo:
+#   - name: ...
+#     type: ...
 services:
   arch:
     user:
@@ -472,10 +483,10 @@ services:
   gentoo:
     default:
       - seatd
-      - netmount
       - bluetooth
       - dbus
       - docker
+      - netmount
       - sysklogd
       - iwd
       - dhcpcd
@@ -531,8 +542,10 @@ all:
         - brillo
         - lua-language-server
       services:
-        system:
-        user:
+        - wireplumber
+        - cups
+        - iwd
+        - bluetooth
     ignore:
       packages:
         - dhcpcd
@@ -549,10 +562,6 @@ all:
         - sof-firmware
         - tmux 
         - vim 
-      altpackages:
-      services:
-        system:
-        user:
 
   gentoo:
     install:
@@ -668,5 +677,3 @@ all:
         - virtual/pager
         - virtual/service-manager
         - virtual/ssh
-      altpackages:
-      services:

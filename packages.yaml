@@ -459,6 +459,13 @@ altpackages:
     - name:
       url:
 
+  cargo:
+    - name: typst
+      url: typst-cli
+
+    - name: tinymist
+      url: https://github.com/Myriad-Dreamin/tinymist
+
 
 
 

@@ -1,6 +1,7 @@
 return {
-	require("carlos.plugins.telescope")[1],
-	require("carlos.plugins.telescope")[2],
+	-- require("carlos.plugins.telescope")[1],
+	-- require("carlos.plugins.telescope")[2],
+	require("carlos.plugins.telescope"),
 	require("carlos.plugins.treesitter"),
 	require("carlos.themes.catppuccin"),
 	require("carlos.plugins.neotree"),
@@ -11,7 +12,8 @@ return {
 	require("carlos.plugins.whichkey"),
 	require("carlos.plugins.alpha"),
 	require("carlos.plugins.toggleterm"),
-	require("carlos.plugins.nvim-snippets")[1],
-	require("carlos.plugins.nvim-snippets")[2],
-	-- require("carlos.plugins.nvim-java"),
+	-- require("carlos.plugins.nvim-snippets")[1],
+	-- require("carlos.plugins.nvim-snippets")[2],
+	require("carlos.plugins.nvim-snippets"),
+	require("carlos.plugins.nvim-java"),
 }

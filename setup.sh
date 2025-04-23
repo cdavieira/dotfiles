@@ -14,11 +14,11 @@ yq_cmd_pkgs_templ='
  | flatten(1)[]
 '
 
-# TODO: check is this is correct
 yq_cmd_altpkgs_templ='
   . as $file
   | $file.all.LINUXDISTRO.install.altpackages as $altpkgs
   | $file.altpackages.METHOD[]
+  | select(.name)
   | { (.name): .url }
   | .[$altpkgs[]]
 '
@@ -72,26 +72,27 @@ make_links(){
 
 install_packages_alt(){
   local yq_distro_cmd=${yq_cmd_altpkgs_templ//LINUXDISTRO/$1}
-  GIT_PKGS=$(cat dotfiles/packages.yaml | yq "${yq_distro_cmd//METHOD/git}" | clean_jq_output)
-  CURL_PKGS=$(cat dotfiles/packages.yaml | yq "${yq_distro_cmd//METHOD/curl}" | clean_jq_output)
-  YARN_PKGS=$(cat dotfiles/packages.yaml | yq "${yq_distro_cmd//METHOD/yarn}" | clean_jq_output)
-  PIP_PKGS=$(cat dotfiles/packages.yaml | yq "${yq_distro_cmd//METHOD/pip}" | clean_jq_output)
-  FLATPAK_PKGS=$(cat dotfiles/packages.yaml | yq "${yq_distro_cmd//METHOD/flatpak}" | clean_jq_output)
+  GIT_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/git}" | clean_jq_output)
+  CURL_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/curl}" | clean_jq_output)
+  YARN_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/yarn}" | clean_jq_output)
+  PIP_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/pip}" | clean_jq_output)
+  FLATPAK_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/flatpak}" | clean_jq_output)
 
   cd ${reposdir}
+
   for repo in $GIT_PKGS; do
     git clone $repo
   done
   for pkg in $CURL_PKGS; do
     curl $pkg
   done
-  if test -n "$YARN_PKGS"; then
+  if [[ ! "$YARN_PKGS" =~ ^[[:space:]]*$ ]]; then
     yarn global add $YARN_PKGS
   fi
-  if test -n "$PIP_PKGS"; then
+  if [[ ! "$PIP_PKGS" =~ ^[[:space:]]*$ ]]; then
     pip install $PIP_PKGS
   fi
-  if test -n "$FLATPAK_PKGS"; then
+  if [[ ! "$FLATPAK_PKGS" =~ ^[[:space:]]*$ ]]; then
     flatpak install $FLATPAK_PKGS
   fi
 }
@@ -147,6 +148,9 @@ install_packages(){
       ;;
   esac
 }
+
+install_packages_alt arch
+exit
 
 #################################
 #################################

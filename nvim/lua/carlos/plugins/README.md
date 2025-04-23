@@ -14,6 +14,8 @@
 
 
 ## Other plugins
+* [session saver](https://github.com/folke/persistence.nvim)
+* [todos](https://github.com/folke/todo-comments.nvim)
 * [comment](https://github.com/numToStr/Comment.nvim)
 * [formatter](https://github.com/mhartington/formatter.nvim)
 * [open markdown file in markdown-preview.com](https://github.com/iamcco/markdown-preview.nvim)

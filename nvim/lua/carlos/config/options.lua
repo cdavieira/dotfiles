@@ -4,4 +4,6 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = false
 vim.opt.relativenumber = true
 vim.opt.wrap = false
-vim.cmd.colorscheme "catppuccin"
+-- Make sure to setup `mapleader` and `maplocalleader` before lazy.nvim loads
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"

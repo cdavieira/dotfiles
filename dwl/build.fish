@@ -72,5 +72,5 @@ function run_once
 	dwl_install
 end
 
-# run_once
+run_once
 # dwl_reinstall

@@ -30,6 +30,7 @@
 * [better code annotations - neogen](https://github.com/danymat/neogen)
 * https://github.com/tpope/vim-fugitive
 * https://github.com/lewis6991/gitsigns.nvim
+* https://github.com/nvim-treesitter/nvim-treesitter-context
 
 ## Other plugins
 * [open markdown file in markdown-preview.com](https://github.com/iamcco/markdown-preview.nvim)

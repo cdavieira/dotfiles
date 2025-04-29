@@ -91,6 +91,7 @@ if status is-interactive
 	alias view 'vim -R'
 	alias dmesg 'dmesg -H'
 	alias info 'info --vi-keys'
+	alias nv 'nvim'
 
 	# in case lynx is installed, override its default cfg file with ours
 	if type -q 'lynx'

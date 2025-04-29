@@ -459,38 +459,74 @@ altpackages:
     - name:
       url:
 
+  cargo:
+    - name: typst
+      url: typst-cli
+
+    - name: tinymist
+      url: https://github.com/Myriad-Dreamin/tinymist
 
 
 
-# TODO: services and packages follow different philosophies...
-# should we do the following instead:
-# wireplumber:
-#  arch:
-#   - name: ...
-#     type: ...
-#  gentoo:
-#   - name: ...
-#     type: ...
+
 services:
-  arch:
-    user:
-      - wireplumber
-    system:
-      - cups
-      - iwd
-      - bluetooth
-      - docker
-  gentoo:
-    default:
-      - seatd
-      - bluetooth
-      - dbus
-      - docker
-      - netmount
-      - sysklogd
-      - iwd
-      - dhcpcd
-      - chronyd
+  - name: wireplumber
+    arch:
+      - name: wireplumber
+        type: user
+    gentoo:
+      - name:
+        type:
+
+  - name: cups
+    arch:
+      - name: cups
+        type: system
+    gentoo:
+      - name:
+        type:
+
+  - name: iwd
+    arch:
+      - name: iwd
+        type: system
+    gentoo:
+      - name: iwd
+        type: default
+
+  - name: bluetooth
+    arch:
+      - name: bluetooth
+        type: system
+    gentoo:
+      - name: bluetooth
+        type: default
+
+  - name: docker
+    arch:
+      - name: docker
+        type: system
+    gentoo:
+      - name: docker
+        type: default
+
+  - name: mostlygentoo
+    arch:
+      - name: 
+        type:
+    gentoo:
+      - name: seatd
+        type: default
+      - name: dbus
+        type: default
+      - name: netmount
+        type: default
+      - name: sysklogd
+        type: default
+      - name: dhcpcd
+        type: default
+      - name: chronyd
+        type: default
 
 
 
@@ -514,6 +550,7 @@ all:
           - wayland
           - flatpak
         user:
+          - fonts
           - dwl
           - texteditor
           - terminal
@@ -544,7 +581,6 @@ all:
       services:
         - wireplumber
         - cups
-        - iwd
         - bluetooth
     ignore:
       packages:
@@ -562,6 +598,8 @@ all:
         - sof-firmware
         - tmux 
         - vim 
+      services:
+        - iwd
 
   gentoo:
     install:
@@ -677,3 +715,5 @@ all:
         - virtual/pager
         - virtual/service-manager
         - virtual/ssh
+      services:
+        -

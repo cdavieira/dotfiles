@@ -50,9 +50,12 @@ function dwl_install
 end
 
 function dwl_reinstall
-	cd $dwl_path
-	make
-	sudo make install
+	cd $dwl_path/wlroots
+	git pull
+	meson setup build && ninja -C build
+
+	cd ..
+	make &&  sudo make install
 end
 
 function dwl_debug
@@ -69,6 +72,7 @@ function run_once
 	apply_post_patches
 	dwl_rebuild
 	ln -s $dwl_dotfile/startup.sh $dwl_path
+	ln -s $dwl_dotfile/build.fish $dwl_path
 	dwl_install
 end
 

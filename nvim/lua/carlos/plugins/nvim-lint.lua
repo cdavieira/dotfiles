@@ -1,5 +1,6 @@
 -- https://github.com/mfussenegger/nvim-lint
 
 return {
-  "mfussenegger/nvim-lint"
+	"mfussenegger/nvim-lint",
+	enabled = false
 }

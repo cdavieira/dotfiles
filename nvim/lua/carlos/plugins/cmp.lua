@@ -1,7 +1,5 @@
--- autocomp/home/carlosletion
-
 -- https://github.com/hrsh7th/nvim-cmp
--- the type for each member of  this dictionary can be found at: $HOME/.local/share/nvim/lazy/nvim-cmp/lua/cmp/types  
+-- the type for each member of  this dictionary can be found at: $HOME/.local/share/nvim/lazy/nvim-cmp/lua/cmp/types
 
 -- also, read ':help nvim-cmp'
 
@@ -20,11 +18,10 @@ return {
 		local cmp = require("cmp")
 		local defaults = require("cmp.config.default")()
 		return {
-		  -- Required, specify a snippet engine
+			-- Required, specify a snippet engine
 			snippet = {
 				expand = function(args)
-					-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-					vim.snippet.expand(args.body) -- For native neovim snippets (Neovim 0.10+)
+					require('luasnip').lsp_expand(args.body)
 				end,
 			},
 			completion = {
@@ -47,17 +44,13 @@ return {
 					fallback()
 				end,
 			}),
-			sources = cmp.config.sources(
-				{
-					{ name = "nvim_lsp" },
-					{ name = "path" },
-					{ name = "snippets" }, --nvim-snippets (which uses community prebuiltin snippets through snippets-friendly)
-					-- { name = "luasnip" },
-				},
-				{
-					{ name = "buffer" },
-				}
-			),
+			sources = cmp.config.sources({
+				{ name = "nvim_lsp" },
+				{ name = "luasnip" }, --nvim-snippets (which uses community prebuiltin snippets through snippets-friendly)
+			}, {
+				{ name = "buffer" },
+				{ name = "path" },
+			}),
 			experimental = {
 				ghost_text = {
 					hl_group = "CmpGhostText",

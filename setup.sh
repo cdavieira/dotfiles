@@ -4,7 +4,7 @@ prefix=$HOME
 reposdir=$prefix/repos
 xdgconfigdir=$prefix/.config
 
-# filter all packages listed for installation in 'packages.yaml' ("all.[arch/gentoo].packages")
+# filter all packages (managed by the distro package manager) listed for installation in 'packages.yaml' ("all.[arch/gentoo].packages")
 yq_cmd_pkgs_templ='
  . as $file
  | ($file.packages.system + $file.packages.user) as $allpkgs
@@ -14,6 +14,7 @@ yq_cmd_pkgs_templ='
  | flatten(1)[]
 '
 
+# filter all packages (managed by non-distro package managers) listed for installation in 'packages.yaml'
 yq_cmd_altpkgs_templ='
   . as $file
   | $file.all.LINUXDISTRO.install.altpackages as $altpkgs
@@ -21,6 +22,18 @@ yq_cmd_altpkgs_templ='
   | select(.name)
   | { (.name): .url }
   | .[$altpkgs[]]
+'
+
+yq_cmd_services_templ='
+  . as $file
+  | ($file.all.LINUXDISTRO.install.services - $file.all.LINUXDISTRO.ignore.services) as $services
+  | [ $file.services[] | select(.name as $n | $services | index($n)) ]
+  | map(.LINUXDISTRO)
+  | flatten
+  | group_by(.type)
+  | map({ (.[0].type // empty): map(.name) }) 
+  | add
+  | .TYPE[]
 '
 
 clean_jq_output(){
@@ -81,10 +94,14 @@ install_packages_alt(){
   cd ${reposdir}
 
   for repo in $GIT_PKGS; do
-    git clone $repo
+    if ! test -d $repo; then
+      git clone $repo
+    fi
   done
   for pkg in $CURL_PKGS; do
-    curl $pkg
+    if ! test -f $repo; then
+      curl $pkg
+    fi
   done
   if [[ ! "$YARN_PKGS" =~ ^[[:space:]]*$ ]]; then
     yarn global add $YARN_PKGS
@@ -106,8 +123,9 @@ install_packages_gentoo(){
 
   local yq_cmd=${yq_cmd_pkgs_templ//LINUXDISTRO/gentoo}
   PKGS_ALL=$(cat packages.yaml | yq "$yq_cmd" | clean_jq_output)
-  # TODO: remove ignored services
-  SERVICES_DEFAULT=$(cat packages.yaml | yq '.services.gentoo.default[]' | clean_jq_output)
+
+  yq_cmd=${yq_cmd_services_templ//LINUXDISTRO/gentoo}
+  SERVICES_DEFAULT=$(cat packages.yaml | yq "${yq_cmd//TYPE/default}" | clean_jq_output)
 
   sudo emerge -av $PKGS_ALL
   for serv in $SERVICES_DEFAULT; do
@@ -120,10 +138,10 @@ install_packages_arch(){
 
   local yq_cmd=${yq_cmd_pkgs_templ//LINUXDISTRO/arch}
   PKGS_ALL=$(cat packages.yaml | yq "$yq_cmd" | clean_jq_output)
-  # TODO: remove ignored services
-  SERVICES_SYSTEM=$(cat packages.yaml | yq '.services.arch.system[]' | clean_jq_output)
-  # TODO: remove ignored services
-  SERVICES_USER=$(cat packages.yaml | yq '.services.arch.user[]' | clean_jq_output)
+
+  yq_cmd=${yq_cmd_services_templ//LINUXDISTRO/arch}
+  SERVICES_SYSTEM=$(cat packages.yaml | yq "${yq_cmd//TYPE/system}" | clean_jq_output)
+  SERVICES_USER=$(cat packages.yaml | yq "${yq_cmd//TYPE/user}" | clean_jq_output)
 
   sudo pacman -S $PKGS_ALL
   sudo systemctl enable $SERVICES_SYSTEM
@@ -132,25 +150,11 @@ install_packages_arch(){
 
 install_packages(){
   case $1 in
-    'arch')
-      if ! command_exists yq ; then
-	sudo pacman -S jq yq
-      fi
-      install_packages_arch
-      ;;
-    'gentoo')
-      if ! command_exists yq ; then
-	sudo pacman -S app-misc/jq app-misc/yq
-      fi
-      install_packages_gentoo
-      ;;
-    *)
-      ;;
+    'arch') install_packages_arch ;;
+    'gentoo') install_packages_gentoo ;;
+    *) ;;
   esac
 }
-
-install_packages_alt arch
-exit
 
 #################################
 #################################
@@ -158,6 +162,7 @@ exit
 
 echo "Welcome to my setup script!"
 echo "This setup script is meant to be used right after the installation of either: ArchLinux, Gentoo or another OS of my likings"
+
 echo "Inform which distribution you are on right now:"
 
 select linuxdistro in arch gentoo; do
@@ -169,6 +174,19 @@ read confirmation
 if ! test "${confirmation}" = "y"; then
   echo "Exiting from setup script..."
   exit
+fi
+
+if ! command_exists yq ; then
+  echo "This script depends on yq to work, but 'yq' wasn't detected in your system!"
+  echo "Attempting to install 'yq' for distro "${linuxdistro}"..."
+  case ${linuxdistro} in
+    'arch') sudo pacman -S jq yq ;;
+    'gentoo') sudo pacman -S app-misc/jq app-misc/yq ;;
+    *)
+      echo "Ahhh: my script does not know how to install 'yq' for distro '${linuxdistro}'. Exiting..."
+      exit
+      ;;
+  esac
 fi
 
 echo "Would you like to create folders in $prefix? [y/N]"
@@ -184,7 +202,8 @@ if ! test "${yes_make_links}" = "y"; then
 fi
 
 # TODO: add list of packages to be installed and the number of them
-echo "Would you like to install packages? [y/N]"
+echo "Would you like to install the following packages? [y/N]"
+echo $(cat packages.yaml | yq "${yq_cmd_pkgs_templ//LINUXDISTRO/${linuxdistro}}" | clean_jq_output)
 read yes_install_pkgs
 if ! test "${yes_install_pkgs}" = "y"; then
   yes_install_pkgs="n"
@@ -194,18 +213,18 @@ fi
 ##############################
 ##############################
 
-if test ${yes_create_folders} = "y"; then
-  echo "Creating folders..."
-  create_folders
-  echo "Ok"
-fi
-if test ${yes_make_links} = "y"; then
-  echo "Creating symlinks for ${linuxdistro}..."
-  make_links ${linuxdistro} 
-  echo "Ok"
-fi
-if test ${yes_install_pkgs} = "y"; then
-  echo "Installing packages..."
-  install_packages ${linuxdistro}
-  echo "Ok"
-fi
+# if test ${yes_create_folders} = "y"; then
+#   echo "Creating folders..."
+#   create_folders
+#   echo "Ok"
+# fi
+# if test ${yes_make_links} = "y"; then
+#   echo "Creating symlinks for ${linuxdistro}..."
+#   make_links ${linuxdistro} 
+#   echo "Ok"
+# fi
+# if test ${yes_install_pkgs} = "y"; then
+#   echo "Installing packages..."
+#   install_packages ${linuxdistro}
+#   echo "Ok"
+# fi

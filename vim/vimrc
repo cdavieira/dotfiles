@@ -23,10 +23,10 @@ def GetDirpath(...dirs: list<string>): string
 	var rel_path = join(dirs, sep) .. sep
 	return rel_path
 enddef
-def GetFileHelperConfig(configname: string): string
+def GetVimConfig(configname: string): string
 	return GetFilepath(getenv('MYVIM_FILES'), configname .. '.vim')
 enddef
-def GetFilePluginConfig(pluginname: string): string
+def GetPluginConfig(pluginname: string): string
 	return GetFilepath(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
 enddef
 def WriteToStdout(...words: list<any>): void
@@ -91,16 +91,16 @@ endfor
 
 
 # Myconfig
-import GetFileHelperConfig('options')
-import GetFileHelperConfig('colorschemes')
-import GetFilePluginConfig('vimplug')
-import GetFilePluginConfig('asyncomplete')
-import GetFilePluginConfig('nerdtree')
-import GetFilePluginConfig('ale')
-#import GetFilePluginConfig('ollama')
-import GetFilePluginConfig('vimlsp')
-import GetFilePluginConfig('vsnip')
-import GetFilePluginConfig('airline')
+import GetVimConfig('options')
+import GetVimConfig('colorschemes')
+import GetPluginConfig('vimplug')
+import GetPluginConfig('asyncomplete')
+import GetPluginConfig('nerdtree')
+import GetPluginConfig('ale')
+#import GetPluginConfig('ollama')
+import GetPluginConfig('vimlsp')
+import GetPluginConfig('vsnip')
+import GetPluginConfig('airline')
 #vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
 #vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
 vimplug.FullSetup($MYVIM_VIMPLUG_DIR)

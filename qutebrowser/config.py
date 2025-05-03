@@ -37,6 +37,8 @@ c.zoom.default = 150
 
 #config.unbind('A', 'normal')
 #config.bind('A', 'spawn zathura {url}', mode='normal')
+#read ':help :hint' for more info
+config.bind('A', 'hint links spawn firefox {hint-url}', mode='normal')
 
 #c.url.default_page = "https://start.duckduckgo.com/"
 c.url.searchengines = {

@@ -35,21 +35,17 @@ if status is-interactive
 	######### Dynamic variables ###########
 	#######################################
 	# add rust package manager's 'bin/' to path
-	if test -d "$HOME/.cargo/bin"
-		set -x PATH $PATH "$HOME/.cargo/bin"
-	end
+	set add_to_path \
+		"$HOME/.local/bin" \
+		"$HOME/.cargo/bin" \
+		"$HOME/.yarn/bin" \
+		"/opt/riscv/bin" \
+		"/usr/local/texlive/$(date +%Y)/bin/x86_64-linux"
 
-	# add '~/.local/bin/' to path
-	if test -d "$HOME/.local/bin"
-		set -x PATH $PATH "$HOME/.local/bin"
-	end
-
-	if test -d "/usr/local/texlive/$(date +%Y)/bin/x86_64-linux"
-		set -x PATH $PATH "/usr/local/texlive/$(date +%Y)/bin/x86_64-linux"
-	end
-
-	if test -d "$HOME/.yarn/bin"
-		set -x PATH $PATH "$HOME/.yarn/bin"
+	for dirpath in $add_to_path
+		if test -d $dirpath; and not contains $dirpath $PATH
+			set -x PATH $PATH $dirpath
+		end
 	end
 
 	# set EDITOR env var
@@ -94,28 +90,14 @@ if status is-interactive
 	alias nv 'nvim'
 
 	# in case lynx is installed, override its default cfg file with ours
-	if type -q 'lynx'
-		if test -e ~/repos/dotfiles/lynx/lynx.cfg
-			alias lynx 'lynx -cfg=~/repos/dotfiles/lynx/lynx.cfg'
-		end
+	if type -q 'lynx'; and test -e ~/repos/dotfiles/lynx/lynx.cfg
+		alias lynx 'lynx -cfg=~/repos/dotfiles/lynx/lynx.cfg'
 	end
-
-	# if type -q nvim
-	# 	alias vim nvim
-	# end
 
 
 	#######################################
 	########### Abbreviations #############
 	#######################################
-
-	# save some typing
-	# for folder in dotfiles notes code
-	# 	if test -d $HOME/repos/$folder
-	# 		set -l shortname $(string sub --start 1 --end 2 $folder) 
-	# 		abbr -a $shortname cd $HOME/$folder
-	# 	end
-	# end
 
 	abbr dc cd
 	abbr sl ls

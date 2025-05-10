@@ -15,6 +15,9 @@ c.colors.webpage.darkmode.enabled = False
 #c.content.blocking.enabled = False
 c.content.autoplay = False
 c.content.images = True
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Accept-Language
+c.content.headers.accept_language = "en-US,en;q=0.9,de;q=0.8"
+# c.content.headers.accept_language = "de-DE,en;q=0.9,de;q=0.8"
 
 c.downloads.location.directory = "~/tmp/"
 

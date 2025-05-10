@@ -50,10 +50,6 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# i will just use the following plugin:
 	# https://github.com/wolandark/wim
 	
-	# Cool plugins so that i can take a look after:
-	# https://github.com/prabirshrestha/dotfiles/blob/main/.vimrc
-	# https://github.com/vim/vim/wiki/Vim9-Plugins
-	
 
 	###############
 	#### THEMES ###
@@ -172,16 +168,16 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# A source is a program/external tool which provides suggestions that
 	# will appear while you type. 
 	#
-	# Different things serve as sources:
+	# Different things might serve as sources:
 	# 1. language servers (such as clangd)
 	# 2. snippers
 	# 3. tag files
 	# 4. even vim functions that return arbitrary suggestions!
 	#
-	# plugins like 'vimlsp' (lsp capability), 'ale' (with its lsp capability),
-	# 'vsnip' (snipper) and others require some tweaks to integrate with
-	# asyncomplete. These tweaks come in the form of plugin bridges, which
-	# do all the work of integrating both plugins for you.
+	# plugins like 'vimlsp' (lsp), 'ale' (lsp), 'vsnip' (snipper) and
+	# others require some tweaks to integrate with asyncomplete. These
+	# tweaks come in the form of plugin bridges, which do all the work of
+	# integrating both plugins for you.
 
 	# https://github.com/prabirshrestha/asyncomplete.vim
 	legacy Plug 'prabirshrestha/asyncomplete.vim'

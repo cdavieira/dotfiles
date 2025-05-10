@@ -90,6 +90,8 @@ install_packages_alt(){
   YARN_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/yarn}" | clean_jq_output)
   PIP_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/pip}" | clean_jq_output)
   FLATPAK_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/flatpak}" | clean_jq_output)
+  # TODO: install cargo packages
+  # TODO: ensure yarn, pip, flatpak, cargo (...) are available
 
   cd ${reposdir}
 

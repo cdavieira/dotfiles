@@ -1,13 +1,11 @@
 // -*- mode: jsonc -*-
+//based on /etc/xdg/waybar/config.jsonc
 {
-	"layer": "bottom",
+	"layer": "top",
 	"position": "top", // Waybar position (top|bottom|left|right)
-	"height": 34, // Waybar height (to be removed for auto height)
+	"height": 30, // Waybar height (to be removed for auto height)
 	"spacing": 4,
 	"mode": "dock",
-	// Only with the IPC patch applied:
-	// 	"dwl/tags"
-	// 	"dwl/window"
 	"modules-left": [
 	],
 	"modules-center": [
@@ -21,7 +19,8 @@
 		"cpu",
 		"memory",
 		"battery",
-		"clock"
+		"clock",
+		"custom/power"
 	],
 	"dwl/window": {
 		"format": "{layout}",
@@ -91,5 +90,17 @@
 	"wireplumber": {
 		"format": "{volume}%",
 		"format-muted": ""
+	},
+	"custom/power": {
+	"format" : "⏻ ",
+		"tooltip": false,
+		"menu": "on-click",
+		"menu-file": "$HOME/.config/waybar/power_menu.xml",
+		"menu-actions": {
+			"shutdown": "shutdown",
+			"reboot": "reboot",
+			"suspend": "systemctl suspend",
+			"hibernate": "systemctl hibernate"
+		}
 	}
 }

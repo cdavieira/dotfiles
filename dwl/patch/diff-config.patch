@@ -6,11 +6,11 @@
 < 	{ "Gimp_EXAMPLE",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
 < 	{ "firefox_EXAMPLE",  NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
 ---
-> 	{ NULL,  NULL,       0,       0,           -1 }, /* Start on ONLY tag "9" */
+>   	{ NULL,  NULL,       0,       0,           -1 }, /* Start on ONLY tag "9" */
 59a59,61
-> 	.rules = "evdev", 
-> 	.model = "pc105", 
-> 	.layout = "br",   
+>   	.rules = "evdev", 
+>   	.model = "pc105", 
+>   	.layout = "br",   
 63,64c65,66
 < static const int repeat_rate = 25;
 < static const int repeat_delay = 600;
@@ -20,7 +20,7 @@
 94c96
 < static const uint32_t send_events_mode = LIBINPUT_CONFIG_SEND_EVENTS_ENABLED;
 ---
-> static const uint32_t send_events_mode = LIBINPUT_CONFIG_SEND_EVENTS_DISABLED_ON_EXTERNAL_MOUSE;
+> static const uint32_t send_events_mode =  LIBINPUT_CONFIG_SEND_EVENTS_DISABLED_ON_EXTERNAL_MOUSE;
 110c112
 < #define MODKEY WLR_MODIFIER_ALT
 ---
@@ -31,9 +31,7 @@
 < static const char *termcmd[] = { "foot", NULL };
 ---
 > static const char *termcmd[] = { "kitty", NULL };
-124c127,137
-< 
----
+124a128,140
 > static const char *browsercmd[] = { "qutebrowser", NULL };
 > static const char * const screenshotcmd = "slurp | grim -g - - | swappy -f -";
 > static const char * const startscreencapturecmd = "wf-recorder -g \"$(slurp)\" --audio --file=recording-$(date +%Y%m%d-%H%M%S).mp4";
@@ -41,16 +39,19 @@
 > static const char * const lowervolcmd = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
 > static const char * const raisevolcmd = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
 > static const char * const mutecmd = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+> static const char * const lowermonbrightnesscmd = "brillo -A 5";
+> static const char * const raisemonbrightnesscmd = "brillo -U 5";
 > 
 > //xkb keynames can be found in:
 > //#include <xkbcommon/xkbcommon-keysyms.h>
 > //#include <linux/input-event-codes.h>
-127a141,144
-> 	{ MODKEY,                    XKB_KEY_b,          spawn,          {.v = browsercmd} },
-> 	{ MODKEY,                    XKB_KEY_s,          spawn,          SHCMD(screenshotcmd)},
-> 	{ MODKEY,                    XKB_KEY_r,          spawn,          FISHCMD(startscreencapturecmd)},
-> 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_R,          spawn,          FISHCMD(finishscreencapturecmd)},
-129a147,149
-> 	{ MODKEY,                    XKB_KEY_XF86AudioLowerVolume,     spawn,       SHCMD(lowervolcmd)},
-> 	{ MODKEY,                    XKB_KEY_XF86AudioRaiseVolume,     spawn,       SHCMD(raisevolcmd)},
-> 	{ MODKEY,                    XKB_KEY_XF86AudioMute       ,     spawn,       SHCMD(mutecmd)},
+126a143,151
+>   	{ MODKEY,                    XKB_KEY_b,          spawn,          {.v = browsercmd} },
+>   	{ MODKEY,                    XKB_KEY_s,          spawn,          SHCMD(screenshotcmd)},
+>   	{ MODKEY,                    XKB_KEY_r,          spawn,          FISHCMD(startscreencapturecmd)},
+>   	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_R,          spawn,          FISHCMD(finishscreencapturecmd)},
+>   	{ MODKEY,                    XKB_KEY_XF86AudioLowerVolume ,     spawn,       SHCMD(lowervolcmd)},
+>   	{ MODKEY,                    XKB_KEY_XF86AudioRaiseVolume ,     spawn,       SHCMD(raisevolcmd)},
+>   	{ MODKEY,                    XKB_KEY_XF86AudioMute        ,     spawn,       SHCMD(mutecmd)},
+>   	{ MODKEY,                    XKB_KEY_XF86MonBrightnessUp  ,     spawn,       SHCMD(raisemonbrightnesscmd)},
+>   	{ MODKEY,                    XKB_KEY_XF86MonBrightnessDown,     spawn,       SHCMD(lowermonbrightnesscmd)},

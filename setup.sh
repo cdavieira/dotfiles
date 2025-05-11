@@ -81,6 +81,12 @@ make_links(){
       ;;
     *) ;;
   esac
+
+  if test -d ${reposdir}/code; then
+	  ln -sf ${reposdir}/code/all/fish/projects/auto_pull.fish /usr/local/bin/auto_pull
+	  ln -sf ${reposdir}/code/all/fish/projects/auto_push.fish /usr/local/bin/auto_push
+	  ln -sf ${reposdir}/code/all/python/projects/qtb-tabsaver/main.py /usr/local/bin/tabsaver
+  fi
 }
 
 install_packages_alt(){

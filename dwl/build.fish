@@ -12,6 +12,15 @@ end
 set dwl_path "$HOME/repos/dwl"
 set dwl_dotfile "$HOME/repos/dotfiles/dwl"
 
+function dwl_available
+	test -d $dwl_path
+	return 
+end
+
+function dwl_download
+	git clone https://codeberg.org/dwl/dwl $dwl_path
+end
+
 function wlroots_available
 	cd $dwl_path
 	ls | grep wlroots
@@ -52,7 +61,7 @@ end
 function dwl_reinstall
 	cd $dwl_path/wlroots
 	git pull
-	meson setup build && ninja -C build
+	sudo meson setup --reconfigure build && ninja -C build
 
 	cd ..
 	make &&  sudo make install
@@ -63,6 +72,9 @@ function dwl_debug
 end
 
 function run_once
+	if ! dwl_available
+		dwl_download
+	end
 	if ! wlroots_available
 		wlroots_download
 	end

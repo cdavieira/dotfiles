@@ -1,3 +1,5 @@
+/* based on /etc/xdg/waybar/style.css */
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;

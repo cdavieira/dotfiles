@@ -9,7 +9,7 @@ command_exists(){
 	return 
 }
 
-mywallpaper="/home/carlos/repos/dotfiles/wallpapers/orangutan.png"
+mywallpaper="$HOME/repos/dotfiles/wallpapers/orangutan.png"
 
 if command_exists gentoo-pipewire-launcher; then
   gentoo-pipewire-launcher <&- &

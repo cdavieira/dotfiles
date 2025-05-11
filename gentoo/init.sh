@@ -27,7 +27,7 @@ elif test "$1" = "dwl"; then
 	# commiting to launch the program with 'dbus-launch'.
 	# WARNING: this option isn't recommended to be used like this. Read
 	# 'man dbus-launch' for more info on that.
-	dbus-launch --exit-with-session dwl -s ~/repos/dwl/startup.sh &> ~/log/init0.log
+	dbus-launch --exit-with-session dwl -s ~/repos/dwl/startup.sh &> ~/log/dwl-$(date +%Y-%m-%d-%H-%M).log
 else
 	echo "Unknown window manager!"
 	echo "run: $0 sway/dwl"

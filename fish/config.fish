@@ -34,7 +34,6 @@ if status is-interactive
 	#######################################
 	######### Dynamic variables ###########
 	#######################################
-	# add rust package manager's 'bin/' to path
 	set add_to_path \
 		"$HOME/.local/bin" \
 		"$HOME/.cargo/bin" \

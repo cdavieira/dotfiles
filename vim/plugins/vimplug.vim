@@ -31,7 +31,7 @@ export def NormalSetup(vimplug_dir: Dirpath)
 	# LSP
 	legacy Plug 'prabirshrestha/vim-lsp'
 
-	# LSP: Autocompletion
+	# Autocompletion
 	legacy Plug 'prabirshrestha/asyncomplete.vim'
 	legacy Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
@@ -244,7 +244,12 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/google/vim-codefmt
 	# legacy Plug 'google/vim-codefmt'
+	
+	# https://github.com/junegunn/vim-easy-align
+	# legacy Plug 'junegunn/vim-easy-align'
 
+	# https://github.com/rhysd/vim-clang-format
+	# legacy Plug 'rhysd/vim-clang-format'
 
 
 
@@ -271,6 +276,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	
 	# https://github.com/jiangmiao/auto-pairs
 	legacy Plug 'jiangmiao/auto-pairs'
+
 
 
 
@@ -365,6 +371,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/mzlogin/vim-markdown-toc
 	# legacy Plug 'mzlogin/vim-markdown-toc'
 
+	# https://github.com/qadzek/link.vim
+	legacy Plug 'qadzek/link.vim'
+
 	### HTML
 	# https://github.com/alvan/vim-closetag
 	legacy Plug 'alvan/vim-closetag'
@@ -399,6 +408,10 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/juanfranblanco/vscode-solidity
 	# legacy Plug 'juanfranblanco/vscode-solidity'
+
+	### GLSL
+	# https://github.com/tikhomirov/vim-glsl
+	# legacy Plug 'tikhomirov/vim-glsl'
 
 
 
@@ -446,33 +459,21 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/romainl/vim-cool
 	legacy Plug 'romainl/vim-cool'
 
-	# https://github.com/chrisbra/csv.vim
-	legacy Plug 'chrisbra/csv.vim'
-
-	# https://github.com/prabirshrestha/quickpick.vim
-	# legacy Plug 'prabirshrestha/quickpick.vim'
-
-	# https://github.com/fredkschott/covim
-	# legacy Plug 'fredkschott/covim'
-
 	# toggle 'paste' automatically when pasting something external from vim
 	# https://github.com/roxma/vim-paste-easy
-	# legacy Plug 'roxma/vim-paste-easy'
+	legacy Plug 'roxma/vim-paste-easy'
+
+	# https://github.com/chrisbra/csv.vim
+	legacy Plug 'chrisbra/csv.vim'
+	
+	# https://github.com/voldikss/vim-floaterm
+	legacy Plug 'voldikss/vim-floaterm'
+
+	# https://github.com/kshenoy/vim-signature
+	legacy Plug 'kshenoy/vim-signature'
 
 	# https://github.com/terryma/vim-smooth-scroll
 	# legacy Plug 'terryma/vim-smooth-scroll'
-
-	# https://github.com/mbbill/undotree
-	# legacy Plug 'mbbill/undotree'
-
-	# https://github.com/rhysd/vim-healthcheck
-	# legacy Plug 'rhysd/vim-healthcheck'
-	
-	# https://github.com/wolandark/vim-live-server
-	# legacy Plug 'wolandark/vim-live-server'
-	
-	# https://github.com/voldikss/vim-floaterm
-	# legacy Plug 'voldikss/vim-floaterm'
 
 	# https://github.com/easymotion/vim-easymotion
 	# legacy Plug 'easymotion/vim-easymotion'
@@ -480,26 +481,29 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/kana/vim-textobj-user
 	# legacy Plug 'kana/vim-textobj-user'
 
-	# https://github.com/vimwiki/vimwiki
-	# legacy Plug 'vimwiki/vimwiki'
-
-	# https://github.com/qadzek/link.vim.git
-	# legacy Plug 'qadzek/link.vim.git'
-	
-	# https://github.com/jessepav/vim-boxdraw
-	# legacy Plug 'jessepav/vim-boxdraw'
+	# https://github.com/mbbill/undotree
+	# legacy Plug 'mbbill/undotree'
 
 	# https://github.com/luochen1990/rainbow
 	# legacy Plug 'luochen1990/rainbow'
+
+	# https://github.com/fredkschott/covim
+	# legacy Plug 'fredkschott/covim'
+
+	# https://github.com/wolandark/vim-live-server
+	# legacy Plug 'wolandark/vim-live-server'
+
+	# https://github.com/prabirshrestha/quickpick.vim
+	# legacy Plug 'prabirshrestha/quickpick.vim'
+
+	# https://github.com/rhysd/vim-healthcheck
+	# legacy Plug 'rhysd/vim-healthcheck'
+
+	# https://github.com/vimwiki/vimwiki
+	# legacy Plug 'vimwiki/vimwiki'
 	
-	# https://github.com/junegunn/vim-easy-align
-	# legacy Plug 'junegunn/vim-easy-align'
-
-	# https://github.com/inkarkat/vim-mark
-	# legacy Plug 'inkarkat/vim-mark'
-
-	# https://github.com/kshenoy/vim-signature
-	# legacy Plug 'kshenoy/vim-signature'
+	# https://github.com/jessepav/vim-boxdraw
+	# legacy Plug 'jessepav/vim-boxdraw'
 
 	# https://github.com/vim-scripts/LargeFile
 	# legacy Plug 'vim-scripts/LargeFile'

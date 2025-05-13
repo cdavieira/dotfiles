@@ -156,6 +156,15 @@ var js_lsp_info = {
 	'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact']
 }
 
+# https://projects.eclipse.org/projects/eclipse.jdt.ls
+var java_lsp_info = {
+        'name': 'Eclipse JDT Language Server',
+	# 'cmd': (server_info) => [&shell, &shellcmdflag, 'jdtls -data ' .. getcwd()],
+        'cmd': (server_info) => ['jdtls', '-data', getcwd()],
+	'root_uri': (server_info) => lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'pom.xml')),
+        'allowlist': ['java']
+}
+
 # https://github.com/microsoft/vscode-html-languageservice
 var html_lsp_info = {
 	'name': 'html-languageserver',
@@ -222,6 +231,9 @@ endif
 if executable('typescript-language-server')
 	au User lsp_setup lsp#register_server(ts_lsp_info)
 	au User lsp_setup lsp#register_server(js_lsp_info)
+endif
+if executable('jdtls')
+	au User lsp_setup lsp#register_server(java_lsp_info)
 endif
 if executable('html-languageserver')
 	au User lsp_setup lsp#register_server(html_lsp_info)

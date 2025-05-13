@@ -73,7 +73,7 @@ set noexpandtab
 set textwidth=78
 
 # minimal number of columns to use for the line number
-set numberwidth=2
+set numberwidth=3
 
 # allows automatically erasing all whitespaces associated with autoindents,
 # line breaks and the start of insert when pressing 'Ctrl-W'/'Ctrl-U'

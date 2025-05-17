@@ -46,7 +46,7 @@ return {
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
-				{ name = "luasnip" }, --nvim-snippets (which uses community prebuiltin snippets through snippets-friendly)
+				{ name = "luasnip" },
 			}, {
 				{ name = "buffer" },
 				{ name = "path" },

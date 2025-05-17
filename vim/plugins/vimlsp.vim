@@ -59,7 +59,7 @@ g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
 # g:lsp_experimental_workspace_folders = 1
 
 # create a log file to inspect lsp action
-# g:lsp_log_file = expand($MYVIM_CONFIG_DIR .. 'vim-lsp.log')
+g:lsp_log_file = expand($MYVIM_CONFIG_DIR .. 'vim-lsp.log')
 
 
 
@@ -179,6 +179,13 @@ var css_lsp_info = {
 	'whitelist': ['css', 'less', 'sass'],
 }
 
+var tailwindcss_lsp_info = {
+	'name': 'tailwindcss-language-server',
+	'cmd': (server_info) => [&shell, &shellcmdflag, 'tailwindcss-language-server --stdio'],
+	'root_uri': (server_info) => lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json')),
+	'whitelist': ['html'],
+}
+
 # https://github.com/latex-lsp/texlab
 # var tex_lsp_info = {
 # 	'name': 'texlab',
@@ -240,6 +247,9 @@ if executable('html-languageserver')
 endif
 if executable('css-languageserver')
 	au User lsp_setup lsp#register_server(css_lsp_info)
+endif
+if executable('tailwindcss-language-server')
+	au User lsp_setup lsp#register_server(tailwindcss_lsp_info)
 endif
 # if executable('texlab')
 # 	au User lsp_setup lsp#register_server(tex_lsp_info)

@@ -17,16 +17,31 @@ fi
 if test "$1" = "sway"; then
 	echo "dbus-launch sway"
 elif test "$1" = "dwl"; then
-	#dbus-launch dwl -s ~/repos/dwl/startup.sh <&-
-
-	# '--exit-with-session' kills all processes and unsets all environment
-	# variables that were created by dbus to launch this program when the
-	# session/window manager instance terminates. This is sort of a
-	# 'cleanup' procedure. If '--exit-with-session' isn't used, then this
-	# script would have to check for DBUS_* enviroment variables before
-	# commiting to launch the program with 'dbus-launch'.
-	# WARNING: this option isn't recommended to be used like this. Read
-	# 'man dbus-launch' for more info on that.
+	# 'dbus-launch'/'dbus-run-session' sets $DBUS_SESSION_BUS_ADDRESS,
+	# which references a dbus session to be used by all processes
+	# started from herein.
+	#
+	# The GentooWiki page for DBUS recommends 'dbus-launch
+	# --exit-with-session' for this purpose.
+	#
+	# The manpage of dbus-launch recommends using 'dbus-run-session'
+	# instead for sessions within a text-mode session (such as shells,
+	# agetty/elogind/TTY, greetd in text/terminal mode)
+	#
+	# Since the dwl session is a graphical one, i suppose we should use
+	# dbus-launch.
+	#
+	# OBS: Beware that systems using systemd/elogind might no need the use
+	# of dbus-launch, because those usually set a dbus session
+	# automatically on user-login through PAM. On the other hand, this
+	# might be necessary in systems that use OpenRC, runit and other
+	# initsystems (if they don't use elogind or another PAM-aware
+	# mechanism, of course)
+	#
+	# '--exit-with-session' kills all processes and unsets all DBUS_*
+	# environment variables that were created by dbus to launch this
+	# program when the session/window manager instance terminates. This is
+	# sort of a 'cleanup' procedure.
 	dbus-launch --exit-with-session dwl -s ~/repos/dwl/startup.sh &> ~/log/dwl-$(date +%Y-%m-%d-%H-%M).log
 else
 	echo "Unknown window manager!"

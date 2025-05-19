@@ -47,9 +47,12 @@ config.bind('A', 'hint links spawn firefox {hint-url}', mode='normal')
 c.url.searchengines = {
     "DEFAULT": "https://google.com/search?hl=en&q={}",
     "d": "https://duckduckgo.com/?q={}",
+    "di": "https://de.thefreedictionary.com/{}",
+    "du": "https://www.duden.de/rechtschreibung/{}",
     "y": "https://www.youtube.com/results?search_query={}",
     "wi": "https://en.wikipedia.org/wiki/{}",
     "w": "https://wiki.archlinux.org/?search={}",
+    "s": "https://www.satzapp.de/saetze/?w={}",
     "v": "https://www.verbformen.com/?w={}",
     "t": "https://translate.google.com/?hl=pt-BR&sl=en&tl=de&text={}&op=translate",
     "l": "https://www.linguee.com.br/alemao-portugues/traducao/{}.html",

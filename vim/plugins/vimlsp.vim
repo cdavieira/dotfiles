@@ -288,7 +288,6 @@ def On_lsp_buffer_enabled(): void
 	nnoremap <buffer> <leader>l <plug>(lsp-preview-close)
 	nnoremap <buffer> <leader>j <plug>(lsp-rename)
 
-	# retired
 	# nnoremap <buffer> <leader>z <plug>(lsp-code-action)
 	# nnoremap <buffer> <leader>y <plug>(lsp-references)
 	# nnoremap <buffer> <leader>x <plug>(lsp-code-lens)
@@ -296,8 +295,6 @@ def On_lsp_buffer_enabled(): void
 	# nnoremap <buffer> <leader>v <plug>(lsp-next-error)
 	# nnoremap <buffer> <leader>u <plug>(lsp-next-warning)
 	# nnoremap <buffer> <leader>n <plug>(lsp-status)
-
-	autocmd! BufWritePre *.rs execute('LspDocumentFormatSync')
 enddef
 
 augroup lsp_install

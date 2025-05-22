@@ -33,9 +33,44 @@ vim.keymap.set('n', '<leader>p', Neotree_edit_myfolder, { desc = 'Edit Lazy\'s p
 vim.keymap.set('n', '\\', Toggleterm.toggle, {desc = 'Edit Lazy\'s plugins file'})
 vim.keymap.set('t', '\\', Toggleterm.toggle, {desc = 'Edit Lazy\'s plugins file'})
 
--- See `:help vim.diagnostic.*` for more
 vim.keymap.set('n', '<space>g', vim.diagnostic.open_float, {desc = 'Open diagnosis floating panel'})
-
 vim.keymap.set('n', '<leader>i', '<Cmd>edit /home/carlos/.config/nvim/init.lua <CR>', {desc = 'Edit init.lua'})
 vim.keymap.set('x', '<leader>y', '"+y', {desc = 'Copy to system clipboard'})
 vim.keymap.set('n', '<S-Esc>', ':noh<CR>', {desc = 'Unhighlight previous search highlight'})
+
+-- Example gaaip to align a paragraph to 1 character
+vim.keymap.set(
+    'x',
+    'gaa',
+    function()
+        local a = require'align'
+        a.operator(a.align_to_char)
+    end,
+    { noremap = true, silent = true }
+)
+
+-- vim.keymap.set(
+-- 	{ 'n' },
+-- 	'<C-k>',
+-- 	function()
+-- 		require('lsp_signature').toggle_float_win()
+-- 	end,
+-- 	{
+-- 		silent = true,
+-- 		noremap = true,
+-- 		desc = 'toggle signature'
+-- 	}
+-- )
+-- vim.keymap.set(
+-- 	{ 'n' },
+-- 	'<Leader>k',
+-- 	function()
+-- 		vim.lsp.buf.signature_help()
+-- 	end,
+-- 	{
+-- 		silent = true,
+-- 		noremap = true,
+-- 		desc = 'toggle signature'
+-- 	}
+-- )
+

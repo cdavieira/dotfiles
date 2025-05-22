@@ -1,22 +1,35 @@
--- https://github.com/stevearc/conform.nvim
-
 return {
-	'stevearc/conform.nvim',
-	opts = {},
-	config = function ()
-		require("conform").setup({
-		  formatters_by_ft = {
-		    -- lua = { "stylua" },
+	-- https://github.com/stevearc/conform.nvim
+	-- Brings support for external formatters
+	{
+		'stevearc/conform.nvim',
+		opts = {},
+		config = function ()
+			require("conform").setup({
+			  formatters_by_ft = {
+			    -- lua = { "stylua" },
 
-		    -- Conform will run multiple formatters sequentially
-		    -- python = { "isort", "black" },
+			    -- Conform will run multiple formatters sequentially
+			    -- python = { "isort", "black" },
 
-		    -- You can customize some of the format options for the filetype (:help conform.format)
-		    rust = { "rustfmt", lsp_format = "fallback" },
+			    -- You can customize some of the format options for the filetype (:help conform.format)
+			    rust = { "rustfmt", lsp_format = "fallback" },
 
-		    -- Conform will run the first available formatter
-		    javascript = { "prettierd", "prettier", stop_after_first = true },
-		  },
-		})
-	end,
+			    -- Conform will run the first available formatter
+			    javascript = { "prettierd", "prettier", stop_after_first = true },
+			  },
+			})
+		end,
+	},
+
+	-- https://github.com/Vonr/align.nvim.git
+	-- Manual text alignment
+	{
+		'Vonr/align.nvim',
+		branch = "v2",
+		lazy = true,
+		init = function()
+		-- Create your mappings here
+		end
+	}
 }

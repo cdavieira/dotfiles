@@ -50,7 +50,7 @@ setenv('MYVIM_SWAP_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'swap'))
 setenv('MYVIM_UNDO_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'undo'))
 setenv('MYVIM_VIMINFO', GetFilepath(getenv('MYVIM_CACHE_DIR'), 'viminfo'))
 setenv('MYVIM_VIMPLUG_DIR', GetDirpath(getenv('MYVIM_CONFIG_DIR'), 'vim-plug'))
-# override the system MANPAGER, since vim might have trouble using it if it has to (ex: if MANPAGER='nvim')
+# override the system MANPAGER, since vim might have trouble using it (ex: if MANPAGER='nvim')
 setenv('MANPAGER', 'vim +MANPAGER --not-a-term -')
 
 
@@ -63,7 +63,7 @@ if has('win64')
 	set keywordprg=:help
 	set shell=pwsh
 	set shellcmdflag=-Command
-	vimplug_install_cmd = '!powershell -Command ' .. '\"iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_file .. ' -Force \"'
+	vimplug_install_cmd = '!powershell -Command \"iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_file .. ' -Force \"'
 else
 	set keywordprg=:Man
 	# set shell=/bin/bash
@@ -78,7 +78,7 @@ else
 endif
 if empty(glob(vimplug_autoload_file))
 	silent execute vimplug_install_cmd 
-	# OBS1: git must be installed in order for the following autocommand to work!
+	# OBS: git must be installed in order for the following autocommand to work!
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 for folder in [$MYVIM_BACKUP_DIR, $MYVIM_SWAP_DIR, $MYVIM_UNDO_DIR]
@@ -134,9 +134,13 @@ snoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '
 
 
 
+
+# Autocommands
 autocmd BufEnter *.c {
   set commentstring=//\ %s
 }
+
+# autocmd! BufWritePre *.rs execute('LspDocumentFormatSync')
 
 
 

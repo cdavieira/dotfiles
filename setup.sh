@@ -71,21 +71,21 @@ make_links(){
   ln -sf ${reposdir}/dotfiles/waybar/style.css ${xdgconfigdir}/waybar
   ln -sf ${reposdir}/dotfiles/dunst/dunstrc ${xdgconfigdir}/dunst
   ln -sf ${reposdir}/dotfiles/qutebrowser/config.py ${xdgconfigdir}/qutebrowser
+  ln -sf ${reposdir}/dotfiles/init.sh ~
   case $1 in
     'arch')
       ln -sf ${reposdir}/dotfiles/kitty/kitty-arch.conf ${xdgconfigdir}/kitty
       ;;
     'gentoo')
       ln -sf ${reposdir}/dotfiles/kitty/kitty-gentoo.conf ${xdgconfigdir}/kitty
-      ln -sf ${reposdir}/dotfiles/gentoo/init.sh ~
       ;;
     *) ;;
   esac
 
   if test -d ${reposdir}/code; then
-	  ln -sf ${reposdir}/code/all/fish/projects/auto_pull.fish /usr/local/bin/auto_pull
-	  ln -sf ${reposdir}/code/all/fish/projects/auto_push.fish /usr/local/bin/auto_push
-	  ln -sf ${reposdir}/code/all/python/projects/qtb-tabsaver/main.py /usr/local/bin/tabsaver
+	  sudo ln -sf ${reposdir}/code/all/fish/projects/auto_pull.fish /usr/local/bin/auto_pull
+	  sudo ln -sf ${reposdir}/code/all/fish/projects/auto_push.fish /usr/local/bin/auto_push
+	  sudo ln -sf ${reposdir}/code/all/python/projects/qtb-tabsaver/main.py /usr/local/bin/tabsaver
   fi
 }
 

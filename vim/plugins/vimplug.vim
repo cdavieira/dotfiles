@@ -246,7 +246,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# legacy Plug 'google/vim-codefmt'
 	
 	# https://github.com/junegunn/vim-easy-align
-	# legacy Plug 'junegunn/vim-easy-align'
+	legacy Plug 'junegunn/vim-easy-align'
 
 	# https://github.com/rhysd/vim-clang-format
 	# legacy Plug 'rhysd/vim-clang-format'

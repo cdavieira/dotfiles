@@ -15,7 +15,9 @@ else
 fi
 
 if test "$1" = "sway"; then
-	echo "dbus-launch sway"
+	echo "exec dbus-launch --exit-with-session sway"
+elif test "$1" = "labwc"; then
+	echo "exec dbus-launch --exit-with-session labwc"
 elif test "$1" = "dwl"; then
 	# 'dbus-launch'/'dbus-run-session' sets $DBUS_SESSION_BUS_ADDRESS,
 	# which references a dbus session to be used by all processes
@@ -31,7 +33,7 @@ elif test "$1" = "dwl"; then
 	# Since the dwl session is a graphical one, i suppose we should use
 	# dbus-launch.
 	#
-	# OBS: Beware that systems using systemd/elogind might no need the use
+	# OBS: Beware that systems using systemd/elogind might not need the use
 	# of dbus-launch, because those usually set a dbus session
 	# automatically on user-login through PAM. On the other hand, this
 	# might be necessary in systems that use OpenRC, runit and other
@@ -42,8 +44,8 @@ elif test "$1" = "dwl"; then
 	# environment variables that were created by dbus to launch this
 	# program when the session/window manager instance terminates. This is
 	# sort of a 'cleanup' procedure.
-	dbus-launch --exit-with-session dwl -s ~/repos/dwl/startup.sh &> ~/log/dwl-$(date +%Y-%m-%d-%H-%M).log
+	exec dbus-launch --exit-with-session dwl -s ~/repos/dwl/startup.sh &> ~/log/dwl-$(date +%Y-%m-%d-%H-%M).log
 else
 	echo "Unknown window manager!"
-	echo "run: $0 sway/dwl"
+	echo "run: $0 sway/dwl/labwc"
 fi

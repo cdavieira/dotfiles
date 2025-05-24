@@ -14,4 +14,4 @@ else
 	echo "'${XDG_RUNTIME_DIR}' already exists"
 fi
 
-dbus-launch --exit-with-session dwl -s /etc/greetd/dwl.sh
+exec dbus-launch --exit-with-session dwl -s /etc/greetd/dwl.sh

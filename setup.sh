@@ -96,29 +96,60 @@ install_packages_alt(){
   YARN_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/yarn}" | clean_jq_output)
   PIP_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/pip}" | clean_jq_output)
   FLATPAK_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/flatpak}" | clean_jq_output)
-  # TODO: install cargo packages
-  # TODO: ensure yarn, pip, flatpak, cargo (...) are available
+  CARGO_PKGS=$(cat packages.yaml | yq "${yq_distro_cmd//METHOD/cargo}" | clean_jq_output)
 
   cd ${reposdir}
 
-  for repo in $GIT_PKGS; do
-    if ! test -d $repo; then
-      git clone $repo
-    fi
-  done
-  for pkg in $CURL_PKGS; do
-    if ! test -f $repo; then
-      curl $pkg
-    fi
-  done
-  if [[ ! "$YARN_PKGS" =~ ^[[:space:]]*$ ]]; then
-    yarn global add $YARN_PKGS
+  if command_exists git ; then
+    for repo in $GIT_PKGS; do
+      if ! test -d $repo; then
+        git clone $repo
+      fi
+    done
+  else
+    echo "git not detected: skipping installation of git packages: $GIT_PKGS"
   fi
-  if [[ ! "$PIP_PKGS" =~ ^[[:space:]]*$ ]]; then
-    pip install $PIP_PKGS
+
+  if command_exists curl ; then
+    for pkg in $CURL_PKGS; do
+      if ! test -f $repo; then
+        curl $pkg
+      fi
+    done
+  else
+    echo "curl not detected: skipping installation of curl packages: $CURL_PKGS"
   fi
-  if [[ ! "$FLATPAK_PKGS" =~ ^[[:space:]]*$ ]]; then
-    flatpak install $FLATPAK_PKGS
+
+  if command_exists cargo ; then
+    if [[ ! "$CARGO_PKGS" =~ ^[[:space:]]*$ ]]; then
+      cargo install $CARGO_PKGS
+    fi
+  else
+    echo "cargo not detected: skipping installation of cargo packages: $CARGO_PKGS"
+  fi
+
+  if command_exists yarn ; then
+    if [[ ! "$YARN_PKGS" =~ ^[[:space:]]*$ ]]; then
+      yarn global add $YARN_PKGS
+    fi
+  else
+    echo "yarn not detected: skipping installation of yarn packages: $YARN_PKGS"
+  fi
+
+  if command_exists pip ; then
+    if [[ ! "$PIP_PKGS" =~ ^[[:space:]]*$ ]]; then
+      pip install $PIP_PKGS
+    fi
+  else
+    echo "pip not detected: skipping installation of pip packages: $PIP_PKGS"
+  fi
+
+  if command_exists flatpak ; then
+    if [[ ! "$FLATPAK_PKGS" =~ ^[[:space:]]*$ ]]; then
+      flatpak install $FLATPAK_PKGS
+    fi
+  else
+    echo "flatpak not detected: skipping installation of flatpak packages: $FLATPAK_PKGS"
   fi
 }
 
@@ -184,11 +215,12 @@ if ! test "${confirmation}" = "y"; then
   exit
 fi
 
+# TODO: check if app-misc/yq is actually go-yq or the wrapper around jq
 if ! command_exists yq ; then
-  echo "This script depends on yq to work, but 'yq' wasn't detected in your system!"
+  echo "This script depends on 'yq' to work, but 'yq' wasn't detected in your system!"
   echo "Attempting to install 'yq' for distro "${linuxdistro}"..."
   case ${linuxdistro} in
-    'arch') sudo pacman -S jq yq ;;
+    'arch') sudo pacman -S jq go-yq ;;
     'gentoo') sudo pacman -S app-misc/jq app-misc/yq ;;
     *)
       echo "Ahhh: my script does not know how to install 'yq' for distro '${linuxdistro}'. Exiting..."

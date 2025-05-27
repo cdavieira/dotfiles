@@ -449,6 +449,12 @@ altpackages:
     - name: regreet
       url: https://github.com/rharish101/ReGreet
 
+    - name: tinymist
+      url: https://github.com/Myriad-Dreamin/tinymist
+
+    - name: gtkgreet
+      url: https://git.sr.ht/~kennylevinsen/gtkgreet
+
   curl:
     - name: lua-language-server
       url: https://github.com/LuaLS/lua-language-server/archive/refs/tags/3.14.0.zip
@@ -471,12 +477,6 @@ altpackages:
   cargo:
     - name: typst
       url: typst-cli
-
-    - name: tinymist
-      url: https://github.com/Myriad-Dreamin/tinymist
-
-    - name: gtkgreet
-      url: https://git.sr.ht/~kennylevinsen/gtkgreet
 
 
 

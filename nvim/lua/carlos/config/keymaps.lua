@@ -41,7 +41,7 @@ vim.keymap.set('n', '<S-Esc>', ':noh<CR>', {desc = 'Unhighlight previous search 
 -- Example gaaip to align a paragraph to 1 character
 vim.keymap.set(
     'x',
-    'gaa',
+    'gac',
     function()
         local a = require'align'
         a.operator(a.align_to_char)
@@ -49,6 +49,15 @@ vim.keymap.set(
     { noremap = true, silent = true }
 )
 
+vim.keymap.set(
+    'x',
+    'gas',
+    function()
+        local a = require'align'
+        a.operator(a.align_to_string)
+    end,
+    { noremap = true, silent = true }
+)
 -- vim.keymap.set(
 -- 	{ 'n' },
 -- 	'<C-k>',

@@ -1,9 +1,16 @@
 #!/bin/sh
 
+logmsg(){
+	echo "init.sh:" $@ >> /tmp/myinit.log
+}
+
+# TODO: 'mktemp' is probably better than these two consecutive if's
+# export XDG_RUNTIME_DIR=$(sudo mktemp -d "/tmp/${UID}-runtime-dir.XXX")
+
 if test -z "${XDG_RUNTIME_DIR}"; then
 	export XDG_RUNTIME_DIR="/run/user/${UID}"
 else
-	echo "XDG_RUNTIME_DIR is already set to ${XDG_RUNTIME_DIR}"
+	logmsg "XDG_RUNTIME_DIR is already set to ${XDG_RUNTIME_DIR}"
 fi
 
 if test ! -d "${XDG_RUNTIME_DIR}"; then
@@ -11,14 +18,26 @@ if test ! -d "${XDG_RUNTIME_DIR}"; then
 	sudo chown carlos ${XDG_RUNTIME_DIR}
 	sudo chmod 0700 ${XDG_RUNTIME_DIR}
 else
-	echo "'${XDG_RUNTIME_DIR}' already exists"
+	logmsg "'${XDG_RUNTIME_DIR}' already exists"
 fi
 
-if test "$1" = "sway"; then
-	echo "exec dbus-launch --exit-with-session sway"
-elif test "$1" = "labwc"; then
-	echo "exec dbus-launch --exit-with-session labwc"
-elif test "$1" = "dwl"; then
+if test "$1" = "dwl"; then
+	startupcmd=~/repos/dwl/startup.sh
+	if test -e ${startupcmd} && test -x ${startupcmd}; then
+		startupcmd="-s ${startupcmd}"
+	else
+		startupcmd=""
+	fi
+	logmsg "startup command: ${startupcmd}"
+
+	dwllogfile="dwl-$(date +%Y-%m-%d-%H-%M).log"
+	if test -d ~/log; then
+		dwllogfile=~/log/${dwllogfile}
+	else
+		dwllogfile=~/${dwllogfile}
+	fi
+	logmsg "log file: ${dwllogfile}"
+
 	# 'dbus-launch'/'dbus-run-session' sets $DBUS_SESSION_BUS_ADDRESS,
 	# which references a dbus session to be used by all processes
 	# started from herein.
@@ -27,14 +46,19 @@ elif test "$1" = "dwl"; then
 	# --exit-with-session' for this purpose.
 	#
 	# The manpage of dbus-launch recommends using 'dbus-run-session'
-	# instead for sessions within a text-mode session (such as shells,
-	# agetty/elogind/TTY, greetd in text/terminal mode)
+	# instead for sessions running within a text-mode session (such as
+	# shells, agetty/elogind/TTY, greetd in text/terminal mode)
 	#
-	# Since the dwl session is a graphical one, i suppose we should use
-	# dbus-launch.
+	# 'https://wiki.gentoo.org/wiki/Greetd' recommends running
+	# 'dbus-run-session' to run a compositor (such as Hyprland) from
+	# within a greetd frontend
 	#
-	# OBS: Beware that systems using systemd/elogind might not need the use
-	# of dbus-launch, because those usually set a dbus session
+	# https://dbus.freedesktop.org/doc/dbus-run-session.1.html
+	#
+	# https://dbus.freedesktop.org/doc/dbus-launch.1.html
+	#
+	# OBS: Beware that systems using systemd/elogind might not need to
+	# use dbus-launch, because those usually set a dbus session
 	# automatically on user-login through PAM. On the other hand, this
 	# might be necessary in systems that use OpenRC, runit and other
 	# initsystems (if they don't use elogind or another PAM-aware
@@ -44,8 +68,12 @@ elif test "$1" = "dwl"; then
 	# environment variables that were created by dbus to launch this
 	# program when the session/window manager instance terminates. This is
 	# sort of a 'cleanup' procedure.
-	exec dbus-launch --exit-with-session dwl -s ~/repos/dwl/startup.sh &> ~/log/dwl-$(date +%Y-%m-%d-%H-%M).log
+	exec dbus-launch --exit-with-session dwl ${startupcmd} &> ${dwllogfile}
+elif test "$1" = "sway"; then
+	logmsg "exec dbus-launch --exit-with-session sway"
+elif test "$1" = "labwc"; then
+	logmsg "exec dbus-launch --exit-with-session labwc"
 else
-	echo "Unknown window manager!"
-	echo "run: $0 sway/dwl/labwc"
+	logmsg "Unknown window manager!"
+	logmsg "run: $0 dwl/sway/labwc"
 fi

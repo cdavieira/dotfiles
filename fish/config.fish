@@ -63,7 +63,7 @@ if status is-interactive
 
 	# in case qutebrowser is installed, use it as def browser
 	# if type -q 'qutebrowser'
-	#   # https://github.com/qutebrowser/qutebrowser/blob/main/misc/org.qutebrowser.qutebrowser.desktop
+	# 	# https://github.com/qutebrowser/qutebrowser/blob/main/misc/org.qutebrowser.qutebrowser.desktop
 	# 	# /usr/local/applications/org.qutebrowser.qutebrowser.desktop
 	# 	xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
 	# 	set -x BROWSER 'org.qutebrowser.qutebrowser.desktop'
@@ -77,10 +77,9 @@ if status is-interactive
 	
 	# shortcut tmux to automatically open my most used folders
 	# if type -q 'tmux'
-	# 	alias tmux "tmux new-session -c ~/dotfiles -n dotfiles \; \
-	# 		new-window -c ~/notes -n notes \; \
-	# 		new-window -c ~/code -n code \; \
-	# 		new-window -c ~/code/c/projects/gwl_keys -n gwl_keys \; "
+	# 	alias tmux "tmux new-session -c ~/repos/dotfiles -n dotfiles \; \
+	# 		new-window -c ~/repos/notes -n notes \; \
+	# 		new-window -c ~/repos/code -n code \; "
 	# end
 
 	alias view 'vim -R'

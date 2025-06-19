@@ -1,0 +1,66 @@
+mybuild:
+  srcs:
+    pkgmgr:
+      - distro-specific
+      - curl
+      - fuse
+      - bluez
+      - v4l
+      # - flatpak
+      - fonts
+      - kitty
+      - fish
+      # - qutebrowser
+      # - firefox
+      - wl-clipboard
+      - wmenu
+      # - waybar
+      - dunst
+      - swaybg
+      - wf-recorder
+      - wl-mirror
+      - zathura
+      - mpv
+      - ffmpeg
+      - imv
+      # - mypaint
+      # - discord
+      - docker
+      # - qemu
+    git:
+      - nvm
+      # - ladybird
+    pip:
+      - python-lsp-server
+    yarn:
+      - typescript-language-server
+    curl:
+      - ventoy
+      - lua-language-server
+    cargo:
+      - typst
+
+  group:
+    - core
+    - doc
+    - systools
+    # - buildtools
+    - nettools
+    - devtools
+    - intel
+    - audio
+    - wayland
+    - compositor
+    - display-manager
+    - powermanagement
+    - backlight
+    - texteditor
+    - screenshot
+    - printer
+
+  filter:
+    - wget
+
+  services:
+    - iwd
+    - seat

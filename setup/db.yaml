@@ -1,0 +1,833 @@
+# packages by source
+packages:
+  pkgmgr:
+    - name: sudo
+      arch: sudo
+      gentoo: app-admin/sudo
+
+    - name: man
+      arch:
+        - man-db
+        - man-pages
+      gentoo: sys-apps/man-pages
+
+    - name: file
+      arch: file
+      gentoo: sys-apps/file
+
+    - name: dmidecode
+      arch: dmidecode
+      gentoo: sys-apps/dmidecode
+
+    - name: parted
+      arch: parted
+      gentoo: sys-block/parted
+
+    - name: which
+      arch: which
+      gentoo: sys-apps/which
+
+    - name: usbutils
+      arch: usbutils
+      gentoo: sys-apps/usbutils
+
+    - name: lshw
+      arch: lshw
+      gentoo: sys-apps/lshw
+
+    - name: zip
+      arch: zip
+      gentoo: app-arch/zip
+
+    - name: ntfs-3g
+      arch: ntfs-3g
+      gentoo: sys-fs/ntfs3g
+
+    - name: strace
+      arch: strace
+      gentoo: dev-debug/strace
+
+    - name: polkit
+      arch: polkit
+      gentoo: sys-auth/polkit
+
+    - name: fuse
+      arch: fuse2
+      gentoo: sys-fs/fuse
+
+    - name: pass
+      arch: pass
+      gentoo: app-admin/pass
+
+    - name: gpg
+      arch: gpg
+      gentoo: app-crypt/gnupg
+
+    - name: git
+      arch: git
+      gentoo: dev-vcs/git
+
+    - name: tree
+      arch: tree
+      gentoo: app-text/tree
+
+    - name: bat
+      arch: bat
+      gentoo: sys-apps/bat
+
+    - name: ripgrep
+      arch: ripgrep
+      gentoo: sys-apps/ripgrep
+
+    - name: fd
+      arch: fd
+      gentoo: sys-apps/fd
+
+    - name: openssh
+      arch: openssh
+      gentoo: net-misc/openssh
+
+    - name: go-md2man
+      arch: go-md2man
+      gentoo: dev-go/go-md2man
+
+    - name: doxygen
+      arch: doxygen
+      gentoo: app-text/doxygen
+
+    - name: gcc
+      arch: gcc
+      gentoo: # MISSING
+
+    - name: meson
+      arch: meson
+      gentoo: # MISSING
+
+    - name: clang
+      arch: clang
+      gentoo: # MISSING
+
+    - name: cmake
+      arch: cmake
+      gentoo: # MISSING
+
+    - name: gdb
+      arch: gdb
+      gentoo: dev-debug/gdb
+
+    - name: valgrind
+      arch: valgrind
+      gentoo: dev-debug/valgrind
+
+    - name: flex
+      arch: flex
+      gentoo: # MISSING
+
+    - name: bison
+      arch: bison
+      gentoo: # MISSING
+
+    - name: make
+      arch: make
+      gentoo: # MISSING
+
+    - name: pkg-config
+      arch: pkg-config
+      gentoo: # MISSING
+
+    - name: bear
+      arch: bear
+      gentoo: dev-util/bear
+
+    - name: rust
+      arch: # MISSING
+      gentoo: dev-lang/rust
+
+    - name: ctags
+      arch: ctags
+      gentoo: dev-util/ctags
+
+    - name: graphviz
+      arch: graphviz
+      gentoo: media-gfx/graphviz
+
+    - name: nettools
+      arch: net-tools
+      gentoo: sys-apps/net-tools
+
+    - name: tcpdump
+      arch: tcpdump
+      gentoo: net-analyzer/tcpdump
+
+    - name: curl
+      arch: curl
+      gentoo: net-misc/curl
+
+    - name: wget
+      arch: wget
+      gentoo: net-misc/wget
+
+    - name: nmap
+      arch: nmap
+      gentoo: net-analyzer/nmap
+
+    - name: yarn
+      arch: yarn
+      gentoo: sys-apps/yarn
+
+    - name: gtk
+      arch: # MISSING
+      gentoo:
+        - gui-libs/gtk
+        - dev-util/gtk-doc
+
+    - name: fcft
+      arch: # MISSING
+      gentoo: media-libs/fcft
+
+    - name: freeglut
+      arch: # MISSING
+      gentoo: media-libs/freeglut
+
+    - name: glfw
+      arch: # MISSING
+      gentoo: media-libs/glfw
+
+    - name: xkbcommon
+      arch: # MISSING
+      gentoo:
+        - x11-libs/libxkbcommon
+
+    - name: xcb
+      arch: # MISSING
+      gentoo:
+        - x11-libs/libxcb
+        - x11-libs/xcb-util-wm
+
+    - name: pixman
+      arch: # MISSING
+      gentoo: x11-libs/pixman
+
+    - name: bluez
+      arch:
+        - bluez
+        - bluez-tools
+        - bluez-utils
+      gentoo:
+        - net-wireless/bluez
+        # - net-wireless/bluez-tools
+
+    - name: cups
+      arch:
+        - cups
+        - cups-pdf
+      gentoo: net-print/cups
+
+    - name: mesa
+      arch: mesa
+      gentoo: media-libs/mesa
+
+    - name: vulkan
+      arch:
+        - vulkan-tools
+        - vulkaninfo
+      gentoo:
+        - dev-util/vulkan-tools
+
+    - name: intel
+      arch:
+        - vulkan-intel
+      gentoo:
+        - media-libs/libva-intel-driver
+        # - dev-libs/intel-compute-runtime
+
+    - name: nvidia-proprietary
+      arch: # MISSING
+      gentoo: # MISSING
+
+    - name: nvidia-opensource
+      arch:
+        - vulkan-nouveau
+      gentoo: # MISSING
+
+    - name: wireplumber
+      arch: wireplumber
+      gentoo: media-video/wireplumber
+
+    - name: pipewire
+      arch:
+        - pipewire-jack
+        - pipewire-alsa
+        - pipewire-pulse
+      gentoo: media-video/pipewire
+
+    - name: v4l
+      arch: # MISSING
+      gentoo: media-libs/libv4l
+
+    - name: libinput
+      arch: libinput
+      gentoo: dev-libs/libinput
+
+    - name: wayland
+      arch:
+        - wayland
+        - wayland-docs
+        - wayland-protocols
+        - wayland-utils
+        - qt6-wayland
+      gentoo:
+        - x11-misc/xdg-utils
+
+    - name: xwayland
+      arch: xorg-xwayland
+      gentoo: x11-base/xwayland
+
+    - name: flatpak
+      arch: flatpak
+      gentoo: sys-apps/flatpak
+
+    - name: distro-specific
+      arch:
+        - pacman-contrib
+      gentoo:
+        - app-eselect/eselect-repository
+        - app-misc/resolve-march-native
+        - app-portage/gentoolkit
+        - app-portage/pfl
+
+    - name: fonts
+      arch:
+        - otf-firamono-nerd
+        - ttf-anonymouspro-nerd
+        - ttf-cascadia-code-nerd
+        - ttf-firacode-nerd
+        - ttf-hack-nerd
+        - ttf-nerd-fonts-symbols
+        - ttf-nerd-fonts-symbols-mono
+        - adobe-source-code-pro-fonts
+        - noto-fonts-emoji
+        - otf-font-awesome
+      gentoo:
+        - media-fonts/noto-emoji
+
+    - name: xdg-portals
+      arch:
+        - xdg-desktop-portal-wlr
+        - xdg-desktop-portal-gtk
+      gentoo:
+        - gui-libs/xdg-desktop-portal-wlr
+        - sys-apps/xdg-desktop-portal-gtk
+
+    - name: wlroots
+      arch: wlroots
+      gentoo: gui-libs/wlroots
+
+    - name: polkit
+      arch: polkit
+      gentoo: sys-auth/polkit
+
+    - name: dbus
+      arch: dbus
+      gentoo: sys-apps/dbus
+
+    - name: sway
+      arch: sway
+      gentoo: gui-wm/sway
+
+    - name: greetd
+      arch: greetd
+      gentoo: gui-libs/greetd
+
+    - name: vim
+      arch: vim
+      gentoo: app-editors/vim
+
+    - name: nvim
+      arch:
+        - neovim
+        - python-pynvim
+      gentoo: app-editors/neovim
+
+    - name: kitty
+      arch: kitty
+      gentoo: x11-terms/kitty
+
+    - name: fish
+      arch: fish
+      gentoo: app-shells/fish
+
+    - name: wl-clipboard
+      arch: wl-clipboard
+      gentoo: gui-apps/wl-clipboard
+
+    - name: qutebrowser
+      arch: qutebrowser
+      gentoo: www-client/qutebrowser
+
+    - name: lynx
+      arch: lynx
+      gentoo: www-client/lynx
+
+    - name: firefox
+      arch: firefox
+      gentoo: www-client/firefox
+
+    - name: wmenu
+      arch: wmenu
+      gentoo: gui-apps/wmenu
+
+    - name: waybar
+      arch: waybar
+      gentoo: gui-apps/waybar
+
+    - name: dunst
+      arch: dunst
+      gentoo: x11-misc/dunst
+
+    - name: fnott
+      arch: fnott
+      gentoo: # MISSING
+
+    - name: swaybg
+      arch: swaybg
+      gentoo: gui-apps/swaybg
+
+    - name: wf-recorder
+      arch: wf-recorder
+      gentoo: # MISSING
+
+    - name: slurp
+      arch: slurp
+      gentoo: gui-apps/slurp
+
+    - name: grim
+      arch: grim
+      gentoo: gui-apps/grim
+
+    - name: swappy
+      arch: swappy
+      gentoo: gui-apps/swappy
+
+    - name: wl-mirror
+      arch: wl-mirror
+      gentoo: # MISSING
+
+    - name: zathura
+      arch:
+        - zathura
+        - zathura-pdf-poppler
+      gentoo:
+        - app-text/zathura
+        - app-text/zathura-pdf-poppler
+
+    - name: mpv
+      arch: mpv
+      gentoo: media-video/mpv
+
+    - name: ffmpeg
+      arch: ffmpeg
+      gentoo: media-video/ffmpeg
+
+    - name: imv
+      arch: imv
+      gentoo: media-gfx/imv
+
+    - name: vimiv
+      arch: vimiv
+      gentoo: # MISSING
+
+    - name: syncthing
+      arch: syncthing
+      gentoo: net-p2p/syncthing
+
+    - name: mypaint
+      arch: mypaint
+      gentoo: media-gfx/mypaint
+
+    - name: discord
+      arch: discord
+      gentoo: net-im/discord
+
+    - name: swayidle
+      arch: swayidle
+      gentoo: gui-apps/swayidle
+
+    - name: swaylock
+      arch: swaylock
+      gentoo: gui-apps/swaylock
+
+    - name: wlopm
+      arch: wlopm
+      gentoo: # MISSING
+
+    - name: docker
+      arch: docker
+      gentoo:
+        - app-containers/docker
+        - app-containers/docker-cli
+
+    - name: dolphin
+      arch: dolphin
+      gentoo: # MISSING
+
+    - name: thunar
+      arch: # MISSING
+      gentoo: xfce-base/thunar
+
+    - name: qemu
+      arch: qemu-desktop
+      gentoo: app-emulation/qemu
+
+    - name: wayvnc
+      arch: # MISSING
+      gentoo: gui-apps/wayvnc
+
+    - name: mutt
+      arch: mutt
+      gentoo: mail-client/mutt
+
+    - name: neomutt
+      arch: neomutt
+      gentoo: mail-client/neomutt
+
+    - name: thunderbird
+      arch: thunderbird
+      gentoo: mail-client/thunderbird
+
+    - name: blender
+      arch: blender
+      gentoo: media-gfx/blender
+
+    - name: freecad
+      arch: freecad
+      gentoo: # MISSING
+
+    - name: xournal
+      arch: xournalpp
+      gentoo: app-text/xournalpp
+
+    - name: darktable
+      arch: darktable
+      gentoo: media-gfx/darktable
+
+    - name: gimp
+      arch: gimp
+      gentoo: media-gfx/gimp
+
+    - name: inkscape
+      arch: inkscape
+      gentoo: media-gfx/inkscape
+
+    - name: kdenlive
+      arch: kdenlive
+      gentoo: kde-apps/kdenlive
+
+    - name: libreoffice
+      arch: libreoffice
+      gentoo: app-office/libreoffice
+
+    - name: glade
+      arch: glade
+      gentoo: # MISSING
+
+    - name: glow
+      arch: glow
+      gentoo: # MISSING
+
+    - name: protobuf
+      arch: protobuf
+      gentoo: dev-libs/protobuf
+
+    - name: grpc
+      arch: grpc
+      gentoo: net-libs/grpc
+
+
+  git:
+    - name: dwl
+      url: https://codeberg.org/dwl/dwl
+
+    - name: raylib
+      url: https://github.com/raysan5/raylib
+
+    - name: wlopm
+      url: https://git.sr.ht/~leon_plickat/wlopm
+
+    - name: wlvncc
+      url: https://github.com/any1/wlvncc.git
+
+    - name: nvm
+      url: https://github.com/nvm-sh/nvm.git
+
+    - name: brillo
+      url: https://github.com/CameronNemo/brillo
+
+    - name: ladybird
+      url: https://github.com/LadybirdBrowser/ladybird
+
+    - name: tuigreet
+      url: https://github.com/apognu/tuigreet
+
+    - name: regreet
+      url: https://github.com/rharish101/ReGreet
+
+    - name: tinymist
+      url: https://github.com/Myriad-Dreamin/tinymist
+
+    - name: gtkgreet
+      url: https://git.sr.ht/~kennylevinsen/gtkgreet
+
+    - name: wlroots
+      url: https://gitlab.freedesktop.org/wlroots/wlroots.git
+
+
+  curl:
+    - name: lua-language-server
+      url: https://github.com/LuaLS/lua-language-server/archive/refs/tags/3.14.0.zip
+
+    - name: ventoy
+      url: https://sourceforge.net/projects/ventoy/files/v1.1.05
+
+
+  yarn:
+    - name: typescript-language-server
+      url: typescript-language-server
+
+
+  pip:
+    - name: python-lsp-server
+      url: python-lsp-server
+
+
+  flatpak:
+    - name:
+      url:
+
+
+  cargo:
+    - name: typst
+      url: typst-cli
+
+
+
+
+# group of sources
+groups:
+  - name: doc
+    pkgmgr:
+      - man-db
+      - man-pages
+
+  - name: intel
+    pkgmgr:
+      - intel
+      - vulkan
+
+  - name: nvidia
+    pkgmgr:
+      - nvidia-opensource
+      - vulkan
+
+  - name: systools
+    pkgmgr:
+      - sudo
+      - pass
+      - gpg
+      - git
+      - tree
+      - bat
+      - ripgrep
+      - fd
+      - openssh
+      - go-md2man
+      - file
+      - dmidecode
+      - parted
+      - which
+      - usbutils
+      - lshw
+      - zip
+      - ntfs-3g
+      - polkit
+      - fuse2
+
+  - name: buildtools
+    pkgmgr:
+      - doxygen
+      - gcc
+      - meson
+      - clang
+      - cmake
+      - gdb
+      - valgrind
+      - flex
+      - bison
+      - make
+      - pkg-config
+      - bear
+      - ctags
+      - graphviz
+
+  - name: nettools
+    pkgmgr:
+      - net-tools
+      - tcpdump
+      - curl
+      - wget
+      - nmap
+
+  - name: devtools
+    pkgmgr:
+      - yarn
+      - gtk
+
+  - name: audio
+    pkgmgr:
+      - wireplumber
+      - pipewire
+  
+  - name: wayland
+    pkgmgr:
+      - xkbcommon
+      - libinput
+      - wayland
+      - xwayland
+      - xdg-portals
+
+  - name: compositor
+    pkgmgr:
+      - polkit
+      - dbus
+      - seatd
+      - xdg-portals
+      - pkg-config
+      - bear
+      - xcb
+    git:
+      - dwl
+      # - wlroots
+  
+  - name: texteditor
+    pkgmgr:
+      - vim
+      - neovim
+      - fd
+      - ripgrep
+
+  - name: screenshot
+    pkgmgr:
+      - slurp
+      - grim
+      - swappy
+
+  - name: powermanagement
+    pkgmgr:
+      - swayidle
+      - swaylock
+      - wlopm
+
+  - name: backlight
+    git:
+      - brillo
+
+  - name: displaymanager
+    pkgmgr:
+      - greetd
+    git:
+      - tuigreet
+      - regreet
+
+  - name: printer
+    pkgmgr:
+      - cups
+
+
+services:
+  - name: wireplumber
+    arch:
+      name: wireplumber
+      type: user
+    gentoo:
+      name:
+      type:
+
+  - name: cups
+    arch:
+      name: cups
+      type: system
+    gentoo:
+      name:
+      type:
+
+  - name: iwd
+    arch:
+      name: iwd
+      type: system
+    gentoo:
+      name: iwd
+      type: default
+
+  - name: bluetooth
+    arch:
+      name: bluetooth
+      type: system
+    gentoo:
+      name: bluetooth
+      type: default
+
+  - name: docker
+    arch:
+      name: docker
+      type: system
+    gentoo:
+      name: docker
+      type: default
+
+  - name: seatd
+    arch:
+      name: seatd
+      type: system
+    gentoo:
+      name: seatd
+      type: default
+
+  - name: dbus
+    arch:
+      name: dbus
+      type: system
+    gentoo:
+      name: dbus
+      type: default
+
+  - name: netmount
+    arch:
+      name:
+      type:
+    gentoo:
+      name: netmount
+      type: default
+
+  - name: sysklogd
+    arch:
+      name:
+      type:
+    gentoo:
+      name: sysklogd
+      type: default
+
+  - name: dhcpcd
+    arch:
+      name:
+      type:
+    gentoo:
+      name: dhcpcd
+      type: default
+
+  - name: chronyd
+    arch:
+      name:
+      type:
+    gentoo:
+      name: chronyd
+      type: default

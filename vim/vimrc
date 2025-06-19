@@ -105,6 +105,7 @@ import GetPluginConfig('airline')
 #vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
 vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
 colorschemes.SetCS('onedark', 'dracula', 'sorbet', 'evening', 'wildcharm')
+#colorschemes.SetCS('sorbet', 'evening', 'wildcharm')
 
 
 

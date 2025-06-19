@@ -4,9 +4,12 @@ logmsg(){
 	echo "init.sh:" $@ >> /tmp/myinit.log
 }
 
-# TODO: 'mktemp' is probably better than these two consecutive if's
-# export XDG_RUNTIME_DIR=$(sudo mktemp -d "/tmp/${UID}-runtime-dir.XXX")
+# TODO: 'mktemp' is probably better than these two consecutive conditionals.
+# 'export XDG_RUNTIME_DIR=$(sudo mktemp -d "/tmp/${UID}-runtime-dir.XXX")', but
+# some applications might still expect XDG_RUNTIME_DIR to be /run/user/${UID}
 
+# TODO: $XDG_RUNTIME_DIR should be deleted upon user logout according to the 
+# xdg base directory specification (https://specifications.freedesktop.org/basedir-spec/latest/)
 if test -z "${XDG_RUNTIME_DIR}"; then
 	export XDG_RUNTIME_DIR="/run/user/${UID}"
 else
@@ -39,7 +42,7 @@ if test "$1" = "dwl"; then
 	logmsg "log file: ${dwllogfile}"
 
 	# 'dbus-launch'/'dbus-run-session' sets $DBUS_SESSION_BUS_ADDRESS,
-	# which references a dbus session to be used by all processes
+	# which refers to a dbus session to be used by all processes
 	# started from herein.
 	#
 	# The GentooWiki page for DBUS recommends 'dbus-launch
@@ -75,5 +78,5 @@ elif test "$1" = "labwc"; then
 	logmsg "exec dbus-launch --exit-with-session labwc"
 else
 	logmsg "Unknown window manager!"
-	logmsg "run: $0 dwl/sway/labwc"
+	echo "run: $0 dwl/sway/labwc"
 fi

@@ -61,7 +61,7 @@ end
 function dwl_reinstall
 	cd $dwl_path/wlroots
 	git pull
-	sudo meson setup --reconfigure build && ninja -C build
+	meson setup --reconfigure build && ninja -C build
 
 	cd ..
 	make &&  sudo make install

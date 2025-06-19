@@ -1,6 +1,5 @@
 -- https://github.com/hrsh7th/nvim-cmp
 -- the type for each member of  this dictionary can be found at: $HOME/.local/share/nvim/lazy/nvim-cmp/lua/cmp/types
-
 -- also, read ':help nvim-cmp'
 
 return {

@@ -255,6 +255,10 @@ def db_services_get_all_names($toplevel; distro):
 
 # install.yaml related
 
+def install_get_builds($install):
+  $install | keys
+;
+
 def install_get_pkgs_from_src($build; $db; src):
   $build.srcs
   | src // []

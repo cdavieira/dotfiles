@@ -60,6 +60,11 @@ jq_install_wrapper(){
   yq -o json db.yaml install.yaml | jq -s -L. "$jq_cmd"
 }
 
+jq_clear_output(){
+  tr ' ' '\n' | sort | uniq | tr -d '"' | tr '\n' ' '
+  echo ''
+}
+
 # $1 build name
 # $2 distro
 # $3 src
@@ -70,6 +75,27 @@ jq_install_pkgs_from_src(){
   " | jq_clear_output
 }
 
-jq_clear_output(){
-  tr ' ' '\n' | sort | uniq | tr -d '"'
+# $1 src (pkgmgr, curl, ...)
+# $2 distro
+# $3 groupname
+jq_db_query_group_pkgs(){
+  jq_db_wrapper "\
+    | utils::db_groups_expand(\$toplevel; [\"$3\"]; .$1) as \$pkgs
+    | utils::db_$1_get_pkgs(\$toplevel; \$pkgs; .$2)
+    | .[]
+  " | jq_clear_output
+}
+
+jq_install_list_builds(){
+  jq_install_wrapper "\
+    | utils::install_get_builds(\$install)
+    | .[]
+  " | jq_clear_output
+}
+
+jq_db_list_groups(){
+  jq_db_wrapper '
+    | utils::db_groups_get_all_names($toplevel)
+    | .[]
+  ' | jq_clear_output
 }

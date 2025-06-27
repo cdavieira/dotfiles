@@ -3,12 +3,17 @@
 source utils.sh
 
 usage(){
-  echo "$0 [-b build] [-d distro] [-s src] [-g group] [-v] [-h]"
-  echo 'Available builds:' 'check on install.yaml'
+  echo "$0 [-b build -d distro [-s src | -g group]] [-D] [-v] [-h]"
+  echo 'Available builds :' $(jq_install_list_builds)
+  echo 'Available groups :' $(jq_db_list_groups)
   echo 'Available distros:' 'arch' 'gentoo'
   echo 'Available sources:' 'pkgmgr' 'git' 'yarn' 'pip' 'cargo' 'curl'
   exit
 }
+
+if test $# -lt 2; then
+  usage
+fi
 
 create_folders(){
   mkdir $1/{tmp,vault,save,repos,books,german,txt,log}
@@ -129,20 +134,26 @@ done
 if $verbose; then
   echo 'Selected distro linux:' $linuxdistro
   echo 'Selected src:' $src
-  echo 'Selected listsrcs:' "$listsrcs"
-  echo 'Selected verbose:' "$verbose"
+  echo 'Selected build:' $build
+  echo 'Selected group:' $group
 fi
 
 if test -z "$linuxdistro" || test -z "$src"; then
   echo "Select a linux distro and a source"
   exit
 fi
- 
-ensure_yq_installed $linuxdistro
 
-if test -n "$build"; then
-  echo $(jq_install_pkgs_from_src $build $linuxdistro $src)
+if test -z "$build" && test -z "$group"; then
+  echo "Select a build or a group"
+  exit
 fi
+ 
+if test -n "$build"; then
+  ensure_yq_installed $linuxdistro
+  jq_install_pkgs_from_src $build $linuxdistro $src
+fi
+
 if test -n "$group"; then
-  # TODO
+  ensure_yq_installed $linuxdistro
+  jq_db_query_group_pkgs $src $linuxdistro $group
 fi

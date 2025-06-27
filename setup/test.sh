@@ -34,7 +34,7 @@ source utils.sh
 
 # jq_db_wrapper '
 #   | utils::db_groups_get_all_names($toplevel) as $groups
-#   | utils::db_groups_expand($toplevel; ["mynettools"]; .pkgmgr) as $pkgs
+#   | utils::db_groups_expand($toplevel; ["buildtools", "systools"]; .pkgmgr) as $pkgs
 #   | utils::db_pkgmgr_get_pkgs($toplevel; $pkgs; .arch) as $selected
 #   | $selected
 # '
@@ -120,13 +120,20 @@ source utils.sh
 #   | .
 # '
 
-jq_install_wrapper '
-  | utils::install_get_pkgs_pkgmgr($install.mybuild; $db; .gentoo)
-  | .
-'
+# jq_install_wrapper '
+#   | utils::install_get_pkgs_pkgmgr($install.mybuild; $db; .gentoo)
+#   | .
+# '
 
 # jq_install_wrapper '
 #   | utils::install_get_pkgs_git($install.mybuild; $db; .gentoo)
 #   | .
 # '
 
+#jq_db_query_group_pkgs pkgmgr gentoo nettools
+
+#jq_db_query_group_pkgs pkgmgr gentoo systools
+
+#jq_install_list_builds
+
+#jq_db_list_groups

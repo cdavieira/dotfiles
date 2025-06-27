@@ -5,8 +5,9 @@ logmsg(){
 }
 
 # TODO: 'mktemp' is probably better than these two consecutive conditionals.
-# 'export XDG_RUNTIME_DIR=$(sudo mktemp -d "/tmp/${UID}-runtime-dir.XXX")', but
-# some applications might still expect XDG_RUNTIME_DIR to be /run/user/${UID}
+#        For example: 'export XDG_RUNTIME_DIR=$(mktemp -d "/tmp/${UID}-runtime-dir.XXX")'
+#        The only problem is that some applications might still expect
+#        XDG_RUNTIME_DIR to be /run/user/${UID}
 
 # TODO: $XDG_RUNTIME_DIR should be deleted upon user logout according to the 
 # xdg base directory specification (https://specifications.freedesktop.org/basedir-spec/latest/)
@@ -41,9 +42,14 @@ if test "$1" = "dwl"; then
 	fi
 	logmsg "log file: ${dwllogfile}"
 
-	# 'dbus-launch'/'dbus-run-session' sets $DBUS_SESSION_BUS_ADDRESS,
-	# which refers to a dbus session to be used by all processes
-	# started from herein.
+	# 'dbus-launch'/'dbus-run-session' sets the $DBUS_SESSION_BUS_ADDRESS
+	# variable, which refers to a dbus session (used by all processes
+	# started from herein)
+	#
+	# '--exit-with-session' kills all processes and unsets all DBUS_*
+	# environment variables that were created by dbus to launch this
+	# program when the session/window manager instance terminates. This is
+	# sort of a 'cleanup' procedure.
 	#
 	# The GentooWiki page for DBUS recommends 'dbus-launch
 	# --exit-with-session' for this purpose.
@@ -66,11 +72,6 @@ if test "$1" = "dwl"; then
 	# might be necessary in systems that use OpenRC, runit and other
 	# initsystems (if they don't use elogind or another PAM-aware
 	# mechanism, of course)
-	#
-	# '--exit-with-session' kills all processes and unsets all DBUS_*
-	# environment variables that were created by dbus to launch this
-	# program when the session/window manager instance terminates. This is
-	# sort of a 'cleanup' procedure.
 	exec dbus-launch --exit-with-session dwl ${startupcmd} &> ${dwllogfile}
 elif test "$1" = "sway"; then
 	logmsg "exec dbus-launch --exit-with-session sway"

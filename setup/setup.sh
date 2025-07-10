@@ -3,11 +3,19 @@
 source utils.sh
 
 usage(){
-  echo "$0 [-b build -d distro [-s src | -g group]] [-D] [-v] [-h]"
-  echo 'Available builds :' $(jq_install_list_builds)
-  echo 'Available groups :' $(jq_db_list_groups)
+  echo "$0 [-d distro -s src [-b buildname | -g group]] [-D] [-v] [-h]"
+  echo ''
+  echo 'Description'
+  echo 'This script prints one or more package names related to arbitrary softwares/services/resources found in a distro'
+  echo ''
+  echo 'Options'
+  echo "-D: create my directory structure at $HOME and symbolic links to my dotfiles"
+  echo "-v: be verbose"
+  echo "-h: print this help"
   echo 'Available distros:' 'arch' 'gentoo'
   echo 'Available sources:' 'pkgmgr' 'git' 'yarn' 'pip' 'cargo' 'curl'
+  echo 'Available builds :' $(jq_install_list_builds)
+  echo 'Available groups :' $(jq_db_list_groups)
   exit
 }
 

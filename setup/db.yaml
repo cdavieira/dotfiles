@@ -277,7 +277,11 @@ packages:
         - wayland-utils
         - qt6-wayland
       gentoo:
+        - dev-libs/wayland
+        - dev-libs/wayland-protocols
         - x11-misc/xdg-utils
+        - app-misc/wayland-utils
+        - dev-util/wayland-scanner
 
     - name: xwayland
       arch: xorg-xwayland
@@ -295,6 +299,7 @@ packages:
         - app-misc/resolve-march-native
         - app-portage/gentoolkit
         - app-portage/pfl
+        - app-portage/genlop
 
     - name: fonts
       arch:

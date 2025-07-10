@@ -39,8 +39,8 @@
 > static const char * const lowervolcmd = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
 > static const char * const raisevolcmd = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
 > static const char * const mutecmd = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-> static const char * const lowermonbrightnesscmd = "brillo -A 5";
-> static const char * const raisemonbrightnesscmd = "brillo -U 5";
+> static const char * const lowermonbrightnesscmd = "brillo -U 5";
+> static const char * const raisemonbrightnesscmd = "brillo -A 5";
 > 
 > //xkb keynames can be found in:
 > //#include <xkbcommon/xkbcommon-keysyms.h>

@@ -39,6 +39,7 @@ if status is-interactive
 		"$HOME/.cargo/bin" \
 		"$HOME/.yarn/bin" \
 		"/opt/riscv/bin" \
+		"/opt/riscv32/bin" \
 		"/usr/local/texlive/$(date +%Y)/bin/x86_64-linux"
 
 	for dirpath in $add_to_path

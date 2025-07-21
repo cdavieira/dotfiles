@@ -103,7 +103,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/prabirshrestha/vim-lsp
 	legacy Plug 'prabirshrestha/vim-lsp'
 
-	# lsp written in vim9! very cool
+	# lsp written in vim9! pretty cool right
 	# https://github.com/yegappan/lsp
 	# legacy Plug 'yegappan/lsp'
 
@@ -210,6 +210,10 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# 'ultisnips' and 'asyncomplete' integration
 	# https://github.com/prabirshrestha/asyncomplete-ultisnips.vim
 	# legacy Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+
+	# vim9 alternative to 'asyncomplete' 
+	# https://github.com/girishji/vimcomplete
+	# legacy Plug 'girishji/vimcomplete'
 
 
 

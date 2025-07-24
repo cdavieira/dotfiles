@@ -1,16 +1,54 @@
 #!/usr/bin/fish
 
-argparse 'h/help' -- $argv
+argparse \
+  'h/help' \
+  'p/path=' \
+  'd/dotfile=' \
+  'w/wlroots=' \
+  's/setup' \
+  'r/reinstall' \
+-- $argv
 
-if test -n "$_flag_h"
-	echo 'dwl_setup.fish [-h/--help]'
+# Routines
+function dwl_help
+	echo 'USAGE'
+	echo './build.fish [-h|--help] [-p|--path] [-d|--dotfile] [-s|--setup] [-r|--reinstall] [-w|--wlroots]'
 	echo ''
-	echo '-h/--help: show this help message and quit'
+	echo 'OPTIONS'
+	echo '-h/--help:      show this help message and quit'
+	echo '-p/--path:      path to the directory where the dwl repository is located/should be downloaded'
+	echo '-d/--dotfile:   path to the directory where my personal dwl dotfile folder is located'
+	echo '-s/--setup:     download, build, compile and install dwl'
+	echo '-r/--reinstall: rebuild, recompile and reinstall dwl'
+	echo '-w/--wlroots:   path to the directory where wlroots\' repository is located/should be downloaded'
+	echo ''
+	echo 'EXAMPLES'
+	echo 'Download and build both dwl and wlroots in ~/tmp/dwl and ~/tmp/dwl/wlroots (respectively) and compile/install dwl to /usr/local/bin'
+	echo '	./build.fish -p ~/tmp/dwl -w ~/tmp/dwl/wlroots -s'
+	echo ''
 	exit
 end
 
-set dwl_path "$HOME/repos/dwl"
-set dwl_dotfile "$HOME/repos/dotfiles/dwl"
+function dwl_inform
+	if dwl_available
+		set dwl_availability "(found)"
+	else
+		set dwl_availability "(not found)"
+	end
+	if wlroots_available
+		set wlroots_availability "(found)"
+	else
+		set wlroots_availability "(not found)"
+	end
+
+	echo 'SCRIPT SUMMARY'
+	echo "dwl path: $dwl_path $dwl_availability"
+	echo "dwl dotfile: $dwl_dotfile"
+	echo "dwl url: $dwl_repo"
+	echo "wlroots path: $dwl_wlroots_path $wlroots_availability"
+	echo "wlroots url: $dwl_wlroots_repo"
+	echo ''
+end
 
 function dwl_available
 	test -d $dwl_path
@@ -18,27 +56,24 @@ function dwl_available
 end
 
 function dwl_download
-	git clone https://codeberg.org/dwl/dwl $dwl_path
+	git clone $dwl_repo $dwl_path
 end
 
 function wlroots_available
-	cd $dwl_path
-	ls | grep wlroots
-	return 
+	test -d $dwl_wlroots_path
 end
 
 function wlroots_download
-	cd $dwl_path
-	git clone https://gitlab.freedesktop.org/wlroots/wlroots.git
+	git clone $dwl_wlroots_repo $dwl_wlroots_path
 end
 
 function wlroots_build
-	cd $dwl_path/wlroots
+	cd $dwl_wlroots_path
 	meson setup build && ninja -C build
 end
 
 function apply_pre_patches
-	# sed could be used alternatively
+	# alternatively, sed could be used
 	patch -b $dwl_path/config.mk $dwl_dotfile/patch/diff-configmk.patch
 end
 
@@ -48,7 +83,7 @@ function dwl_rebuild
 end
 
 function apply_post_patches
-	# sed could be used alternatively
+	# alternatively, sed could be used
 	patch -b $dwl_path/config.h    $dwl_dotfile/patch/diff-config.patch
 	patch -b $dwl_path/dwl.desktop $dwl_dotfile/patch/diff-desktop.patch
 end
@@ -59,11 +94,11 @@ function dwl_install
 end
 
 function dwl_reinstall
-	cd $dwl_path/wlroots
+	cd $dwl_wlroots_path
 	git pull
 	meson setup --reconfigure build && ninja -C build
 
-	cd ..
+	cd $dwl_path
 	make &&  sudo make install
 end
 
@@ -88,5 +123,30 @@ function run_once
 	dwl_install
 end
 
-# run_once
-dwl_reinstall
+# Defaults
+set dwl_path "$HOME/repos/dwl"
+set dwl_dotfile "$HOME/repos/dotfiles/dwl"
+set dwl_repo "https://codeberg.org/dwl/dwl"
+set dwl_wlroots_path "$dwl_path/wlroots"
+set dwl_wlroots_repo "https://gitlab.freedesktop.org/wlroots/wlroots.git"
+if test -n "$_flag_dotfile"
+	set dwl_dotfile "$_flag_dotfile"
+end
+if test -n "$_flag_path"
+	set dwl_path "$_flag_path"
+end
+if test -n "$_flag_wlroots"
+	set dwl_wlroots_path "$_flag_wlroots"
+end
+
+# Main
+if test -n "$_flag_setup"
+	dwl_inform
+	run_once
+	exit
+else if test -n "$_flag_reinstall"
+	dwl_inform
+	dwl_reinstall
+	exit
+end
+dwl_help

@@ -58,12 +58,12 @@ set nowrap
 # NOTE: you can always insert actual <Tab> characters in insert mode with 'Ctrl-V+<Tab>'
 # The number of spaces that an actual <Tab> in the file visually represents.
 set tabstop=8
-# The actual number of spaces that a <Tab> inserts in insert mode. Whenever
-# the number of spaces inserted by 'softtabstop' is equal to the value of
-# 'tabstop', an actual <Tab> is inserted instead of spaces.
+# The actual number of spaces that a <Tab> inserts in insert mode.
+# Whenever the number of spaces inserted by 'softtabstop' is equal to the
+# value of 'tabstop', an actual <Tab> is inserted instead of spaces.
 set softtabstop=2
-# The number of spaces to use for each step of (auto)indent. Used for 'cindent',
-# >>, <<, etc.
+# The number of spaces used by (auto)indent.
+# This affects 'cindent', >>, <<, etc.
 set shiftwidth=8
 # Do not replace tabs with spaces
 set noexpandtab

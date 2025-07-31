@@ -1,8 +1,7 @@
 #!/usr/bin/env fish
 
 set dwl_path "$HOME/repos/dwl"
-set dwl_dotfile "$HOME/repos/dotfiles/dwl"
-set dwl_patch_dir "$dwl_dotfile/patch"
+set dwl_patch_dir "$HOME/repos/dotfiles/dwl/patch"
 
 function update_patch -a fin fout
 	set pre_patch_file "$dwl_path/$fin.orig"

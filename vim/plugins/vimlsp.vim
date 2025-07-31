@@ -59,7 +59,7 @@ g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
 # g:lsp_experimental_workspace_folders = 1
 
 # create a log file to inspect lsp action
-g:lsp_log_file = expand($MYVIM_CONFIG_DIR .. 'vim-lsp.log')
+# g:lsp_log_file = expand($MYVIM_CONFIG_DIR .. 'vim-lsp.log')
 
 
 

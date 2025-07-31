@@ -300,6 +300,7 @@ packages:
         - app-portage/gentoolkit
         - app-portage/pfl
         - app-portage/genlop
+        - app-admin/eclean-kernel
 
     - name: fonts
       arch:
@@ -471,6 +472,7 @@ packages:
       gentoo:
         - app-containers/docker
         - app-containers/docker-cli
+        - app-containers/docker-compose
 
     - name: dolphin
       arch: dolphin

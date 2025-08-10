@@ -441,7 +441,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# neither use a GPU (i have one, but i don't have its driver installed)
 	# https://github.com/ollama/ollama
 	# https://github.com/gergap/vim-ollama
-	# legacy Plug 'gergap/vim-ollama'
+	legacy Plug 'gergap/vim-ollama'
 
 	# https://github.com/CoderCookE/vim-chatgpt
 	# legacy Plug 'CoderCookE/vim-chatgpt'

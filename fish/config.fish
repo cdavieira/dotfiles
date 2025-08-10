@@ -24,6 +24,14 @@ if status is-interactive
 	# analogous to /var/lib
 	set -x XDG_STATE_HOME "$HOME/.local/state"
 
+	# according to 'man portals.conf' and the XDG Specification, this gets
+	# used when loading the '.conf' file for '/usr/libexec/xdg-desktop-portal'.
+	# All '.conf' files can be found under /usr/share/xdg-desktop-portal/.
+	# By default, '/usr/share/xdg-desktop-portal/portals.conf' gets used,
+	# but we can use another one more suitable for the desktop in use (dwl),
+	# like '/usr/share/xdg-desktop-portal/wlroots-portals.conf'.
+	set -x XDG_CURRENT_DESKTOP wlroots
+
 	# 'pam_systemd' sets XDG_RUNTIME_DIR automatically
 	# set -x XDG_RUNTIME_DIR "/run/user/$UID"
 
@@ -129,6 +137,10 @@ if status is-interactive
 			ls
 		end
 	end
+
+	#######################################
+	########## Initializations ############
+	#######################################
 
 else if status is-login
 	# Commands to run in login sessions can go here

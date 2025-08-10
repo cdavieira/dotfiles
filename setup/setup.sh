@@ -3,19 +3,25 @@
 source utils.sh
 
 usage(){
-  echo "$0 [-d distro -s src [-b buildname | -g group]] [-D] [-v] [-h]"
+  echo "$0 [-d distro -s src [-b buildname | -g group]] [-j] [-D] [-v] [-h]"
   echo ''
   echo 'Description'
   echo 'This script prints one or more package names related to arbitrary softwares/services/resources found in a distro'
   echo ''
   echo 'Options'
   echo "-D: create my directory structure at $HOME and symbolic links to my dotfiles"
+  echo "-j: install jq and yq"
   echo "-v: be verbose"
   echo "-h: print this help"
   echo 'Available distros:' 'arch' 'gentoo'
   echo 'Available sources:' 'pkgmgr' 'git' 'yarn' 'pip' 'cargo' 'curl'
-  echo 'Available builds :' $(jq_install_list_builds)
-  echo 'Available groups :' $(jq_db_list_groups)
+  if has_yq; then
+	  echo 'Available builds :' $(jq_install_list_builds)
+	  echo 'Available groups :' $(jq_db_list_groups)
+  fi
+  echo ''
+  echo 'Notes'
+  echo 'This script requires jq and go-yq to be installed'
   exit
 }
 
@@ -32,6 +38,7 @@ create_folders(){
 
 make_links(){
   ln -sf $1/dotfiles/fish/config.fish      $2/fish
+  # ln -sf $1/dotfiles/fish/functions/*.fish $2/fish/functions
   ln -sf $1/dotfiles/vim/vimrc             $2/vim
   ln -sf $1/dotfiles/vim/snippets          $2/vim
   ln -sf $1/dotfiles/nvim/                 $2
@@ -79,7 +86,7 @@ build=""
 group=""
 verbose=false
 
-while getopts 'b:d:s:g:Dvh' opt; do
+while getopts 'b:d:s:g:Dvhj' opt; do
   # $OPTIND, $OPTARG
   case "$opt" in
   	'b')
@@ -115,6 +122,11 @@ while getopts 'b:d:s:g:Dvh' opt; do
 	# group
   	'g')
 	  group="$OPTARG"
+  	;;
+
+	# jq and go-yq
+  	'j')
+	  ensure_yq_installed $linuxdistro
   	;;
 
 	# create desktop dirs and symbolic links
@@ -158,10 +170,19 @@ fi
  
 if test -n "$build"; then
   ensure_yq_installed $linuxdistro
-  jq_install_pkgs_from_src $build $linuxdistro $src
+  if has_yq; then
+	  jq_install_pkgs_from_src $build $linuxdistro $src
+  else
+	  echo "Run '$0 -j' before proceeding!"
+	  exit
+  fi
 fi
 
 if test -n "$group"; then
-  ensure_yq_installed $linuxdistro
-  jq_db_query_group_pkgs $src $linuxdistro $group
+  if has_yq; then
+	  jq_db_query_group_pkgs $src $linuxdistro $group
+  else
+	  echo "Run '$0 -j' before proceeding!"
+	  exit
+  fi
 fi

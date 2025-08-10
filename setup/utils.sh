@@ -4,15 +4,19 @@ command_exists(){
   command -v $1 &>/dev/null
 }
 
+has_yq(){
+ command_exists yq
+}
+
 ensure_yq_installed(){
-  if ! command_exists yq ; then
+  if ! has_yq ; then
     echo "This script depends on 'yq' to work, but 'yq' wasn't detected in your system!"
     echo "Attempting to install 'yq' for distro "${linuxdistro}"..."
     case $1 in
       'arch') sudo pacman -S jq go-yq ;;
       'gentoo') sudo emerge -av app-misc/jq app-misc/yq-go ;;
       *)
-        echo "Ahhh: my script does not know how to install 'jq' and 'yq' for distro '${linuxdistro}'. Exiting..."
+        echo "TODO: implement installation of 'jq' and 'yq' for distro '${linuxdistro}'. Exiting..."
         exit
         ;;
     esac

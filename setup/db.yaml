@@ -588,6 +588,9 @@ packages:
     - name: wlroots
       url: https://gitlab.freedesktop.org/wlroots/wlroots.git
 
+    - name: bass
+      url: https://github.com/edc/bass.git
+
 
   curl:
     - name: lua-language-server

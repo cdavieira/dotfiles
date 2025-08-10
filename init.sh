@@ -4,26 +4,39 @@ logmsg(){
 	echo "init.sh:" $@ >> /tmp/myinit.log
 }
 
-# TODO: 'mktemp' is probably better than these two consecutive conditionals.
-#        For example: 'export XDG_RUNTIME_DIR=$(mktemp -d "/tmp/${UID}-runtime-dir.XXX")'
-#        The only problem is that some applications might still expect
-#        XDG_RUNTIME_DIR to be /run/user/${UID}
+# The only problem with using 'mktemp' to set XDG_RUNTIME_DIR like this is that
+# some applications might still expect XDG_RUNTIME_DIR to be /run/user/${UID}
+create_xdgruntimedir_mktemp(){
+	export XDG_RUNTIME_DIR=$(mktemp -d "/tmp/${UID}-runtime-dir.XXX")
+}
 
-# TODO: $XDG_RUNTIME_DIR should be deleted upon user logout according to the 
-# xdg base directory specification (https://specifications.freedesktop.org/basedir-spec/latest/)
-if test -z "${XDG_RUNTIME_DIR}"; then
-	export XDG_RUNTIME_DIR="/run/user/${UID}"
-else
-	logmsg "XDG_RUNTIME_DIR is already set to ${XDG_RUNTIME_DIR}"
-fi
+# The following method requires 'sudo' and for that reason it's not really
+# convenient, specially if this script get's used by a display manager to start
+# the graphical session of another user
+create_xdgruntimedir_mkdir(){
+	if test -z "${XDG_RUNTIME_DIR}"; then
+		export XDG_RUNTIME_DIR="/run/user/${UID}"
+	else
+		logmsg "XDG_RUNTIME_DIR is already set to ${XDG_RUNTIME_DIR}"
+	fi
 
-if test ! -d "${XDG_RUNTIME_DIR}"; then
-	sudo mkdir --parents ${XDG_RUNTIME_DIR}
-	sudo chown carlos ${XDG_RUNTIME_DIR}
-	sudo chmod 0700 ${XDG_RUNTIME_DIR}
-else
-	logmsg "'${XDG_RUNTIME_DIR}' already exists"
-fi
+	if test ! -d "${XDG_RUNTIME_DIR}"; then
+		sudo mkdir --parents ${XDG_RUNTIME_DIR}
+		sudo chown carlos ${XDG_RUNTIME_DIR}
+		sudo chmod 0700 ${XDG_RUNTIME_DIR}
+	else
+		logmsg "'${XDG_RUNTIME_DIR}' already exists"
+	fi
+}
+
+# More on $XDG_RUNTIME_DIR: https://specifications.freedesktop.org/basedir-spec/latest/
+create_xdgruntimedir(){
+	create_xdgruntimedir_mktemp
+}
+
+create_xdgruntimedir
+
+logmsg "XDG_RUNTIME_DIR set to ${XDG_RUNTIME_DIR}"
 
 if test "$1" = "dwl"; then
 	startupcmd=~/repos/dwl/startup.sh

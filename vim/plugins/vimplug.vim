@@ -361,7 +361,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	### Rust
 	# https://github.com/rust-lang/rust.vim
-	# legacy Plug 'rust-lang/rust.vim'
+	legacy Plug 'rust-lang/rust.vim'
 	
 	### Go
 	# https://github.com/fatih/vim-go

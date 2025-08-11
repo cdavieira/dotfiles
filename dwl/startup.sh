@@ -3,7 +3,6 @@
 # <&- closes standard input
 
 # https://stackoverflow.com/questions/592620/how-can-i-check-if-a-program-exists-from-a-bash-script
-# command --help
 command_exists(){
 	command -v $1 &>/dev/null
 	return 
@@ -30,7 +29,7 @@ fi
 if test -e ${mywallpaper}; then
   swaybg -i ${mywallpaper} -m fit <&- &
 else
-  log_err 'fail when setting background (swaybg not found)'
+  log_err 'fail when setting background (file not found)'
 fi
 
 if command_exists dunst; then
@@ -39,7 +38,6 @@ else
   log_err 'fail when starting notify-daemon (dunst not found)'
 fi
 
-# TODO: maybe use xdg-screensaver instead of swayidle/wlopm/swaylock?
 if command_exists swayidle && command_exists swaylock && command_exists wlopm; then
   swayidle -w \
     timeout 600 'swaylock -f -c 000000' \

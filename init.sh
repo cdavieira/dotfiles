@@ -34,63 +34,70 @@ create_xdgruntimedir(){
 	create_xdgruntimedir_mktemp
 }
 
-create_xdgruntimedir
+# $1: name of the wayland compositor executable
+run_default_wl_compositor(){
+	logmsg "exec dbus-launch --exit-with-session $1"
+	# exec dbus-launch --exit-with-session $1
+}
 
+create_xdgruntimedir
 logmsg "XDG_RUNTIME_DIR set to ${XDG_RUNTIME_DIR}"
 
-if test "$1" = "dwl"; then
-	startupcmd=~/repos/dwl/startup.sh
-	if test -e ${startupcmd} && test -x ${startupcmd}; then
-		startupcmd="-s ${startupcmd}"
-	else
-		startupcmd=""
-	fi
-	logmsg "startup command: ${startupcmd}"
+case "$1" in
+	'dwl')
+		startupcmd=~/repos/dwl/startup.sh
+		if test -e ${startupcmd} && test -x ${startupcmd}; then
+			startupcmd="-s ${startupcmd}"
+		else
+			startupcmd=""
+		fi
+		logmsg "startup command: ${startupcmd}"
 
-	dwllogfile="dwl-$(date +%Y-%m-%d-%H-%M).log"
-	if test -d ~/log; then
-		dwllogfile=~/log/${dwllogfile}
-	else
-		dwllogfile=~/${dwllogfile}
-	fi
-	logmsg "log file: ${dwllogfile}"
+		dwllogfile="dwl-$(date +%Y-%m-%d-%H-%M).log"
+		if test -d ~/log; then
+			dwllogfile=~/log/${dwllogfile}
+		else
+			dwllogfile=~/${dwllogfile}
+		fi
+		logmsg "log file: ${dwllogfile}"
 
-	# 'dbus-launch'/'dbus-run-session' sets the $DBUS_SESSION_BUS_ADDRESS
-	# variable, which refers to a dbus session (used by all processes
-	# started from herein)
-	#
-	# '--exit-with-session' kills all processes and unsets all DBUS_*
-	# environment variables that were created by dbus to launch this
-	# program when the session/window manager instance terminates. This is
-	# sort of a 'cleanup' procedure.
-	#
-	# The GentooWiki page for DBUS recommends 'dbus-launch
-	# --exit-with-session' for this purpose.
-	#
-	# The manpage of dbus-launch recommends using 'dbus-run-session'
-	# instead for sessions running within a text-mode session (such as
-	# shells, agetty/elogind/TTY, greetd in text/terminal mode)
-	#
-	# 'https://wiki.gentoo.org/wiki/Greetd' recommends running
-	# 'dbus-run-session' to run a compositor (such as Hyprland) from
-	# within a greetd frontend
-	#
-	# https://dbus.freedesktop.org/doc/dbus-run-session.1.html
-	#
-	# https://dbus.freedesktop.org/doc/dbus-launch.1.html
-	#
-	# OBS: Beware that systems using systemd/elogind might not need to
-	# use dbus-launch, because those usually set a dbus session
-	# automatically on user-login through PAM. On the other hand, this
-	# might be necessary in systems that use OpenRC, runit and other
-	# initsystems (if they don't use elogind or another PAM-aware
-	# mechanism, of course)
-	exec dbus-launch --exit-with-session dwl ${startupcmd} &> ${dwllogfile}
-elif test "$1" = "sway"; then
-	logmsg "exec dbus-launch --exit-with-session sway"
-elif test "$1" = "labwc"; then
-	logmsg "exec dbus-launch --exit-with-session labwc"
-else
-	logmsg "Unknown window manager!"
-	echo "run: $0 dwl/sway/labwc"
-fi
+		# 'dbus-launch'/'dbus-run-session' sets the $DBUS_SESSION_BUS_ADDRESS
+		# variable, which refers to a dbus session (used by all processes
+		# started from herein)
+		#
+		# '--exit-with-session' kills all processes and unsets all DBUS_*
+		# environment variables that were created by dbus to launch this
+		# program when the session/window manager instance terminates. This is
+		# sort of a 'cleanup' procedure.
+		#
+		# The GentooWiki page for DBUS recommends 'dbus-launch
+		# --exit-with-session' for this purpose.
+		#
+		# The manpage of dbus-launch recommends using 'dbus-run-session'
+		# instead for sessions running within a text-mode session (such as
+		# shells, agetty/elogind/TTY, greetd in text/terminal mode)
+		#
+		# 'https://wiki.gentoo.org/wiki/Greetd' recommends running
+		# 'dbus-run-session' to run a compositor (such as Hyprland) from
+		# within a greetd frontend
+		#
+		# https://dbus.freedesktop.org/doc/dbus-run-session.1.html
+		#
+		# https://dbus.freedesktop.org/doc/dbus-launch.1.html
+		#
+		# OBS: Beware that systems using systemd/elogind might not need to
+		# use dbus-launch, because those usually set a dbus session
+		# automatically on user-login through PAM. On the other hand, this
+		# might be necessary in systems that use OpenRC, runit and other
+		# initsystems (if they don't use elogind or another PAM-aware
+		# mechanism, of course)
+		exec dbus-launch --exit-with-session dwl ${startupcmd} &> ${dwllogfile}
+	;;
+	'labwc'|'sway'|'cwcwm')
+		run_default_wl_compositor "$1"
+	;;
+	*)
+		logmsg "Unknown window manager!"
+		echo "run: $0 dwl/sway/labwc/cwcwm"
+	;;
+esac

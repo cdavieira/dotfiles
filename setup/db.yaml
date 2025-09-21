@@ -550,6 +550,10 @@ packages:
       arch: grpc
       gentoo: net-libs/grpc
 
+    - name: tlp
+      arch: tlp
+      gentoo: sys-power/tlp
+
 
   git:
     - name: dwl
@@ -590,6 +594,9 @@ packages:
 
     - name: bass
       url: https://github.com/edc/bass.git
+
+    - name: gammastep
+      url: https://gitlab.com/chinstrap/gammastep
 
 
   curl:
@@ -645,6 +652,7 @@ groups:
       - pass
       - gpg
       - git
+      - gdb
       - tree
       - bat
       - ripgrep
@@ -669,7 +677,6 @@ groups:
       - meson
       - clang
       - cmake
-      - gdb
       - valgrind
       - flex
       - bison
@@ -736,10 +743,12 @@ groups:
       - swayidle
       - swaylock
       - wlopm
+      - tlp
 
   - name: backlight
     git:
       - brillo
+      - gammastep
 
   - name: displaymanager
     pkgmgr:

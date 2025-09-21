@@ -43,6 +43,52 @@ export def NormalSetup(vimplug_dir: Dirpath)
 	g:plug#end()
 enddef
 
+export def LighterFullSetup(vimplug_dir: Dirpath)
+	g:plug#begin(vimplug_dir)
+
+	# File explorer
+	legacy Plug 'preservim/nerdtree'
+	legacy Plug 'ryanoasis/vim-devicons'
+
+	# Fuzzy finder
+	legacy Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	legacy Plug 'junegunn/fzf.vim'
+
+	# LSP
+	legacy Plug 'prabirshrestha/vim-lsp'
+
+	# Autocompletion
+	legacy Plug 'prabirshrestha/asyncomplete.vim'
+	legacy Plug 'prabirshrestha/asyncomplete-lsp.vim'
+	# legacy Plug 'girishji/vimcomplete'
+
+	# Snippers
+	legacy Plug 'hrsh7th/vim-vsnip'
+	legacy Plug 'hrsh7th/vim-vsnip-integ'
+	legacy Plug 'rafamadriz/friendly-snippets'
+
+	# Formatter
+	legacy Plug 'junegunn/vim-easy-align'
+
+	# Auto typing
+	legacy Plug 'tpope/vim-commentary'
+	legacy Plug 'tpope/vim-surround'
+	legacy Plug 'tpope/vim-endwise'
+	legacy Plug 'jiangmiao/auto-pairs'
+
+	### Git
+	legacy Plug 'tpope/vim-fugitive'
+	legacy Plug 'airblade/vim-gitgutter'
+	legacy Plug 'junegunn/gv.vim'
+
+	### Other
+	legacy Plug 'romainl/vim-cool'
+	legacy Plug 'roxma/vim-paste-easy'
+	legacy Plug 'kshenoy/vim-signature'
+
+	g:plug#end()
+enddef
+
 export def FullSetup(vimplug_dir: Dirpath)
 	g:plug#begin(vimplug_dir)
 

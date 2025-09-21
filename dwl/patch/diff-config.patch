@@ -7,6 +7,10 @@
 < 	{ "firefox_EXAMPLE",  NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
 ---
 >   	{ NULL,  NULL,       0,       0,           -1 }, /* Start on ONLY tag "9" */
+51c50
+< 	{ NULL,       0.55f, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
+---
+> 	{ NULL,       0.55f, 1,      1,    &layouts[2], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
 59a59,61
 >   	.rules = "evdev", 
 >   	.model = "pc105", 

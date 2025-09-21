@@ -93,21 +93,29 @@ endfor
 # Myconfig
 import GetVimConfig('options')
 import GetVimConfig('colorschemes')
-import GetPluginConfig('vimplug')
-import GetPluginConfig('asyncomplete')
-import GetPluginConfig('nerdtree')
-import GetPluginConfig('ale')
-#import GetPluginConfig('ollama')
-import GetPluginConfig('vimlsp')
-import GetPluginConfig('vsnip')
-import GetPluginConfig('airline')
-#vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
-#vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
-vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
-colorschemes.SetCS('onedark', 'dracula', 'sorbet', 'evening', 'wildcharm')
-#colorschemes.SetCS('sorbet', 'evening', 'wildcharm')
 
+# import GetPluginConfig('vimplug')
+# import GetPluginConfig('asyncomplete')
+# import GetPluginConfig('nerdtree')
+# import GetPluginConfig('vimlsp')
+# import GetPluginConfig('vsnip')
+# import GetPluginConfig('ale')
+# import GetPluginConfig('ollama')
+# import GetPluginConfig('airline')
+# vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
+# vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
+# vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
+# vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
 
+import GetPluginConfig('plugpac')
+plugpac.NormalSetup()
+packadd minpac
+packadd lsp
+import GetPluginConfig('vim9lsp')
+
+# colorschemes.SetCS('onedark', 'dracula', 'sorbet', 'evening', 'wildcharm')
+# colorschemes.SetCS('sorbet', 'evening', 'wildcharm')
+colorschemes.SetCS('habamax', 'sorbet', 'evening', 'wildcharm')
 
 
 # Mappings

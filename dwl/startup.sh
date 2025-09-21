@@ -26,10 +26,10 @@ else
   log_err 'fail when starting bar (waybar not found)'
 fi
 
-if test -e ${mywallpaper}; then
+if test -e ${mywallpaper} && command_exists swaybg; then
   swaybg -i ${mywallpaper} -m fit <&- &
 else
-  log_err 'fail when setting background (file not found)'
+  log_err 'fail when setting background'
 fi
 
 if command_exists dunst; then
@@ -42,7 +42,13 @@ if command_exists swayidle && command_exists swaylock && command_exists wlopm; t
   swayidle -w \
     timeout 600 'swaylock -f -c 000000' \
     timeout 1200 'wlopm --off eDP-1' \
-    resume 'wlopm --on eDP-1'
+    resume 'wlopm --on eDP-1' <&-
 else
   log_err 'fail when starting screensaving service (swayidle/swaylock/wlopm not found)'
 fi
+
+# if command_exists gammastep; then
+#   gammastep <&- &
+# else
+#   log_err 'fail when starting gammastep'
+# fi

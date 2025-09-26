@@ -32,6 +32,12 @@ enddef
 def WriteToStdout(...words: list<any>): void
 	writefile(words, '/dev/stdout', 'a')
 enddef
+def GetDownloadCmd(_url: string, file_destination: string): string
+	if has('win64')
+		return '!powershell -Command \"iwr -useb ' .. _url .. ' | ni ' .. file_destination .. ' -Force \"'
+	endif
+	return '!curl -fLo ' .. file_destination .. ' --create-dirs ' .. _url
+enddef
 
 
 
@@ -55,15 +61,11 @@ setenv('MANPAGER', 'vim +MANPAGER --not-a-term -')
 
 
 
-
-# OS-Specific
-var vimplug_install_cmd: string
-var vimplug_autoload_file = GetFilepath(getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim')
+# OS Specific
 if has('win64')
 	set keywordprg=:help
 	set shell=pwsh
 	set shellcmdflag=-Command
-	vimplug_install_cmd = '!powershell -Command \"iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni ' .. vimplug_autoload_file .. ' -Force \"'
 else
 	set keywordprg=:Man
 	# set shell=/bin/bash
@@ -74,8 +76,14 @@ else
 	set packpath-=$VIM/vimfiles
 	set packpath-=$VIM/vimfiles/after
 	runtime ftplugin/man.vim
-	vimplug_install_cmd = '!curl -fLo ' .. vimplug_autoload_file .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
+
+
+
+# OS Agnostic 
+const vimplug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+const vimplug_autoload_file = GetFilepath(getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim')
+const vimplug_install_cmd = GetDownloadCmd(vimplug_url, vimplug_autoload_file)
 if empty(glob(vimplug_autoload_file))
 	silent execute vimplug_install_cmd 
 	# OBS: git must be installed in order for the following autocommand to work!
@@ -89,33 +97,34 @@ endfor
 
 
 
-
 # Myconfig
 import GetVimConfig('options')
 import GetVimConfig('colorschemes')
 
-# import GetPluginConfig('vimplug')
-# import GetPluginConfig('asyncomplete')
-# import GetPluginConfig('nerdtree')
-# import GetPluginConfig('vimlsp')
-# import GetPluginConfig('vsnip')
-# import GetPluginConfig('ale')
+# Vim8 compatible approach
+import GetPluginConfig('vimplug')
+import GetPluginConfig('asyncomplete')
+import GetPluginConfig('nerdtree')
+import GetPluginConfig('vimlsp')
+import GetPluginConfig('vsnip')
+import GetPluginConfig('ale')
+import GetPluginConfig('airline')
 # import GetPluginConfig('ollama')
-# import GetPluginConfig('airline')
 # vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
 # vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
-# vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
+vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
 # vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
 
-import GetPluginConfig('plugpac')
-plugpac.NormalSetup()
-packadd minpac
-packadd lsp
-import GetPluginConfig('vim9lsp')
+# Vim9 approach
+# import GetPluginConfig('plugpac')
+# plugpac.NormalSetup()
+# packadd minpac
+# packadd lsp
+# import GetPluginConfig('vim9lsp')
 
 # colorschemes.SetCS('onedark', 'dracula', 'sorbet', 'evening', 'wildcharm')
-# colorschemes.SetCS('sorbet', 'evening', 'wildcharm')
 colorschemes.SetCS('habamax', 'sorbet', 'evening', 'wildcharm')
+
 
 
 # Mappings
@@ -140,7 +149,6 @@ inoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '
 snoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 inoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 snoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-
 
 
 

@@ -5,9 +5,11 @@ vim9script
 # Take a look on how to setup plugpac first:
 # https://github.com/bennyyip/plugpac.vim
 #
-# Plugpac works by leveraging the builtin package system of vim.
+# Plugpac is a thin layer over minpac. It's written in vim9.
 #
-# In that regard, plugpac installs new plugins in the typical 'pack/'
+# minpac works by leveraging the builtin package system of vim.
+#
+# In that regard, minpac installs new plugins in the typical 'pack/'
 # directory of vim and manages them there. Enabled plugins are organized in
 # the 'start/' directory and disabled ones go to 'opt/'. plugpac itself is
 # located in the 'opt/' folder and requires being added through 'packadd' in
@@ -29,19 +31,19 @@ export def NormalSetup()
 	})
 
 	# File explorer
-	legacy Pack 'ryanoasis/vim-devicons'
+	plugpac#Add('ryanoasis/vim-devicons')
 
 	## No treeview/sidepanel
-	legacy Pack 'habamax/vim-dir'
+	plugpac#Add('habamax/vim-dir')
 
 	## Sidepanel
-	# Pack 'nda-cunh/SupraTree'
+	# plugpac#Add('nda-cunh/SupraTree')
 
 	# Fuzzy finder
-	# Pack 'vim-fuzzbox/fuzzbox.vim'
+	# plugpac#Add('vim-fuzzbox/fuzzbox.vim')
 
 	# LSP
-	legacy Pack 'yegappan/lsp'
+	plugpac#Add('yegappan/lsp')
 
 	# Autocompletion
 	# :h ins-autocompletion
@@ -60,7 +62,7 @@ export def NormalSetup()
 	# 'tpope/vim-surround'
 	# 'tpope/vim-endwise'
 	# 'jiangmiao/auto-pairs'
-	# Pack 'ubaldot/vim-op-surround'
+	# plugpac#Add('ubaldot/vim-op-surround')
 
 	### Git
 	# 'tpope/vim-fugitive'
@@ -68,11 +70,11 @@ export def NormalSetup()
 	# 'junegunn/gv.vim'
 
 	### Other
-	legacy Pack 'kshenoy/vim-signature'
-	legacy Pack 'romainl/vim-cool'
-	legacy Pack 'roxma/vim-paste-easy'
-	# legacy Pack 'bfrg/vim-qf-diagnostics'
-	# legacy Pack 'bfrg/vim-qf-preview'
+	plugpac#Add('kshenoy/vim-signature')
+	plugpac#Add('romainl/vim-cool')
+	plugpac#Add('roxma/vim-paste-easy')
+	# plugpac#Add('bfrg/vim-qf-diagnostics')
+	# plugpac#Add('bfrg/vim-qf-preview')
 
 	plugpac#End()
 enddef

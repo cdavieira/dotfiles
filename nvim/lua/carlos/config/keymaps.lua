@@ -12,7 +12,8 @@ local SPECIAL_KEYS = {
 
 ---@enum vim_modes
 local VIM_MODES = {
-	Normal = 'n'
+	Normal = 'n',
+	Visual = 'v',
 }
 
 
@@ -31,6 +32,16 @@ end
 ---@param description string
 local AddNormalLeaderKeymap = function (keys, callback, description)
 	local mode = VIM_MODES.Normal
+	local cmd = BuildLeaderShortcut(keys)
+	vim.keymap.set(mode, cmd, callback, {desc = description})
+end
+
+---Add shortcuts which use leader as prefix
+---@param keys string
+---@param callback function|string
+---@param description string
+local AddVisualLeaderKeymap = function (keys, callback, description)
+	local mode = VIM_MODES.Visual
 	local cmd = BuildLeaderShortcut(keys)
 	vim.keymap.set(mode, cmd, callback, {desc = description})
 end
@@ -73,7 +84,7 @@ vim.keymap.set('t', '\\', Toggleterm.toggle, {desc = 'Edit Lazy\'s plugins file'
 
 AddNormalLeaderKeymap('g', vim.diagnostic.open_float, 'Open diagnosis floating panel')
 AddNormalLeaderKeymap('i', '<Cmd>edit /home/carlos/.config/nvim/init.lua <CR>', 'Edit init.lua')
-AddNormalLeaderKeymap('y', '"+y', 'Copy to system clipboard')
+AddVisualLeaderKeymap('y', '"+y', 'Copy to system clipboard')
 
 vim.keymap.set('n', '<S-Esc>', ':noh<CR>', {desc = 'Unhighlight previous search highlight'})
 

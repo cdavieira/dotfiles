@@ -1,5 +1,10 @@
 vim9script
 
+# The 'vim9lsp' plugin is simpler than 'vimlsp'. It only requires registering
+# new language servers and that's it. No autocommand needed or anything. The
+# only inconvenient is that the 'lsp' package has to be loaded with 'packadd
+# lsp' in order to use the g:LspAddServer function
+
 var clangd = {
 	'name': 'clangd',
 	'filetype': ['c', 'cpp'],

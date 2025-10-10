@@ -112,8 +112,8 @@ import GetPluginConfig('airline')
 # import GetPluginConfig('ollama')
 # vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
 # vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
-vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
-# vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
+# vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
+vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
 
 # Vim9 approach
 # import GetPluginConfig('plugpac')

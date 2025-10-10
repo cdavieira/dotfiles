@@ -1,6 +1,6 @@
 set from = "$GMAIL"
 set folder = "imaps://$GMAIL@imap.gmail.com:993"
-set smtp_url = "smtps://$GMAIL@smtp.gmail.com:587"
+set smtp_url = "smtp://$GMAIL@smtp.gmail.com:587"
 set imap_user = "$GMAIL"
 set imap_authenticators='oauthbearer:xoauth2'
 set imap_oauth_refresh_command = "python $my_neomutt_config/oauth2.py \

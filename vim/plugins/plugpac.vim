@@ -5,7 +5,8 @@ vim9script
 # Take a look on how to setup plugpac first:
 # https://github.com/bennyyip/plugpac.vim
 #
-# Plugpac is a thin layer over minpac. It's written in vim9.
+# Plugpac is a vim9 plugin, that acts as a thin layer over minpac (written in
+# legacy vim).
 #
 # minpac works by leveraging the builtin package system of vim.
 #
@@ -14,11 +15,6 @@ vim9script
 # the 'start/' directory and disabled ones go to 'opt/'. plugpac itself is
 # located in the 'opt/' folder and requires being added through 'packadd' in
 # order to expose its commands (Pack, ...)
-#
-# The 'vim9lsp' plugin is simpler than 'vimlsp'. It only requires registering
-# new language servers and that's it. No autocommand needed or anything. The
-# only inconvenient is that the 'lsp' package has to be loaded with 'packadd
-# lsp' in order to use the g:LspAddServer function
 #
 # OBS: not all plugins found here are actually written in vim9. Some were
 # spared from this requirement, because they are perfect the way they are!

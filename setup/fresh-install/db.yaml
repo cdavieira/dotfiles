@@ -821,32 +821,48 @@ services:
 
   - name: netmount
     arch:
-      name:
-      type:
+      name: # MISSING
+      type: # MISSING
     gentoo:
       name: netmount
       type: default
 
   - name: sysklogd
     arch:
-      name:
-      type:
+      name: # MISSING
+      type: # MISSING
     gentoo:
       name: sysklogd
       type: default
 
   - name: dhcpcd
     arch:
-      name:
-      type:
+      name: # MISSING
+      type: # MISSING
     gentoo:
       name: dhcpcd
       type: default
 
   - name: chronyd
     arch:
-      name:
-      type:
+      name: # MISSING
+      type: # MISSING
     gentoo:
       name: chronyd
+      type: default
+
+  - name: displaymanager
+    arch:
+      name: # MISSING
+      type: # MISSING
+    gentoo:
+      name: display-manager
+      type: default
+
+  - name: tlp
+    arch:
+      name: # MISSING
+      type: # MISSING
+    gentoo:
+      name: tlp
       type: default

@@ -32,7 +32,8 @@ install_core_tools(){
     net-wireless/bluez \
     media-libs/mesa \
     dev-util/vulkan-tools \
-    media-libs/libva-intel-driver
+    media-libs/libva-intel-driver \
+    sys-fs/ntfs3g
   "
   sudo emerge -av "${PKGS}"
 }

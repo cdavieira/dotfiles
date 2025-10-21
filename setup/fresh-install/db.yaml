@@ -554,6 +554,10 @@ packages:
       arch: tlp
       gentoo: sys-power/tlp
 
+    - name: libdisplay
+      arch: # MISSING
+      gentoo: media-libs/libdisplay-info
+
 
   git:
     - name: dwl
@@ -714,6 +718,7 @@ groups:
 
   - name: compositor
     pkgmgr:
+      - libdisplay
       - polkit
       - dbus
       - seatd

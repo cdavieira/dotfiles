@@ -3,13 +3,12 @@
 source utils.sh
 
 usage(){
-  echo "$0 [-d distro -s src [-b buildname | -g group]] [-j] [-D] [-v] [-h]"
+  echo "$0 [-d distro -s src [-b buildname | -g group]] [-d distro -j] [-v] [-h]"
   echo ''
   echo 'Description'
   echo 'This script prints one or more package names related to arbitrary softwares/services/resources found in a distro'
   echo ''
   echo 'Options'
-  echo "-D: create my directory structure at $HOME and symbolic links to my dotfiles"
   echo "-j: install jq and yq"
   echo "-v: be verbose"
   echo "-h: print this help"
@@ -25,53 +24,9 @@ usage(){
   exit
 }
 
-if test $# -lt 2; then
+if test $# -eq 0; then
   usage
 fi
-
-create_folders(){
-  mkdir $1/{tmp,vault,save,repos,books,german,txt,log}
-  mkdir $1/.config/{,vim,fish,kitty,tmux,waybar,qutebrowser,dunst}
-  mkdir $1/.cache $1/.cache/vim/{,backup,swap,undo}
-  git clone https://github.com/cdavieira/dotfiles.git $1/repos
-}
-
-make_links(){
-  ln -sf $1/dotfiles/fish/config.fish      $2/fish
-  # ln -sf $1/dotfiles/fish/functions/*.fish $2/fish/functions
-  ln -sf $1/dotfiles/vim/vimrc             $2/vim
-  ln -sf $1/dotfiles/vim/snippets          $2/vim
-  ln -sf $1/dotfiles/nvim/                 $2
-  ln -sf $1/dotfiles/tmux/tmux.conf        $2/tmux
-  ln -sf $1/dotfiles/mailcap/mailcap       ~/.mailcap
-  ln -sf $1/dotfiles/waybar/config.jsonc   $2/waybar
-  ln -sf $1/dotfiles/waybar/style.css      $2/waybar
-  ln -sf $1/dotfiles/dunst/dunstrc         $2/dunst
-  ln -sf $1/dotfiles/qutebrowser/config.py $2/qutebrowser
-  ln -sf $1/dotfiles/init.sh ~
-  case $1 in
-    'arch')
-      ln -sf $1/dotfiles/kitty/kitty-arch.conf $2/kitty/kitty.conf
-      ;;
-    'gentoo')
-      ln -sf $1/dotfiles/kitty/kitty-gentoo.conf $2/kitty/kitty.conf
-      ;;
-    *) ;;
-  esac
-
-  if test -d "$1/code"; then
-    sudo ln -sf $1/code/all/fish/projects/auto_pull.fish /usr/local/bin/auto_pull
-    sudo ln -sf $1/code/all/fish/projects/auto_push.fish /usr/local/bin/auto_push
-    sudo ln -sf $1/code/all/python/projects/qtb-tabsaver/main.py /usr/local/bin/tabsaver
-  fi
-
-  if test -d /etc/greetd; then
-    sudo ln -sf $1/dotfiles/greetd/config.toml  /etc/greetd
-    sudo ln -sf $1/dotfiles/greetd/dwl.sh       /etc/greetd
-    sudo ln -sf $1/dotfiles/greetd/guigreet.sh  /etc/greetd
-    sudo ln -sf $1/dotfiles/greetd/regreet.toml /etc/greetd
-  fi
-}
 
 #################################
 #################################
@@ -127,13 +82,6 @@ while getopts 'b:d:s:g:Dvhj' opt; do
 	# jq and go-yq
   	'j')
 	  ensure_yq_installed $linuxdistro
-  	;;
-
-	# create desktop dirs and symbolic links
-  	'D')
-	  create_folders $prefix
-	  make_links     $reposdir $xdgconfigdir
-	  exit
   	;;
 
 	# verbose

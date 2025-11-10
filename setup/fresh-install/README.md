@@ -69,7 +69,7 @@ for the `texteditor` group, all of its items are going to be looked up in order
 to name the packages associated with them
 
 
-## Why not using only distro-agnostic methods of installing software?
+## Why not use distro-agnostic methods to install software?
 I don't really use flatpak/appimages for all programs installed in my system
 for many different reasons. Honestly, one day i might lay out all the reasons
 for that, but to keep it simple:
@@ -77,8 +77,8 @@ for that, but to keep it simple:
 work/sandbox breaks
 
 My system is a mix of programs installed with:
-* the distro package manager
-* github
+* the package manager of the current distro
+* git + make/cmake/meson/...
 * manually with curl + scripts
 * flatpak
 * appimages
@@ -105,3 +105,4 @@ So this project was my solution to deal with that mess
 * https://apihandyman.io/api-toolbox-jq-and-openapi-part-2-using-jq-command-line-arguments-functions-and-modules/
 * https://stackoverflow.com/questions/53315791/how-to-convert-a-json-response-into-yaml-in-bash
 * https://stackoverflow.com/questions/11742996/is-mixing-getopts-with-positional-parameters-possible
+> the jq commands 'to_entries', 'from_entries' would've been pretty useful if i knew about them before writing 'utils.jq'!

@@ -65,7 +65,8 @@ bootstrap_dwl(){
     gui-apps/wl-clipboard  \
     gui-apps/grim   \
     gui-apps/swappy \
-    gui-apps/slurp
+    gui-apps/slurp \
+    libv4l 
   "
   sudo emerge -av "${PKGS}"
 
@@ -103,9 +104,37 @@ install_fish(){
   sudo emerge -av fish
 }
 
+install_other_programs(){
+  PKGS="\
+    swayidle \
+    swaylock \
+    tlp \
+    neovim \
+    ripgrep \
+    fd \
+    bear \
+    mutt \
+    dunst \
+    qutebrowser \
+    cups \
+    bear \
+    blender \
+    app-emulation/qemu \
+    app-containers/docker \
+    app-containers/docker-cli
+  "
+  sudo emerge -av "${PKGS}"
+
+  sudo usermod -aG docker carlos
+  sudo gpasswd -a carlos kvm
+
+  sudo rc-update add tlp default
+}
+
 # main routine
 # copy_package_use
 # sync
 # install_core_tools
 # install_fish
 # bootstrap_dwl
+# install_other_programs

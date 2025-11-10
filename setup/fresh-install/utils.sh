@@ -90,6 +90,16 @@ jq_db_query_group_pkgs(){
   " | jq_clear_output
 }
 
+# $1 pkgname
+# $2 distro
+jq_db_query_pkgname(){
+  jq_db_wrapper "\
+    | utils::db_pkgmgr_get_pkg(\$toplevel; .$2; \"$1\") as \$pkgs
+    | \$pkgs
+    | .[]
+  " | jq_clear_output
+}
+
 jq_install_list_builds(){
   jq_install_wrapper "\
     | utils::install_get_builds(\$install)

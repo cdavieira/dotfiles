@@ -128,6 +128,12 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/ryanoasis/vim-devicons
 	legacy Plug 'ryanoasis/vim-devicons'
 
+	# https://github.com/habamax/vim-dir
+	# legacy Plug 'habamax/vim-dir'
+
+	# https://github.com/nda-cunh/SupraTree
+	# legacy Plug 'nda-cunh/SupraTree'
+
 
 
 	###############################
@@ -148,7 +154,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/prabirshrestha/vim-lsp
 	legacy Plug 'prabirshrestha/vim-lsp'
 
-	# lsp written in vim9! pretty cool right
+	# lsp written in vim9!
 	# https://github.com/yegappan/lsp
 	# legacy Plug 'yegappan/lsp'
 
@@ -259,6 +265,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# vim9 alternative to 'asyncomplete' 
 	# https://github.com/girishji/vimcomplete
 	# legacy Plug 'girishji/vimcomplete'
+
+	# :h ins-autocompletion
+	# :h ins-autocompletion-example
 
 
 

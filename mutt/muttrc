@@ -1,23 +1,29 @@
 set header_cache="$HOME/.cache/mutt"
 set tmpdir="$HOME/.cache/mutt/tmp"
+
+# OUTLOOK
+set imap_user="$OUTLOOK"
 set folder="imaps://$OUTLOOK@outlook.office365.com:993"
-set attach_save_dir="${tmpdir}"
+set smtp_url="smtp://${imap_user}@smtp-mail.outlook.com:587"
+
+# GMAIL
+# set imap_user="$GMAIL"
+# set folder="imaps://$GMAIL@imap.gmail.com:993"
+# set smtp_url="smtp://$GMAIL@smtp.gmail.com:587"
 
 set spoolfile="+INBOX"
 set record = "+Sent"
 set postponed = "+Drafts"
 set trash = "+Trash"
 
-set imap_user="$OUTLOOK"
-set imap_authenticators="oauthbearer:xoauth2"
-set imap_oauth_refresh_command="python $HOME/.config/mutt/mutt_oauth2.py ${header_cache}/${imap_user}.token"
+set attach_save_dir="${tmpdir}"
 set message_cachedir="${tmpdir}"
 
-set smtp_url="smtp://${imap_user}@smtp-mail.outlook.com:587"
+set imap_authenticators="oauthbearer:xoauth2"
+set imap_oauth_refresh_command="python $HOME/.config/mutt/mutt_oauth2.py ${header_cache}/${imap_user}.token"
+
 set smtp_authenticators=${imap_authenticators}
 set smtp_oauth_refresh_command=${imap_oauth_refresh_command}
-
-set ssl_force_tls=yes
 
 set send_charset="utf-8"
 set assumed_charset="iso-8859-1"
@@ -26,6 +32,7 @@ set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
 set sort=reverse-date-received
 set sort_aux=threads
 set strict_threads=yes
+set ssl_force_tls=yes
 
 set realname="Carlos Vieira"
 set from="${imap_user}"

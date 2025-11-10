@@ -1,2 +1,2 @@
-app-emulation/qemu sdl gtk QEMU_SOFTMMU_TARGETS: x86_64 riscv32 QEMU_USER_TARGETS: x86_64
+app-emulation/qemu sdl QEMU_SOFTMMU_TARGETS: x86_64 riscv32 QEMU_USER_TARGETS: x86_64
 media-libs/libsdl2 gles2

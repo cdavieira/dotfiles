@@ -97,11 +97,11 @@ endfor
 
 
 
-# Myconfig
+# Vim config
 import GetVimConfig('options')
 import GetVimConfig('colorschemes')
 
-# Vim8 compatible approach
+# Plugin config
 import GetPluginConfig('vimplug')
 import GetPluginConfig('asyncomplete')
 import GetPluginConfig('nerdtree')
@@ -110,18 +110,14 @@ import GetPluginConfig('vsnip')
 import GetPluginConfig('ale')
 import GetPluginConfig('airline')
 # import GetPluginConfig('ollama')
+
+# Plugin setup
 # vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
 # vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
-# vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
 vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
+# vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
 
-# Vim9 approach
-# import GetPluginConfig('plugpac')
-# plugpac.NormalSetup()
-# packadd minpac
-# packadd lsp
-# import GetPluginConfig('vim9lsp')
-
+# Themes
 # colorschemes.SetCS('onedark', 'dracula', 'sorbet', 'evening', 'wildcharm')
 colorschemes.SetCS('habamax', 'sorbet', 'evening', 'wildcharm')
 
@@ -130,18 +126,19 @@ colorschemes.SetCS('habamax', 'sorbet', 'evening', 'wildcharm')
 # Mappings
 # <M-*> = alt + *
 tnoremap <C-D> <C-W><C-C>
-nnoremap <Leader>b <Cmd>Buffers<CR>
 nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(-1)<CR>
 nnoremap <Leader>v <ScriptCmd>colorschemes.Rotate(+1)<CR>
-nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
-nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>p <Cmd>edit $MYVIM_FILES<CR>
 nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
-nnoremap <Leader>s <Cmd>Rg<CR>
 nnoremap <M-t> <Cmd>term ++noclose<CR>
 tnoremap <M-t> <Cmd>quit!<CR>
 tnoremap <M-q> <Cmd>quit!<CR>
-# nnoremap <Leader>o <Cmd>Ollama toggle<CR>
+
+nnoremap <Leader>f <Cmd>Files<CR>
+nnoremap <Leader>b <Cmd>Buffers<CR>
+nnoremap <Leader>s <Cmd>Rg<CR>
+nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
+nnoremap <Leader>o <Cmd>Ollama toggle<CR>
 imap <expr> <C-j>       vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 imap <expr> <C-l>       vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 smap <expr> <C-l>       vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'

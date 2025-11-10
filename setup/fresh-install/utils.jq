@@ -73,6 +73,26 @@ def merge_arrays($array1; $array2):
 # it is, so that any code that uses it stays the same
 
 ## package manager
+# Pseudocode:
+#   for pkg in $toplevel.packages.pkgmgr:
+#     if pkg.name == name:
+#       pkg_distro = pkg[<distro>]
+#       if type(pkg_distro) == "array":
+#         return pkg_distro
+#       else:
+#         return [ pkg_distro ]
+#   return None
+# OBS: the pseudocode above is not exactly how 'db_pkgmgr_get_pkg' computes the
+# output of each filter. For example, 'select(.name == name)' will first filter
+# ALL packages whose the field 'name' matches that of the parameter <name>,
+# before applying the <distro> filter to the previously selected packages.
+def db_pkgmgr_get_pkg($toplevel; distro; name):
+  $toplevel.packages.pkgmgr[]
+  | select(.name == name)
+  | distro
+  | select(type == "array") // [.]
+;
+
 def db_pkgmgr_get_all_pkgs($toplevel; distro):
   [ $toplevel.packages.pkgmgr[] | distro ]
   | flatten
@@ -266,7 +286,7 @@ def install_get_pkgs_from_src($build; $db; src):
 ;
 
 def install_get_pkgs_from_groups($build; $db; src):
-  $build.group
+  $build.group // []
   | filter_null(.) as $groups
   | db_groups_expand($db; $groups; src)
 ;

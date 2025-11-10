@@ -85,6 +85,8 @@ function dwl_apply_post_patches
 	# alternatively, sed could be used
 	patch -b $dwl_path/config.h    $dwl_dotfile/patch/diff-config.patch
 	patch -b $dwl_path/dwl.desktop $dwl_dotfile/patch/diff-desktop.patch
+	# WARNING: the following patch went untested, but it is necessary. Apply it manually if needed.
+	# patch -b $dwl_path/dwl.c $dwl_dotfile/patch/git-diff-dwl.patch
 end
 
 function dwl_install

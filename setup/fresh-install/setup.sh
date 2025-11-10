@@ -3,13 +3,18 @@
 source utils.sh
 
 usage(){
-  echo "$0 [-d distro -s src [-b buildname | -g group]] [-d distro -j] [-v] [-h]"
-  echo ''
   echo 'Description'
   echo 'This script prints one or more package names related to arbitrary softwares/services/resources found in a distro'
   echo ''
+  echo 'Usage'
+  echo "$0 [-v | -h]"
+  echo "$0 [-d distro -s src [-b buildname | -g group]]"
+  echo "$0 [-d distro -j]"
+  echo "$0 [-i -d distro -p pkg]"
+  echo ''
   echo 'Options'
   echo "-j: install jq and yq"
+  echo "-i: inform the name of a package for a distro"
   echo "-v: be verbose"
   echo "-h: print this help"
   echo 'Available distros:' 'arch' 'gentoo'
@@ -19,8 +24,25 @@ usage(){
 	  echo 'Available groups :' $(jq_db_list_groups)
   fi
   echo ''
+  echo 'Examples'
+  echo 'Install jq/go-yq for gentoo:'
+  echo "  $0 -j -d gentoo"
+  echo 'See what packages are necessary to install ''docker'' in gentoo:'
+  echo "  $0 -i -d gentoo -p docker"
+  echo 'See what packages are necessary to install ''imv'' in arch:'
+  echo "  $0 -i -d arch -p img"
+  echo 'See what packages are in the group ''compositor'' for gentoo:'
+  echo "  $0 -s pkgmgr -g compositor -d gentoo"
+  echo 'See what packages are needed to install the ''mybuild'' build for gentoo:'
+  echo "  $0 -s pkgmgr -b mybuild -d gentoo"
+  echo ''
   echo 'Notes'
   echo 'This script requires jq and go-yq to be installed'
+  if has_yq; then
+	  echo '  jq/go-yq are already installed!'
+  else
+	  echo "  run '$0 -j -d <distro>' in order to try installing jq/go-yq"
+  fi
   exit
 }
 
@@ -39,9 +61,11 @@ linuxdistro=""
 src=""
 build=""
 group=""
+pkg=""
 verbose=false
+routine=""
 
-while getopts 'b:d:s:g:Dvhj' opt; do
+while getopts 'b:d:s:g:p:Dvhji' opt; do
   # $OPTIND, $OPTARG
   case "$opt" in
   	'b')
@@ -79,9 +103,18 @@ while getopts 'b:d:s:g:Dvhj' opt; do
 	  group="$OPTARG"
   	;;
 
+	# inform
+  	'i')
+	  routine="INFORM"
+  	;;
+
+  	'p')
+	  pkg="$OPTARG"
+  	;;
+
 	# jq and go-yq
   	'j')
-	  ensure_yq_installed $linuxdistro
+	  routine="ENSURE"
   	;;
 
 	# verbose
@@ -106,31 +139,39 @@ if $verbose; then
   echo 'Selected group:' $group
 fi
 
-if test -z "$linuxdistro" || test -z "$src"; then
-  echo "Select a linux distro and a source"
-  exit
-fi
-
-if test -z "$build" && test -z "$group"; then
-  echo "Select a build or a group"
+if test -z "$linuxdistro"; then
+  echo "Select a linux distro"
   exit
 fi
  
-if test -n "$build"; then
-  ensure_yq_installed $linuxdistro
-  if has_yq; then
-	  jq_install_pkgs_from_src $build $linuxdistro $src
-  else
-	  echo "Run '$0 -j' before proceeding!"
-	  exit
-  fi
-fi
+case "${routine}" in
+	'INFORM') jq_db_query_pkgname $pkg $linuxdistro
+	;;
+  	'ENSURE') ensure_yq_installed $linuxdistro
+	;;
+	*) 
+	  if test -z "$src"; then
+	    echo "Select a source"
+	    exit
+	  fi
 
-if test -n "$group"; then
-  if has_yq; then
-	  jq_db_query_group_pkgs $src $linuxdistro $group
-  else
-	  echo "Run '$0 -j' before proceeding!"
-	  exit
-  fi
-fi
+	  if test -n "$build"; then
+	    ensure_yq_installed $linuxdistro
+	    if has_yq; then
+	  	  jq_install_pkgs_from_src $build $linuxdistro $src
+	    else
+	  	  echo "Run '$0 -j' before proceeding!"
+	    fi
+	    exit
+	  fi
+
+	  if test -n "$group"; then
+	    if has_yq; then
+	  	  jq_db_query_group_pkgs $src $linuxdistro $group
+	    else
+	  	  echo "Run '$0 -j' before proceeding!"
+	    fi
+	    exit
+	  fi
+	;;
+esac

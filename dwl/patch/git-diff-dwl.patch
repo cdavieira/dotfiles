@@ -1,0 +1,12 @@
+diff --git a/dwl.c b/dwl.c
+index 12f441e..e0eb67a 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -69,6 +69,7 @@
+ #endif
+ 
+ #include "util.h"
++#include "xdg-shell-protocol.h"
+ 
+ /* macros */
+ #define MAX(A, B)               ((A) > (B) ? (A) : (B))

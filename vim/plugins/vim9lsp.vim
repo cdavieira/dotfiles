@@ -5,6 +5,8 @@ vim9script
 # only inconvenient is that the 'lsp' package has to be loaded with 'packadd
 # lsp' in order to use the g:LspAddServer function
 
+# packadd lsp
+
 var clangd = {
 	'name': 'clangd',
 	'filetype': ['c', 'cpp'],

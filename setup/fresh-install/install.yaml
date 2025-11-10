@@ -1,3 +1,8 @@
+mybuild2:
+  srcs:
+    pkgmgr:
+      - distro-specific
+
 mybuild:
   srcs:
     pkgmgr:
@@ -41,7 +46,6 @@ mybuild:
       - typst
 
   group:
-    - core
     - doc
     - systools
     # - buildtools

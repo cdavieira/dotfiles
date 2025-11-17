@@ -1,3 +1,4 @@
 secret.fish
 secretneomuttrc
 *.tokens
+nvim/lazy-lock.json

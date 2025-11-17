@@ -15,22 +15,20 @@ vim9script
 
 # Helper functions
 const sep = has('win64') ? '\' : '/'
-def GetFilepath(...dirs: list<string>): string
+def BuildFilepath(...dirs: list<string>): string
 	var rel_path = join(dirs, sep)
 	return rel_path
 enddef
-def GetDirpath(...dirs: list<string>): string
-	var rel_path = join(dirs, sep) .. sep
-	return rel_path
-enddef
 def GetVimConfig(configname: string): string
-	return GetFilepath(getenv('MYVIM_FILES'), configname .. '.vim')
+	return BuildFilepath(getenv('MYVIM_FILES'), configname .. '.vim')
 enddef
 def GetPluginConfig(pluginname: string): string
-	return GetFilepath(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
+	return BuildFilepath(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
 enddef
 def WriteToStdout(...words: list<any>): void
-	writefile(words, '/dev/stdout', 'a')
+	if !has('win64')
+		writefile(words, '/dev/stdout', 'a')
+	endif
 enddef
 def GetDownloadCmd(_url: string, file_destination: string): string
 	if has('win64')
@@ -43,19 +41,19 @@ enddef
 
 # Environment variables
 if has('win64')
-	setenv('MYVIM_CONFIG_DIR', GetDirpath($HOME, 'vimfiles'))
-	setenv('MYVIM_CACHE_DIR', GetDirpath(getenv('MYVIM_CONFIG_DIR'), 'cache'))
-	setenv('MYVIM_FILES', GetDirpath($HOME, 'Downloads', 'dotfiles', 'vim'))
+	setenv('MYVIM_CONFIG_DIR', BuildFilepath($HOME, 'vimfiles'))
+	setenv('MYVIM_CACHE_DIR', BuildFilepath(getenv('MYVIM_CONFIG_DIR'), 'cache'))
+	setenv('MYVIM_FILES', BuildFilepath($HOME, 'Downloads', 'dotfiles', 'vim'))
 else
-	setenv('MYVIM_CONFIG_DIR', GetDirpath($HOME, '.config', 'vim'))
-	setenv('MYVIM_CACHE_DIR', GetDirpath($HOME, '.cache', 'vim'))
-	setenv('MYVIM_FILES', GetDirpath($HOME, 'repos', 'dotfiles', 'vim'))
+	setenv('MYVIM_CONFIG_DIR', BuildFilepath($HOME, '.config', 'vim'))
+	setenv('MYVIM_CACHE_DIR', BuildFilepath($HOME, '.cache', 'vim'))
+	setenv('MYVIM_FILES', BuildFilepath($HOME, 'repos', 'dotfiles', 'vim'))
 endif
-setenv('MYVIM_BACKUP_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'backup'))
-setenv('MYVIM_SWAP_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'swap'))
-setenv('MYVIM_UNDO_DIR', GetDirpath(getenv('MYVIM_CACHE_DIR'), 'undo'))
-setenv('MYVIM_VIMINFO', GetFilepath(getenv('MYVIM_CACHE_DIR'), 'viminfo'))
-setenv('MYVIM_VIMPLUG_DIR', GetDirpath(getenv('MYVIM_CONFIG_DIR'), 'vim-plug'))
+setenv('MYVIM_BACKUP_DIR', BuildFilepath(getenv('MYVIM_CACHE_DIR'), 'backup'))
+setenv('MYVIM_SWAP_DIR', BuildFilepath(getenv('MYVIM_CACHE_DIR'), 'swap'))
+setenv('MYVIM_UNDO_DIR', BuildFilepath(getenv('MYVIM_CACHE_DIR'), 'undo'))
+setenv('MYVIM_VIMINFO', BuildFilepath(getenv('MYVIM_CACHE_DIR'), 'viminfo'))
+setenv('MYVIM_VIMPLUG_DIR', BuildFilepath(getenv('MYVIM_CONFIG_DIR'), 'vim-plug'))
 # override the system MANPAGER, since vim might have trouble using it (ex: if MANPAGER='nvim')
 setenv('MANPAGER', 'vim +MANPAGER --not-a-term -')
 
@@ -80,14 +78,15 @@ endif
 
 
 
-# OS Agnostic 
-const vimplug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-const vimplug_autoload_file = GetFilepath(getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim')
-const vimplug_install_cmd = GetDownloadCmd(vimplug_url, vimplug_autoload_file)
-if empty(glob(vimplug_autoload_file))
-	silent execute vimplug_install_cmd 
-	# OBS: git must be installed in order for the following autocommand to work!
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+# Plugin manager setup
+if executable('git')
+	const vimplug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	const vimplug_autoload_file = BuildFilepath(getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim')
+	const vimplug_install_cmd = GetDownloadCmd(vimplug_url, vimplug_autoload_file)
+	if empty(glob(vimplug_autoload_file))
+		silent execute vimplug_install_cmd
+		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	endif
 endif
 for folder in [$MYVIM_BACKUP_DIR, $MYVIM_SWAP_DIR, $MYVIM_UNDO_DIR]
 	if empty(glob(folder))
@@ -97,19 +96,30 @@ endfor
 
 
 
-# Vim config
-import GetVimConfig('options')
-import GetVimConfig('colorschemes')
+# Vim and Plugin configs
+const customVimConfigs = [
+	'options',
+	'colorschemes',
+]
 
-# Plugin config
-import GetPluginConfig('vimplug')
-import GetPluginConfig('asyncomplete')
-import GetPluginConfig('nerdtree')
-import GetPluginConfig('vimlsp')
-import GetPluginConfig('vsnip')
-import GetPluginConfig('ale')
-import GetPluginConfig('airline')
-# import GetPluginConfig('ollama')
+const customPluginConfigs = [
+	'vimplug',
+	'asyncomplete',
+	'nerdtree',
+	'vimlsp',
+	'vsnip',
+	'ale',
+	'airline',
+	# 'ollama',
+]
+
+for config in customVimConfigs
+	import GetVimConfig(config)
+endfor
+
+for config in customPluginConfigs
+	import GetPluginConfig(config)
+endfor
 
 # Plugin setup
 # vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)

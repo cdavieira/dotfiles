@@ -36,8 +36,8 @@ create_xdgruntimedir(){
 
 # $1: name of the wayland compositor executable
 run_default_wl_compositor(){
-	logmsg "exec dbus-launch --exit-with-session $1"
-	# exec dbus-launch --exit-with-session $1
+	# logmsg "exec dbus-launch --exit-with-session $1"
+	exec dbus-launch --exit-with-session $1
 }
 
 create_xdgruntimedir

@@ -143,6 +143,7 @@ nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
 nnoremap <M-t> <Cmd>term ++noclose<CR>
 tnoremap <M-t> <Cmd>quit!<CR>
 tnoremap <M-q> <Cmd>quit!<CR>
+vnoremap <Leader>y "+y
 
 nnoremap <Leader>f <Cmd>Files<CR>
 nnoremap <Leader>b <Cmd>Buffers<CR>

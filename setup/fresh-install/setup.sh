@@ -30,7 +30,7 @@ usage(){
   echo 'See what packages are necessary to install ''docker'' in gentoo:'
   echo "  $0 -i -d gentoo -p docker"
   echo 'See what packages are necessary to install ''imv'' in arch:'
-  echo "  $0 -i -d arch -p img"
+  echo "  $0 -i -d arch -p imv"
   echo 'See what packages are in the group ''compositor'' for gentoo:'
   echo "  $0 -s pkgmgr -g compositor -d gentoo"
   echo 'See what packages are needed to install the ''mybuild'' build for gentoo:'

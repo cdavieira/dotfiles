@@ -85,6 +85,7 @@ bootstrap_dwl(){
   make
   patch -b ${REPODIR}/dwl/config.h    ${DOTDIR}/dwl/patch/diff-config.patch
   patch -b ${REPODIR}/dwl/dwl.desktop ${DOTDIR}/dwl/patch/diff-desktop.patch
+  patch -b ${REPODIR}/dwl/dwl.c ${DOTDIR}/dwl/patch/git-diff-dwl.patch
   make clean
   make
   sudo make install

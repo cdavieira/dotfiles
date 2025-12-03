@@ -77,7 +77,7 @@ for that, but to keep it simple:
 work/sandbox breaks
 
 My system is a mix of programs installed with:
-* the package manager of the current distro
+* the package manager
 * git + make/cmake/meson/...
 * manually with curl + scripts
 * flatpak

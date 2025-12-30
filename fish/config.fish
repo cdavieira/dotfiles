@@ -138,6 +138,10 @@ if status is-interactive
 		end
 	end
 
+	function open_tcp_ports
+		ss -Qp4ato
+	end
+
 	#######################################
 	########## Initializations ############
 	#######################################

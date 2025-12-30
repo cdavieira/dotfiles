@@ -3,7 +3,6 @@ Neotree = require('neo-tree.command')
 Toggleterm = require('toggleterm')
 
 
-
 ---@enum special_keys
 local SPECIAL_KEYS = {
 	Leader = '<leader>',
@@ -54,8 +53,16 @@ local telescope_search_all_manpages = function()
 end
 
 local neotree_edit_myfolder = function()
-	local xdg_config_path = os.getenv('XDG_CONFIG_HOME')
+	local xdg_config_path = os.getenv('XDG_CONFIG_HOME') or '~/.config'
+	if not vim.fn.isdirectory(vim.fn.glob(xdg_config_path)) then
+		return;
+	end
+
 	local my_config_path = xdg_config_path .. '/nvim/lua/carlos'
+	if not vim.fn.isdirectory(vim.fn.glob(xdg_config_path)) then
+		return;
+	end
+
 	Neotree.execute({
 		dir = my_config_path,
 		toggle = true,

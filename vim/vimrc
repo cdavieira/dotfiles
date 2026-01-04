@@ -15,21 +15,26 @@ vim9script
 
 # Helper functions
 const sep = has('win64') ? '\' : '/'
+
 def BuildFilepath(...dirs: list<string>): string
 	var rel_path = join(dirs, sep)
 	return rel_path
 enddef
+
 def GetVimConfig(configname: string): string
 	return BuildFilepath(getenv('MYVIM_FILES'), configname .. '.vim')
 enddef
+
 def GetPluginConfig(pluginname: string): string
 	return BuildFilepath(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
 enddef
+
 def WriteToStdout(...words: list<any>): void
 	if !has('win64')
 		writefile(words, '/dev/stdout', 'a')
 	endif
 enddef
+
 def GetDownloadCmd(_url: string, file_destination: string): string
 	if has('win64')
 		return '!powershell -Command \"iwr -useb ' .. _url .. ' | ni ' .. file_destination .. ' -Force \"'

@@ -30,7 +30,7 @@ if status is-interactive
 	# By default, '/usr/share/xdg-desktop-portal/portals.conf' gets used,
 	# but we can use another one more suitable for the desktop in use (dwl),
 	# like '/usr/share/xdg-desktop-portal/wlroots-portals.conf'.
-	set -x XDG_CURRENT_DESKTOP wlroots
+	# set -x XDG_CURRENT_DESKTOP wlroots
 
 	# 'pam_systemd' sets XDG_RUNTIME_DIR automatically
 	# set -x XDG_RUNTIME_DIR "/run/user/$UID"
@@ -39,9 +39,16 @@ if status is-interactive
 	# set -x XDG_DATA_DIRS "/usr/local/share:/usr/share"
 	# set -x XDG_CONFIG_DIRS "/etc/xdg"
 
+	# After fish 4.3, the 'fish_key_bindings' variable no longer has
+	# universal scope, but rather global scope
+	set --global fish_key_bindings fish_default_key_bindings
+
+
+
 	#######################################
 	######### Dynamic variables ###########
 	#######################################
+
 	set add_to_path \
 		"$HOME/.local/bin" \
 		"$HOME/.cargo/bin" \
@@ -73,24 +80,20 @@ if status is-interactive
 	# in case qutebrowser is installed, use it as def browser
 	# if type -q 'qutebrowser'
 	# 	# https://github.com/qutebrowser/qutebrowser/blob/main/misc/org.qutebrowser.qutebrowser.desktop
-	# 	# /usr/local/applications/org.qutebrowser.qutebrowser.desktop
-	# 	xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
-	# 	set -x BROWSER 'org.qutebrowser.qutebrowser.desktop'
+	# 	if test -e '/usr/local/applications/org.qutebrowser.qutebrowser.desktop'
+	# 		xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
+	# 		set -x BROWSER 'org.qutebrowser.qutebrowser.desktop'
+	# 	end
 	# end
+
+
 
 	#######################################
 	############## Aliases ################
 	#######################################
+
 	alias ls 'ls --group-directories-first --color=auto'
 	alias la 'ls --group-directories-first --color=auto -la'
-	
-	# shortcut tmux to automatically open my most used folders
-	# if type -q 'tmux'
-	# 	alias tmux "tmux new-session -c ~/repos/dotfiles -n dotfiles \; \
-	# 		new-window -c ~/repos/notes -n notes \; \
-	# 		new-window -c ~/repos/code -n code \; "
-	# end
-
 	alias view 'vim -R'
 	alias dmesg 'dmesg -H'
 	alias info 'info --vi-keys'
@@ -100,6 +103,14 @@ if status is-interactive
 	if type -q 'lynx'; and test -e ~/repos/dotfiles/lynx/lynx.cfg
 		alias lynx 'lynx -cfg=~/repos/dotfiles/lynx/lynx.cfg'
 	end
+	
+	# shortcut tmux to automatically open my most used folders
+	# if type -q 'tmux'
+	# 	alias tmux "tmux new-session -c ~/repos/dotfiles -n dotfiles \; \
+	# 		new-window -c ~/repos/notes -n notes \; \
+	# 		new-window -c ~/repos/code -n code \; "
+	# end
+
 
 
 	#######################################
@@ -109,6 +120,8 @@ if status is-interactive
 	abbr dc cd
 	abbr sl ls
 	abbr maek make
+
+
 
 	#######################################
 	############# Functions ###############
@@ -142,9 +155,25 @@ if status is-interactive
 		ss -Qp4ato
 	end
 
+
+
 	#######################################
 	########## Initializations ############
 	#######################################
+
+	fish_config prompt choose informative
+
+	fish_config theme choose tomorrow-night-bright
+
+	# We have to check for 'nvm' instead of 'nvm_load' (for some strange
+	# reason). It works the same way anyway tho, since both functions are
+	# defined in '$XDG_CONFIG_HOME/functions/nvm.fish'
+	#
+	# Alternatively, 'nvm_load' can be postponed and be called
+	# manually/on-demand in order to make fish initialize faster
+	# if type -q 'nvm'
+	# 	nvm_load > /dev/stderr
+	# end
 
 else if status is-login
 	# Commands to run in login sessions can go here

@@ -8,19 +8,21 @@ XDGCONFIGDIR="${HOMEDIR}/.config"
 
 mkdir --parents ${HOMEDIR}/{tmp,vault,save,repos,books,german,txt,log}
 mkdir --parents ${HOMEDIR}/.config/{,vim,fish,kitty,tmux,waybar,qutebrowser,dunst,sway}
+mkdir --parents ${HOMEDIR}/.config/fish/{functions,conf.d}
 mkdir --parents ${HOMEDIR}/.cache ${HOMEDIR}/.cache/vim/{,backup,swap,undo}
 
-ln -sf ${DOTDIR}/fish/config.fish      ${XDGCONFIGDIR}/fish
-ln -sf ${DOTDIR}/vim/vimrc             ${XDGCONFIGDIR}/vim
-ln -sf ${DOTDIR}/vim/snippets          ${XDGCONFIGDIR}/vim
-ln -sf ${DOTDIR}/nvim/                 ${XDGCONFIGDIR}
-ln -sf ${DOTDIR}/tmux/tmux.conf        ${XDGCONFIGDIR}/tmux
-ln -sf ${DOTDIR}/mailcap/mailcap       ${HOMEDIR}/.mailcap
-ln -sf ${DOTDIR}/waybar/config.jsonc   ${XDGCONFIGDIR}/waybar
-ln -sf ${DOTDIR}/waybar/style.css      ${XDGCONFIGDIR}/waybar
-ln -sf ${DOTDIR}/dunst/dunstrc         ${XDGCONFIGDIR}/dunst
-ln -sf ${DOTDIR}/qutebrowser/config.py ${XDGCONFIGDIR}/qutebrowser
-ln -sf ${DOTDIR}/sway/config           ${XDGCONFIGDIR}/sway
+ln -sf ${DOTDIR}/fish/config.fish        ${XDGCONFIGDIR}/fish
+ln -sf ${DOTDIR}/fish/functions/nvm.fish ${XDGCONFIGDIR}/fish/functions
+ln -sf ${DOTDIR}/vim/vimrc               ${XDGCONFIGDIR}/vim
+ln -sf ${DOTDIR}/vim/snippets            ${XDGCONFIGDIR}/vim
+ln -sf ${DOTDIR}/nvim/                   ${XDGCONFIGDIR}
+ln -sf ${DOTDIR}/tmux/tmux.conf          ${XDGCONFIGDIR}/tmux
+ln -sf ${DOTDIR}/mailcap/mailcap         ${HOMEDIR}/.mailcap
+ln -sf ${DOTDIR}/waybar/config.jsonc     ${XDGCONFIGDIR}/waybar
+ln -sf ${DOTDIR}/waybar/style.css        ${XDGCONFIGDIR}/waybar
+ln -sf ${DOTDIR}/dunst/dunstrc           ${XDGCONFIGDIR}/dunst
+ln -sf ${DOTDIR}/qutebrowser/config.py   ${XDGCONFIGDIR}/qutebrowser
+ln -sf ${DOTDIR}/sway/config             ${XDGCONFIGDIR}/sway
 ln -sf ${DOTDIR}/init.sh ~
 
 case "${DISTRO}" in

@@ -86,8 +86,8 @@ AddNormalLeaderKeymap('m', telescope_search_all_manpages, 'Search for a manpage'
 AddNormalLeaderKeymap('e', neotree_toggle, 'Toggle Neotree side panel')
 AddNormalLeaderKeymap('p', neotree_edit_myfolder, 'Edit Lazy\'s plugins file' )
 
-vim.keymap.set('n', '\\', Toggleterm.toggle, {desc = 'Edit Lazy\'s plugins file'})
-vim.keymap.set('t', '\\', Toggleterm.toggle, {desc = 'Edit Lazy\'s plugins file'})
+vim.keymap.set('n', '\\', Toggleterm.toggle, {desc = 'Open terminal'})
+vim.keymap.set('t', '\\', Toggleterm.toggle, {desc = 'Close terminal'})
 
 AddNormalLeaderKeymap('g', vim.diagnostic.open_float, 'Open diagnosis floating panel')
 AddNormalLeaderKeymap('i', '<Cmd>edit /home/carlos/.config/nvim/init.lua <CR>', 'Edit init.lua')
@@ -115,6 +115,7 @@ vim.keymap.set(
     end,
     { noremap = true, silent = true }
 )
+
 -- vim.keymap.set(
 -- 	{ 'n' },
 -- 	'<C-k>',
@@ -127,6 +128,7 @@ vim.keymap.set(
 -- 		desc = 'toggle signature'
 -- 	}
 -- )
+
 -- vim.keymap.set(
 -- 	{ 'n' },
 -- 	'<Leader>k',
@@ -140,3 +142,14 @@ vim.keymap.set(
 -- 	}
 -- )
 
+vim.keymap.set("n", "<leader>tt", function()
+	local themery = require("themery")
+	local currentTheme = themery.getCurrentTheme()
+	if currentTheme and currentTheme.name == "gruvbox light" then
+		themery.setThemeByName("gruvbox dark", true)
+	else
+		themery.setThemeByName("gruvbox light", true)
+	end
+end, { noremap = true })
+
+vim.keymap.set("n", "<leader>c", require("themery").themery, { noremap = true })

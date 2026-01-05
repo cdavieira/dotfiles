@@ -11,5 +11,23 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {},
-	}
+	},
+	{
+		"zaldih/themery.nvim",
+		lazy = false,
+		config = function()
+			local themery = require("themery")
+			themery.setup({
+				themes = {
+					'catppuccin',
+					'habamax',
+					'sorbet',
+					'unokai',
+					'zaibatsu',
+					'zellner',
+				},
+				livePreview = true,
+			})
+		end
+	},
 }

@@ -96,6 +96,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/wolandark/wim
 	
 
+
 	###############
 	#### THEMES ###
 	###############
@@ -198,6 +199,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# displaying error messages. This can be surpassed by disabling ALE's
 	# capabilities associated with language servers and letting only
 	# 'vimlsp' receive information coming from language servers.
+	#
+	# OBS2: i'd prefer a leaner solution to provide linting capabilities,
+	# but i haven't found such a plugin yet
 
 	# https://github.com/dense-analysis/ale
 	legacy Plug 'dense-analysis/ale'
@@ -308,6 +312,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/rhysd/vim-clang-format
 	# legacy Plug 'rhysd/vim-clang-format'
+
+	# https://github.com/prettier/vim-prettier
+	# legacy Plug 'prettier/vim-prettier'
 
 
 
@@ -497,14 +504,22 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/gergap/vim-ollama
 	# legacy Plug 'gergap/vim-ollama'
 
-	# https://github.com/CoderCookE/vim-chatgpt
-	# legacy Plug 'CoderCookE/vim-chatgpt'
-
 	# https://github.com/github/copilot.vim
 	# legacy Plug 'github/copilot.vim'
 
 	# https://github.com/skywind3000/vim-gpt-commit
 	# legacy Plug 'skywind3000/vim-gpt-commit'
+
+	# https://github.com/CoderCookE/vim-chatgpt
+	# legacy Plug 'CoderCookE/vim-chatgpt'
+
+
+
+	#################
+	##### DEBUG #####
+	#################
+	# https://github.com/puremourning/vimspector
+	# legacy Plug 'puremourning/vimspector'
 
 
 
@@ -568,9 +583,6 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/lambdalisue/vim-suda
 	# legacy Plug 'lambdalisue/vim-suda'
-	
-	# another plugin manager, but written in vim9
-	# https://github.com/bennyyip/plugpac.vim
 
 	# " Call plug#end to update &runtimepath and initialize the plugin system.
 	# " - It automatically executes `filetype plugin indent on` and `syntax enable`

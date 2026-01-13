@@ -64,7 +64,7 @@ if status is-interactive
 	end
 
 	# set EDITOR env var
-	set editors 'nvim' 'vim' 'less'
+	set editors 'nvim' 'vim' 'micro' 'nano' 'less'
 	for editor in $editors
 		if type -q $editor
 			set -x EDITOR "$editor"
@@ -80,9 +80,14 @@ if status is-interactive
 	# in case qutebrowser is installed, use it as def browser
 	# if type -q 'qutebrowser'
 	# 	# https://github.com/qutebrowser/qutebrowser/blob/main/misc/org.qutebrowser.qutebrowser.desktop
-	# 	if test -e '/usr/local/applications/org.qutebrowser.qutebrowser.desktop'
-	# 		xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
-	# 		set -x BROWSER 'org.qutebrowser.qutebrowser.desktop'
+	# 	set qutebrowser_desktop_files \
+	# 		'/usr/local/applications/org.qutebrowser.qutebrowser.desktop' \
+	# 		'/usr/share/applications/org.qutebrowser.qutebrowser.desktop'
+	# 	for desktop_file in $qutebrowser_desktop_files
+	# 		if test -e $desktop_file
+	# 			xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
+	# 			set -x BROWSER 'org.qutebrowser.qutebrowser.desktop'
+	# 		end
 	# 	end
 	# end
 
@@ -166,7 +171,7 @@ if status is-interactive
 	fish_config theme choose tomorrow-night-bright
 
 	# We have to check for 'nvm' instead of 'nvm_load' (for some strange
-	# reason). It works the same way anyway tho, since both functions are
+	# reason). Anyway, it works the same way, since both functions are
 	# defined in '$XDG_CONFIG_HOME/functions/nvm.fish'
 	#
 	# Alternatively, 'nvm_load' can be postponed and be called

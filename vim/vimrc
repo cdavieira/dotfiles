@@ -129,8 +129,8 @@ endfor
 # Plugin setup
 # vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
 # vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
-vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
-# vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
+# vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
+vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
 
 # Themes
 # colorschemes.SetCS('onedark', 'dracula', 'sorbet', 'evening', 'wildcharm')

@@ -329,10 +329,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 
 
-
-	##########################
-	#### AUTOMATIC TYPING ####
-	##########################
+	#####################
+	#### CONVENIENCE ####
+	#####################
 	# https://github.com/tpope/vim-surround
 	legacy Plug 'tpope/vim-surround'
 
@@ -342,12 +341,43 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/jiangmiao/auto-pairs
 	legacy Plug 'jiangmiao/auto-pairs'
 
+	# https://github.com/romainl/vim-cool
+	legacy Plug 'romainl/vim-cool'
+
+	# toggle 'paste' automatically when pasting something external from vim
+	# https://github.com/roxma/vim-paste-easy
+	legacy Plug 'roxma/vim-paste-easy'
+
+	# https://github.com/kshenoy/vim-signature
+	legacy Plug 'kshenoy/vim-signature'
+
+	# https://github.com/lambdalisue/vim-suda
+	legacy Plug 'lambdalisue/vim-suda'
+
+	# https://github.com/terryma/vim-expand-region
+	# legacy Plug 'terryma/vim-expand-region'
+
+	# https://github.com/easymotion/vim-easymotion
+	# legacy Plug 'easymotion/vim-easymotion'
+	
+	# https://github.com/kana/vim-textobj-user
+	# legacy Plug 'kana/vim-textobj-user'
+
+	# https://github.com/mbbill/undotree
+	# legacy Plug 'mbbill/undotree'
+	
+	# https://github.com/kana/vim-textobj-indent
+	# legacy Plug 'kana/vim-textobj-indent'
 
 
 
 	############################
 	##### TOOL INTEGRATION #####
 	############################
+	### Terminal
+	# https://github.com/voldikss/vim-floaterm
+	legacy Plug 'voldikss/vim-floaterm'
+
 	### Git
 	# https://github.com/tpope/vim-fugitive
 	legacy Plug 'tpope/vim-fugitive'
@@ -359,14 +389,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	legacy Plug 'junegunn/gv.vim'
 
 	# https://github.com/rhysd/git-messenger.vim
-	# legacy Plug 'rhysd/git-messenger.vim'
-
-	### jq
-	# https://github.com/bfrg/vim-jq
-	# legacy Plug 'bfrg/vim-jq'
-
-	# https://github.com/bfrg/vim-jqplay
-	# legacy Plug 'bfrg/vim-jqplay'
+	legacy Plug 'rhysd/git-messenger.vim'
 	
 	### Databases
 	# https://github.com/tpope/vim-dadbod
@@ -412,9 +435,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 
 
-	#################
-	##### PL/ML #####
-	#################
+	###########################
+	##### PL/ML/FILETYPES #####
+	###########################
 
 	### Pack of programming languages and more
 	# https://github.com/sheerun/vim-polyglot
@@ -478,25 +501,39 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/tikhomirov/vim-glsl
 	# legacy Plug 'tikhomirov/vim-glsl'
 
+	### CSV
+	# https://github.com/chrisbra/csv.vim
+	# legacy Plug 'chrisbra/csv.vim'
+
+	### jq
+	# https://github.com/bfrg/vim-jq
+	# legacy Plug 'bfrg/vim-jq'
+
+	# https://github.com/bfrg/vim-jqplay
+	# legacy Plug 'bfrg/vim-jqplay'
+
 
 
 	########################
 	###### STATUS BAR ######
 	########################
-	# https://github.com/itchyny/lightline.vim
-	# legacy Plug 'itchyny/lightline.vim'
-
 	# https://github.com/vim-airline/vim-airline
 	legacy Plug 'vim-airline/vim-airline'
 
 	# https://github.com/vim-airline/vim-airline-themes
 	legacy Plug 'vim-airline/vim-airline-themes'
 
+	# https://github.com/itchyny/lightline.vim
+	# legacy Plug 'itchyny/lightline.vim'
+
 
 
 	##############
 	##### AI #####
 	##############
+	# https://github.com/github/copilot.vim
+	legacy Plug 'github/copilot.vim'
+
 	# The ollama installation script considers a system which uses systemd as
 	# the init system and that has a GPU. In my case, i don't use systemd and
 	# neither use a GPU (i have one, but i don't have its driver installed)
@@ -504,14 +541,11 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/gergap/vim-ollama
 	# legacy Plug 'gergap/vim-ollama'
 
-	# https://github.com/github/copilot.vim
-	# legacy Plug 'github/copilot.vim'
+	# https://github.com/CoderCookE/vim-chatgpt
+	# legacy Plug 'CoderCookE/vim-chatgpt'
 
 	# https://github.com/skywind3000/vim-gpt-commit
 	# legacy Plug 'skywind3000/vim-gpt-commit'
-
-	# https://github.com/CoderCookE/vim-chatgpt
-	# legacy Plug 'CoderCookE/vim-chatgpt'
 
 
 
@@ -523,39 +557,31 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 
 
+	#######################
+	##### BUILD/ASYNC #####
+	#######################
+	# https://github.com/tpope/vim-dispatch
+	# legacy Plug 'tpope/vim-dispatch'
+
+	# https://github.com/skywind3000/asynctasks.vim
+	# legacy Plug 'skywind3000/asynctasks.vim'
+
+	# https://github.com/skywind3000/asyncrun.vim
+	# legacy Plug 'skywind3000/asyncrun.vim'
+
+
+
 	################
 	##### MISC #####
 	################
 	# https://github.com/mhinz/vim-startify.git
 	legacy Plug 'mhinz/vim-startify'
 
-	# https://github.com/romainl/vim-cool
-	legacy Plug 'romainl/vim-cool'
-
-	# toggle 'paste' automatically when pasting something external from vim
-	# https://github.com/roxma/vim-paste-easy
-	legacy Plug 'roxma/vim-paste-easy'
-
-	# https://github.com/chrisbra/csv.vim
-	legacy Plug 'chrisbra/csv.vim'
-	
-	# https://github.com/voldikss/vim-floaterm
-	legacy Plug 'voldikss/vim-floaterm'
-
-	# https://github.com/kshenoy/vim-signature
-	legacy Plug 'kshenoy/vim-signature'
-
 	# https://github.com/terryma/vim-smooth-scroll
 	# legacy Plug 'terryma/vim-smooth-scroll'
 
-	# https://github.com/easymotion/vim-easymotion
-	# legacy Plug 'easymotion/vim-easymotion'
-	
-	# https://github.com/kana/vim-textobj-user
-	# legacy Plug 'kana/vim-textobj-user'
-
-	# https://github.com/mbbill/undotree
-	# legacy Plug 'mbbill/undotree'
+	# https://github.com/prabirshrestha/quickpick.vim
+	# legacy Plug 'prabirshrestha/quickpick.vim'
 
 	# https://github.com/luochen1990/rainbow
 	# legacy Plug 'luochen1990/rainbow'
@@ -566,8 +592,8 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/wolandark/vim-live-server
 	# legacy Plug 'wolandark/vim-live-server'
 
-	# https://github.com/prabirshrestha/quickpick.vim
-	# legacy Plug 'prabirshrestha/quickpick.vim'
+	# https://github.com/vim-scripts/LargeFile
+	# legacy Plug 'vim-scripts/LargeFile'
 
 	# https://github.com/rhysd/vim-healthcheck
 	# legacy Plug 'rhysd/vim-healthcheck'
@@ -578,13 +604,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/jessepav/vim-boxdraw
 	# legacy Plug 'jessepav/vim-boxdraw'
 
-	# https://github.com/vim-scripts/LargeFile
-	# legacy Plug 'vim-scripts/LargeFile'
-
-	# https://github.com/lambdalisue/vim-suda
-	# legacy Plug 'lambdalisue/vim-suda'
-
-	# " Call plug#end to update &runtimepath and initialize the plugin system.
-	# " - It automatically executes `filetype plugin indent on` and `syntax enable`
+	# Call plug#end to update &runtimepath and initialize the plugin system.
+	# - It automatically executes `filetype plugin indent on` and `syntax enable`
 	g:plug#end()
 enddef

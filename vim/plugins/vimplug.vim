@@ -135,6 +135,8 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/nda-cunh/SupraTree
 	# legacy Plug 'nda-cunh/SupraTree'
 
+	# :help tabpanel
+	# :help tab-page
 
 
 	###############################
@@ -272,6 +274,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# :h ins-autocompletion
 	# :h ins-autocompletion-example
+	# :h compl-function
+	# :h compl-omni
+	# :h insert.txt
 
 
 
@@ -316,6 +321,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/prettier/vim-prettier
 	# legacy Plug 'prettier/vim-prettier'
 
+	# :help gq
+	# :help format-comments
+
 
 
 	########################
@@ -327,6 +335,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/tpope/vim-commentary
 	legacy Plug 'tpope/vim-commentary'
 
+	# packadd comment
+	# :help usr_05.txt
+	# :help comment.txt
 
 
 	#####################
@@ -377,6 +388,15 @@ export def FullSetup(vimplug_dir: Dirpath)
 	### Terminal
 	# https://github.com/voldikss/vim-floaterm
 	legacy Plug 'voldikss/vim-floaterm'
+
+	# https://github.com/iaalm/terminal-drawer.vim
+	# legacy Plug 'iaalm/terminal-drawer.vim'
+
+	# https://github.com/wuelnerdotexe/nerdterm
+	# legacy Plug 'wuelnerdotexe/nerdterm'
+
+	# https://github.com/chrispane11/miniterm.vim
+	# legacy Plug 'chrispane11/miniterm.vim'
 
 	### Git
 	# https://github.com/tpope/vim-fugitive
@@ -532,7 +552,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	##### AI #####
 	##############
 	# https://github.com/github/copilot.vim
-	legacy Plug 'github/copilot.vim'
+	# legacy Plug 'github/copilot.vim'
 
 	# The ollama installation script considers a system which uses systemd as
 	# the init system and that has a GPU. In my case, i don't use systemd and
@@ -603,6 +623,12 @@ export def FullSetup(vimplug_dir: Dirpath)
 	
 	# https://github.com/jessepav/vim-boxdraw
 	# legacy Plug 'jessepav/vim-boxdraw'
+
+	# https://github.com/skywind3000/vim-navigator
+	# legacy Plug 'skywind3000/vim-navigator'
+
+	# https://github.com/will133/vim-dirdiff
+	# legacy Plug 'will133/vim-dirdiff'
 
 	# Call plug#end to update &runtimepath and initialize the plugin system.
 	# - It automatically executes `filetype plugin indent on` and `syntax enable`

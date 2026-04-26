@@ -398,6 +398,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/chrispane11/miniterm.vim
 	# legacy Plug 'chrispane11/miniterm.vim'
 
+	# https://github.com/habamax/vim-shout
+	# legacy Plug 'habamax/vim-shout'
+
 	### Git
 	# https://github.com/tpope/vim-fugitive
 	legacy Plug 'tpope/vim-fugitive'
@@ -597,6 +600,12 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/mhinz/vim-startify.git
 	legacy Plug 'mhinz/vim-startify'
 
+	# https://github.com/vimwiki/vimwiki
+	legacy Plug 'vimwiki/vimwiki'
+
+	# https://github.com/mattn/calendar-vim
+	legacy Plug 'mattn/calendar-vim'
+
 	# https://github.com/terryma/vim-smooth-scroll
 	# legacy Plug 'terryma/vim-smooth-scroll'
 
@@ -617,9 +626,6 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/rhysd/vim-healthcheck
 	# legacy Plug 'rhysd/vim-healthcheck'
-
-	# https://github.com/vimwiki/vimwiki
-	# legacy Plug 'vimwiki/vimwiki'
 	
 	# https://github.com/jessepav/vim-boxdraw
 	# legacy Plug 'jessepav/vim-boxdraw'

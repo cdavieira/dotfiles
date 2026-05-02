@@ -239,6 +239,7 @@ packages:
         - vulkan-intel
       gentoo:
         - media-libs/libva-intel-driver
+        - media-libs/libva-intel-media-driver
         # - dev-libs/intel-compute-runtime
 
     - name: nvidia-proprietary
@@ -429,7 +430,9 @@ packages:
 
     - name: mpv
       arch: mpv
-      gentoo: media-video/mpv
+      gentoo:
+        - media-video/mpv
+        - net-misc/yt-dlp
 
     - name: ffmpeg
       arch: ffmpeg
@@ -471,6 +474,7 @@ packages:
       arch: docker
       gentoo:
         - app-containers/docker
+        - app-containers/docker-buildx
         - app-containers/docker-cli
         - app-containers/docker-compose
 

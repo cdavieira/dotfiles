@@ -4,10 +4,10 @@ vim9script
 filetype plugin indent on
 
 # load package 'editorconfig' (shipped with vim)
-packadd editorconfig
+# packadd editorconfig
 
 # turn on syntax highlighting for different filetypes
-syntax on
+# syntax on
 
 # folder to store '~' files
 # if !empty($MYVIM_BACKUP_DIR)

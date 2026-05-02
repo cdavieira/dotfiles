@@ -157,6 +157,14 @@ if status is-interactive
 	end
 
 	function open_tcp_ports
+		# -Q: remove recv and senq information (i don't know what those mean)
+		# -p: show all processes which are using that socket
+		#     threads can also be shown with the -T option
+		# -4: only show information related to ipv4 sockets
+		# -a: show information of both listening and non-listening sockets
+		# -t: only show information related to tcp sockets
+		# -o: display timeout information (when the socket is going to expire)
+		# -D file: save the output to a file
 		ss -Qp4ato
 	end
 

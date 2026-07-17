@@ -139,6 +139,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# :help tab-page
 
 
+
 	###############################
 	##### FILE/SYMBOL SEARCH ######
 	###############################
@@ -338,6 +339,7 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# packadd comment
 	# :help usr_05.txt
 	# :help comment.txt
+
 
 
 	#####################
@@ -577,6 +579,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	#################
 	# https://github.com/puremourning/vimspector
 	# legacy Plug 'puremourning/vimspector'
+	
+	# https://github.com/ubaldot/vim-microdebugger
+	# legacy Plug 'ubaldot/vim-microdebugger'
 
 
 
@@ -605,6 +610,12 @@ export def FullSetup(vimplug_dir: Dirpath)
 
 	# https://github.com/mattn/calendar-vim
 	legacy Plug 'mattn/calendar-vim'
+
+	# https://github.com/wolandark/vim-ez-emoji
+	legacy Plug 'wolandark/vim-ez-emoji'
+
+	# https://github.com/ubaldot/vim-outline
+	# legacy Plug 'ubaldot/vim-outline'
 
 	# https://github.com/terryma/vim-smooth-scroll
 	# legacy Plug 'terryma/vim-smooth-scroll'

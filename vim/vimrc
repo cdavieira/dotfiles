@@ -28,7 +28,7 @@ const PREFERRED_COLORSCHEMES = [
 	'wildcharm',
 ]
 
-const USE_PLUGINS = v:true
+g:MYVIM_USE_PLUGINS = v:true
 
 #####################################################
 #####################################################
@@ -40,7 +40,7 @@ utils.SetupCustomEnvironmentVariables()
 
 utils.SetupOSDependentOptions()
 
-if USE_PLUGINS
+if g:MYVIM_USE_PLUGINS
 	utils.DownloadVimplugIfNeeded()
 endif
 
@@ -50,7 +50,7 @@ import utils.GetVimConfig('options')
 
 import utils.GetVimConfig('colorschemes')
 
-if USE_PLUGINS
+if g:MYVIM_USE_PLUGINS
 	for config in CUSTOM_PLUGIN_CONFIGS
 		import utils.GetPluginConfig(config)
 	endfor

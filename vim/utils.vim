@@ -97,6 +97,7 @@ export def GetPluginConfig(pluginname: string): string
 	return BuildFilePath2(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
 enddef
 
+# Setup MYVIM_* environment variables
 # Overview of some environment variables i set in this vimrc:
 # $MYVIM_CONFIG_DIR  - the path to the directory where vim expects to find your 'vimrc' file
 # $MYVIM_CACHE_DIR   - the path to the directory where vim will store '~', '.un' and '.swp' files

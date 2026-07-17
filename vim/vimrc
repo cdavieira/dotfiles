@@ -28,14 +28,21 @@ const PREFERRED_COLORSCHEMES = [
 	'wildcharm',
 ]
 
+const USE_PLUGINS = v:true
+
+#####################################################
+#####################################################
+#####################################################
+
 import UTILS_FILEPATH
 
-# Setup MYVIM_* envinronment variables
 utils.SetupCustomEnvironmentVariables()
 
 utils.SetupOSDependentOptions()
 
-utils.DownloadVimplugIfNeeded()
+if USE_PLUGINS
+	utils.DownloadVimplugIfNeeded()
+endif
 
 utils.CreateDirectoriesIfNeeded()
 
@@ -43,14 +50,16 @@ import utils.GetVimConfig('options')
 
 import utils.GetVimConfig('colorschemes')
 
-for config in CUSTOM_PLUGIN_CONFIGS
-	import utils.GetPluginConfig(config)
-endfor
+if USE_PLUGINS
+	for config in CUSTOM_PLUGIN_CONFIGS
+		import utils.GetPluginConfig(config)
+	endfor
 
-vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
-# vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
-# vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
-# vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
+	# vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
+	# vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
+	# vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
+	vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
+endif
 
 colorschemes.SetCS(PREFERRED_COLORSCHEMES)
 

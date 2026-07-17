@@ -1,107 +1,14 @@
 vim9script
 
-
 # To create a symbolic link to this vimrc:
 # (Windows) : New-Item -ItemType SymbolicLink -Target $HOME\path\to\thisvimrc -Path $HOME\vimfiles\vimrc
 # (linux)   : ln -s ~/path/to/this/vimrc ~/.config/vim
 
-# Overview of some environment variables i set in this vimrc:
-# $MYVIM_CONFIG_DIR  - the path to the directory where vim expects to find your 'vimrc' file
-# $MYVIM_CACHE_DIR   - the path to the directory where vim will store '~', '.un' and '.swp' files
-# $MYVIM_FILES       - the path to the root directory where my custom '.vim' files can be found
-# $MYVIM_VIMPLUG_DIR - the path to the directory where vimplug will download plugins
+const DOTFILES_DIRPATH = resolve(expand($MYVIMRC))
 
+const UTILS_FILEPATH   = fnamemodify(DOTFILES_DIRPATH, ':p:h') .. (has('win64') ? '\' : '/') .. 'utils.vim'
 
-
-# Helper functions
-const sep = has('win64') ? '\' : '/'
-
-def BuildFilepath(...dirs: list<string>): string
-	var rel_path = join(dirs, sep)
-	return rel_path
-enddef
-
-def GetVimConfig(configname: string): string
-	return BuildFilepath(getenv('MYVIM_FILES'), configname .. '.vim')
-enddef
-
-def GetPluginConfig(pluginname: string): string
-	return BuildFilepath(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
-enddef
-
-def GetDownloadCmd(_url: string, file_destination: string): string
-	if has('win64')
-		return '!powershell -Command \"iwr -useb ' .. _url .. ' | ni ' .. file_destination .. ' -Force \"'
-	endif
-	return '!curl -fLo ' .. file_destination .. ' --create-dirs ' .. _url
-enddef
-
-
-
-# Environment variables
-if has('win64')
-	setenv('MYVIM_CONFIG_DIR', BuildFilepath($HOME, 'vimfiles'))
-	setenv('MYVIM_CACHE_DIR', BuildFilepath(getenv('MYVIM_CONFIG_DIR'), 'cache'))
-	setenv('MYVIM_FILES', BuildFilepath($HOME, 'Downloads', 'dotfiles', 'vim'))
-else
-	setenv('MYVIM_CONFIG_DIR', BuildFilepath($HOME, '.config', 'vim'))
-	setenv('MYVIM_CACHE_DIR', BuildFilepath($HOME, '.cache', 'vim'))
-	setenv('MYVIM_FILES', BuildFilepath($HOME, 'repos', 'dotfiles', 'vim'))
-endif
-setenv('MYVIM_BACKUP_DIR', BuildFilepath(getenv('MYVIM_CACHE_DIR'), 'backup'))
-setenv('MYVIM_SWAP_DIR', BuildFilepath(getenv('MYVIM_CACHE_DIR'), 'swap'))
-setenv('MYVIM_UNDO_DIR', BuildFilepath(getenv('MYVIM_CACHE_DIR'), 'undo'))
-setenv('MYVIM_VIMINFO', BuildFilepath(getenv('MYVIM_CACHE_DIR'), 'viminfo'))
-setenv('MYVIM_VIMPLUG_DIR', BuildFilepath(getenv('MYVIM_CONFIG_DIR'), 'vim-plug'))
-# override the system MANPAGER, since vim might have trouble using it (ex: if MANPAGER='nvim')
-setenv('MANPAGER', 'vim +MANPAGER --not-a-term -')
-
-
-
-# OS Specific
-if has('win64')
-	set keywordprg=:help
-	set shell=pwsh
-	set shellcmdflag=-Command
-else
-	set keywordprg=:Man
-	# set shell=/bin/bash
-	set shell=/usr/bin/fish
-	set shellcmdflag=-c
-	set rtp-=$VIM/vimfiles
-	set rtp-=$VIM/vimfiles/after
-	set packpath-=$VIM/vimfiles
-	set packpath-=$VIM/vimfiles/after
-	runtime ftplugin/man.vim
-endif
-
-
-
-# Plugin manager setup
-if executable('git')
-	const vimplug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-	const vimplug_autoload_file = BuildFilepath(getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim')
-	const vimplug_install_cmd = GetDownloadCmd(vimplug_url, vimplug_autoload_file)
-	if empty(glob(vimplug_autoload_file))
-		silent execute vimplug_install_cmd
-		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-	endif
-endif
-for folder in [$MYVIM_BACKUP_DIR, $MYVIM_SWAP_DIR, $MYVIM_UNDO_DIR]
-	if empty(glob(folder))
-		mkdir(folder, 'p')
-	endif
-endfor
-
-
-
-# Vim and Plugin configs
-const customVimConfigs = [
-	'options',
-	'colorschemes',
-]
-
-const customPluginConfigs = [
+const CUSTOM_PLUGIN_CONFIGS = [
 	'vimplug',
 	'asyncomplete',
 	'nerdtree',
@@ -110,65 +17,45 @@ const customPluginConfigs = [
 	'ale',
 	'airline',
 	'vimwiki',
-	# 'ollama',
 ]
 
-for config in customVimConfigs
-	import GetVimConfig(config)
+const PREFERRED_COLORSCHEMES = [
+	#'onedark',
+	#'dracula',
+	'habamax',
+	'sorbet',
+	'evening',
+	'wildcharm',
+]
+
+import UTILS_FILEPATH
+
+# Setup MYVIM_* envinronment variables
+utils.SetupCustomEnvironmentVariables()
+
+utils.SetupOSDependentOptions()
+
+utils.DownloadVimplugIfNeeded()
+
+utils.CreateDirectoriesIfNeeded()
+
+import utils.GetVimConfig('options')
+
+import utils.GetVimConfig('colorschemes')
+
+for config in CUSTOM_PLUGIN_CONFIGS
+	import utils.GetPluginConfig(config)
 endfor
 
-for config in customPluginConfigs
-	import GetPluginConfig(config)
-endfor
-
-# Plugin setup
-# vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
+vimplug.MinimalSetup($MYVIM_VIMPLUG_DIR)
 # vimplug.NormalSetup($MYVIM_VIMPLUG_DIR)
 # vimplug.LighterFullSetup($MYVIM_VIMPLUG_DIR)
-vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
+# vimplug.FullSetup($MYVIM_VIMPLUG_DIR)
 
-# Themes
-# colorschemes.SetCS('onedark', 'dracula', 'sorbet', 'evening', 'wildcharm')
-colorschemes.SetCS('habamax', 'sorbet', 'evening', 'wildcharm')
+colorschemes.SetCS(PREFERRED_COLORSCHEMES)
 
+import utils.GetVimConfig('mappings')
 
-
-# Mappings
-# <M-*> = alt + *
-tnoremap <C-D> <C-W><C-C>
-nnoremap <Leader>c <ScriptCmd>colorschemes.Rotate(-1)<CR>
-nnoremap <Leader>v <ScriptCmd>colorschemes.Rotate(+1)<CR>
-nnoremap <Leader>p <Cmd>edit $MYVIM_FILES<CR>
-nnoremap <Leader>r <Cmd>source $MYVIMRC<CR>
-nnoremap <M-t> <Cmd>term ++noclose<CR>
-tnoremap <M-t> <Cmd>quit!<CR>
-tnoremap <M-q> <Cmd>quit!<CR>
-vnoremap <Leader>y "+y
-
-nnoremap <Leader>f <Cmd>Files<CR>
-nnoremap <Leader>b <Cmd>Buffers<CR>
-nnoremap <Leader>s <Cmd>Rg<CR>
-nnoremap <Leader>e <Cmd>NERDTreeToggle<CR>
-nnoremap <Leader>o <Cmd>Ollama toggle<CR>
-imap <expr> <C-j>       vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-imap <expr> <C-l>       vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l>       vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-inoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-snoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-inoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-snoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-inoremap <expr> <C-y>   pumvisible() ? asyncomplete#close_popup()  : "\<C-y>"
-inoremap <expr> <C-e>   pumvisible() ? asyncomplete#cancel_popup() : "\<C-e>"
-
-
-
-# Autocommands
-autocmd BufEnter *.c {
-  set commentstring=//\ %s
-}
-
-# autocmd! BufWritePre *.rs execute('LspDocumentFormatSync')
-
-
+import utils.GetVimConfig('autocmds')
 
 # vim: set ft=vim :

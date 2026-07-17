@@ -1,57 +1,39 @@
-vim9
+vim9script
 
-# Use the internal diff if available.
-# Otherwise use the special 'diffexpr' for Windows.
+def IsWindows(): bool
+	return has('win64')
+enddef
 
-# if &diffopt !~# 'internal'
-#   set diffexpr=MyDiff()
-# endif
-# function MyDiff()
-#   let opt = '-a --binary '
-#   if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-#   if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-#   let arg1 = v:fname_in
-#   if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-#   let arg1 = substitute(arg1, '!', '\!', 'g')
-#   let arg2 = v:fname_new
-#   if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-#   let arg2 = substitute(arg2, '!', '\!', 'g')
-#   let arg3 = v:fname_out
-#   if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-#   let arg3 = substitute(arg3, '!', '\!', 'g')
-#   if $VIMRUNTIME =~ ' '
-#     if &sh =~ '\<cmd'
-#       if empty(&shellxquote)
-#         let l:shxq_sav = ''
-#         set shellxquote&
-#       endif
-#       let cmd = '"' . $VIMRUNTIME . '\diff"'
-#     else
-#       let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-#     endif
-#   else
-#     let cmd = $VIMRUNTIME . '\diff'
-#   endif
-#   let cmd = substitute(cmd, '!', '\!', 'g')
-#   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-#   if exists('l:shxq_sav')
-#     let &shellxquote=l:shxq_sav
-#   endif
-# endfunction
+const sep = IsWindows() ? '\' : '/'
+
+def BuildFilePath(dirs: list<string>): string
+	return join(dirs, sep)
+enddef
+
+def BuildFilePath2(...dirs: list<string>): string
+	return BuildFilePath(dirs)
+enddef
 
 def LogMsg(msg: string): void
 	redraw | echo msg
 enddef
 
 def RunShellCommand(...words: list<string>): void
-	var prefix = has('win64') ? ':!powershell -Command' : ':!bash -c'
+	var prefix = IsWindows() ? ':!powershell -Command' : ':!bash -c'
 	var content = join(words, ' ')
 	var cmd = prefix .. ' "' .. content .. '"'
 	execute cmd
 enddef
 
-def WriteToStdout(...words: list<string>): void
-	if has('win64')
+def GetDownloadCmd(_url: string, file_destination: string): string
+	if IsWindows()
+		return '!powershell -Command \"iwr -useb ' .. _url .. ' | ni ' .. file_destination .. ' -Force \"'
+	endif
+	return '!curl -fLo ' .. file_destination .. ' --create-dirs ' .. _url
+enddef
+
+export def WriteToStdout(...words: list<string>): void
+	if IsWindows()
 		var content = join(words, ' ')
 		var cmd = 'echo ' .. content
 		RunShellCommand(cmd)
@@ -59,3 +41,160 @@ def WriteToStdout(...words: list<string>): void
 		writefile(words, '/dev/stdout', 'a')
 	endif
 enddef
+
+def FileExists(path: string): bool
+	return !empty(glob(path))
+enddef
+
+def FolderExists(path: string): bool
+	return isdirectory(path)
+enddef
+
+def FindFirstAvailablePath(paths: list<list<string>>): string
+	var folderpath: string
+
+	# i'm pretty sure there's a builtin function which does this lol
+	for _path in paths
+		folderpath = BuildFilePath(_path)
+		if FolderExists(folderpath)
+			return folderpath
+		endif
+	endfor
+
+	return ""
+enddef
+
+def FindMyVimConfigDir(): string
+	const PATHS = IsWindows() ?
+	[
+	  [$HOME, 'vimfiles'],
+	] :
+	[
+	  [$HOME, '.config', 'vim'],
+	]
+
+	return FindFirstAvailablePath(PATHS)
+enddef
+
+def FindMyVimCacheDir(): string
+	const PATHS = IsWindows() ?
+	[
+	  # [getenv('MYVIM_CONFIG_DIR'), 'cache'],
+	  [$HOME, 'vimfiles', 'cache'],
+	] :
+	[
+	  [$HOME, '.cache', 'vim'],
+	]
+
+	return FindFirstAvailablePath(PATHS)
+enddef
+
+export def GetVimConfig(configname: string): string
+	return BuildFilePath2(getenv('MYVIM_FILES'), configname .. '.vim')
+enddef
+
+export def GetPluginConfig(pluginname: string): string
+	return BuildFilePath2(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
+enddef
+
+# Overview of some environment variables i set in this vimrc:
+# $MYVIM_CONFIG_DIR  - the path to the directory where vim expects to find your 'vimrc' file
+# $MYVIM_CACHE_DIR   - the path to the directory where vim will store '~', '.un' and '.swp' files
+# $MYVIM_FILES       - the path to the root directory where my custom '.vim' files can be found
+# $MYVIM_VIMPLUG_DIR - the path to the directory where vimplug will download plugins
+export def SetupCustomEnvironmentVariables(): void
+	if has('win64')
+		setenv('MYVIM_CONFIG_DIR', BuildFilePath2($HOME, 'vimfiles'))
+		setenv('MYVIM_CACHE_DIR', BuildFilePath2(getenv('MYVIM_CONFIG_DIR'), 'cache'))
+		setenv('MYVIM_FILES', BuildFilePath2($HOME, 'Downloads', 'dotfiles', 'vim'))
+	else
+		setenv('MYVIM_CONFIG_DIR', BuildFilePath2($HOME, '.config', 'vim'))
+		setenv('MYVIM_CACHE_DIR', BuildFilePath2($HOME, '.cache', 'vim'))
+		setenv('MYVIM_FILES', BuildFilePath2($HOME, 'repos', 'dotfiles', 'vim'))
+	endif
+	setenv('MYVIM_BACKUP_DIR', BuildFilePath2(getenv('MYVIM_CACHE_DIR'), 'backup'))
+	setenv('MYVIM_SWAP_DIR', BuildFilePath2(getenv('MYVIM_CACHE_DIR'), 'swap'))
+	setenv('MYVIM_UNDO_DIR', BuildFilePath2(getenv('MYVIM_CACHE_DIR'), 'undo'))
+	setenv('MYVIM_VIMINFO', BuildFilePath2(getenv('MYVIM_CACHE_DIR'), 'viminfo'))
+	setenv('MYVIM_VIMPLUG_DIR', BuildFilePath2(getenv('MYVIM_CONFIG_DIR'), 'vim-plug'))
+	# override the system MANPAGER, since vim might have trouble using it (ex: if MANPAGER='nvim')
+	setenv('MANPAGER', 'vim +MANPAGER --not-a-term -')
+enddef
+
+export def SetupOSDependentOptions(): void
+	if has('win64')
+		set keywordprg=:help
+		set shell=pwsh
+		set shellcmdflag=-Command
+	else
+		set keywordprg=:Man
+		# set shell=/bin/bash
+		set shell=/usr/bin/fish
+		set shellcmdflag=-c
+		set rtp-=$VIM/vimfiles
+		set rtp-=$VIM/vimfiles/after
+		set packpath-=$VIM/vimfiles
+		set packpath-=$VIM/vimfiles/after
+		runtime ftplugin/man.vim
+	endif
+enddef
+
+export def DownloadVimplugIfNeeded()
+	if executable('git')
+		const vimplug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+		const vimplug_autoload_file = BuildFilePath2(getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim')
+		const vimplug_install_cmd = GetDownloadCmd(vimplug_url, vimplug_autoload_file)
+		if empty(glob(vimplug_autoload_file))
+			silent execute vimplug_install_cmd
+			autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+		endif
+	endif
+enddef
+
+export def CreateDirectoriesIfNeeded()
+	for folder in [$MYVIM_BACKUP_DIR, $MYVIM_SWAP_DIR, $MYVIM_UNDO_DIR]
+		if empty(glob(folder))
+			mkdir(folder, 'p')
+		endif
+	endfor
+enddef
+
+# Wayland clipboard
+# :help wayland-primary-selection
+
+def Available(): bool
+	return executable('wl-copy') && executable('wl-paste')
+enddef
+
+def Copy(reg: string, type: string, str: list<string>)
+	var args = "wl-copy"
+
+	if reg == "*"
+	    args ..= " -p"
+	endif
+
+	system(args, str)
+enddef
+
+def Paste(reg: string): tuple<string, list<string>>
+	var args = "wl-paste --type text/plain;charset=utf-8"
+
+	if reg == "*"
+	    args ..= " -p"
+	endif
+
+	return ("", systemlist(args))
+enddef
+
+v:clipproviders["wl_clipboard"] = {
+	available: Available,
+	copy: {
+	    "+": Copy,
+	    "*": Copy
+	},
+	paste: {
+	    "+": Paste,
+	    "*": Paste
+	}
+}
+set clipmethod=wl_clipboard

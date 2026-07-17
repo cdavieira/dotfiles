@@ -43,8 +43,8 @@ def SetColor(name: string): bool
 	return true
 enddef
 
-export def SetCS(...names: list<string>): void
-# 'background' and 'colorscheme' operate together to set vim's visuals
+export def SetCS(names: list<string>): void
+	# 'background' and 'colorscheme' operate together to set vim's visuals
 	set termguicolors
 	set background=dark
 	for mycolor in names

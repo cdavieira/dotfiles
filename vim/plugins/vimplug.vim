@@ -149,6 +149,10 @@ export def FullSetup(vimplug_dir: Dirpath)
 	legacy Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	legacy Plug 'junegunn/fzf.vim'
 
+	# https://github.com/girishji/scope.vim
+	# legacy Plug 'girishji/scope.vim'
+
+
 
 
 	######################
@@ -537,6 +541,14 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/bfrg/vim-jqplay
 	# legacy Plug 'bfrg/vim-jqplay'
 
+	### Typst
+	# https://github.com/kaarmu/typst.vim
+	# legacy Plug 'kaarmu/typst.vim'
+	
+	### REST Api
+	# https://github.com/sojohnnysaid/vim-restman
+	# legacy Plug 'sojohnnysaid/vim-restman'
+
 
 
 	########################
@@ -559,6 +571,9 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/github/copilot.vim
 	# legacy Plug 'github/copilot.vim'
 
+	# https://github.com/DanBradbury/copilot-chat.vim
+	# legacy Plug 'DanBradbury/copilot-chat.vim'
+
 	# The ollama installation script considers a system which uses systemd as
 	# the init system and that has a GPU. In my case, i don't use systemd and
 	# neither use a GPU (i have one, but i don't have its driver installed)
@@ -566,11 +581,21 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/gergap/vim-ollama
 	# legacy Plug 'gergap/vim-ollama'
 
+	# https://github.com/ggml-org/llama.vim
+	# legacy Plug 'ggml-org/llama.vim'
+
+	# https://github.com/greeschenko/vim9-ollama
+	# legacy Plug 'greeschenko/vim9-ollama'
+
 	# https://github.com/CoderCookE/vim-chatgpt
 	# legacy Plug 'CoderCookE/vim-chatgpt'
 
+	# https://github.com/pasky/claude.vim
+	# legacy Plug 'pasky/claude.vim'
+
 	# https://github.com/skywind3000/vim-gpt-commit
 	# legacy Plug 'skywind3000/vim-gpt-commit'
+
 
 
 
@@ -614,11 +639,14 @@ export def FullSetup(vimplug_dir: Dirpath)
 	# https://github.com/wolandark/vim-ez-emoji
 	legacy Plug 'wolandark/vim-ez-emoji'
 
+	# https://github.com/girishji/devdocs.vim
+	legacy Plug 'girishji/devdocs.vim'
+
+	# https://github.com/sedm0784/vim-rainbow-trails.git
+	legacy Plug 'sedm0784/vim-rainbow-trails'
+
 	# https://github.com/ubaldot/vim-outline
 	# legacy Plug 'ubaldot/vim-outline'
-
-	# https://github.com/terryma/vim-smooth-scroll
-	# legacy Plug 'terryma/vim-smooth-scroll'
 
 	# https://github.com/prabirshrestha/quickpick.vim
 	# legacy Plug 'prabirshrestha/quickpick.vim'

@@ -1,135 +1,78 @@
 vim9script
 
-def IsWindows(): bool
-	return has('win64')
-enddef
+var VIM_PATHS: dict<any>
 
-const sep = IsWindows() ? '\' : '/'
+if has('win64')
+	VIM_PATHS = {
+		config: [
+			[$HOME, 'vimfiles'],
+		],
+		cache: [
+			[$HOME, 'vimfiles', 'cache'],
+		],
+		dotfiles: [
+			[$HOME, 'Downloads', 'dotfiles', 'vim'],
+		],
+	}
 
-def BuildFilePath(dirs: list<string>): string
-	return join(dirs, sep)
-enddef
+	def BuildFilePath(dirs: list<string>): string
+		return join(dirs, '\')
+	enddef
 
-def BuildFilePath2(...dirs: list<string>): string
-	return BuildFilePath(dirs)
-enddef
-
-def LogMsg(msg: string): void
-	redraw | echo msg
-enddef
-
-def RunShellCommand(...words: list<string>): void
-	var prefix = IsWindows() ? ':!powershell -Command' : ':!bash -c'
-	var content = join(words, ' ')
-	var cmd = prefix .. ' "' .. content .. '"'
-	execute cmd
-enddef
-
-def GetDownloadCmd(_url: string, file_destination: string): string
-	if IsWindows()
-		return '!powershell -Command \"iwr -useb ' .. _url .. ' | ni ' .. file_destination .. ' -Force \"'
-	endif
-	return '!curl -fLo ' .. file_destination .. ' --create-dirs ' .. _url
-enddef
-
-export def WriteToStdout(...words: list<string>): void
-	if IsWindows()
+	export def WriteToStdout(...words: list<string>): void
 		var content = join(words, ' ')
 		var cmd = 'echo ' .. content
 		RunShellCommand(cmd)
-	else
-		writefile(words, '/dev/stdout', 'a')
-	endif
-enddef
+	enddef
 
-def FileExists(path: string): bool
-	return !empty(glob(path))
-enddef
+	def GetDownloadCmd(_url: string, file_destination: string): string
+		return '!powershell -Command \"iwr -useb ' .. _url .. ' | ni ' .. file_destination .. ' -Force \"'
+	enddef
 
-def FolderExists(path: string): bool
-	return isdirectory(path)
-enddef
+	def RunShellCommand(...words: list<string>): void
+		var content = join(words, ' ')
+		var cmd = ':!powershell -Command "' .. content .. '"'
+		execute cmd
+	enddef
 
-def FindFirstAvailablePath(paths: list<list<string>>): string
-	var folderpath: string
-
-	# i'm pretty sure there's a builtin function which does this lol
-	for _path in paths
-		folderpath = BuildFilePath(_path)
-		if FolderExists(folderpath)
-			return folderpath
-		endif
-	endfor
-
-	return ""
-enddef
-
-def FindMyVimConfigDir(): string
-	const PATHS = IsWindows() ?
-	[
-	  [$HOME, 'vimfiles'],
-	] :
-	[
-	  [$HOME, '.config', 'vim'],
-	]
-
-	return FindFirstAvailablePath(PATHS)
-enddef
-
-def FindMyVimCacheDir(): string
-	const PATHS = IsWindows() ?
-	[
-	  # [getenv('MYVIM_CONFIG_DIR'), 'cache'],
-	  [$HOME, 'vimfiles', 'cache'],
-	] :
-	[
-	  [$HOME, '.cache', 'vim'],
-	]
-
-	return FindFirstAvailablePath(PATHS)
-enddef
-
-export def GetVimConfig(configname: string): string
-	return BuildFilePath2(getenv('MYVIM_FILES'), configname .. '.vim')
-enddef
-
-export def GetPluginConfig(pluginname: string): string
-	return BuildFilePath2(getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim')
-enddef
-
-# Setup MYVIM_* environment variables
-# Overview of some environment variables i set in this vimrc:
-# $MYVIM_CONFIG_DIR  - the path to the directory where vim expects to find your 'vimrc' file
-# $MYVIM_CACHE_DIR   - the path to the directory where vim will store '~', '.un' and '.swp' files
-# $MYVIM_FILES       - the path to the root directory where my custom '.vim' files can be found
-# $MYVIM_VIMPLUG_DIR - the path to the directory where vimplug will download plugins
-export def SetupCustomEnvironmentVariables(): void
-	if has('win64')
-		setenv('MYVIM_CONFIG_DIR', BuildFilePath2($HOME, 'vimfiles'))
-		setenv('MYVIM_CACHE_DIR', BuildFilePath2(getenv('MYVIM_CONFIG_DIR'), 'cache'))
-		setenv('MYVIM_FILES', BuildFilePath2($HOME, 'Downloads', 'dotfiles', 'vim'))
-	else
-		setenv('MYVIM_CONFIG_DIR', BuildFilePath2($HOME, '.config', 'vim'))
-		setenv('MYVIM_CACHE_DIR', BuildFilePath2($HOME, '.cache', 'vim'))
-		setenv('MYVIM_FILES', BuildFilePath2($HOME, 'repos', 'dotfiles', 'vim'))
-	endif
-	setenv('MYVIM_BACKUP_DIR', BuildFilePath2(getenv('MYVIM_CACHE_DIR'), 'backup'))
-	setenv('MYVIM_SWAP_DIR', BuildFilePath2(getenv('MYVIM_CACHE_DIR'), 'swap'))
-	setenv('MYVIM_UNDO_DIR', BuildFilePath2(getenv('MYVIM_CACHE_DIR'), 'undo'))
-	setenv('MYVIM_VIMINFO', BuildFilePath2(getenv('MYVIM_CACHE_DIR'), 'viminfo'))
-	setenv('MYVIM_VIMPLUG_DIR', BuildFilePath2(getenv('MYVIM_CONFIG_DIR'), 'vim-plug'))
-	# override the system MANPAGER, since vim might have trouble using it (ex: if MANPAGER='nvim')
-	setenv('MANPAGER', 'vim +MANPAGER --not-a-term -')
-enddef
-
-export def SetupOSDependentOptions(): void
-	if has('win64')
+	export def SetupOSDependentOptions(): void
 		set keywordprg=:help
 		set shell=pwsh
 		set shellcmdflag=-Command
-	else
+	enddef
+else
+	VIM_PATHS = {
+		config: [
+			[$HOME, '.config', 'vim'],
+		],
+		cache: [
+			[$HOME, '.cache', 'vim'],
+		],
+		dotfiles: [
+			[$HOME, 'repos', 'dotfiles', 'vim'],
+		],
+	}
+
+	def BuildFilePath(dirs: list<string>): string
+		return join(dirs, '/')
+	enddef
+
+	export def WriteToStdout(...words: list<string>): void
+		writefile(words, '/dev/stdout', 'a')
+	enddef
+
+	def GetDownloadCmd(_url: string, file_destination: string): string
+		return '!curl -fLo ' .. file_destination .. ' --create-dirs ' .. _url
+	enddef
+
+	def RunShellCommand(...words: list<string>): void
+		var content = join(words, ' ')
+		var cmd = ':!bash -c "' .. content .. '"'
+		execute cmd
+	enddef
+
+	export def SetupOSDependentOptions(): void
 		set keywordprg=:Man
-		# set shell=/bin/bash
 		set shell=/usr/bin/fish
 		set shellcmdflag=-c
 		set rtp-=$VIM/vimfiles
@@ -137,16 +80,74 @@ export def SetupOSDependentOptions(): void
 		set packpath-=$VIM/vimfiles
 		set packpath-=$VIM/vimfiles/after
 		runtime ftplugin/man.vim
+	enddef
+endif
+
+def LogMsg(msg: string): void
+	redraw | echo msg
+enddef
+
+def FindMyVimDir(dirname: string): string
+	var count = len(VIM_PATHS[dirname])
+
+	if count == 0
+		return ""
 	endif
+
+	var folderpath_default: string = BuildFilePath(VIM_PATHS[dirname][0])
+
+	if count == 1
+		return folderpath_default
+	endif
+
+	# i'm pretty sure there's a builtin function which does this lol
+	var folderpath: string
+	for _path in VIM_PATHS[dirname]
+		folderpath = BuildFilePath(_path)
+		if isdirectory(folderpath)
+			return folderpath
+		endif
+	endfor
+
+	return folderpath_default
+enddef
+
+export def GetVimConfig(configname: string): string
+	return BuildFilePath([getenv('MYVIM_FILES'), configname .. '.vim'])
+enddef
+
+export def GetPluginConfig(pluginname: string): string
+	return BuildFilePath([getenv('MYVIM_FILES'), 'plugins', pluginname .. '.vim'])
+enddef
+
+export def SetupCustomEnvironmentVariables(): void
+	# the path to the directory where vim expects to find your 'vimrc' file
+	setenv('MYVIM_CONFIG_DIR', FindMyVimDir('config'))
+
+	# the path to the directory where vim will store '~', '.un' and '.swp' files
+	setenv('MYVIM_CACHE_DIR', FindMyVimDir('cache'))
+
+	# the path to the root directory where my custom '.vim' files can be found
+	setenv('MYVIM_FILES', FindMyVimDir('dotfiles'))
+
+	# the path to the directory where vimplug will download plugins
+	setenv('MYVIM_VIMPLUG_DIR', BuildFilePath([getenv('MYVIM_CONFIG_DIR'), 'vim-plug']))
+
+	setenv('MYVIM_BACKUP_DIR', BuildFilePath([getenv('MYVIM_CACHE_DIR'), 'backup']))
+	setenv('MYVIM_SWAP_DIR', BuildFilePath([getenv('MYVIM_CACHE_DIR'), 'swap']))
+	setenv('MYVIM_UNDO_DIR', BuildFilePath([getenv('MYVIM_CACHE_DIR'), 'undo']))
+	setenv('MYVIM_VIMINFO', BuildFilePath([getenv('MYVIM_CACHE_DIR'), 'viminfo']))
+
+	# override the system MANPAGER, since vim might have trouble using it (ex: if MANPAGER='nvim')
+	setenv('MANPAGER', 'vim +MANPAGER --not-a-term -')
 enddef
 
 export def DownloadVimplugIfNeeded()
 	if executable('git')
-		const vimplug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-		const vimplug_autoload_file = BuildFilePath2(getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim')
-		const vimplug_install_cmd = GetDownloadCmd(vimplug_url, vimplug_autoload_file)
+		const vimplug_autoload_file = BuildFilePath([getenv('MYVIM_CONFIG_DIR'), 'autoload', 'plug.vim'])
 		if empty(glob(vimplug_autoload_file))
-			silent execute vimplug_install_cmd
+			const vimplug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+			silent execute GetDownloadCmd(vimplug_url, vimplug_autoload_file)
 			autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 		endif
 	endif

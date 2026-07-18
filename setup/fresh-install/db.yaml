@@ -562,6 +562,10 @@ packages:
       arch: # MISSING
       gentoo: media-libs/libdisplay-info
 
+    - name: pandoc
+      arch: pandoc
+      gentoo: # UNKNOWN
+
 
   git:
     - name: dwl

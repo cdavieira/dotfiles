@@ -4,10 +4,6 @@ vim9script
 # (Windows) : New-Item -ItemType SymbolicLink -Target $HOME\path\to\thisvimrc -Path $HOME\vimfiles\vimrc
 # (linux)   : ln -s ~/path/to/this/vimrc ~/.config/vim
 
-const DOTFILES_DIRPATH = resolve(expand($MYVIMRC))
-
-const UTILS_FILEPATH   = fnamemodify(DOTFILES_DIRPATH, ':p:h') .. (has('win64') ? '\' : '/') .. 'utils.vim'
-
 const CUSTOM_PLUGIN_CONFIGS = [
 	'vimplug',
 	'asyncomplete',
@@ -33,6 +29,10 @@ g:MYVIM_USE_PLUGINS = v:true
 #####################################################
 #####################################################
 #####################################################
+
+const DOTFILES_DIRPATH = resolve(expand($MYVIMRC))
+
+const UTILS_FILEPATH   = fnamemodify(DOTFILES_DIRPATH, ':p:h') .. (has('win64') ? '\' : '/') .. 'utils.vim'
 
 import UTILS_FILEPATH
 

@@ -19,6 +19,12 @@ if has('win64')
 		return join(dirs, '\')
 	enddef
 
+	def RunShellCommand(...words: list<string>): void
+		var content = join(words, ' ')
+		var cmd = ':!powershell -Command "' .. content .. '"'
+		execute cmd
+	enddef
+
 	export def WriteToStdout(...words: list<string>): void
 		var content = join(words, ' ')
 		var cmd = 'echo ' .. content
@@ -27,12 +33,6 @@ if has('win64')
 
 	def GetDownloadCmd(_url: string, file_destination: string): string
 		return '!powershell -Command \"iwr -useb ' .. _url .. ' | ni ' .. file_destination .. ' -Force \"'
-	enddef
-
-	def RunShellCommand(...words: list<string>): void
-		var content = join(words, ' ')
-		var cmd = ':!powershell -Command "' .. content .. '"'
-		execute cmd
 	enddef
 
 	export def SetupOSDependentOptions(): void
@@ -57,18 +57,18 @@ else
 		return join(dirs, '/')
 	enddef
 
+	def RunShellCommand(...words: list<string>): void
+		var content = join(words, ' ')
+		var cmd = ':!bash -c "' .. content .. '"'
+		execute cmd
+	enddef
+
 	export def WriteToStdout(...words: list<string>): void
 		writefile(words, '/dev/stdout', 'a')
 	enddef
 
 	def GetDownloadCmd(_url: string, file_destination: string): string
 		return '!curl -fLo ' .. file_destination .. ' --create-dirs ' .. _url
-	enddef
-
-	def RunShellCommand(...words: list<string>): void
-		var content = join(words, ' ')
-		var cmd = ':!bash -c "' .. content .. '"'
-		execute cmd
 	enddef
 
 	export def SetupOSDependentOptions(): void
